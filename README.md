@@ -13,6 +13,7 @@ http://stackoverflow.com/questions/12517133/how-to-count-number-of-instructions-
 e anche da altre parti dicono tutti che per contare il numero di istruzioni bisogna analizzare il bytecode.
 Quindi può essere che ci convenga contare semplicemente i punti e virgola per sapere le istruzioni. Se trovi qualcosa di meglio fammi sapere
 
+Ti ho scritto un messaggio su gmail, ma per ora non ho trovato niente di concreto.
 
 Tirocinio
 =========
