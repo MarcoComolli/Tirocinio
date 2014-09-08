@@ -80,7 +80,7 @@ public class Interface extends JFrame{
 		
 		setTitle("Tirocinio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 256);
+		setBounds(100, 100, 450, 271);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -142,6 +142,7 @@ public class Interface extends JFrame{
 		contentPane.add(scrollPane, "cell 0 6 2 1,grow");
 		
 		textPane = new JTextPane();
+		textPane.setContentType("text/html");
 		scrollPane.setViewportView(textPane);
 		
 		btnSearchTest = new JButton("...");
@@ -277,9 +278,7 @@ public class Interface extends JFrame{
 	}
 	
 	class CopyTask extends SwingWorker<Void, Void> {
-        /*
-         * Main task. Executed in background thread.
-         */
+
         @Override
         public Void doInBackground() {
             int progress = 0;       
@@ -306,7 +305,7 @@ public class Interface extends JFrame{
         	btnCopy.setEnabled(true);
         }
         
-        
+        //setta il progresso
         public void setTheProgress(int a){
         	this.setProgress(a);
         }
