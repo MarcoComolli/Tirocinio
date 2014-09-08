@@ -1,8 +1,23 @@
 Annotazioni
 =========
-Ho cercato un po' quella roba del parser delle espressioni booleane. Non ho trovato molto a parte questo che però non ho ancora provato:
-http://www.hephy.at/project/cms/trigger/globalTrigger/setup_software/javadoc/gt/gtgui/BooleanExpressionParser.html#getExpressionOperands%28%29
-potrebbe essere interessante il metodo getExpressionOperands().
+Ho cercato un po' quella roba del parser delle espressioni booleane. 
+
+
+Ho testato il metodo getExpressionOperands().
+Il risultato non è nulla di che:
+se gli dai in pasto questa stringa
+
+"else if( (y -3) != 4 || y == 2 && alfa != 9)";
+
+ti fa un array contenete le seguenti entries:
+
+[else, if, y, -3, !=, 4, ||, y, ==, 2, &&, alfa, !=, 9]
+
+in pratica mi sembra uno string.split(" ");
+Non è quello che ci serve.
+
+
+
 In alternativa ho pensato un attimo a quello che aveva detto il prof sul prendere i token e ho fatto una piccola classe che estrae gli operatori booleani dalla riga del codice sorgente.
 Non funziona ancora per i for però potrebbe essere uno spunto. 
 
