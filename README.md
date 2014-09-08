@@ -1,7 +1,7 @@
 COMMENTI
 =========
 
-Guarda che c'è un errore alla linea 32..per il momento fa questo questo questo bal bla bla
+
 
 Tirocinio
 =========
