@@ -5,7 +5,9 @@ http://www.hephy.at/project/cms/trigger/globalTrigger/setup_software/javadoc/gt/
 potrebbe essere interessante il metodo getExpressionOperands().
 In alternativa ho pensato un attimo a quello che aveva detto il prof sul prendere i token e ho fatto una piccola classe che estrae gli operatori booleani dalla riga del codice sorgente.
 Non funziona ancora per i for però potrebbe essere uno spunto. 
-..................
+
+------------------
+
 Per quanto riguarda il conteggio delle istruzioni questo non mi da molte speranze
 http://stackoverflow.com/questions/12517133/how-to-count-number-of-instructions-in-code-path
 e anche da altre parti dicono tutti che per contare il numero di istruzioni bisogna analizzare il bytecode.
