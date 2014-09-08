@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class CommentsRemover {
+	//commento
 
 	public static boolean inBlockComment = false;
 	public static boolean out = true;
