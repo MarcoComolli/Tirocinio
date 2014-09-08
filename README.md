@@ -1,5 +1,11 @@
+COMMENTI
+=========
+
+Guarda che c'è un errore alla linea 32..per il momento fa questo questo questo bal bla bla
+
 Tirocinio
 =========
+
 parsing logical boolean expressions java --> stringa di ricerca
 
 
@@ -21,3 +27,6 @@ parsing logical boolean expressions java --> stringa di ricerca
 	- sapere quante istruzioni per blocco e tenerne traccia
 
 - interfaccia grafica (5)
+
+
+
