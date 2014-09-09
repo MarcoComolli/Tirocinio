@@ -39,6 +39,19 @@ Ho provato a modifcare il codice per aggiungere alla fine quel metodo che ti dic
 Ho visto il codice e oltre al preprocessing non avrei idea di come fare per notificare la fine dei metodi. 
 Nel frattempo cosa potrei fare?
 
+-------
+Scusa ma col temporale ho preferito tenere il pc spento e ho letto solo ora.
+Dunque: quello che ora mi metto a fare è una roba di questo genere per il return:
+se il metodo ha come return type il void allora uso il codice che ho appena scritto che dovrebbe funzionare
+se invece il metodo ha un tipo diverso dal void inserisco la chiamata a quel metodo prima di ogni return in tutto il metodo. Mi sembra la via più fattibile anche se riconoscere tutti i return potrebbe essere difficile..mah ora vedo
+
+Pensavo che per evitare di modificare codice condiviso che poi coi commit facciamo bordelli (non ho ancora capito come fare il merge se devo essere sincero bisognerà fare qualche prova) mentre provo con la storia dei return potresti provare a integrare quello del punto (3). Cioè, ho visto che hai sistemato la cosa del condition per il ciclo for quindi potresti fare così:
+- o crei un'istanza della classe booleanoperatorparse e usi i metodi già fatti (magari cambiandoli non più statici)
+- oppure copi quei due metodi nella classe FileParser e li chiami sul parse delle condizioni. 
+Siccome mi sembra che la condizione specificata per il for sia l'unica, cioè che non ci sono altri casi particolari oltre il for, potresti fare magari un metodo a posta per il parse delle condizioni del for e poi invece di chiamare il solito metodo nella parte dove viene riconosciuto che c'è un ciclo for metti il nuovo metodo (lo so è un po' contorto)
+Comunque prova a integrarlo e vedi se da un file di java normale riesce a tirare fuori gli operandi giusti.
+Oppure prova a iniziare col punto 2 come preferisci.
+
 Tirocinio
 =========
 
