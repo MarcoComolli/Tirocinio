@@ -20,6 +20,11 @@ Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo g
 
 -------
 
+Sì, l'idea mi sembra sensata, le strutture dati che hai detto secondo me vanno bene.
+Per la memoria magari vediamo dopo quando riusciamo a far funzionare tutto. 
+
+(cavolo, il mio ultimo commit  ha cancellato le righe che avevi scritto...le riscrivo..errore mio scusa)
+
 Ho iniziato a buttar giù un po' di codice (lascia perdere le altre cose del commit che ho commentato dei println e spostato il global test nel package originale per fare un po' d'ordine). Ti spiego come funziona:
 
 All'inizio del metodo oltre alla chiamata al metodo tracer() ho messo anche una chiamata al metodo recordPath() che ho creato in MyTracerClass. Praticamente questo metodo setta a true una variabile booleana che indica quando deve registrare un percorso e inizializza la lista che dovrà tenere traccia dei blocchi e l'identificativo del percorso.
