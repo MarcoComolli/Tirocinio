@@ -5,11 +5,12 @@ import java.util.LinkedList;
 
 public class MyTracerClass {
 	
-	public static HashMap<String, Integer> countMap = new HashMap<String, Integer>();
-	public static HashMap<String, LinkedList<String>> pathMap = new HashMap<String, LinkedList<String>>();
-	public static boolean recordPath = false;
-	public static LinkedList<String> blockList = new LinkedList<String>();
-	public static String methodPath;
+	private static HashMap<String, Integer> countMap = new HashMap<String, Integer>();
+	private static HashMap<String, LinkedList<String>> pathMap = new HashMap<String, LinkedList<String>>();
+	private static boolean recordPath = false;
+	private static LinkedList<String> blockList = new LinkedList<String>();
+	private static String currentObjectIDPath;
+	private static int currentexecutionNumberPath;
 	
 	
 	public MyTracerClass(){
@@ -31,23 +32,31 @@ public class MyTracerClass {
 			blockList.add(objectID + "@" + blockID);
 		}
 		
-		if(recordPath == false){
-			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
-			pathMap.put(methodPath, blockList);
-		}
+		
+			
 		
 	}
 	
 	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
 		if(recordPath == false){
+			System.out.println("Inizio a registrare per " + objectID);
 			recordPath = true;
 			//inizializza i campi
-			int executionNumber = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
-			methodPath = objectID+"-"+ executionNumber;
+			currentexecutionNumberPath = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
+			currentObjectIDPath = objectID;
 			blockList.clear();
 		}
-		
+	}
+	
+	public static void endRecordPath(String objectID){
+		if(objectID == currentObjectIDPath){ //se l'ordine di fermarsi arriva dalla fine del metodo giusto
+			System.out.println("Finisco di registrare per " + objectID);
+			recordPath = false;
+			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
+			pathMap.put(objectID+"-"+ currentexecutionNumberPath, blockList);
+		}
+	
 	}
 	
 	

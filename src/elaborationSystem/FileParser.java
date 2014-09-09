@@ -23,6 +23,8 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.junit.internal.matchers.SubstringMatcher;
+
 public class FileParser {
 	
 	public static final int CODE_IF = 0;
@@ -35,7 +37,6 @@ public class FileParser {
 	public static final int CODE_CATCH = 7;
 	public static final int CODE_CASE = 8;
 	public static final int CODE_PACKAGE = 9;
-	//public static final int CODE_MORE_THAN_ONE = 7;
 
 
 	private final String READ_URI;
@@ -52,7 +53,7 @@ public class FileParser {
 	private SortedSet<Map.Entry<String, Integer>> currentMethodMapSorted;
 	private Iterator<Entry<String, Integer>> iterator;
 	private int curlyOpened = 0;
-	private int curlyClosed = 0;
+	private int curlyCountMethodEnd = 0;
 	private int currentCode = -1;
 	
 	private int currentLine = 1;
@@ -75,7 +76,7 @@ public class FileParser {
 //		for (Map.Entry entry : currentMethodMap.entrySet()) {
 //			System.out.println(entry.getKey() + " " + entry.getValue());
 //		}
-//		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
+		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
 //		System.out.println("|||||| MAPPA SORTED ||||||");
 //		for (Map.Entry entry : currentMethodMapSorted) {
 //			System.out.println(entry.getKey() + " " + entry.getValue());
@@ -157,6 +158,7 @@ public class FileParser {
 	private String insertMethodTracer(String currentMethod, String line) {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
+			curlyCountMethodEnd++;
 			currentBlockID = 0;
 			return line.substring(0, index+1) + 
 					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
@@ -247,55 +249,35 @@ public class FileParser {
 			if(checkKeyword("else", line) && !checkInString(line, "else", line.indexOf("else"))){
 				code = CODE_ELSE;
 			}
-			
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 
 		if(line.contains("while")){
 			if(checkKeyword("while", line) && !checkInString(line, "while", line.indexOf("while"))){
 				code = CODE_WHILE;
 			}
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 		
 		if(line.contains("do")){
 			if(checkKeyword("do", line) && !checkInString(line, "do", line.indexOf("do"))){
 				code = CODE_DO;
 			}
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 		if(line.contains("for")){
 			if(checkKeyword("for", line) && !checkInString(line, "for", line.indexOf("for"))){
 				code = CODE_FOR;
 			}
 			
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 		if(line.contains("switch")){
 			if(checkKeyword("switch", line) && !checkInString(line, "switch", line.indexOf("switch"))){
 				code = CODE_SWITCH;
 			}
-			
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 		
 		if(line.contains("?")){
 			if(checkKeyword("?", line) && !checkInString(line, "?", line.indexOf("?"))){
 				code = CODE_CONDITIONAL;
 			}
-//			if (foundMore) {
-//				return CODE_MORE_THAN_ONE;
-//			}
 		}
 		if(line.contains("catch")){
 			if(checkKeyword("catch", line) && !checkInString(line, "catch", line.indexOf("catch"))){
@@ -333,6 +315,7 @@ public class FileParser {
 	public String parseString(String line) {
 		int constructCode;
 		String newLine = line;
+		newLine = checkEndOfMethod(line);
 		if(processSwitchCase){
 			line = processCurly(line);
 			newLine = line;
@@ -393,6 +376,36 @@ public class FileParser {
 	}
 
 	
+	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
+	private String checkEndOfMethod(String line) {
+		
+		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non è 0
+			System.out.println("entro: " + line);
+			for (int i = 0; i < line.length(); i++) {
+				if(line.charAt(i) == '{'){ //se ho trovato una {
+					System.out.println("trovata");
+					if(!checkInString(line, "{", i)){ //se non è in una stringa
+						curlyCountMethodEnd++;
+						System.out.println("aggiungo +1 -> " + curlyCountMethodEnd);
+					}
+					
+				}
+				else if(line.charAt(i) == '}'){ //se ho trovato una }
+					if(!checkInString(line, "}", i)){ //se non è in una stringa
+						System.out.println("tolgo -1 -> " + curlyCountMethodEnd);
+						curlyCountMethodEnd--;
+						if(curlyCountMethodEnd == 1){
+							curlyCountMethodEnd = 0;
+							System.out.println("\nAGGIUNTOOOOOOOOOOOOOOO\n");
+							return line.substring(0,i) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(i);
+						}
+					}
+				}
+			}
+			
+		}
+		return line;
+	}
 
 	private String addImport(String line) {
 		return line.concat(" import elaborationSystem.MyTracerClass;");
@@ -504,16 +517,6 @@ public class FileParser {
 			stackOfStack.push(stack);
 			stack = new Stack<Character>();
 		}
-//		String newLine = null;
-//		String tracerSwitch = "System.out.println(\""+ currentMethod +" SWITCH\");";
-//		if(line.contains("{")){
-//			for (int i = 0; i < line.length(); i++) {
-//				if(line.charAt(i) == '{'){
-//					newLine = line.substring(0, i+1) + tracerSwitch + line.substring(i+1, line.length());
-//				}
-//			}
-//			return newLine;
-//		}
 		return line;
 	}
 

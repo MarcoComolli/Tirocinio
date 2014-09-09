@@ -97,16 +97,20 @@ public class ParenthesisAdder {
 //		}
 //		
 
+		
+		//C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java --> path per pmd
 		MethodSignatureExtractor mse = new MethodSignatureExtractor("C:/Users/Marco/Desktop/MetodiTirocinio.txt");
-		m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
+		m = mse.parseFilesInDir("F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/");
 		ParenthesisAdder p = new ParenthesisAdder(m);
-		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
+		p.parseFilesInDir("F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/");
 		p.paintMap(m);
 
 		
 		
 	}
 	
+	//TODO
+	//Cancellare una volta finito tutto
 	private void paintMap(SortedMap<String, Integer> m ){
 		System.out.println("=== MAPPA ===");
 		for (Map.Entry<String, Integer> e : m.entrySet()) {
