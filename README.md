@@ -32,6 +32,8 @@ Da questo momento ogni volta che entra nel tracer gli faccio aggiungere alla lis
 Alla fine prendo la lista, ne faccio una copia (perchè penso che altrimenti mi passerebbe un riferimento a quella statica che viene azzerata ogni volta..penso) e inserisco nell'hashmap di percorsi.
 Il problema più grande che ho qui adesso è: come faccio a dirgli 'smettila di registrare il percorso?' cioè, arrivato a fine metodo dovrei inserire qualcosa che gli dica 'setta a false la variabile recordPath' però al momento non saprei come fare. O meglio si potrebbe mettere a fine di ogni metodo una chiamata tipo setFalse() però questo richiederebbe di ritoccare ancora il codice...rischioso.. se hai altre idee fammi sapere
 
+--------
+Ho provato a modifcare il codice per aggiungere alla fine quel metodo che ti dicevo. Sono riuscito a farlo ma ora ho un problema: questo mi mette le chiamate al metodo prima dell'ultima parentesi del metodo. Stupidamente ho dimenticato di considerare che se c'è un return il metodo non può essere eseguito. Quindi devo sistemare ancora questa cosa. Se vuoi dare un'occhiata nel frattempo committo quello che ho fatto. Oggi pomeriggio penso a come risolvere la cosa del return.
 
 Tirocinio
 =========
