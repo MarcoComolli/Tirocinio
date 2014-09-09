@@ -81,6 +81,29 @@ Ho fatto un po' di pulizia nel readMe e mi sono accorto di una cosa. Per il punt
 Stasera provo quello che mi hai detto, ma ho paura di far casini visto le ultime cose che hai scritto.
 Se riesco ad avere qualcosa di funzionante ti faccio sapere.
 
+----
+Ok. Io dovrei essere quasi arrivato alla soluzione del mio...se tutto funziona poi committo tutto.  
+Vorrei però se non ti dispiace fare una prova quando hai un attimo di tempo:
+Volevo vedere git come si comporta nel caso ad esempio io faccio il commit e aggiungo le righe 33 34 e 35 nel file FileParser. Mettiamo che tu nel tuo progetto sul tuo pc avevi aggiunto qualcosa di tuo alla riga 33 e fai la sincronizzazione. Cosa succede? Ti cancella la linea 33 che hai aggiunto tu e sostituisce le mie o dà un avvertimento?  
+Voglio evitare di perdere codice prezioso visto il tempo che abbiamo. 
+Quindi al massimo creo una classe di prova stupidissima e ci faccio due modifiche e poi cambia magari anche tu quelle righe e vediamo. Se magari stasera ti trovo su Skype possiamo provare (anche solo per chattare non è necessaria la chiamata)
+
+Del mio ho un problema che potrei risolvere (e che purtroppo sto risolvendo in questo modo) in modo che però in una particolare situazione causi un errore.  
+Ho questo codice:  
+> do{  
+...  
+) while(x > 0);  
+return y;  
+
+quando trova il *do* inserisce correttamente il tracer ma non riesce a capire che l'ultimo while fa parte dell'intero costrutto do-while e quindi mi cerca di mettere un tracer per il *while* come se fosse un ciclo separato.  
+La mia soluzione che potrebbe andare bene ma che è abbastanza scorretta è di dargli un booleano che metto a _true_ quando incontro *do* e quando incontro il *while* successivo invece lo setto a _false_.  
+Se questo booleano è settato a true non considero quel *while*.  
+Il problema sarebbe se ci fosse un *while* dentro un *do-while*. Abbastanza raro ma non impossibile.  
+Pensi che se per il momento lo lascio dentro potrebbe dare problemi in futuro?  
+Perchè in questo modo risolvo per tutti i *do-while* tranne per quelli innestati mentre se non faccio nulla mi danno problemi tutti i *do-while* e di conseguenza non mi funziona il programma.
+
+
+
 Tirocinio
 =========
 
