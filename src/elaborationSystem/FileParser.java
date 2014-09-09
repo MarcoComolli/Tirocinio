@@ -61,7 +61,6 @@ public class FileParser {
 	private String currentMethod ;
 	private int currentBlockID = 0;
 	private int nextMethodLine;
-	//private static int fileindex = 0;
 	private Entry<String,Integer> iteratorEntry;
 	private boolean processFirstCase;
 	
@@ -72,15 +71,15 @@ public class FileParser {
 		File f = new File(readURI);
 		String packageName = extractPackageFromFile(f);
 		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, packageName+"/" + className + " ");
-		System.out.println("|||||| MAPPA NON SORTED ||||||");
-		for (Map.Entry entry : currentMethodMap.entrySet()) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		}
-		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
-		System.out.println("|||||| MAPPA SORTED ||||||");
-		for (Map.Entry entry : currentMethodMapSorted) {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		}
+//		System.out.println("|||||| MAPPA NON SORTED ||||||");
+//		for (Map.Entry entry : currentMethodMap.entrySet()) {
+//			System.out.println(entry.getKey() + " " + entry.getValue());
+//		}
+//		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
+//		System.out.println("|||||| MAPPA SORTED ||||||");
+//		for (Map.Entry entry : currentMethodMapSorted) {
+//			System.out.println(entry.getKey() + " " + entry.getValue());
+//		}
 	
 	
 		
@@ -159,7 +158,10 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			currentBlockID = 0;
-			return line.substring(0, index+1) + " MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + line.substring(index+1, line.length());
+			return line.substring(0, index+1) + 
+					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
+					" MyTracerClass.recordPath(\""+currentMethod+"\");" +
+					line.substring(index+1, line.length());
 		}
 		else if(line.contains(";")){
 			processNextMethodLine = false;
