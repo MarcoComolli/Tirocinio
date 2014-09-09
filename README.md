@@ -35,6 +35,10 @@ Il problema più grande che ho qui adesso è: come faccio a dirgli 'smettila di 
 --------
 Ho provato a modifcare il codice per aggiungere alla fine quel metodo che ti dicevo. Sono riuscito a farlo ma ora ho un problema: questo mi mette le chiamate al metodo prima dell'ultima parentesi del metodo. Stupidamente ho dimenticato di considerare che se c'è un return il metodo non può essere eseguito. Quindi devo sistemare ancora questa cosa. Se vuoi dare un'occhiata nel frattempo committo quello che ho fatto. Oggi pomeriggio penso a come risolvere la cosa del return.
 
+--------
+Ho visto il codice e oltre al preprocessing non avrei idea di come fare per notificare la fine dei metodi. 
+Nel frattempo cosa potrei fare?
+
 Tirocinio
 =========
 
