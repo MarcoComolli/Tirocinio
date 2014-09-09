@@ -56,6 +56,41 @@ Oppure prova a iniziare col punto 2 come preferisci.
 Sto provando a fare la storia degli if, ma il problema è che non so come copiare il blocco interno del if che vado a spezzettare in più if ed ad inserire gli else prima di essi.
 Il parser per ora funziona con le condizioni, ma il problema grosso è quello lì.
 
+-------
+Non credo sia necessario spezettare il tutto come aveva detto. Ora che abbiamo i token basta fare una cosa di questo tipo secondo me:
+- prendere la lunghezza dell'array con gli operatori booleani (es. ho 3 condizioni la lunghezza dello split sarà 3)
+- creare un array di booleani di quella dimensione
+- fare gli assegnamenti con gli operatori appena presi prima della dichiarazione dell'if o del blocco
+
+Il problema più grosso sarebbe l'ultimo punto secondo me. Ti faccio un esempio:
+supponiamo di avere:  
+> if(cond1 && stack.isEmpty()) {  
+> .....  
+> } 
+
+allora l'array sarà fatto di 2 entry in questo modo  
+> array: [cond1][stack.isEmpty()]
+
+quello che bisognerebbe cercare di fare è avere il codice alla fine con qualcosa del tipo  
+> boolean[] boolArr = new boolArr[array.length];  
+> boolArr[0] = cond1;  
+> boolArr[1] = stack.isEmpty();  
+> if(cond1 && stack.isEmpty()) { MyTracerClass.tracer(nomemetodo, blockCode, ID, boolArr);  
+> .....  
+> } 
+
+così poi si prende come paramentro nel MytracerClass.
+
+Un'alternativa che mi viene in mente potrebbe essere qualcosa del tipo
+> boolean[] boolArr = new boolArr[array.length]{cond1,stack.isEmpty()};  
+> if(cond1 && stack.isEmpty()) { MyTracerClass.tracer(nomemetodo, blockCode, ID, boolArr);  
+> .....  
+> }  
+
+Così da aggiungere una sola linea invece che tante quante l'array. Stai comunque attentissimo a cercare di non modificare il numero di linee nel file originale perchè sennò è un bordello:  
+infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale linea iniziano. Se col preprocessing i numeri di linea in cui iniziano i metodi cambiano penso succederebbe qualcosa di paragonabile all'apocalisse @.@
+
+
 Tirocinio
 =========
 
