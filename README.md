@@ -7,6 +7,15 @@ Di tools che fanno quello che cerchiamo probabilmente non ce ne sono.
 --------
 
 Ok ora inizio a dare un occhio a come fare la roba dei path del punto 1
+IDEA PER IL PUNTO 1:
+Nel MyTracerClass dobbiamo creare una nuova struttura dati per creare i cammini. Un cammino deve avere un identificativo che secondo me potrebbe essere qualcosa come CLASSE + NOME DEL METODO + NUMERO DELLA SUA ESECUZIONE e come dato per tenere in memoria il cammino si può tenere un'istanza di una list (linkedList, arrayList... ecc) contenente CLASSE/METODO + NUMERO DI BLOCCO.
+Esempio:
+
+BaseConstruct/MethodIf-3 --> BaseConstruct/MethodIf@1 || BaseConstruct/MethodIf@2 || BaseConstruct/MethodIf@5 || BaseConstruct/MethodIf@6
+
+dove BaseConstruct/MethodIf-3 vuol dire cammino del MethodIf alla sua terza esecuzione. e Gli altri dopo la @ sono il numero dei blocchi. Ti può sembrare sensata? Se si che struttura suggerisci?
+Io pensavo tipo ad un TreeMap o un Hasmap con key l'identificativo e come data una lista.
+Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo grandi per la memoria si può, dopo un tot di dati aggiornare un file di testo con i cammini
 
 
 Tirocinio
