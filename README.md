@@ -17,6 +17,10 @@ dove BaseConstruct/MethodIf-3 vuol dire cammino del MethodIf alla sua terza esec
 Io pensavo tipo ad un TreeMap o un Hasmap con key l'identificativo e come data una lista.
 Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo grandi per la memoria si può, dopo un tot di dati aggiornare un file di testo con i cammini
 
+--------
+
+Sì, l'idea mi sembra sensata, le strutture dati che hai detto secondo me vanno bene.
+Per la memoria magari vediamo dopo quando riusciamo a far funzionare tutto. 
 
 Tirocinio
 =========
