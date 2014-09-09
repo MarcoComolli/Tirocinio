@@ -1,37 +1,12 @@
 Annotazioni
 =========
-Ho cercato un po' quella roba del parser delle espressioni booleane. 
-
-
-Ho testato il metodo getExpressionOperands().
-Il risultato non è nulla di che:
-se gli dai in pasto questa stringa
-
-"else if( (y -3) != 4 || y == 2 && alfa != 9)";
-
-ti fa un array contenete le seguenti entries:
-
-[else, if, y, -3, !=, 4, ||, y, ==, 2, &&, alfa, !=, 9]
-
-in pratica mi sembra uno string.split(" ");
-Non è quello che ci serve.
-
-
-
-In alternativa ho pensato un attimo a quello che aveva detto il prof sul prendere i token e ho fatto una piccola classe che estrae gli operatori booleani dalla riga del codice sorgente.
-Non funziona ancora per i for però potrebbe essere uno spunto. 
-
-------------------
-
-Per quanto riguarda il conteggio delle istruzioni questo non mi da molte speranze
-http://stackoverflow.com/questions/12517133/how-to-count-number-of-instructions-in-code-path
-e anche da altre parti dicono tutti che per contare il numero di istruzioni bisogna analizzare il bytecode.
-Quindi può essere che ci convenga contare semplicemente i punti e virgola per sapere le istruzioni. Se trovi qualcosa di meglio fammi sapere
-
 Per il conteggio delle istruzioni neanche io ho trovato niente, solo cose riguardanti il bytecode.
 
 Di tools che fanno quello che cerchiamo probabilmente non ce ne sono.
 
+--------
+
+Ok ora inizio a dare un occhio a come fare la roba dei path del punto 1
 
 
 Tirocinio
