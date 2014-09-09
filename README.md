@@ -52,6 +52,10 @@ Siccome mi sembra che la condizione specificata per il for sia l'unica, cioè ch
 Comunque prova a integrarlo e vedi se da un file di java normale riesce a tirare fuori gli operandi giusti.
 Oppure prova a iniziare col punto 2 come preferisci.
 
+-------
+Sto provando a fare la storia degli if, ma il problema è che non so come copiare il blocco interno del if che vado a spezzettare in più if ed ad inserire gli else prima di essi.
+Il parser per ora funziona con le condizioni, ma il problema grosso è quello lì.
+
 Tirocinio
 =========
 
