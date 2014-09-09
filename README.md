@@ -102,7 +102,9 @@ Il problema sarebbe se ci fosse un *while* dentro un *do-while*. Abbastanza raro
 Pensi che se per il momento lo lascio dentro potrebbe dare problemi in futuro?  
 Perchè in questo modo risolvo per tutti i *do-while* tranne per quelli innestati mentre se non faccio nulla mi danno problemi tutti i *do-while* e di conseguenza non mi funziona il programma.
 
+------
 
+Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho solo testato sulle classi di prova però, non ho ancora provato su pmd. Faccio il commit tra poco, prima di sincronizzare però magari ti conviene aspettare perchè ho ritoccato la classe FileParse e MyTracerClass e non vorrei che ti cancellasse qualcosa che magari hai fatto su quelle
 
 Tirocinio
 =========
