@@ -40,11 +40,13 @@ public class MyTracerClass {
 	
 	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
-		recordPath = true;
-		//inizializza i campi
-		int executionNumber = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
-		methodPath = objectID+"-"+ executionNumber;
-		blockList.clear();
+		if(recordPath == false){
+			recordPath = true;
+			//inizializza i campi
+			int executionNumber = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
+			methodPath = objectID+"-"+ executionNumber;
+			blockList.clear();
+		}
 		
 	}
 	
