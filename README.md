@@ -77,6 +77,9 @@ infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale
 -----
 Ho fatto un po' di pulizia nel readMe e mi sono accorto di una cosa. Per il punto due abbiamo bisogno dell'interfaccia grafica perchè è da lì che riesco a far partire i test classe per classe quindi bisognerebbe prima sistemare quella. Ho quindi aggiornato le priorità qui sotto
 
+-----
+Stasera provo quello che mi hai detto, ma ho paura di far casini visto le ultime cose che hai scritto.
+Se riesco ad avere qualcosa di funzionante ti faccio sapere.
 
 Tirocinio
 =========
