@@ -5,89 +5,93 @@ public class BaseConstruct {
 	int x = 0;
 	int y = 0;
 
-	public int methodIf() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodIf."); 
+	public int methodIf() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodIf,int,."); 
 		
 
 
 
-		if (x % 2 == 0 && x == 2) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",0,1);
+		if (x % 2 == 0 && x == 2) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",0,1);
 			y++;
-		} else if (x == 0) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",1,2);
+		} else if (x == 0) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",1,2);
 			y--;
 		}
-		if (true) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",0,3);
+		if (true) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",0,3);
 			y++;
 		}
 		x--; 
-		if (true) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",0,4);
+		if (true) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",0,4);
 			x++;
-		} else { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf.",1,5);
+		} else { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodIf,int,.",1,5);
 			x--;
 		}
 		;
 		;
-		return y;
-	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodIf.");}
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodIf,int,.");return y;
+	}
+	
+	public void methodVoid(){ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodVoid,void,.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodVoid,void,.");
+		
+	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodVoid,void,.");}
 
 	
 
 
 
 
-	public int methodLoop() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodLoop.");
-		while (x < 0) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop.",2,1);
+	public int methodLoop() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop,int,.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodLoop,int,.");
+		while (x < 0) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop,int,.",2,1);
 			y++;
 		}
 
-		for (int i = 0; i < 10; i++) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop.",4,2);
+		for (int i = 0; i < 10; i++) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop,int,.",4,2);
 			y++;
 		}
 
-		do { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop.",3,3);
+		do { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodLoop,int,.",3,3);
 			y--;
 		} while (x < 0);
 
-		return y;
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodLoop,int,.");return y;
 	}
 
 	public int methodSwitch() 
-	{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",2,1); MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodSwitch.");
+	{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch,int,.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodSwitch,int,.");
 		switch (x){
-		case 0:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",8,2);{
+		case 0:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch,int,.",8,1);{
 			y++;
 			break;}
 
-		}case 1:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",8,3);
-			if(x == 0){ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",0,4);
+		}case 1:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch,int,.",8,2);
+			if(x == 0){ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch,int,.",0,3);
 				y++;
 			}
 			y--;
-		}default:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch.",8,5);
+		}default:{ MyTracerClass.tracer("src/originalFiles/BaseConstruct methodSwitch,int,.",8,4);
 			break;
 		}}
 
-		return y;
-	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodSwitch.");}
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodSwitch,int,.");return y;
+	}
 
-	public int methodConditionalOperator() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator.");
+	public int methodConditionalOperator() { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator,int,.",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.");
 		x = y > 3 ? 5 : 2;
-		return x;
-	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator.");}
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.");return x;
+	}
 
-	public int methodConditionalOperator(int x) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator.int ",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator.int ");
+	public int methodConditionalOperator(int x) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int ",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int ");
 		
-		return x;
-	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator.int ");}
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int ");return x;
+	}
 
-	public int methodConditionalOperator(int x, float iffy, int x1) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator.int float int ",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator.int float int ");
+	public int methodConditionalOperator(int x, float iffy, int x1) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int float int ",-1,0); MyTracerClass.recordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int float int ");
 		
 		try {
 			String a = null;
 			a.toString();
-		} catch (NullPointerException | ArithmeticException e) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator.int float int ",7,1);
-			System.out.println(e.getClass());
+		} catch (NullPointerException | ArithmeticException e) { MyTracerClass.tracer("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int float int ",7,1);
+			
 		}
-		return x;
-	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator.int float int ");}
+		 MyTracerClass.endRecordPath("src/originalFiles/BaseConstruct methodConditionalOperator,int,.int float int ");return x;
+	}
 
 }

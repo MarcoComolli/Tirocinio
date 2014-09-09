@@ -11,6 +11,7 @@ public class GlobalTest {
 		BaseConstruct bc = new BaseConstruct();
 		
 		bc.methodIf();
+		bc.methodVoid();
 		bc.methodLoop();
 		bc.methodSwitch();
 		bc.methodConditionalOperator();

@@ -117,7 +117,7 @@ public class MethodSignatureExtractor {
 				
 				nodeName = node.getName().toString();
 				returned = node.getReturnType2(); //null se è un costruttore
-				temp = extractPackageFromFile(currentFile) +  "/" + currentFileName + " " + nodeName + ".";
+				temp = extractPackageFromFile(currentFile) +  "/" + currentFileName + " " + nodeName + ","+ returned + ",." ;
 				
 				System.out.println("Method: '" + node + "'"
 						+ " return: " + node.getReturnType2() + "\nat line "

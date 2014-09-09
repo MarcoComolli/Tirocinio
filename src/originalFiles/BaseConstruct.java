@@ -28,6 +28,10 @@ public class BaseConstruct {
 		;
 		return y;
 	}
+	
+	public void methodVoid(){
+		
+	}
 
 	/**
 	 * if

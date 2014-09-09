@@ -1,6 +1,7 @@
 package elaborationSystem;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class MyTracerClass {
@@ -40,21 +41,27 @@ public class MyTracerClass {
 	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
 		if(recordPath == false){
-			System.out.println("Inizio a registrare per " + objectID);
+			
 			recordPath = true;
 			//inizializza i campi
 			currentexecutionNumberPath = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
 			currentObjectIDPath = objectID;
 			blockList.clear();
+			System.out.println("Inizio a registrare per " + objectID + "-" + currentexecutionNumberPath);
 		}
 	}
 	
 	public static void endRecordPath(String objectID){
 		if(objectID == currentObjectIDPath){ //se l'ordine di fermarsi arriva dalla fine del metodo giusto
-			System.out.println("Finisco di registrare per " + objectID);
 			recordPath = false;
 			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
 			pathMap.put(objectID+"-"+ currentexecutionNumberPath, blockList);
+			System.out.println("Finisco di registrare per " + objectID +"-"+ currentexecutionNumberPath);
+			for (String s : newList) {
+				System.out.print(s +  " >>> ");
+			}
+			
+			System.out.println();
 		}
 	
 	}

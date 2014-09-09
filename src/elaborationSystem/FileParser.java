@@ -47,6 +47,7 @@ public class FileParser {
 	private boolean processNextMethodLine = false;
 	private boolean processSwitchCase = false;
 	private boolean processNextCase = false;
+	private boolean whileAfterDo = false;
 	
 	
 	
@@ -60,6 +61,7 @@ public class FileParser {
 	
 	private String className;
 	private String currentMethod ;
+	private boolean currentMethodReturnVoid = false;
 	private int currentBlockID = 0;
 	private int nextMethodLine;
 	private Entry<String,Integer> iteratorEntry;
@@ -89,6 +91,13 @@ public class FileParser {
 			iteratorEntry = iterator.next();
 			nextMethodLine = iteratorEntry.getValue();
 			currentMethod = iteratorEntry.getKey();
+			if(checkReturnType(currentMethod).equals("void")){
+				currentMethodReturnVoid = true;
+			}
+			else{
+				currentMethodReturnVoid = false;
+			}
+			
 			System.out.println("COSTRUTTORE - prossimo metodo " + currentMethod + " at line " + nextMethodLine);
 		}
 		
@@ -114,6 +123,7 @@ public class FileParser {
             while(line != null){
             	line = CommentsRemover.removeComments(line);
             	String newLine = parseString(line);
+            	System.out.println("newLine " + newLine);
     			buffWrite.write(newLine);
     			buffWrite.newLine();
     			buffWrite.flush();
@@ -122,6 +132,12 @@ public class FileParser {
     			currentLine++; 
     			if(currentLine == nextMethodLine && line != null){
     				currentMethod = iteratorEntry.getKey();
+    				if(checkReturnType(currentMethod).equals("void")){
+    					currentMethodReturnVoid = true;
+    				}
+    				else{
+    					currentMethodReturnVoid = false;
+    				}
     				line = insertMethodTracer(currentMethod, line);
     				if(processNextMethodLine){
     					nextMethodLine++;
@@ -130,6 +146,7 @@ public class FileParser {
     					if(iterator.hasNext()){
         					iteratorEntry = iterator.next();
         					nextMethodLine = iteratorEntry.getValue();
+        					
         				}
     				}
     			}
@@ -158,7 +175,11 @@ public class FileParser {
 	private String insertMethodTracer(String currentMethod, String line) {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			curlyCountMethodEnd++;
+			System.out.println("Controllo currentvoidblabla");
+			if(currentMethodReturnVoid){
+				System.out.println("è void? "+ currentMethodReturnVoid + " allora aggiungo");
+				curlyCountMethodEnd++;
+			}
 			currentBlockID = 0;
 			return line.substring(0, index+1) + 
 					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
@@ -235,6 +256,15 @@ public class FileParser {
 		else{
 			return indexList.get(0);
 		}
+	}
+	
+	private String checkReturnType(String method){
+		String[] splitted = method.split(",");
+		System.out.println("SPLIT  " + method + " -> " + splitted[1]);
+		if(splitted != null && splitted.length != 0){
+			return splitted[1];
+		}
+		return null;
 	}
 
 	public int checkConstruct(String line) {
@@ -315,7 +345,12 @@ public class FileParser {
 	public String parseString(String line) {
 		int constructCode;
 		String newLine = line;
-		newLine = checkEndOfMethod(line);
+		if(currentMethodReturnVoid){
+			newLine = checkEndOfMethod(line);
+		}
+		else{
+			newLine = checkReturns(line);
+		}
 		if(processSwitchCase){
 			line = processCurly(line);
 			newLine = line;
@@ -362,12 +397,14 @@ public class FileParser {
 			default:
 				break;
 			}
+			System.out.println(constructCode + " normale " + newLine);
 			return newLine;
 		}
 		else{
 			if(curlyOpened != 0){
 				return closeCurly(line);
 			}
+			System.out.println(constructCode + " else " + newLine);
 			return newLine;
 		}
 
@@ -376,27 +413,38 @@ public class FileParser {
 	}
 
 	
+	//cerca se c'è un return e aggiunge la riga
+	private String checkReturns(String line) {
+		System.out.println("Check return: " + line);
+		if(line.contains("return")){
+			int ind = line.indexOf("return");
+			System.out.println("trovato");
+			if(!checkInString(line, "return", ind)){
+				System.out.println("Inserito = " + line.substring(0,ind) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(ind));
+				return line.substring(0,ind) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(ind);
+			}
+		}
+		return line;
+	}
+
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private String checkEndOfMethod(String line) {
-		
+		System.out.println("endofmethod: " + line);
 		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non è 0
 			System.out.println("entro: " + line);
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
-					System.out.println("trovata");
 					if(!checkInString(line, "{", i)){ //se non è in una stringa
 						curlyCountMethodEnd++;
-						System.out.println("aggiungo +1 -> " + curlyCountMethodEnd);
 					}
 					
 				}
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non è in una stringa
-						System.out.println("tolgo -1 -> " + curlyCountMethodEnd);
 						curlyCountMethodEnd--;
+						System.out.println("trovata } totale= " + curlyCountMethodEnd);
 						if(curlyCountMethodEnd == 1){
 							curlyCountMethodEnd = 0;
-							System.out.println("\nAGGIUNTOOOOOOOOOOOOOOO\n");
 							return line.substring(0,i) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(i);
 						}
 					}
@@ -540,14 +588,19 @@ public class FileParser {
 		currentBlockID++;
 		String newLine = null;
 		String tracerWhile = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_WHILE+","+currentBlockID+");";
-		int index = checkCurlyOpen(line);
-		if(index != -1){
-			newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());
-			return newLine;
+		if(whileAfterDo == false){
+			int index = checkCurlyOpen(line);
+			if(index != -1){
+				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());
+				return newLine;
+			}
+			else{
+				currentCode = CODE_WHILE;
+				processNextLine = true;
+			}
 		}
 		else{
-			currentCode = CODE_WHILE;
-			processNextLine = true;
+			whileAfterDo = false;
 		}
 		return line;
 	}
@@ -555,6 +608,7 @@ public class FileParser {
 	private String processDo(String line) {
 		currentBlockID++;
 		String newLine = null;
+		whileAfterDo = true;
 		String tracerDo = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_DO+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
@@ -656,6 +710,13 @@ public class FileParser {
 		return path.substring(index+1);
 	}
 	
+	/**
+	 * Check if a specified key with start at beginIndex is in a string or not
+	 * @param line
+	 * @param key
+	 * @param beginIndex
+	 * @return true if the key is in a string false otherwise
+	 */
 	private boolean checkInString(String line, String key, int beginIndex) {
 		if(beginIndex >= line.length()){
 			return false;
