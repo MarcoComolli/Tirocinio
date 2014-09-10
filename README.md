@@ -139,6 +139,8 @@ Per il for prova con la stessa cosa cioè a metterlo dentro altrimenti non sapre
 -----
 Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema per gli switch, credo sia dovuto al parser. Per il do-while non so bene come far a prendere la riga del while inerente al do, per lo switch non ho ancora provato, ma è un bel casino
 
+Per il do-while forse ho risolto, sto provando il tutto su una copia di ieri perché non vorrei fare casino tra le versioni, se vuoi ti invio la classe che ho modificato.
+
 
 Tirocinio
 =========
