@@ -175,6 +175,9 @@ Tipo nella prova che abbiamo fatto mi è bastato tenere i tuoi commenti e metter
 poi il merge è andato a posto.
 p.s. sono arrivato a 14 errori
 
+Aggiornamento: mi dava qualche conflitto con i file caricati ma penso di aver sistemato adesso. Quindi teoricamente dovremmo avere ora gli stessi files.
+Ho provato a far partire il tutto su pmd. Mi da una indexOutOfBoundException su una condizione if (indice -1) ora provo a controllare dove lo fa.
+
 Tirocinio
 =========
 
