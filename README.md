@@ -136,6 +136,7 @@ Mi è venuta un'idea. Mettili prima del tracer. Ti faccio un esempio (per quanto
 
 Così teoricamente dovrebbe andare.
 Per il for prova con la stessa cosa cioè a metterlo dentro altrimenti non saprei.
+
 -----
 Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema per gli switch, credo sia dovuto al parser. Per il do-while non so bene come far a prendere la riga del while inerente al do, per lo switch non ho ancora provato, ma è un bel casino
 
@@ -143,6 +144,13 @@ Per il do-while forse ho risolto, sto provando il tutto su una copia di ieri per
 
 Ok, ora ti invio la classe modificata, per gli switch attualmente non so se si può fare il tutto perché bisognerebbe salvare il valore inizial della stringa o carattere e poi valutare le condizioni con == o equals per ogni caso.
 Il problema con gli switch dovuto al cambiamento del codice per i while per ora rimane ancora.
+
+----
+Beh ma comunque a questo punto potrebbe non essere necessaria la valutazione delle condizioni nello switch:  
+se ci pensi la valutazione delle condizioni a noi serve solo quando ci sono più condizioni nello stesso predicato perchè se ne abbiamo una sola allora questa è verificata cioè è vera per ogni volta che si entra nel blocco.  
+Quindi se entriamo nel blocco deve per forza essere vera l'unica condizione, cioè che sia == o equals. Secondo me quindi per gli switch potrebbe non essere necessario.  
+Per le classi che mi hai inviato ora le guardo però tu prova lo stesso a fare il commit di quello che hai fatto vedere se te lo fa fare e non credo di ci siano problemi.  
+Tu stavi lavorando con la versione con già le modifiche che avevo fatto io per risolvere il problema dei path?
 
 
 Tirocinio
