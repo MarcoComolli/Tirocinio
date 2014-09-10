@@ -1,8 +1,6 @@
 Annotazioni
 =========
 
-Ok ora inizio a dare un occhio a come fare la roba dei path del punto 1
-
 IDEA PER IL PUNTO 1:
 Nel MyTracerClass dobbiamo creare una nuova struttura dati per creare i cammini. Un cammino deve avere un identificativo che secondo me potrebbe essere qualcosa come CLASSE + NOME DEL METODO + NUMERO DELLA SUA ESECUZIONE e come dato per tenere in memoria il cammino si può tenere un'istanza di una list (linkedList, arrayList... ecc) contenente CLASSE/METODO + NUMERO DI BLOCCO.
 Esempio:
@@ -32,54 +30,9 @@ Siccome mi sembra che la condizione specificata per il for sia l'unica, cioè ch
 Comunque prova a integrarlo e vedi se da un file di java normale riesce a tirare fuori gli operandi giusti.
 
 -------
-Ora che abbiamo i token basta fare una cosa di questo tipo secondo me:
-- prendere la lunghezza dell'array con gli operatori booleani (es. ho 3 condizioni la lunghezza dello split sarà 3)
-- creare un array di booleani di quella dimensione
-- fare gli assegnamenti con gli operatori appena presi prima della dichiarazione dell'if o del blocco
 
-
-quello che bisognerebbe cercare di fare è avere il codice alla fine con qualcosa del tipo  
-> boolean[] boolArr = new boolArr[array.length];  
-> boolArr[0] = cond1;  
-> boolArr[1] = stack.isEmpty();  
-> if(cond1 && stack.isEmpty()) { MyTracerClass.tracer(nomemetodo, blockCode, ID, boolArr);  
-> .....  
-> } 
-
-così poi si prende come paramentro nel MytracerClass.
-
-Un'alternativa che mi viene in mente potrebbe essere qualcosa del tipo
-> boolean[] boolArr = new boolArr[array.length]{cond1,stack.isEmpty()};  
-> if(cond1 && stack.isEmpty()) { MyTracerClass.tracer(nomemetodo, blockCode, ID, boolArr);  
-> .....  
-> }  
-
-Così da aggiungere una sola linea invece che tante quante l'array.  
 Stai comunque attentissimo a cercare di non modificare il numero di linee nel file originale perchè sennò è un bordello:  
 infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale linea iniziano. Se col preprocessing i numeri di linea in cui iniziano i metodi cambiano penso succederebbe qualcosa di paragonabile all'apocalisse @.@
-
-Per il punto due abbiamo bisogno dell'interfaccia grafica perchè è da lì che riesco a far partire i test classe per classe quindi bisognerebbe prima sistemare quella. 
-
-----
-
-Vorrei però se non ti dispiace fare una prova quando hai un attimo di tempo:
-Volevo vedere git come si comporta nel caso ad esempio io faccio il commit e aggiungo le righe 33 34 e 35 nel file FileParser. Mettiamo che tu nel tuo progetto sul tuo pc avevi aggiunto qualcosa di tuo alla riga 33 e fai la sincronizzazione. Cosa succede? Ti cancella la linea 33 che hai aggiunto tu e sostituisce le mie o dà un avvertimento? 
-
-Del mio ho un problema che potrei risolvere in modo che però in una particolare situazione causi un errore.  
-Ho questo codice:  
-> do{  
-...  
-) while(x > 0);  
-return y;  
-
-quando trova il *do* inserisce correttamente il tracer ma non riesce a capire che l'ultimo while fa parte dell'intero costrutto do-while e quindi mi cerca di mettere un tracer per il *while* come se fosse un ciclo separato.  
-La mia soluzione che potrebbe andare bene ma che è abbastanza scorretta è di dargli un booleano che metto a _true_ quando incontro *do* e quando incontro il *while* successivo invece lo setto a _false_.  
-Se questo booleano è settato a true non considero quel *while*.  
-Il problema sarebbe se ci fosse un *while* dentro un *do-while*. Abbastanza raro ma non impossibile.  
-Pensi che se per il momento lo lascio dentro potrebbe dare problemi in futuro?  
-Perchè in questo modo risolvo per tutti i *do-while* tranne per quelli innestati mentre se non faccio nulla mi danno problemi tutti i *do-while* e di conseguenza non mi funziona il programma.
-
-Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho solo testato sulle classi di prova però, non ho ancora provato su pmd.
 
 ------
 
@@ -95,11 +48,6 @@ Per gli altri costrutti tipo while, for, bisogna fare la stessa cosa degli if (i
 ------
 
 Ok tranquillo. Uhm forse hai ragione per il while del do-while non ci avevo pensato se ci avanza del tempo provo a modificarlo vedere se ci sono risultati apprezzabili.  
-Perchè ti dà problemi se ci sono più if-else all'interno di un metodo?  
-Sisi credo vada benissimo la storia della varibile (magari non statica che tanto di FileParse ne viene creato uno per classe) e magari cambia il nome invece che boolArray che potrebbe magari essere un nome frequente mettere qualcosa di più infrequente tipo anche in italiano **ilMioArrayDiBooleani** (o qualcosa di inventato che non sia tipo **array** che magari è dichiarato da qualche parte nella classe e andrebbero in conflitto).  
-Sisi credo proprio di sì. L'unica cosa da stare attenti è il for...e forse il do-while appunto che ha la condizione alla fine e non all'inizio. Se ci sono problemi scrivi pure che possiamo vedere assieme.
-Quando leggi fammi un favore se puoi. Ho messo la classe **ClassediTestPerGit** nel baseConstruct. Se puoi scrivi due o tre linee di codice commentato tra la riga 5 e la riga 6 (tra i due commenti) e se riesci committa solo quel file così poi provo anche io a modificare quelle righe vedere cosa succede.
-Ora faccio anche io un po' pulizia sul readMe e inizio magari a pensare qualcosa per il punto (3).
 
 ------
 
@@ -123,7 +71,6 @@ in questo caso per la condizione i<0 nella dichiarazione di un array, la i me a 
 
 -----
 
-Ho provato con a mettere la roba del test dei conflitti e se c'è un conflitto ti avvisa e non te lo carica. Anzi ti aggiunge un'annotazione proprio nel codice per fartelo risolvere manualmente.  
 Se ti interessa è spiegato tutto qua in modo semplice https://help.github.com/articles/resolving-merge-conflicts. 
 
 Hai ragione non ci avevo proprio pensato.
@@ -136,12 +83,9 @@ Mi è venuta un'idea. Mettili prima del tracer. Ti faccio un esempio (per quanto
 		}  
 
 Così teoricamente dovrebbe andare.
-Per il for prova con la stessa cosa cioè a metterlo dentro altrimenti non saprei.
 
 -----
 Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema per gli switch, credo sia dovuto al parser. Per il do-while non so bene come far a prendere la riga del while inerente al do, per lo switch non ho ancora provato, ma è un bel casino
-
-Per il do-while forse ho risolto, sto provando il tutto su una copia di ieri perché non vorrei fare casino tra le versioni, se vuoi ti invio la classe che ho modificato.
 
 Ok, ora ti invio la classe modificata, per gli switch attualmente non so se si può fare il tutto perché bisognerebbe salvare il valore inizial della stringa o carattere e poi valutare le condizioni con == o equals per ogni caso.
 Il problema con gli switch dovuto al cambiamento del codice per i while per ora rimane ancora.
@@ -150,8 +94,6 @@ Il problema con gli switch dovuto al cambiamento del codice per i while per ora 
 Beh ma comunque a questo punto potrebbe non essere necessaria la valutazione delle condizioni nello switch:  
 se ci pensi la valutazione delle condizioni a noi serve solo quando ci sono più condizioni nello stesso predicato perchè se ne abbiamo una sola allora questa è verificata cioè è vera per ogni volta che si entra nel blocco.  
 Quindi se entriamo nel blocco deve per forza essere vera l'unica condizione, cioè che sia == o equals. Secondo me quindi per gli switch potrebbe non essere necessario.  
-Per le classi che mi hai inviato ora le guardo però tu prova lo stesso a fare il commit di quello che hai fatto vedere se te lo fa fare e non credo di ci siano problemi.  
-Tu stavi lavorando con la versione con già le modifiche che avevo fatto io per risolvere il problema dei path?
 
 Ho un problema con la rilevazione delle istruzioni. O meglio sul come passarle al tracer.  
 Il programma scandisce linea per linea il codice però inserisce la chiamata al tracer all'inizio mentre io ho bisogno di arrivare alla fine del blocco per poter valutare quante istruzioni ci sono.  
@@ -160,21 +102,6 @@ Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in
 Altro problema su cui sto lavorando adesso. Ho provato a testare la storia dei path su pmd.. risultato -> 236 errori. Inizio a correggerli piano piano e che dio me la mandi buona
 
 ------
-Scusa un attimo.Sai come faccio a fare il merge di quello che ho io e quello che è su github, non vorrei fare casini.
-
-------
-Quel che ho fatto io è stato modificare il codice. Praticamente lui dovrebbe metterti delle annotazioni topo <<<<<<< o ====== HEDER ecc. e tu devi fare in modo di non avere più conflitti.  
-Tipo nella prova che abbiamo fatto mi è bastato tenere i tuoi commenti e metterli sotto il mio in questo modo
-
-> 	//da qua  
-	// questo l'ho creato io  
-	//commento di prova   
-	//if(x==0){  
-	//}else{}  
-	//a qua  
-	
-poi il merge è andato a posto.
-p.s. sono arrivato a 14 errori
 
 Aggiornamento: mi dava qualche conflitto con i file caricati ma penso di aver sistemato adesso. Quindi teoricamente dovremmo avere ora gli stessi files.
 Ho provato a far partire il tutto su pmd. Mi da una indexOutOfBoundException su una condizione if (indice -1) ora provo a controllare dove lo fa.
@@ -199,6 +126,13 @@ Altre due cose:
 -  Ho capito perchè fa casini con il for-each. Praticamente lui vede il for e viene chiamato il metodo che cerca i gli opeatori booleani della classe BooleanExpressionParse lui arriva in fondo e vede che non c'è condizione con ; quindi pensa di essere in un'espressione normale e considera un operatore booleano tutto quello tra parentesi.  
 
 Dobbiamo trovare un modo per distinguere i cicli for dai cicli for each. E non fargli parsare gli operatori quando ci sono i for-each. Ora come ora mi verrebbe in mente di identificare i for each dala presenza dei due punti **:** però bisogna tener conto che non devono essere in una stringa.
+
+Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'è più chiarezza:
+- Considerare la possibilità di espressioni booleane su più righe
+- Trovare una differenza tra for e for-each e fare una distinzione quando si parsano i valori booleani
+- Mettere le creazioni degli array su una sola riga prima della chiamata MyTracerClass.tracer(...)
+- Risolvere gli errori dovuti al return per pmd (questo è per me)
+- Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
 
 Tirocinio
 =========
