@@ -99,10 +99,11 @@ public class ParenthesisAdder {
 
 		
 		//C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java --> path per pmd
+		//F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/ --> path test base
 		MethodSignatureExtractor mse = new MethodSignatureExtractor("C:/Users/Marco/Desktop/MetodiTirocinio.txt");
-		m = mse.parseFilesInDir("F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/");
+		m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
 		ParenthesisAdder p = new ParenthesisAdder(m);
-		p.parseFilesInDir("F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/");
+		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
 		p.paintMap(m);
 
 		

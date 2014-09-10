@@ -56,7 +56,6 @@ public class FileParser {
 	private int curlyOpened = 0;
 	private int curlyCountMethodEnd = 0;
 	private int currentCode = -1;
-	
 	private int currentLine = 1;
 	
 	private String className;
@@ -65,6 +64,7 @@ public class FileParser {
 	private int currentBlockID = 0;
 	private int nextMethodLine;
 	private Entry<String,Integer> iteratorEntry;
+	private int currentInstructionCount = 0;
 	private boolean processFirstCase;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
@@ -123,7 +123,6 @@ public class FileParser {
             while(line != null){
             	line = CommentsRemover.removeComments(line);
             	String newLine = parseString(line);
-            	System.out.println("newLine " + newLine);
     			buffWrite.write(newLine);
     			buffWrite.newLine();
     			buffWrite.flush();
@@ -175,9 +174,7 @@ public class FileParser {
 	private String insertMethodTracer(String currentMethod, String line) {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			System.out.println("Controllo currentvoidblabla");
 			if(currentMethodReturnVoid){
-				System.out.println("è void? "+ currentMethodReturnVoid + " allora aggiungo");
 				curlyCountMethodEnd++;
 			}
 			currentBlockID = 0;
@@ -260,7 +257,6 @@ public class FileParser {
 	
 	private String checkReturnType(String method){
 		String[] splitted = method.split(",");
-		System.out.println("SPLIT  " + method + " -> " + splitted[1]);
 		if(splitted != null && splitted.length != 0){
 			return splitted[1];
 		}
@@ -397,14 +393,12 @@ public class FileParser {
 			default:
 				break;
 			}
-			System.out.println(constructCode + " normale " + newLine);
 			return newLine;
 		}
 		else{
 			if(curlyOpened != 0){
 				return closeCurly(line);
 			}
-			System.out.println(constructCode + " else " + newLine);
 			return newLine;
 		}
 
@@ -415,12 +409,9 @@ public class FileParser {
 	
 	//cerca se c'è un return e aggiunge la riga
 	private String checkReturns(String line) {
-		System.out.println("Check return: " + line);
-		if(line.contains("return")){
+		if(line.contains("return ") || line.contains("return;")){
 			int ind = line.indexOf("return");
-			System.out.println("trovato");
-			if(!checkInString(line, "return", ind)){
-				System.out.println("Inserito = " + line.substring(0,ind) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(ind));
+			if(!checkInString(line, "return ", ind) && !checkInString(line, "return;", ind)){
 				return line.substring(0,ind) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(ind);
 			}
 		}
@@ -429,9 +420,8 @@ public class FileParser {
 
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private String checkEndOfMethod(String line) {
-		System.out.println("endofmethod: " + line);
+		line = checkReturns(line);
 		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non è 0
-			System.out.println("entro: " + line);
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non è in una stringa
@@ -621,6 +611,7 @@ public class FileParser {
 		}
 		return line;
 	}
+	
 
 	private String processElse(String line) {
 		currentBlockID++;
@@ -654,6 +645,20 @@ public class FileParser {
 		
 		return line;
 		
+	}
+	
+	private int findInstructions(String line){
+		int count = 0;
+		if(line.contains(";")){
+			for (int i = 0; i < line.length(); i++) {
+				if(line.charAt(i) == ';'){
+					if(!checkInString(line, ";", i)){
+						count++;
+					}
+				}
+			}
+		}
+		return count;
 	}
 	
 	//TODO
@@ -721,7 +726,6 @@ public class FileParser {
 		if(beginIndex >= line.length()){
 			return false;
 		}
-		String substring = line.substring(beginIndex);
 		boolean firstApex = false;
 		for (int i = 0; i < line.length(); i++) {
 			if(line.charAt(i) == '"'){

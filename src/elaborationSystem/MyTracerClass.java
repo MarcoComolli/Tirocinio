@@ -60,7 +60,6 @@ public class MyTracerClass {
 			for (String s : newList) {
 				System.out.print(s +  " >>> ");
 			}
-			
 			System.out.println();
 		}
 	
