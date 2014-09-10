@@ -51,7 +51,7 @@ public class BooleanExpressionParser {
 		}
 		//se non e' condizione di un for
 		if(!string.substring(indexOpen+1,indexClosed).contains(";")){
-		return string.substring(indexOpen+1,indexClosed);
+			return string.substring(indexOpen+1,indexClosed);
 		}else{
 			//condizione for
 			String[] innerFor=string.substring(indexOpen+1,indexClosed).split(";");
