@@ -1,9 +1,5 @@
 Annotazioni
 =========
-Per il conteggio delle istruzioni neanche io ho trovato niente, solo cose riguardanti il bytecode.
-Di tools che fanno quello che cerchiamo probabilmente non ce ne sono.
-
---------
 
 Ok ora inizio a dare un occhio a come fare la roba dei path del punto 1
 
