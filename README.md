@@ -158,6 +158,9 @@ Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in
 
 Altro problema su cui sto lavorando adesso. Ho provato a testare la storia dei path su pmd.. risultato -> 236 errori. Inizio a correggerli piano piano e che dio me la mandi buona
 
+------
+Scusa un attimo.Sai come faccio a fare il merge di quello che ho io e quello che è su github, non vorrei fare casini.
+
 Tirocinio
 =========
 
