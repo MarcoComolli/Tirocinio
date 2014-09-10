@@ -37,6 +37,7 @@ public class FileParser {
 	public static final int CODE_CATCH = 7;
 	public static final int CODE_CASE = 8;
 	public static final int CODE_PACKAGE = 9;
+	public static final int CODE_ELSEIF = 10;
 
 
 	private final String READ_URI;
@@ -67,6 +68,8 @@ public class FileParser {
 	private int currentInstructionCount = 0;
 	private boolean processFirstCase;
 	private int arrayConditionsNumber=0;
+	private String currentBooleanCondition = "";
+	private boolean multiLineBooleanCondition = false;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
 		this.READ_URI = readURI;
@@ -194,6 +197,11 @@ public class FileParser {
 		}
 	}
 
+	/**
+	 * Trova l'ultima parentesi graffa aperta che segna l'inizio di un metodo e restituisce l'indice di questa
+	 * @param line
+	 * @return
+	 */
 	private int checkCurlyOpen(String line) {
 		if(line.contains("{")){
 			Pattern pattern = Pattern.compile("\\{");
@@ -276,6 +284,9 @@ public class FileParser {
 			if(checkKeyword("else", line) && !checkInString(line, "else", line.indexOf("else"))){
 				code = CODE_ELSE;
 			}
+			if(checkKeyword("else if", line) && !checkInString(line, "else if", line.indexOf("else if"))){
+				code = CODE_ELSEIF;
+			}
 		}
 
 		if(line.contains("while")){
@@ -330,6 +341,9 @@ public class FileParser {
 	private boolean checkKeyword(String key, String line) {
 		int index = line.indexOf(key);
 		int keylength = key.length();
+		if(index == -1){
+			return false;
+		}
 		if(index > 0 && ((int)line.charAt(index-1) >= 60 && (int)line.charAt(index-1) <= 122)){
 			return false;
 		}
@@ -366,6 +380,9 @@ public class FileParser {
 				break;
 			case CODE_ELSE:
 				newLine = processElse(line);
+				break;
+			case CODE_ELSEIF:
+				newLine = processElseIf(line);
 				break;
 			case CODE_DO:
 				newLine = processDo(line);
@@ -560,17 +577,28 @@ public class FileParser {
 		String tracerFor = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_FOR+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			String booleanArrayString = getBooleanArrayString(line);
+			String booleanArrayString;
+			if(multiLineBooleanCondition){
+				currentBooleanCondition += line;
+				booleanArrayString = getBooleanArrayString(currentBooleanCondition);
+				multiLineBooleanCondition = false;
+				currentBooleanCondition = "";
+			}
+			else{
+				booleanArrayString = getBooleanArrayString(line);
+			}
 			if(booleanArrayString.equals("forEach")){
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
 				System.err.println("foreachhhhh "+ tracerFor);
 				return newLine;
 			}else{
-			newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
-			
-			return newLine;}
+				newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
+				return newLine;
+			}
 		}
 		else{
+			currentBooleanCondition += line;
+			multiLineBooleanCondition = true;
 			currentCode = CODE_FOR;
 			processNextLine = true;
 		}
@@ -587,12 +615,23 @@ public class FileParser {
 			//int index = checkCurlyOpen(line);
 			if(index != -1){
 				System.err.println("line1: "+line);
-				String booleanArrayString = getBooleanArrayString(line);
+				String booleanArrayString;
+				if(multiLineBooleanCondition){
+					currentBooleanCondition += line;
+					booleanArrayString = getBooleanArrayString(currentBooleanCondition);
+					multiLineBooleanCondition = false;
+					currentBooleanCondition = "";
+				}
+				else{
+					booleanArrayString = getBooleanArrayString(line);
+				}
 				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ tracerWhile + line.substring(index+1, line.length());						
 				return newLine;
 			}
 			else{
 				System.err.println("line2: "+line);
+				currentBooleanCondition += line;
+				multiLineBooleanCondition = true;
 				currentCode = CODE_WHILE;
 				processNextLine = true;
 			}
@@ -627,24 +666,45 @@ public class FileParser {
 		return line;
 	}
 	
+	private String processElseIf(String line) {
+		System.out.println("Process IFELSE");
+		currentBlockID++;
+		String newLine = null;
+		String tracerElseIf = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_ELSEIF+","+currentBlockID+");";
+		int index = checkCurlyOpen(line);
+		if(index != -1){
+			String booleanArrayString;
+			if(multiLineBooleanCondition){
+				currentBooleanCondition += line;
+				booleanArrayString = getBooleanArrayString(currentBooleanCondition);
+				multiLineBooleanCondition = false;
+				currentBooleanCondition = "";
+			}
+			else{
+				booleanArrayString = getBooleanArrayString(line);
+			}
+			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerElseIf + line.substring(index+1, line.length());
+			return newLine;
+		}
+		else{
+			currentBooleanCondition += line;
+			multiLineBooleanCondition = true;
+			currentCode = CODE_ELSEIF;
+			processNextLine = true;
+		}
+		return line;
+	}
+	
 
 	private String processElse(String line) {
+		System.out.println("Process else");
 		currentBlockID++;
 		String newLine = null;
 		String tracerElse = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_ELSE+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			if(line.contains("if")){
-				String booleanArrayString = getBooleanArrayString(line);
-				newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerElse + line.substring(index+1, line.length());
-				
-				return newLine;
-				
-			}else{
-		
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
-			
-			return newLine;}
+			return newLine;
 		}
 		else{
 			currentCode = CODE_ELSE;
@@ -659,11 +719,22 @@ public class FileParser {
 		String tracerIf = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_IF+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			String booleanArrayString = getBooleanArrayString(line);
+			String booleanArrayString;
+			if(multiLineBooleanCondition){
+				currentBooleanCondition += line;
+				booleanArrayString = getBooleanArrayString(currentBooleanCondition);
+				multiLineBooleanCondition = false;
+				currentBooleanCondition = "";
+			}
+			else{
+				booleanArrayString = getBooleanArrayString(line);
+			}
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length());			
-			return newLine ;
+			return newLine;
 		}
 		else{
+			currentBooleanCondition += line;
+			multiLineBooleanCondition = true;
 			currentCode = CODE_IF;
 			processNextLine = true;
 		}

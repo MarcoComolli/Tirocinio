@@ -35,6 +35,7 @@ public class BooleanExpressionParser {
 
 	//estrae l'espressione booleana dalla riga di codice parsata
 	private static String extractBooleanExpression(String string) {
+		System.out.println(string);
 		int indexOpen = string.indexOf('(');
 		int indexClosed = -1;
 		int curly = 0;
@@ -50,12 +51,21 @@ public class BooleanExpressionParser {
 				break;
 			}
 		}
+		if(curly != 0){
+			System.out.println("E' su più righe " + curly);
+		}
+		System.out.println("INDICE: " +  indexClosed);
 		//condizione for	
-		if(string.substring(indexOpen+1,indexClosed).contains(";")){
+		if(string.substring(indexOpen+1,indexClosed).contains(";")){ //TODO il ; può essere contenuto in una stringa di una condizione
 			String[] innerFor=string.substring(indexOpen+1,indexClosed).split(";");
-			return innerFor[1];
+			if(innerFor.length > 2){
+				return innerFor[1];
+			}
+			else{
+				return "true"; //fatto per il caso for(;;){}
+			}
 		
-		}else if(string.substring(indexOpen+1,indexClosed).contains(":")){
+		}else if(string.substring(indexOpen+1,indexClosed).contains(":")){ //TODO il : può essere contenuto in una stringa di una condizione
 			//se non e' condizione di un for
 			return "forEach";
 		}else{
