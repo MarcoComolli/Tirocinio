@@ -178,6 +178,8 @@ p.s. sono arrivato a 14 errori
 Aggiornamento: mi dava qualche conflitto con i file caricati ma penso di aver sistemato adesso. Quindi teoricamente dovremmo avere ora gli stessi files.
 Ho provato a far partire il tutto su pmd. Mi da una indexOutOfBoundException su una condizione if (indice -1) ora provo a controllare dove lo fa.
 
+L'errore credo sia nei cicli for-each che cerca una condizione booleana all'interno del for e la trova. Ma non capisco perchè la trova infatti non ci sono punti e virgola. Mah ora provo a sistemare e se riesco faccio il commit
+
 Tirocinio
 =========
 
