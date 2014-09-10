@@ -156,6 +156,24 @@ Ho un problema con la rilevazione delle istruzioni. O meglio sul come passarle a
 Il programma scandisce linea per linea il codice però inserisce la chiamata al tracer all'inizio mentre io ho bisogno di arrivare alla fine del blocco per poter valutare quante istruzioni ci sono.  
 Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in cui memorizzare il nome del blocco e quante istruzioni contiene e passarle alla classe MyTracerClass in un secondo momento. Ti può sembrare sensato?
 
+Altro problema su cui sto lavorando adesso. Ho provato a testare la storia dei path su pmd.. risultato -> 236 errori. Inizio a correggerli piano piano e che dio me la mandi buona
+
+------
+Scusa un attimo.Sai come faccio a fare il merge di quello che ho io e quello che è su github, non vorrei fare casini.
+
+------
+Quel che ho fatto io è stato modificare il codice. Praticamente lui dovrebbe metterti delle annotazioni topo <<<<<<< o ====== HEDER ecc. e tu devi fare in modo di non avere più conflitti.  
+Tipo nella prova che abbiamo fatto mi è bastato tenere i tuoi commenti e metterli sotto il mio in questo modo
+
+> 	//da qua  
+	// questo l'ho creato io  
+	//commento di prova   
+	//if(x==0){  
+	//}else{}  
+	//a qua  
+	
+poi il merge è andato a posto.
+p.s. sono arrivato a 14 errori
 
 Tirocinio
 =========
