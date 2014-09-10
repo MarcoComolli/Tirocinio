@@ -137,6 +137,10 @@ Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'�
 -----
 Tu ora cosa stai facendo? Ho visto che hai sistemato i for-each e messo i cosi sulla stessa riga dei tracer. Stavo pensando di lavorare suli predicati su più righe ma non voglio creare conflitti se ci stai già pensando tu o se hai già trovato qualche soluzione
 
+-----
+Per ora non sto lavorando sui predicati
+
+
 Tirocinio
 =========
 
