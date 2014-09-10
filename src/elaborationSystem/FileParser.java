@@ -66,6 +66,7 @@ public class FileParser {
 	private int nextMethodLine;
 	private Entry<String,Integer> iteratorEntry;
 	private boolean processFirstCase;
+	private int arrayConditionsNumber=0;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
 		this.READ_URI = readURI;
@@ -177,7 +178,7 @@ public class FileParser {
 		if(index != -1){
 			System.out.println("Controllo currentvoidblabla");
 			if(currentMethodReturnVoid){
-				System.out.println("è void? "+ currentMethodReturnVoid + " allora aggiungo");
+				System.out.println("Ã¨ void? "+ currentMethodReturnVoid + " allora aggiungo");
 				curlyCountMethodEnd++;
 			}
 			currentBlockID = 0;
@@ -413,7 +414,7 @@ public class FileParser {
 	}
 
 	
-	//cerca se c'è un return e aggiunge la riga
+	//cerca se c'Ã¨ un return e aggiunge la riga
 	private String checkReturns(String line) {
 		System.out.println("Check return: " + line);
 		if(line.contains("return")){
@@ -427,20 +428,20 @@ public class FileParser {
 		return line;
 	}
 
-	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
+	//esegue il conteggio delle parentesi graffe e se Ã¨ arrivato alla fine aggiunge la fine metodo
 	private String checkEndOfMethod(String line) {
 		System.out.println("endofmethod: " + line);
-		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non è 0
+		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non Ã¨ 0
 			System.out.println("entro: " + line);
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
-					if(!checkInString(line, "{", i)){ //se non è in una stringa
+					if(!checkInString(line, "{", i)){ //se non Ã¨ in una stringa
 						curlyCountMethodEnd++;
 					}
 					
 				}
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
-					if(!checkInString(line, "}", i)){ //se non è in una stringa
+					if(!checkInString(line, "}", i)){ //se non Ã¨ in una stringa
 						curlyCountMethodEnd--;
 						System.out.println("trovata } totale= " + curlyCountMethodEnd);
 						if(curlyCountMethodEnd == 1){
@@ -574,7 +575,9 @@ public class FileParser {
 		String tracerFor = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_FOR+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());
+			String booleanArrayString = getBooleanArrayString(line);
+			newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
+			
 			return newLine;
 		}
 		else{
@@ -628,8 +631,17 @@ public class FileParser {
 		String tracerElse = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_ELSE+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
+			if(line.contains("if")){
+				String booleanArrayString = getBooleanArrayString(line);
+				newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerElse + line.substring(index+1, line.length());
+				
+				return newLine;
+				
+			}else{
+		
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
-			return newLine;
+			
+			return newLine;}
 		}
 		else{
 			currentCode = CODE_ELSE;
@@ -645,7 +657,8 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			newLine = line.substring(0, index+1) + tracerIf + line.substring(index+1, line.length());
-			return newLine;
+			String booleanArrayString = getBooleanArrayString(line);
+			return booleanArrayString +"\n"+newLine ;
 		}
 		else{
 			currentCode = CODE_IF;
@@ -744,6 +757,19 @@ public class FileParser {
 
 		}
 		return false;
+	}
+	
+	private String getBooleanArrayString(String line) {
+		String[] operands=BooleanExpressionParser.extractOperands(line).split("\\r?\\n");
+		//boolean[] boolArr = new boolArr[array.length]{cond1,stack.isEmpty()};
+
+		String conditions = "";
+		for(int i=0;i<operands.length;i++){
+			conditions+=operands[i]+",";	
+		}
+		String booleanArrayString="boolean[] ilMioArrayDiBooleani"+arrayConditionsNumber+" ={"+conditions.substring(0, conditions.length()-1)+"};";
+		arrayConditionsNumber++;
+		return booleanArrayString;
 	}
 	
 }

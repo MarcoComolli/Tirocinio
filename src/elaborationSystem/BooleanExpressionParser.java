@@ -19,14 +19,15 @@ public class BooleanExpressionParser {
 	}
 
 	//estrae gli operatori nell'array result
-	private static String extractOperands(String string) {
+	public static String extractOperands(String string) {
 		String expression = extractBooleanExpression(string);
 		System.out.println("Espressione: " + expression);
 		String[] result = expression.split("&&|&|\\|\\||\\|");
 		String res = "";
 		System.out.println("operatori: " + result.length);
 		for (int i = 0; i < result.length; i++) {
-			res += (i+1) + " " + result[i] + "\n" ;
+			//res += (i+1) + " " + result[i] + "\n" ;
+			res+=result[i]+"\n";
 		}
 		return res;
 	}
