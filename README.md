@@ -9,7 +9,7 @@ Esempio:
 
 BaseConstruct/MethodIf-3 --> BaseConstruct/MethodIf@1 || BaseConstruct/MethodIf@2 || BaseConstruct/MethodIf@5 || BaseConstruct/MethodIf@6
 
-dove BaseConstruct/MethodIf-3 vuol dire cammino del MethodIf alla sua terza esecuzione. e Gli altri dopo la @ sono il numero dei blocchi. Ti può sembrare sensata? Se si che struttura suggerisci?
+dove BaseConstruct/MethodIf-3 vuol dire cammino del MethodIf alla sua terza esecuzione. e Gli altri dopo la @ sono il numero dei blocchi.  
 Io pensavo tipo ad un TreeMap o un Hashmap con key l'identificativo e come data una lista.
 Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo grandi per la memoria si può, dopo un tot di dati aggiornare un file di testo con i cammini.  
 
@@ -17,39 +17,25 @@ Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo g
 All'inizio del metodo oltre alla chiamata al metodo tracer() ho messo anche una chiamata al metodo recordPath() che ho creato in MyTracerClass. Praticamente questo metodo setta a true una variabile booleana che indica quando deve registrare un percorso e inizializza la lista che dovrà tenere traccia dei blocchi e l'identificativo del percorso.
 Da questo momento ogni volta che entra nel tracer gli faccio aggiungere alla lista il blocco chiamato.
 Alla fine prendo la lista, ne faccio una copia (perchè penso che altrimenti mi passerebbe un riferimento a quella statica che viene azzerata ogni volta..penso) e inserisco nell'hashmap di percorsi.
-Il problema più grande che ho qui adesso è: come faccio a dirgli 'smettila di registrare il percorso?' cioè, arrivato a fine metodo dovrei inserire qualcosa che gli dica 'setta a false la variabile recordPath' però al momento non saprei come fare. O meglio si potrebbe mettere a fine di ogni metodo una chiamata tipo setFalse() però questo richiederebbe di ritoccare ancora il codice...rischioso.. se hai altre idee fammi sapere
 
 -------
 
 Dunque: quello che ora mi metto a fare è una roba di questo genere per il return:
 se il metodo ha come return type il void allora uso il codice che ho appena scritto che dovrebbe funzionare
-se invece il metodo ha un tipo diverso dal void inserisco la chiamata a quel metodo prima di ogni return in tutto il metodo. Mi sembra la via più fattibile anche se riconoscere tutti i return potrebbe essere difficile..mah ora vedo
+se invece il metodo ha un tipo diverso dal void inserisco la chiamata a quel metodo prima di ogni return in tutto il metodo.
 
-Pensavo che per evitare di modificare codice condiviso che poi coi commit facciamo bordelli (non ho ancora capito come fare il merge se devo essere sincero bisognerà fare qualche prova) mentre provo con la storia dei return potresti provare a integrare quello del punto (3). Cioè, ho visto che hai sistemato la cosa del condition per il ciclo for quindi potresti fare così:
+Per il ciclo for quindi potresti fare così:
 - o crei un'istanza della classe booleanoperatorparse e usi i metodi già fatti (magari cambiandoli non più statici)
 - oppure copi quei due metodi nella classe FileParser e li chiami sul parse delle condizioni. 
 Siccome mi sembra che la condizione specificata per il for sia l'unica, cioè che non ci sono altri casi particolari oltre il for, potresti fare magari un metodo a posta per il parse delle condizioni del for e poi invece di chiamare il solito metodo nella parte dove viene riconosciuto che c'è un ciclo for metti il nuovo metodo (lo so è un po' contorto)
 Comunque prova a integrarlo e vedi se da un file di java normale riesce a tirare fuori gli operandi giusti.
-Oppure prova a iniziare col punto 2 come preferisci.
 
 -------
-Sto provando a fare la storia degli if, ma il problema è che non so come copiare il blocco interno del if che vado a spezzettare in più if ed ad inserire gli else prima di essi.
-Il parser per ora funziona con le condizioni, ma il problema grosso è quello lì.
-
--------
-Non credo sia necessario spezettare il tutto come aveva detto. Ora che abbiamo i token basta fare una cosa di questo tipo secondo me:
+Ora che abbiamo i token basta fare una cosa di questo tipo secondo me:
 - prendere la lunghezza dell'array con gli operatori booleani (es. ho 3 condizioni la lunghezza dello split sarà 3)
 - creare un array di booleani di quella dimensione
 - fare gli assegnamenti con gli operatori appena presi prima della dichiarazione dell'if o del blocco
 
-Il problema più grosso sarebbe l'ultimo punto secondo me. Ti faccio un esempio:
-supponiamo di avere:  
-> if(cond1 && stack.isEmpty()) {  
-> .....  
-> } 
-
-allora l'array sarà fatto di 2 entry in questo modo  
-> array: [cond1][stack.isEmpty()]
 
 quello che bisognerebbe cercare di fare è avere il codice alla fine con qualcosa del tipo  
 > boolean[] boolArr = new boolArr[array.length];  
@@ -67,24 +53,18 @@ Un'alternativa che mi viene in mente potrebbe essere qualcosa del tipo
 > .....  
 > }  
 
-Così da aggiungere una sola linea invece che tante quante l'array. Stai comunque attentissimo a cercare di non modificare il numero di linee nel file originale perchè sennò è un bordello:  
+Così da aggiungere una sola linea invece che tante quante l'array.  
+Stai comunque attentissimo a cercare di non modificare il numero di linee nel file originale perchè sennò è un bordello:  
 infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale linea iniziano. Se col preprocessing i numeri di linea in cui iniziano i metodi cambiano penso succederebbe qualcosa di paragonabile all'apocalisse @.@
 
------
-Ho fatto un po' di pulizia nel readMe e mi sono accorto di una cosa. Per il punto due abbiamo bisogno dell'interfaccia grafica perchè è da lì che riesco a far partire i test classe per classe quindi bisognerebbe prima sistemare quella. Ho quindi aggiornato le priorità qui sotto
-
------
-Stasera provo quello che mi hai detto, ma ho paura di far casini visto le ultime cose che hai scritto.
-Se riesco ad avere qualcosa di funzionante ti faccio sapere.
+Per il punto due abbiamo bisogno dell'interfaccia grafica perchè è da lì che riesco a far partire i test classe per classe quindi bisognerebbe prima sistemare quella. 
 
 ----
-Ok. Io dovrei essere quasi arrivato alla soluzione del mio...se tutto funziona poi committo tutto.  
-Vorrei però se non ti dispiace fare una prova quando hai un attimo di tempo:
-Volevo vedere git come si comporta nel caso ad esempio io faccio il commit e aggiungo le righe 33 34 e 35 nel file FileParser. Mettiamo che tu nel tuo progetto sul tuo pc avevi aggiunto qualcosa di tuo alla riga 33 e fai la sincronizzazione. Cosa succede? Ti cancella la linea 33 che hai aggiunto tu e sostituisce le mie o dà un avvertimento?  
-Voglio evitare di perdere codice prezioso visto il tempo che abbiamo. 
-Quindi al massimo creo una classe di prova stupidissima e ci faccio due modifiche e poi cambia magari anche tu quelle righe e vediamo. Se magari stasera ti trovo su Skype possiamo provare (anche solo per chattare non è necessaria la chiamata)
 
-Del mio ho un problema che potrei risolvere (e che purtroppo sto risolvendo in questo modo) in modo che però in una particolare situazione causi un errore.  
+Vorrei però se non ti dispiace fare una prova quando hai un attimo di tempo:
+Volevo vedere git come si comporta nel caso ad esempio io faccio il commit e aggiungo le righe 33 34 e 35 nel file FileParser. Mettiamo che tu nel tuo progetto sul tuo pc avevi aggiunto qualcosa di tuo alla riga 33 e fai la sincronizzazione. Cosa succede? Ti cancella la linea 33 che hai aggiunto tu e sostituisce le mie o dà un avvertimento? 
+
+Del mio ho un problema che potrei risolvere in modo che però in una particolare situazione causi un errore.  
 Ho questo codice:  
 > do{  
 ...  
@@ -98,9 +78,7 @@ Il problema sarebbe se ci fosse un *while* dentro un *do-while*. Abbastanza raro
 Pensi che se per il momento lo lascio dentro potrebbe dare problemi in futuro?  
 Perchè in questo modo risolvo per tutti i *do-while* tranne per quelli innestati mentre se non faccio nulla mi danno problemi tutti i *do-while* e di conseguenza non mi funziona il programma.
 
-------
-
-Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho solo testato sulle classi di prova però, non ho ancora provato su pmd. Faccio il commit tra poco, prima di sincronizzare però magari ti conviene aspettare perchè ho ritoccato la classe FileParse e MyTracerClass e non vorrei che ti cancellasse qualcosa che magari hai fatto su quelle
+Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho solo testato sulle classi di prova però, non ho ancora provato su pmd.
 
 ------
 
@@ -112,6 +90,16 @@ Sto provando ad aggiungere la stringa con l'array, forse aggiungere una sola rig
 Per il nome degli array stavo risolvendo aggiungendo alla stringa boolArray un contatore statico della classe. Non è una bellissima soluzione, ma non mi viene in mente niente.
 
 Per gli altri costrutti tipo while, for, bisogna fare la stessa cosa degli if (inizializzare un array prima del while per esempio)?
+
+------
+
+Ok tranquillo. Uhm forse hai ragione per il while del do-while non ci avevo pensato se ci avanza del tempo provo a modificarlo vedere se ci sono risultati apprezzabili.  
+Perchè ti dà problemi se ci sono più if-else all'interno di un metodo?  
+Sisi credo vada benissimo la storia della varibile (magari non statica che tanto di FileParse ne viene creato uno per classe) e magari cambia il nome invece che boolArray che potrebbe magari essere un nome frequente mettere qualcosa di più infrequente tipo anche in italiano **ilMioArrayDiBooleani** (o qualcosa di inventato che non sia tipo **array** che magari è dichiarato da qualche parte nella classe e andrebbero in conflitto).  
+Sisi credo proprio di sì. L'unica cosa da stare attenti è il for...e forse il do-while appunto che ha la condizione alla fine e non all'inizio. Se ci sono problemi scrivi pure che possiamo vedere assieme.
+Quando leggi fammi un favore se puoi. Ho messo la classe **ClassediTestPerGit** nel baseConstruct. Se puoi scrivi due o tre linee di codice commentato tra la riga 5 e la riga 6 (tra i due commenti) e se riesci committa solo quel file così poi provo anche io a modificare quelle righe vedere cosa succede.
+Ora faccio anche io un po' pulizia sul readMe e inizio magari a pensare qualcosa per il punto (3).
+
 
 Tirocinio
 =========
