@@ -14,6 +14,7 @@ Io pensavo tipo ad un TreeMap o un Hashmap con key l'identificativo e come data 
 Altro problema che mi viene in mente. Se i percorsi dovessero risultare troppo grandi per la memoria si può, dopo un tot di dati aggiornare un file di testo con i cammini.  
 
 ----
+
 All'inizio del metodo oltre alla chiamata al metodo tracer() ho messo anche una chiamata al metodo recordPath() che ho creato in MyTracerClass. Praticamente questo metodo setta a true una variabile booleana che indica quando deve registrare un percorso e inizializza la lista che dovrà tenere traccia dei blocchi e l'identificativo del percorso.
 Da questo momento ogni volta che entra nel tracer gli faccio aggiungere alla lista il blocco chiamato.
 Alla fine prendo la lista, ne faccio una copia (perchè penso che altrimenti mi passerebbe un riferimento a quella statica che viene azzerata ogni volta..penso) e inserisco nell'hashmap di percorsi.
@@ -179,8 +180,25 @@ Aggiornamento: mi dava qualche conflitto con i file caricati ma penso di aver si
 Ho provato a far partire il tutto su pmd. Mi da una indexOutOfBoundException su una condizione if (indice -1) ora provo a controllare dove lo fa.
 
 L'errore credo sia nei cicli for-each che cerca una condizione booleana all'interno del for e la trova. Ma non capisco perchè la trova infatti non ci sono punti e virgola. Mah ora provo a sistemare e se riesco faccio il commit
+
 ------
+
 Ho aggiunto i cambiamenti sui file per inserire le stringhe di creazione degli array, sui file di prova dovrebbe funzionare tutto, comunque ora controllo meglio. Spero non ci siano problemi di conflitto tra i file.
+
+-------
+
+Ecco la linea con l'errore
+
+> if (!CollectionUtil.areEqual(entry.getKey().defaultValue(),  
+					entry.getValue())) {
+					
+lo dà giustamente perchè non abbiamo considerato espressioni booleane multi-linea.
+Altre due cose:
+
+- Sarebbe meglio mettere per tutti i costrutti prima del tracer invece che prima del costrutto, cioè dentro l'if prima  del tracer() e non sopra così non si sfalsano le righe
+-  Ho capito perchè fa casini con il for-each. Praticamente lui vede il for e viene chiamato il metodo che cerca i gli opeatori booleani della classe BooleanExpressionParse lui arriva in fondo e vede che non c'è condizione con ; quindi pensa di essere in un'espressione normale e considera un operatore booleano tutto quello tra parentesi.  
+
+Dobbiamo trovare un modo per distinguere i cicli for dai cicli for each. E non fargli parsare gli operatori quando ci sono i for-each. Ora come ora mi verrebbe in mente di identificare i for each dala presenza dei due punti **:** però bisogna tener conto che non devono essere in una stringa.
 
 Tirocinio
 =========
