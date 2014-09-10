@@ -106,6 +106,11 @@ Perchè in questo modo risolvo per tutti i *do-while* tranne per quelli innestat
 
 Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho solo testato sulle classi di prova però, non ho ancora provato su pmd. Faccio il commit tra poco, prima di sincronizzare però magari ti conviene aspettare perchè ho ritoccato la classe FileParse e MyTracerClass e non vorrei che ti cancellasse qualcosa che magari hai fatto su quelle
 
+------
+
+Scusami, ieri sera alla fine non ho fatto niente perché ero stanco ed è un momento un po' incasinato per me, stamattina faccio quello che ti avevo detto. In ogni caso farò il commit solo se avrò qualcosa di funzionante, per evitare casini visto che non sono molto pratico. Al massimo se ho qualcosa di buono ma che non funziona de tutto te lo passo in un altro modo.
+Per il do-while secondo me potrebbe andare bene anche così, di while interni a do-while non ce ne dovrebbero essere in generale. L'unica cosa che mi viene in mente è se si può gestire il while del do-while in modo diverso dal while tradizionale tenendo conto del ; immediatamente successivo ad esso.
+
 Tirocinio
 =========
 
