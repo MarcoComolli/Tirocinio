@@ -561,9 +561,14 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			String booleanArrayString = getBooleanArrayString(line);
+			if(booleanArrayString.equals("forEach")){
+				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
+				System.err.println("foreachhhhh "+ tracerFor);
+				return newLine;
+			}else{
 			newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
 			
-			return newLine;
+			return newLine;}
 		}
 		else{
 			currentCode = CODE_FOR;
@@ -778,9 +783,12 @@ public class FileParser {
 		for(int i=0;i<operands.length;i++){
 			conditions+=operands[i]+",";	
 		}
+		if(conditions.substring(0, conditions.length()-1).equals("forEach")){
+			return "forEach";
+		}else{
 		String booleanArrayString="boolean[] ilMioArrayDiBooleani"+arrayConditionsNumber+" ={"+conditions.substring(0, conditions.length()-1)+"};";
 		arrayConditionsNumber++;
-		return booleanArrayString;
+		return booleanArrayString;}
 	}
 	
 }

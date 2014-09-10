@@ -1,5 +1,7 @@
 package originalFiles;
 
+import java.util.LinkedList;
+
 public class BaseConstruct {
 
 	int x = 0;
@@ -92,6 +94,14 @@ public class BaseConstruct {
 			System.out.println(e.getClass());
 		}
 		return x;
+	}
+	public int methodForEach(int x){ 
+	
+		LinkedList<String> s= new LinkedList();
+	for (String str:s) {
+		x++;
+	}
+	return x;
 	}
 
 }
