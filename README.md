@@ -134,6 +134,9 @@ Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'�
 - Risolvere gli errori dovuti al return per pmd (questo è per me)
 - Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
 
+-----
+Tu ora cosa stai facendo? Ho visto che hai sistemato i for-each e messo i cosi sulla stessa riga dei tracer. Stavo pensando di lavorare suli predicati su più righe ma non voglio creare conflitti se ci stai già pensando tu o se hai già trovato qualche soluzione
+
 Tirocinio
 =========
 
