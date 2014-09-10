@@ -582,9 +582,9 @@ public class FileParser {
 			//int index = checkCurlyOpen(line);
 			if(index != -1){
 				System.err.println("line1: "+line);
-				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());			
-				String booleanArrayString = getBooleanArrayString(line);		
-				return booleanArrayString+"\n"+newLine;
+				String booleanArrayString = getBooleanArrayString(line);
+				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ tracerWhile + line.substring(index+1, line.length());						
+				return newLine;
 			}
 			else{
 				System.err.println("line2: "+line);
@@ -598,7 +598,7 @@ public class FileParser {
 			if(line.contains("while")){
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
 				String booleanArrayString = getBooleanArrayString(line);			
-			return booleanArrayString+"\n"+newLine;
+			return booleanArrayString+" "+newLine;
 			}
 			
 		}
@@ -654,9 +654,9 @@ public class FileParser {
 		String tracerIf = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_IF+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			newLine = line.substring(0, index+1) + tracerIf + line.substring(index+1, line.length());
 			String booleanArrayString = getBooleanArrayString(line);
-			return booleanArrayString +"\n"+newLine ;
+			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length());			
+			return newLine ;
 		}
 		else{
 			currentCode = CODE_IF;
