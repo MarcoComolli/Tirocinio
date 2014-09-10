@@ -161,6 +161,20 @@ Altro problema su cui sto lavorando adesso. Ho provato a testare la storia dei p
 ------
 Scusa un attimo.Sai come faccio a fare il merge di quello che ho io e quello che è su github, non vorrei fare casini.
 
+------
+Quel che ho fatto io è stato modificare il codice. Praticamente lui dovrebbe metterti delle annotazioni topo <<<<<<< o ====== HEDER ecc. e tu devi fare in modo di non avere più conflitti.  
+Tipo nella prova che abbiamo fatto mi è bastato tenere i tuoi commenti e metterli sotto il mio in questo modo
+
+> 	//da qua  
+	// questo l'ho creato io  
+	//commento di prova   
+	//if(x==0){  
+	//}else{}  
+	//a qua  
+	
+poi il merge è andato a posto.
+p.s. sono arrivato a 14 errori
+
 Tirocinio
 =========
 
