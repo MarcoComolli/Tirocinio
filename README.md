@@ -111,6 +111,8 @@ Ok, al momento sembra funzionare. Riesco a salvare il path dei vari metodi. Ho s
 Scusami, ieri sera alla fine non ho fatto niente perché ero stanco ed è un momento un po' incasinato per me, stamattina faccio quello che ti avevo detto. In ogni caso farò il commit solo se avrò qualcosa di funzionante, per evitare casini visto che non sono molto pratico. Al massimo se ho qualcosa di buono ma che non funziona de tutto te lo passo in un altro modo.
 Per il do-while secondo me potrebbe andare bene anche così, di while interni a do-while non ce ne dovrebbero essere in generale. L'unica cosa che mi viene in mente è se si può gestire il while del do-while in modo diverso dal while tradizionale tenendo conto del ; immediatamente successivo ad esso.
 
+Sto provando ad aggiungere la stringa con l'array, forse aggiungere una sola riga mi dà problemi di compilazione una singola riga forse poi mi dà problemi di compilazione se ci sono più if else all'interno di un metodo. Mi sa che bisogna tenere conto del nome delle variabili degli array creati.
+
 Tirocinio
 =========
 
