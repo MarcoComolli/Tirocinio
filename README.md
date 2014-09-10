@@ -152,6 +152,10 @@ Quindi se entriamo nel blocco deve per forza essere vera l'unica condizione, cio
 Per le classi che mi hai inviato ora le guardo però tu prova lo stesso a fare il commit di quello che hai fatto vedere se te lo fa fare e non credo di ci siano problemi.  
 Tu stavi lavorando con la versione con già le modifiche che avevo fatto io per risolvere il problema dei path?
 
+Ho un problema con la rilevazione delle istruzioni. O meglio sul come passarle al tracer.  
+Il programma scandisce linea per linea il codice però inserisce la chiamata al tracer all'inizio mentre io ho bisogno di arrivare alla fine del blocco per poter valutare quante istruzioni ci sono.  
+Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in cui memorizzare il nome del blocco e quante istruzioni contiene e passarle alla classe MyTracerClass in un secondo momento. Ti può sembrare sensato?
+
 
 Tirocinio
 =========
