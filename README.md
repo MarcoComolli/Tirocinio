@@ -144,6 +144,20 @@ Per ora non sto lavorando sui predicati
 
 Ok però stasera non so se ci riesco a lavorare magari più sul tardi vedrò
 
+-----
+
+Mi sembra di aver risolto il problema delle condizioni su linee diverse. Il che ha aperto qualche altro problema ma poi penso a risolvere anche quelli.
+Ho ritoccato tutti i metodi e spero di non aver creato conflitti con quello che avevi fatto tu. Al momento non mi sembra però non si può mai sapere.  
+Ho aggiunto un metodo apposta per gli else-if diversificato dall'else e ho spostato il codice che avevi fatto per adattare l'else-if lì dentro. Dovrebbe funzionare.
+Nel BooleanExpressionParser ho dovuto aggiungere una condizione un po' strana che sennò dava errore. Infatti quei brillantoni che hanno scritto PMD hanno inserito un ciclo infinito di questo tipo for(;;) e ovviamente non trovava la condizione in mezzo perchè non c'era (un while(true) era troppo banale per loro si vede vabbè..)  
+Ultima cosa: sempre in quella classe lì ho marchiato con il TODO che bisogna sistemare quelle due condizioni perchè in righe come questa crede che ci sia un for-each perchè vede i **:** 
+> if (s.startsWith("::")) {
+
+e fa questo scherzetto  
+> if (s.startsWith("::")) {forEach  MyTracerClass.tracer("rule/basic/AvoidUsingHardCodedIPRule isIPv6,boolean,.char String boolean boolean ",0,4);
+
+Quindi poi domani bisogna darci un'occhiata (non dovrebbe essere molto difficile, avevo già fatto un metodo che si chiamava qualcosa tipo checkInString o qualcosa del genere poi domani ci penso)
+
 Tirocinio
 =========
 
