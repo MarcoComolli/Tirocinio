@@ -176,8 +176,6 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			if(currentMethodReturnVoid){
-				System.out.println(" void? "+ currentMethodReturnVoid + " allora aggiungo");
-
 				curlyCountMethodEnd++;
 			}
 			currentBlockID = 0;
@@ -423,10 +421,8 @@ public class FileParser {
 
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private String checkEndOfMethod(String line) {
-		System.out.println("endofmethod: " + line);
 		line = checkReturns(line);
 		if(curlyCountMethodEnd != 0){ //fai il tutto quando il count non è 0
-			System.out.println("entro: " + line);
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non è in una stringa
@@ -437,7 +433,6 @@ public class FileParser {
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non è in una stringa
 						curlyCountMethodEnd--;
-						System.out.println("trovata } totale= " + curlyCountMethodEnd);
 						if(curlyCountMethodEnd == 1){
 							curlyCountMethodEnd = 0;
 							return line.substring(0,i) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(i);
@@ -464,7 +459,6 @@ public class FileParser {
 					stack.pop();
 				}
 				else{
-					System.out.println("SONO VUOTA");
 					processSwitchCase = false;
 					if(stackOfStack != null && !stackOfStack.isEmpty()){
 						processSwitchCase = true;
@@ -548,15 +542,12 @@ public class FileParser {
 		processSwitchCase = true;
 		processFirstCase = true;
 		if(stack == null || stack.isEmpty()){
-			System.out.println("create new stack");
 			stack = new Stack<Character>();
 		}
 		else{
 			if(stackOfStack == null){
-				System.out.println("create new stackofstack");
 				stackOfStack = new Stack<Stack<Character>>();
 			}
-			System.out.println("push stack and create new one");
 			stackOfStack.push(stack);
 			stack = new Stack<Character>();
 		}
