@@ -120,6 +120,22 @@ tipo:
 
 in questo caso per la condizione i<0 nella dichiarazione di un array, la i me a dà come non dichiarata.
 
+-----
+
+Ho provato con a mettere la roba del test dei conflitti e se c'è un conflitto ti avvisa e non te lo carica. Anzi ti aggiunge un'annotazione proprio nel codice per fartelo risolvere manualmente.  
+Se ti interessa è spiegato tutto qua in modo semplice https://help.github.com/articles/resolving-merge-conflicts. 
+
+Hai ragione non ci avevo proprio pensato.
+Mi è venuta un'idea. Mettili prima del tracer. Ti faccio un esempio (per quanto riguarda if ed else intendo).
+
+> if (x % 2 == 0 && x == 2) { boolean[] arr1 = new boolean[2]{x % 2 == 0,x == 2};MyTracerClass.tracer(....., arr);
+			y++;
+		} else if (x == 0) { boolean[] arr1 = new boolean[1]{x== 0};MyTracerClass.tracer(....., arr);
+			y--;
+		}
+
+Così teoricamente dovrebbe andare.
+Per il for prova con la stessa cosa cioè a metterlo dentro altrimenti non saprei.
 
 Tirocinio
 =========
