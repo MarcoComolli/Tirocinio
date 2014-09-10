@@ -113,6 +113,10 @@ Per il do-while secondo me potrebbe andare bene anche così, di while interni a 
 
 Sto provando ad aggiungere la stringa con l'array, forse aggiungere una sola riga mi dà problemi di compilazione una singola riga forse poi mi dà problemi di compilazione se ci sono più if else all'interno di un metodo. Mi sa che bisogna tenere conto del nome delle variabili degli array creati.
 
+Per il nome degli array stavo risolvendo aggiungendo alla stringa boolArray un contatore statico della classe. Non è una bellissima soluzione, ma non mi viene in mente niente.
+
+Per gli altri costrutti tipo while, for, bisogna fare la stessa cosa degli if (inizializzare un array prima del while per esempio)?
+
 Tirocinio
 =========
 
