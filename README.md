@@ -103,6 +103,22 @@ Ora faccio anche io un po' pulizia sul readMe e inizio magari a pensare qualcosa
 ------
 
 Commit con commenti fatto.
+Il problema con gli else if è che non so bene dove mettere la dichiarazione dell'array prima delle else. Se per esempio ho
+> if (x % 2 == 0 && x == 2) {
+			y++;
+		} else if (x == 0) {
+			y--;
+		}
+		
+non so dove mettere la dichiarazione per la condizione del secondo if, perchè se la mettessi prima dell'else, verrebbe eseguita solo se il blocco del primo if fosse eseguito.
+Per il for il problema è che la condizione interna molte volte dipende da una variabile dichiarata internamente al for.
+
+tipo:
+> for (int i = 0; i < 10; i++) {
+			y++;
+		}
+
+in questo caso per la condizione i<0 nella dichiarazione di un array, la i me a dà come non dichiarata.
 
 
 Tirocinio
