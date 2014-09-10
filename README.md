@@ -141,6 +141,9 @@ Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema 
 
 Per il do-while forse ho risolto, sto provando il tutto su una copia di ieri perché non vorrei fare casino tra le versioni, se vuoi ti invio la classe che ho modificato.
 
+Ok, ora ti invio la classe modificata, per gli switch attualmente non so se si può fare il tutto perché bisognerebbe salvare il valore inizial della stringa o carattere e poi valutare le condizioni con == o equals per ogni caso.
+Il problema con gli switch dovuto al cambiamento del codice per i while per ora rimane ancora.
+
 
 Tirocinio
 =========
