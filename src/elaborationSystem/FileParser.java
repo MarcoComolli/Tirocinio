@@ -575,20 +575,32 @@ public class FileParser {
 	private String processWhile(String line) {
 		currentBlockID++;
 		String newLine = null;
+		System.err.println("line: "+line);
 		String tracerWhile = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_WHILE+","+currentBlockID+");";
+		int index = checkCurlyOpen(line);
 		if(whileAfterDo == false){
-			int index = checkCurlyOpen(line);
+			//int index = checkCurlyOpen(line);
 			if(index != -1){
-				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());
-				return newLine;
+				System.err.println("line1: "+line);
+				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());			
+				String booleanArrayString = getBooleanArrayString(line);		
+				return booleanArrayString+"\n"+newLine;
 			}
 			else{
+				System.err.println("line2: "+line);
 				currentCode = CODE_WHILE;
 				processNextLine = true;
 			}
 		}
 		else{
+			System.err.println("line3: "+line);
 			whileAfterDo = false;
+			if(line.contains("while")){
+				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
+				String booleanArrayString = getBooleanArrayString(line);			
+			return booleanArrayString+"\n"+newLine;
+			}
+			
 		}
 		return line;
 	}
