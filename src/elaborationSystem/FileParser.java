@@ -563,6 +563,8 @@ public class FileParser {
 			String booleanArrayString = getBooleanArrayString(line);
 			if(booleanArrayString.equals("forEach")){
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
+				System.err.println("foreachhhhh "+ tracerFor);
+				return newLine;
 			}else{
 			newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
 			
