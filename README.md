@@ -100,6 +100,10 @@ Sisi credo proprio di sì. L'unica cosa da stare attenti è il for...e forse il 
 Quando leggi fammi un favore se puoi. Ho messo la classe **ClassediTestPerGit** nel baseConstruct. Se puoi scrivi due o tre linee di codice commentato tra la riga 5 e la riga 6 (tra i due commenti) e se riesci committa solo quel file così poi provo anche io a modificare quelle righe vedere cosa succede.
 Ora faccio anche io un po' pulizia sul readMe e inizio magari a pensare qualcosa per il punto (3).
 
+------
+
+Commit con commenti fatto.
+
 
 Tirocinio
 =========
