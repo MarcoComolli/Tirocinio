@@ -136,6 +136,9 @@ Mi è venuta un'idea. Mettili prima del tracer. Ti faccio un esempio (per quanto
 
 Così teoricamente dovrebbe andare.
 Per il for prova con la stessa cosa cioè a metterlo dentro altrimenti non saprei.
+-----
+Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema per gli switch, credo sia dovuto al parser. Per il do-while non so bene come far a prendere la riga del while inerente al do, per lo switch non ho ancora provato, ma è un bel casino
+
 
 Tirocinio
 =========
