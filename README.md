@@ -140,6 +140,9 @@ Tu ora cosa stai facendo? Ho visto che hai sistemato i for-each e messo i cosi s
 -----
 Per ora non sto lavorando sui predicati
 
+------
+
+Ok però stasera non so se ci riesco a lavorare magari più sul tardi vedrò
 
 Tirocinio
 =========
