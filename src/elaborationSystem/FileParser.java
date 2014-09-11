@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -70,6 +71,8 @@ public class FileParser {
 	private int arrayConditionsNumber=0;
 	private String currentBooleanCondition = "";
 	private boolean multiLineBooleanCondition = false;
+	private HashMap<String,Integer> linesInBlock=new HashMap<String,Integer>();
+	private boolean countInstruction=false;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
 		this.READ_URI = readURI;
@@ -133,6 +136,16 @@ public class FileParser {
 	
     			line = buffRead.readLine();
     			currentLine++; 
+    			if(countInstruction){
+    				currentInstructionCount+=findInstructions(line);
+    			}
+    			if(line!=null && line.contains("}") && countInstruction){
+    				linesInBlock.put(currentMethod, currentBlockID);
+    				System.err.println(currentMethod+" "+ currentBlockID +" " +currentInstructionCount);
+    				currentInstructionCount=0;
+    				countInstruction=false;
+    			}
+    			
     			if(currentLine == nextMethodLine && line != null){
     				currentMethod = iteratorEntry.getKey();
     				if(checkReturnType(currentMethod).equals("void")){
@@ -524,6 +537,7 @@ public class FileParser {
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == ':'){
 					newLine = line.substring(0, i+1) + "{" +  tracerCatch + line.substring(i+1, line.length());
+					countInstruction=true;
 				}
 			}
 			if(processFirstCase){
@@ -544,6 +558,7 @@ public class FileParser {
 					newLine = line.substring(0, i+1) + tracerCatch + line.substring(i+1, line.length());
 				}
 			}
+			countInstruction=true;
 			return newLine;
 		}
 		return line;
@@ -590,9 +605,11 @@ public class FileParser {
 			if(booleanArrayString.equals("forEach")){
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
 				System.err.println("foreachhhhh "+ tracerFor);
+				countInstruction=true;
 				return newLine;
 			}else{
 				newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
+				countInstruction=true;
 				return newLine;
 			}
 		}
@@ -625,7 +642,8 @@ public class FileParser {
 				else{
 					booleanArrayString = getBooleanArrayString(line);
 				}
-				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ tracerWhile + line.substring(index+1, line.length());						
+				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ tracerWhile + line.substring(index+1, line.length());
+				countInstruction=true;
 				return newLine;
 			}
 			else{
@@ -641,7 +659,8 @@ public class FileParser {
 			whileAfterDo = false;
 			if(line.contains("while")){
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
-				String booleanArrayString = getBooleanArrayString(line);			
+				String booleanArrayString = getBooleanArrayString(line);
+				countInstruction=true;
 			return booleanArrayString+" "+newLine;
 			}
 			
@@ -657,6 +676,7 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			newLine = line.substring(0, index+1) + tracerDo + line.substring(index+1, line.length());
+			countInstruction=true;
 			return newLine;
 		}
 		else{
@@ -684,6 +704,7 @@ public class FileParser {
 				booleanArrayString = getBooleanArrayString(line);
 			}
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerElseIf + line.substring(index+1, line.length());
+			countInstruction=true;
 			return newLine;
 		}
 		else{
@@ -704,6 +725,7 @@ public class FileParser {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
+			countInstruction=true;
 			return newLine;
 		}
 		else{
@@ -729,7 +751,8 @@ public class FileParser {
 			else{
 				booleanArrayString = getBooleanArrayString(line);
 			}
-			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length());			
+			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length());
+			countInstruction=true;
 			return newLine;
 		}
 		else{
