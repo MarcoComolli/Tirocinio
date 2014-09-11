@@ -152,6 +152,15 @@ Quindi poi domani bisogna darci un'occhiata (non dovrebbe essere molto difficile
 Intanto io cosa potrei fare? Dici che posso iniziare con il punto 3? I punti virgola in questo caso sarebbero da contare per ogni singolo blocco, giusto?
 Altra cosa, magari oggi o domani potremmo aggiornare il prof sull'andamento del tirocinio. 
 
+-----
+
+Allora sì, per la storia dei punti e virgola sarebbero da contare per tutti i blocchi. Ci avevo iniziato a lavorare e se vedi nel codice avevo aggiunto questo metodo findInstructions() che conta i punti e virgola nella linea che gli passi e restituisce l'intero (non conta quelli presenti nelle stringhe) e anche il campo currentIstructionCount. Puoi usare quelli se vuoi.  
+Il problema stava, come avevo scritto un po' più in su, nel come passare i dati alla classe my tracer visto che processando riga per riga bisogna attendere la fine del blocco prima di sapere il numero effettivo. Ti cito qual'era il problema se ti sembra senstato
+> Ho un problema con la rilevazione delle istruzioni. O meglio sul come passarle al tracer.  
+Il programma scandisce linea per linea il codice però inserisce la chiamata al tracer all'inizio mentre io ho bisogno di arrivare alla fine del blocco per poter valutare quante istruzioni ci sono.  
+Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in cui memorizzare il nome del blocco e quante istruzioni contiene e passarle alla classe MyTracerClass in un secondo momento. Ti può sembrare sensato?
+
+Preferirei domani così oggi abbiamo tempo di sistemare i punti 1 e 2 e magar riuscire a fare il 3. Mi sembra comunque un ottimo progresso fare 3 punti in 3 giorni. Intanto ora inizio a pensare ai problemi che ti avevo citato sopra
 
 Tirocinio
 =========
