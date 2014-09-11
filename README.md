@@ -36,17 +36,6 @@ infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale
 
 ------
 
-Scusami, ieri sera alla fine non ho fatto niente perché ero stanco ed è un momento un po' incasinato per me, stamattina faccio quello che ti avevo detto. In ogni caso farò il commit solo se avrò qualcosa di funzionante, per evitare casini visto che non sono molto pratico. Al massimo se ho qualcosa di buono ma che non funziona de tutto te lo passo in un altro modo.
-Per il do-while secondo me potrebbe andare bene anche così, di while interni a do-while non ce ne dovrebbero essere in generale. L'unica cosa che mi viene in mente è se si può gestire il while del do-while in modo diverso dal while tradizionale tenendo conto del ; immediatamente successivo ad esso.
-
-Sto provando ad aggiungere la stringa con l'array, forse aggiungere una sola riga mi dà problemi di compilazione una singola riga forse poi mi dà problemi di compilazione se ci sono più if else all'interno di un metodo. Mi sa che bisogna tenere conto del nome delle variabili degli array creati.
-
-Per il nome degli array stavo risolvendo aggiungendo alla stringa boolArray un contatore statico della classe. Non è una bellissima soluzione, ma non mi viene in mente niente.
-
-Per gli altri costrutti tipo while, for, bisogna fare la stessa cosa degli if (inizializzare un array prima del while per esempio)?
-
-------
-
 Ok tranquillo. Uhm forse hai ragione per il while del do-while non ci avevo pensato se ci avanza del tempo provo a modificarlo vedere se ci sono risultati apprezzabili.  
 
 ------
@@ -157,6 +146,12 @@ e fa questo scherzetto
 > if (s.startsWith("::")) {forEach  MyTracerClass.tracer("rule/basic/AvoidUsingHardCodedIPRule isIPv6,boolean,.char String boolean boolean ",0,4);
 
 Quindi poi domani bisogna darci un'occhiata (non dovrebbe essere molto difficile, avevo già fatto un metodo che si chiamava qualcosa tipo checkInString o qualcosa del genere poi domani ci penso)
+
+-----
+
+Intanto io cosa potrei fare? Dici che posso iniziare con il punto 3? I punti virgola in questo caso sarebbero da contare per ogni singolo blocco, giusto?
+Altra cosa, magari oggi o domani potremmo aggiornare il prof sull'andamento del tirocinio. 
+
 
 Tirocinio
 =========
