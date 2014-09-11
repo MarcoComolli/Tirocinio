@@ -121,8 +121,31 @@ Beh penso che le tenere tutte le condizioni semplici senza anche la composizione
 Penso che agirò direttamente nella classe BooleanExpressionParser. Qualcosa tipo cercare nella condizione booleana più grossa se ci sono delle parentesi tonde che han dentro &&,&,||,| e spezzettare anche quelle...boh ci penso dopo pranzo
 
 ------
-Per ora purtroppo non ho risultati positivi. Non capisco bene ancora dove effettuare il conteggio delle istruzioni, dove incrementare questo campo e dove azzerarlo per far in modo che si disponibile per un altro blocco.
+Per ora purtroppo non ho risultati positivi. Non capisco bene ancora dove effettuare il conteggio delle istruzioni, dove incrementare questo campo e dove azzerarlo per far in modo che sia disponibile per un altro blocco.
 Io pensavo di effettuare il conteggio con il metodo findInstructions() su ogni linea e incrementare il campo currentIstructionCount e questo lo faccio quando il file viene letto, il problema è quando inserire nella struttura dati(un HashMap per ora) l'identificativo del metodo-blocco e il conteggio delle istruzioni.
+
+------
+Anche qua niente di che ma ci sto lavorando...in qualche modo verrà fuori qualcosa di contorto come al solito.
+
+Per il tuo problema stavo pensando....dunque, visto così ti serve sicuramente un booleano (qualcosa del tipo countInstruction o startCount) che quando è settato a true dice che bisogna contare i punti e virgola, mentre quando è settato a false non bisogna contare. Quindi la chiamata a findInstruction() sarà effettuata solo quando questo campo è true.  
+Il problema ora è: quando farlo? Secondo me sarebbe il caso di farlo dopo aver inserito un tracer che non sia il tracer iniziale del metodo (infatti il tracer indica l'inizio del blocco ma bisogna stare attenti a fare in modo di non contare la linea del tracer (con il tracer già aggiunto) altrimenti conterebbe anche i punti e virgola del codice che abbiamo aggiunto noi).  
+Settarlo invece a false quando il blocco finisce (qui non saprei si potrebbe vedere qualcosa con le parentesi graffe...al momento non mi viene in mente niente).  
+Quindi il procedimento sarebbe: 
+> boolean = false --> trovo metodo -> trovo inizio blocco -> inserisco tracer del blocco -> boolean = true -> trovo la fine del blocco -> boolean = false -> inserisco il numero di istruzioni, il metodo corrente con il numero di blocco corrente nella hashmap -> inizializzo a 0 il conteggio delle istruzioni
+
+Ci sarebbe un altro problema però in questo modo. Se c'è un'istruzione fuori da un blocco il metodo non la conterebbe. Per esempio:
+
+```Java
+public void method(){ //qua viene inserito il tracer metodo
+	System.out.println("Io non vengo contata");  // <--- Questa istruzione non viene contata perchè non è in nessun blocco ma appartiene al metodo 
+	if(x== 0){
+		//interno del blocco
+	}
+
+}
+```
+
+Però è un problema che penso si ponga più avanti. Adesso sarebbe già un buon risultato riuscire a contare le istruzione dei blocchi
 
 
 Tirocinio
