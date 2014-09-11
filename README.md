@@ -120,6 +120,11 @@ boolean[] ilMioArrayDiBooleani0 ={!node.isInterface() , node.isNested(), (node.i
 Beh penso che le tenere tutte le condizioni semplici senza anche la composizione di queste sia più che sufficiente. Il problema rimane comunque come tenere separate quelle unite dalle parentesi.
 Penso che agirò direttamente nella classe BooleanExpressionParser. Qualcosa tipo cercare nella condizione booleana più grossa se ci sono delle parentesi tonde che han dentro &&,&,||,| e spezzettare anche quelle...boh ci penso dopo pranzo
 
+------
+Per ora purtroppo non ho risultati positivi. Non capisco bene ancora dove effettuare il conteggio delle istruzioni, dove incrementare questo campo e dove azzerarlo per far in modo che si disponibile per un altro blocco.
+Io pensavo di effettuare il conteggio con il metodo findInstructions() su ogni linea e incrementare il campo currentIstructionCount e questo lo faccio quando il file viene letto, il problema è quando inserire nella struttura dati(un HashMap per ora) l'identificativo del metodo-blocco e il conteggio delle istruzioni.
+
+
 Tirocinio
 =========
 
