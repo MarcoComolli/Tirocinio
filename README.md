@@ -172,6 +172,12 @@ Nel caso eventuale in cui non ce la facessimo a trovare un modo per avere il num
 Se vuoi faccio il commit, dovrei aver lavorato sulla versione tua ultima aggiornata, perché ho rifatto tutto.
 Per ora non funziona molto bene perché ha i problemi che ho detto e forse altri.
 
+------
+
+Beh ma nel blocco if difatti c'è una sola istruzione che è int x = 0; l'altra, quella con l'operatore booleano, non te la conta perchè non è nel blocco ma è nel metodo...è il problema che dicevamo prima. Sisi committa pure (guardo poi più sul tardi che ora non posso).  
+p.s. perchè hai dovuto rifare? Non bastava fare il merge?
+
+
 Tirocinio
 =========
 
