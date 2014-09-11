@@ -177,6 +177,9 @@ Per ora non funziona molto bene perché ha i problemi che ho detto e forse altri
 Beh ma nel blocco if difatti c'è una sola istruzione che è int x = 0; l'altra, quella con l'operatore booleano, non te la conta perchè non è nel blocco ma è nel metodo...è il problema che dicevamo prima. Sisi committa pure (guardo poi più sul tardi che ora non posso).  
 p.s. perchè hai dovuto rifare? Non bastava fare il merge?
 
+------
+
+Ho rifatto tutto da 0 perché con la mia soluzione non andava bene. 
 
 Tirocinio
 =========
