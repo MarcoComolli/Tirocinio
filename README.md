@@ -110,6 +110,13 @@ boolean[] ilMioArrayDiBooleani0 ={!node.isInterface() , node.isNested(), (node.i
 dando un errore perchè in una condizione (node.isPublic() ha la parentesi aperta poi c'è la virgola che separa l'altra condizione con la parentesi chiusa ed è un problema. 
 Hai in mente un modo per risolverlo?
 
+------
+Non so, forse bisognerebbe tenere conto dell'OR e considerarli come una sola condizione però aquesto punto non avremmo le valutazioni possibili delle due o più condizioni. In caso volessimo tenere anche le due condizioni singole si potrebbe fare così, ma non so se ha senso ed è fattibile:
+
+```Java
+boolean[] ilMioArrayDiBooleani0 ={!node.isInterface() , node.isNested(), (node.isPublic() || node.isStatic()), node.isPublic(), node.isStatic() };  
+```
+
 
 Tirocinio
 =========
