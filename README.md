@@ -38,46 +38,9 @@ infatti prima di applicare il processing memorizzo l'elenco dei metodi e a quale
 
 Ok tranquillo. Uhm forse hai ragione per il while del do-while non ci avevo pensato se ci avanza del tempo provo a modificarlo vedere se ci sono risultati apprezzabili.  
 
-------
-
-Commit con commenti fatto.
-Il problema con gli else if è che non so bene dove mettere la dichiarazione dell'array prima delle else. Se per esempio ho
-> if (x % 2 == 0 && x == 2) {
-			y++;
-		} else if (x == 0) {
-			y--;
-		}
-		
-non so dove mettere la dichiarazione per la condizione del secondo if, perchè se la mettessi prima dell'else, verrebbe eseguita solo se il blocco del primo if fosse eseguito.
-Per il for il problema è che la condizione interna molte volte dipende da una variabile dichiarata internamente al for.
-
-tipo:
-> for (int i = 0; i < 10; i++) {
-			y++;
-		}
-
-in questo caso per la condizione i<0 nella dichiarazione di un array, la i me a dà come non dichiarata.
-
 -----
 
-Se ti interessa è spiegato tutto qua in modo semplice https://help.github.com/articles/resolving-merge-conflicts. 
-
-Hai ragione non ci avevo proprio pensato.
-Mi è venuta un'idea. Mettili prima del tracer. Ti faccio un esempio (per quanto riguarda if ed else intendo).'
-
-> if (x % 2 == 0 && x == 2) { boolean[] arr1 = new boolean[2]{x % 2 == 0,x == 2};MyTracerClass.tracer(....., arr);  
-			y++;  
-		} else if (x == 0) { boolean[] arr1 = new boolean[1]{x== 0};MyTracerClass.tracer(....., arr);  
-			y--;  
-		}  
-
-Così teoricamente dovrebbe andare.
-
------
-Per if, if-else e for dovrei esserci. Per while funziona, ma micrea un problema per gli switch, credo sia dovuto al parser. Per il do-while non so bene come far a prendere la riga del while inerente al do, per lo switch non ho ancora provato, ma è un bel casino
-
-Ok, ora ti invio la classe modificata, per gli switch attualmente non so se si può fare il tutto perché bisognerebbe salvare il valore inizial della stringa o carattere e poi valutare le condizioni con == o equals per ogni caso.
-Il problema con gli switch dovuto al cambiamento del codice per i while per ora rimane ancora.
+Per risolvere i conflitti del merge se ti interessa è spiegato tutto qua in modo semplice https://help.github.com/articles/resolving-merge-conflicts. 
 
 ----
 Beh ma comunque a questo punto potrebbe non essere necessaria la valutazione delle condizioni nello switch:  
@@ -88,35 +51,9 @@ Ho un problema con la rilevazione delle istruzioni. O meglio sul come passarle a
 Il programma scandisce linea per linea il codice però inserisce la chiamata al tracer all'inizio mentre io ho bisogno di arrivare alla fine del blocco per poter valutare quante istruzioni ci sono.  
 Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in cui memorizzare il nome del blocco e quante istruzioni contiene e passarle alla classe MyTracerClass in un secondo momento. Ti può sembrare sensato?
 
-Altro problema su cui sto lavorando adesso. Ho provato a testare la storia dei path su pmd.. risultato -> 236 errori. Inizio a correggerli piano piano e che dio me la mandi buona
-
 ------
 
-Aggiornamento: mi dava qualche conflitto con i file caricati ma penso di aver sistemato adesso. Quindi teoricamente dovremmo avere ora gli stessi files.
-Ho provato a far partire il tutto su pmd. Mi da una indexOutOfBoundException su una condizione if (indice -1) ora provo a controllare dove lo fa.
-
-L'errore credo sia nei cicli for-each che cerca una condizione booleana all'interno del for e la trova. Ma non capisco perchè la trova infatti non ci sono punti e virgola. Mah ora provo a sistemare e se riesco faccio il commit
-
-------
-
-Ho aggiunto i cambiamenti sui file per inserire le stringhe di creazione degli array, sui file di prova dovrebbe funzionare tutto, comunque ora controllo meglio. Spero non ci siano problemi di conflitto tra i file.
-
--------
-
-Ecco la linea con l'errore
-
-> if (!CollectionUtil.areEqual(entry.getKey().defaultValue(),  
-					entry.getValue())) {
-					
-lo dà giustamente perchè non abbiamo considerato espressioni booleane multi-linea.
-Altre due cose:
-
-- Sarebbe meglio mettere per tutti i costrutti prima del tracer invece che prima del costrutto, cioè dentro l'if prima  del tracer() e non sopra così non si sfalsano le righe
--  Ho capito perchè fa casini con il for-each. Praticamente lui vede il for e viene chiamato il metodo che cerca i gli opeatori booleani della classe BooleanExpressionParse lui arriva in fondo e vede che non c'è condizione con ; quindi pensa di essere in un'espressione normale e considera un operatore booleano tutto quello tra parentesi.  
-
-Dobbiamo trovare un modo per distinguere i cicli for dai cicli for each. E non fargli parsare gli operatori quando ci sono i for-each. Ora come ora mi verrebbe in mente di identificare i for each dala presenza dei due punti **:** però bisogna tener conto che non devono essere in una stringa.
-
-Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'è più chiarezza:
+Faccio un elenco delle cose che dobbiamo fare ora così c'è più chiarezza:
 - [x] Considerare la possibilità di espressioni booleane su più righe
 - [x] Trovare una differenza tra for e for-each e fare una distinzione quando si parsano i valori booleani
 - [x] Mettere le creazioni degli array su una sola riga prima della chiamata MyTracerClass.tracer(...)
@@ -124,26 +61,20 @@ Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'�
 - [ ] Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
 
 -----
-Tu ora cosa stai facendo? Ho visto che hai sistemato i for-each e messo i cosi sulla stessa riga dei tracer. Stavo pensando di lavorare suli predicati su più righe ma non voglio creare conflitti se ci stai già pensando tu o se hai già trovato qualche soluzione
-
------
-Per ora non sto lavorando sui predicati
-
-------
-
-Ok però stasera non so se ci riesco a lavorare magari più sul tardi vedrò
-
------
 
 Mi sembra di aver risolto il problema delle condizioni su linee diverse. Il che ha aperto qualche altro problema ma poi penso a risolvere anche quelli.
 Ho ritoccato tutti i metodi e spero di non aver creato conflitti con quello che avevi fatto tu. Al momento non mi sembra però non si può mai sapere.  
 Ho aggiunto un metodo apposta per gli else-if diversificato dall'else e ho spostato il codice che avevi fatto per adattare l'else-if lì dentro. Dovrebbe funzionare.
 Nel BooleanExpressionParser ho dovuto aggiungere una condizione un po' strana che sennò dava errore. Infatti quei brillantoni che hanno scritto PMD hanno inserito un ciclo infinito di questo tipo for(;;) e ovviamente non trovava la condizione in mezzo perchè non c'era (un while(true) era troppo banale per loro si vede vabbè..)  
-Ultima cosa: sempre in quella classe lì ho marchiato con il TODO che bisogna sistemare quelle due condizioni perchè in righe come questa crede che ci sia un for-each perchè vede i **:** 
-> if (s.startsWith("::")) {
+Ultima cosa: sempre in quella classe lì ho marchiato con il TODO che bisogna sistemare quelle due condizioni perchè in righe come questa crede che ci sia un for-each perchè vede i **:**  
+
+``` if (s.startsWith("::")) {```
 
 e fa questo scherzetto  
-> if (s.startsWith("::")) {forEach  MyTracerClass.tracer("rule/basic/AvoidUsingHardCodedIPRule isIPv6,boolean,.char String boolean boolean ",0,4);
+
+```Java
+if (s.startsWith("::")) {forEach  MyTracerClass.tracer("rule/basic/AvoidUsingHardCodedIPRule isIPv6,boolean,.char String boolean boolean ",0,4);
+```
 
 Quindi poi domani bisogna darci un'occhiata (non dovrebbe essere molto difficile, avevo già fatto un metodo che si chiamava qualcosa tipo checkInString o qualcosa del genere poi domani ci penso)
 
