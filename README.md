@@ -156,7 +156,15 @@ Posso fare il commit di quello che ho fatto? O preferisci fare tu prima e poi fa
 
 ------
 
-Se vuoi fai pure il commit.
+Sto provando quello che mi hai detto, un problema è che tenendo conto della parentesi graffa chiusa per un blocco succede che mi conta 1 sola istruzione per un blocco di questo tipo anzichè 2:
+```Java
+if (y == 0) {boolean[] ilMioArrayDiBooleani4 ={y == 0};  MyTracerClass.tracer("src/originalFiles/BaseConstructDue methodIf,void,.",0,6);
+			int x = 0;
+		}
+
+		x = y > 3 ? 5 : 2;
+	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstructDue methodIf,void,.");}
+```
 
 Tirocinio
 =========
