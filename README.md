@@ -147,6 +147,12 @@ public void method(){ //qua viene inserito il tracer metodo
 
 Però è un problema che penso si ponga più avanti. Adesso sarebbe già un buon risultato riuscire a contare le istruzione dei blocchi
 
+------
+
+Ce l'ho fatta! O almeno, su pmd, non mi da più errori per gli array booleani. Ci ho messo una vita cavolo! E ovviamente è tutto un po' contorto. Non ho ancora risolto la storia dei return ma ho una mezza idea di come fare (è un problema quando invece di **return** c'è un **throw** e basta che aggiungo quella parola chiave).
+Ah ho cambiato una cosa:  
+Nel booleanExpressionParser, alla fine di tutto, avevamo un array con le condizioni, costruivamo da questo una stringa e poi la splittavamo nell'altro metodo del fileParser. Ho tolto il passaggio intermedio quindi ora restituisce un array di stringhe che dovrebbe contenere già le varie condizioni separate. Non dovrebbe far casini visto che su pmd non mi segna più errori.
+Posso fare il commit di quello che ho fatto? O preferisci fare tu prima e poi faccio il merge io?
 
 Tirocinio
 =========
