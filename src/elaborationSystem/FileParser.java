@@ -847,7 +847,7 @@ public class FileParser {
 	}
 	
 	private String getBooleanArrayString(String line) {
-		String[] operands=BooleanExpressionParser.extractOperands(line).split("\\r?\\n");
+		String[] operands=BooleanExpressionParser.extractOperands(line);
 		//boolean[] boolArr = new boolArr[array.length]{cond1,stack.isEmpty()};
 
 		String conditions = "";
