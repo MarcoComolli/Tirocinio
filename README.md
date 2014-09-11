@@ -154,6 +154,10 @@ Ah ho cambiato una cosa:
 Nel booleanExpressionParser, alla fine di tutto, avevamo un array con le condizioni, costruivamo da questo una stringa e poi la splittavamo nell'altro metodo del fileParser. Ho tolto il passaggio intermedio quindi ora restituisce un array di stringhe che dovrebbe contenere già le varie condizioni separate. Non dovrebbe far casini visto che su pmd non mi segna più errori.
 Posso fare il commit di quello che ho fatto? O preferisci fare tu prima e poi faccio il merge io?
 
+------
+
+Se vuoi fai pure il commit.
+
 Tirocinio
 =========
 
