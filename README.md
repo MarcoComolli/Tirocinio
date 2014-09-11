@@ -117,11 +117,11 @@ Altre due cose:
 Dobbiamo trovare un modo per distinguere i cicli for dai cicli for each. E non fargli parsare gli operatori quando ci sono i for-each. Ora come ora mi verrebbe in mente di identificare i for each dala presenza dei due punti **:** però bisogna tener conto che non devono essere in una stringa.
 
 Sistemato il readMe. Faccio un elenco delle cose che dobbiamo fare ora così c'è più chiarezza:
-- Considerare la possibilità di espressioni booleane su più righe
-- Trovare una differenza tra for e for-each e fare una distinzione quando si parsano i valori booleani
-- Mettere le creazioni degli array su una sola riga prima della chiamata MyTracerClass.tracer(...)
-- Risolvere gli errori dovuti al return per pmd (questo è per me)
-- Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
+- [x] Considerare la possibilità di espressioni booleane su più righe
+- [x] Trovare una differenza tra for e for-each e fare una distinzione quando si parsano i valori booleani
+- [x] Mettere le creazioni degli array su una sola riga prima della chiamata MyTracerClass.tracer(...)
+- [ ] Risolvere gli errori dovuti al return per pmd (questo è per me)
+- [ ] Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
 
 -----
 Tu ora cosa stai facendo? Ho visto che hai sistemato i for-each e messo i cosi sulla stessa riga dei tracer. Stavo pensando di lavorare suli predicati su più righe ma non voglio creare conflitti se ci stai già pensando tu o se hai già trovato qualche soluzione
@@ -168,24 +168,24 @@ Tirocinio
 parsing logical boolean expressions java --> stringa di ricerca
 
 
-- per ogni esecuzione di metodo tenere traccia dei vari cammini (1)
-	- modificare il mytracer (inizia a registrare quando trovi una chiamata con codice -1)
+- [x] per ogni esecuzione di metodo tenere traccia dei vari cammini (1)
+ 	- [x] modificare il mytracer (inizia a registrare quando trovi una chiamata con codice -1)
 
-- condition coverage (2)
-	- cercare parser espressioni
-	- inserire istruzioni prima dei blocchi if per sapere il valore della condizione
-	- tenere traccia delle condizioni
+- [x] condition coverage (2)
+	- [x] cercare parser espressioni
+	- [x] inserire istruzioni prima dei blocchi if per sapere il valore della condizione
+	- [x] tenere traccia delle condizioni
 
-- copertura delle istruzioni interne ai blocchi (3)
-	- cercare un tool che tenga conto del numero istruzione
-	- contare i punti e virgola in caso negativo
-	- sapere quante istruzioni per blocco e tenerne traccia
+- [ ] copertura delle istruzioni interne ai blocchi (3)
+	- [x] cercare un tool che tenga conto del numero istruzione
+	- [ ] contare i punti e virgola in caso negativo
+	- [ ] sapere quante istruzioni per blocco e tenerne traccia
 
-- interfaccia grafica (4)
+- [ ] interfaccia grafica (4)
 
-- copertura dei casi di test (5)
-	- alla fine di ogni classe di test sapere quanto si è coperto del totale
-	- giocare con le statistiche
+- [ ] copertura dei casi di test (5)
+	- [ ] alla fine di ogni classe di test sapere quanto si è coperto del totale
+	- [ ] giocare con le statistiche
 
 
 
