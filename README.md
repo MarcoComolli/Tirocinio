@@ -116,7 +116,9 @@ Non so, forse bisognerebbe tenere conto dell'OR e considerarli come una sola con
 ```Java
 boolean[] ilMioArrayDiBooleani0 ={!node.isInterface() , node.isNested(), (node.isPublic() || node.isStatic()), node.isPublic(), node.isStatic() };  
 ```
-
+------
+Beh penso che le tenere tutte le condizioni semplici senza anche la composizione di queste sia più che sufficiente. Il problema rimane comunque come tenere separate quelle unite dalle parentesi.
+Penso che agirò direttamente nella classe BooleanExpressionParser. Qualcosa tipo cercare nella condizione booleana più grossa se ci sono delle parentesi tonde che han dentro &&,&,||,| e spezzettare anche quelle...boh ci penso dopo pranzo
 
 Tirocinio
 =========
