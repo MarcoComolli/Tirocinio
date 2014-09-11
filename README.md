@@ -166,6 +166,12 @@ if (y == 0) {boolean[] ilMioArrayDiBooleani4 ={y == 0};  MyTracerClass.tracer("s
 	 MyTracerClass.endRecordPath("src/originalFiles/BaseConstructDue methodIf,void,.");}
 ```
 
+Come hai detto tu, per ora le istruzioni prima dei blocchi non vengono contate.
+Nel caso eventuale in cui non ce la facessimo a trovare un modo per avere il numero preciso delle istruzioni potremmo sparare un po' a caso, tenendo buono il conteggio molto approssimato.
+
+Se vuoi faccio il commit, dovrei aver lavorato sulla versione tua ultima aggiornata, perché ho rifatto tutto.
+Per ora non funziona molto bene perché ha i problemi che ho detto e forse altri.
+
 Tirocinio
 =========
 
