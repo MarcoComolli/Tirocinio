@@ -93,6 +93,24 @@ Quindi stavo pensando di avere un'altra struttura dati nella classe FileParse in
 
 Preferirei domani così oggi abbiamo tempo di sistemare i punti 1 e 2 e magar riuscire a fare il 3. Mi sembra comunque un ottimo progresso fare 3 punti in 3 giorni. Intanto ora inizio a pensare ai problemi che ti avevo citato sopra
 
+------
+
+Risolto il problema delle condizioni stringhe/char ma mi sono accorto che dà problemi con predicati complessi rinchiusti tra parentesi tonde come qua ad esempio:
+
+```Java
+if (!node.isInterface() && node.isNested()
+				&& (node.isPublic() || node.isStatic())) {
+```				
+la dichiarazione dell'array diventa così:
+				
+```Java
+boolean[] ilMioArrayDiBooleani0 ={!node.isInterface() , node.isNested(), (node.isPublic() , node.isStatic())};  
+```
+
+dando un errore perchè in una condizione (node.isPublic() ha la parentesi aperta poi c'è la virgola che separa l'altra condizione con la parentesi chiusa ed è un problema. 
+Hai in mente un modo per risolverlo?
+
+
 Tirocinio
 =========
 
