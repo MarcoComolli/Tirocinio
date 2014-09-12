@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -74,6 +75,7 @@ public class FileParser {
 	private HashMap<String,Integer> linesInBlock=new HashMap<String,Integer>();
 	private boolean countInstruction=false;
 	private String currentBooleanArray;
+	private BufferedWriter out;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
 		this.READ_URI = readURI;
@@ -181,6 +183,14 @@ public class FileParser {
 				fr.close();
 				buffWrite.close();
 				fw.close();
+				
+				
+				PrintWriter f0 = new PrintWriter(new FileWriter("C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt",true));
+				for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
+				    f0.println(entry.getKey() +" Numero di istruzioni: " +entry.getValue());
+				    f0.flush();
+				}
+				f0.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -444,6 +454,16 @@ public class FileParser {
 		if(line.contains("return ") || line.contains("return;")){
 			int ind = line.indexOf("return");
 			if(!checkInString(line, "return ", ind) && !checkInString(line, "return;", ind)){
+				System.err.println(currentMethod+" "+ currentBlockID +" quella che cerco");
+				/*if(linesInBlock!=null){
+					System.err.println(linesInBlock==null);
+					for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
+						System.out.println("Key : " + entry.getKey() + " Value : "
+							+ entry.getValue());
+					}
+					int instructionsNumber=linesInBlock.get(currentMethod+" "+ currentBlockID);
+					MyTracerClass.getInstructionsCountMap().put((currentMethod+"@"+ currentBlockID),instructionsNumber);
+					System.err.println("numero instruzioni inserito "+instructionsNumber);}*/
 				return line.substring(0,ind) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(ind);
 			}
 		}
@@ -466,6 +486,7 @@ public class FileParser {
 						curlyCountMethodEnd--;
 						if(curlyCountMethodEnd == 1){
 							curlyCountMethodEnd = 0;
+							
 							return line.substring(0,i) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(i);
 						}
 					}
