@@ -127,6 +127,14 @@ oppure come dici tu si può salvare alla fine del preprocessing l'hashmap su fil
 Oppure magari si può fare qualcosa tipo che a fine esecuzione la mappa che abbiamo salvato va passata al mytracer direttamente nel parenthesysAdder ma non so se è fattibile questo.
 Ho notato un altro problemino (che palle lo so). Quando c'è una classe anonima interna i metodi di quella classe sono salvati nel myTracer con il nome della classe più esterna. Non so se questo potrebbe generare un conflitto o poca chiarezza nel "report" finale. Ora mi dedico ai throw
 
+----
+Cavolo sono in panne. Riesco a mettere le istruzioni prima dei throw ma non riesco a fargli capire quando è la fine del metodo e mi fa sto scherzo:
+
+```Java
+	public void valueForPathChanged(TreePath path, Object newValue) { MyTracerClass.tracer("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ",-1,0); MyTracerClass.recordPath("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ");
+		 MyTracerClass.endRecordPath("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ");throw new UnsupportedOperationException();
+	 MyTracerClass.endRecordPath("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ");} // <--- parte di codice irraggiungibile prchè dopo il throw
+```
 
 
 TODO LIST
