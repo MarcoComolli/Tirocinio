@@ -120,14 +120,21 @@ Magari si potrebbe accedere al numero di istruzioni durante l'esecuzione del met
 
 ------
 
-Sposto qua sotto l'elenco delle cose da fare aggiornato (creo una sezione nuova così rimane sempre in fondo come una specie di elenco dei compiti più immediati):
+Ok, ho testato su pmd il tuo codice è non mi dà errori.  
+Per quanto riguarda il salvataggio del conteggio delle istruzioni si potrebbero salvare in 2 modi secondo me:  
+O mettendo poco prima della chiamata endRecordPath() una chiamata ad un metodo in modo tale che aggiunga tutti i dati nuovi appena raccolti nella struttura dati del MyTracer  
+oppure come dici tu si può salvare alla fine del preprocessing l'hashmap su file, parsare il file e inserirlo nel my tracer.  
+Oppure magari si può fare qualcosa tipo che a fine esecuzione la mappa che abbiamo salvato va passata al mytracer direttamente nel parenthesysAdder ma non so se è fattibile questo.
+Ho notato un altro problemino (che palle lo so). Quando c'è una classe anonima interna i metodi di quella classe sono salvati nel myTracer con il nome della classe più esterna. Non so se questo potrebbe generare un conflitto o poca chiarezza nel "report" finale. Ora mi dedico ai throw
+
+
 
 TODO LIST
 =========
 - [x] Risolvere problemi per il condition coverage
 - [ ] Risolvere gli errori dovuti al return per pmd (questo è per me)
 - [ ] Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
-- [ ] Bisogna passare nel tracer() l'array di booleani appena creato
+- [x] Bisogna passare nel tracer() l'array di booleani appena creato
 - [ ] Gestire nel MyTracerClass l'array di condizioni che viene passato
 - [x] Codice per contare le istruzioni nei blocchi
 - [ ] Testare codice per il conteggio delle istruzioni
