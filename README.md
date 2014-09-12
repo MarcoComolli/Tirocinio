@@ -140,6 +140,20 @@ Cavolo sono in panne. Riesco a mettere le istruzioni prima dei throw ma non ries
 Il numero delle istruzioni interne ad un blocco dovrei inserirlo nell'HashMap countMap della classe MyTracer, giusto? In questo caso posso cambiare l'HashMap da <String,Integer> ad uno con chiave String e con valore una struttura dati che mi permetta di salvare due interi (uno per il numero di volte del blocco eseguito e uno per il numero di istruzioni all'interno del blocco)?
 Purtroppo per il problema dei throw, per ora non ti so aiutare.
 
+-----
+Sisi si può fare in 2 modi.  
+O Crei un'altra mappa apposta per le istruzioni del blocco (così poi ne abbiamo 2, una per il numero delle volte e una per il numero di istruzioni)  
+oppure fai come hai detto tu.  
+A dirti la verità non ho idea di quale delle due richieda più memoria, se 2 hashmap semplici oppure 1 hashmap più complessa. A questo punto direi di fare come preferisci per me è uguale.  
+p.s. cerca di non usare le parentesi angolari '<' e '>' qua perchè mi sa che è un simbolo per nascondere il contenuto.
+
+Per quanto riguarda il throw ci sto lavorando da qualche ora e ho scoperto casini che neanche ti immagini. Ho tra l'altro scoperto perchè non metteva alcuni tracer all'inizio e perchè alcuni erano sbagliati. E' tutto sbagliato l'ordine in cui legge la riga all'inizia e incrementa il contatore di linea...pure l'inserimento dei tracer si riferiscono a righe sbagliate senza i commenti rimossi e fanno macello.  
+Ora ho risolto in parte questo problema e quello dei throw. Ma cambiando lì mi ha ovviamente portato fuori altri errori.
+Per la risoluzione dei throw senti qua la follia che mi è venuta in mente:  
+per sapere se inserirlo o no alla fine mi serve sapere qual'è l'ultima istruzione appartenente al metodo. Allora ho tenuto in una stringa temporanea l'ultima riga di codice appartenente al metodo e a nessun blocco (l'ho calcolato in base al numero di parentesi { spaiate) Se arrivo in fondo al metodo guardo l'ultima riga salvata e calcolo l'ultima istruzione. Se è un throw o un return allora non inserisco l'endOfPath().  
+C'ero quasi riuscito solo che in un paio di casi su tutto il programma (mannaggia a loro) il throw era dentro un blocco catch alla fine del metodo e sono arrivato fino a questo punto. Devo sbrogliare questo problema e con i throw/return sono a posto. 
+Quando hai qualcosa ti conviene fare subito il commit perchè quando farò io (se mai riesco a risolvere) ci sono un patafracco di cambiamenti al fileParser e non vorrei che poi ti tocchi fare il merge di tutto sto bordello.
+
 TODO LIST
 =========
 - [x] Risolvere problemi per il condition coverage
