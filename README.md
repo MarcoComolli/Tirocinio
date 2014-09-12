@@ -112,6 +112,14 @@ Ho rifatto tutto da 0 perché con la mia soluzione non andava bene.
 Cavolo mi spiace! La prossima volta committa te per prima che al massimo mi adatto io.  
 Ho guardato il codice aggiornato e mi sembra ok.  
 Hai già testato su qualche classe per vedere se ha problemi? Nel frattempo mi sono accorto di altre due cosine da fare. Tu ricordi per caso se poi è stato sistemato il problema del do-while nel caso ci fosse un while al suo interno? Non mi ricordo più.  
+
+------
+
+Il passaggio dell'array al metodo tracer funziona sui file di prova. Il passaggio del conteggio elle istruzioni al tracer è più complicato, perchè il termine del conteggio fine effettuato a fine blocco con conseguente inserimento nell'hashMap mentre il metodo viene inserito a inizio blocco. Non saprei quando poter inserire il conteggio delle istruzioni nel metodo.
+Magari si potrebbe accedere al numero di istruzioni durante l'esecuzione del metodo tracer, ma ciò richiederebbe salvare esternamente tutti i dati contenuti nell'HashMap.
+
+------
+
 Sposto qua sotto l'elenco delle cose da fare aggiornato (creo una sezione nuova così rimane sempre in fondo come una specie di elenco dei compiti più immediati):
 
 TODO LIST
@@ -126,6 +134,8 @@ TODO LIST
 - [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
 - [ ] Passare al myTracerClass il conteggio delle istruzioni
 - [ ] Gestire nel myTracerClass il conteggio istruzioni
+ 
+
  
 Tirocinio
 =========
