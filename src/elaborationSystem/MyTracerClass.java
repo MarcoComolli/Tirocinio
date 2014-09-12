@@ -38,6 +38,26 @@ public class MyTracerClass {
 		
 	}
 	
+	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
+		int n = 1;
+		if(countMap.containsKey(objectID+"@"+blockID)){
+			n = countMap.get(objectID+"@"+blockID);
+			n++;
+		}
+
+		System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n);
+		countMap.put(objectID+"@"+blockID, n);
+		System.out.println(countMap.size());
+		
+		if(recordPath){ //se devo registrare il cammino
+			blockList.add(objectID + "@" + blockID);
+		}
+		
+		
+			
+		
+	}
+	
 	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
 		if(recordPath == false){

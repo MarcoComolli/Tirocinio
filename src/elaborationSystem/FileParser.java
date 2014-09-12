@@ -73,6 +73,7 @@ public class FileParser {
 	private boolean multiLineBooleanCondition = false;
 	private HashMap<String,Integer> linesInBlock=new HashMap<String,Integer>();
 	private boolean countInstruction=false;
+	private String currentBooleanArray;
 	
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
 		this.READ_URI = readURI;
@@ -608,7 +609,7 @@ public class FileParser {
 				countInstruction=true;
 				return newLine;
 			}else{
-				newLine = line.substring(0, index+1) + booleanArrayString+" "+tracerFor + line.substring(index+1, line.length());
+				newLine = line.substring(0, index+1) + booleanArrayString+" "+addBooleanArrayToTracer(tracerFor) + line.substring(index+1, line.length());
 				countInstruction=true;
 				return newLine;
 			}
@@ -642,7 +643,7 @@ public class FileParser {
 				else{
 					booleanArrayString = getBooleanArrayString(line);
 				}
-				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ tracerWhile + line.substring(index+1, line.length());
+				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ addBooleanArrayToTracer(tracerWhile) + line.substring(index+1, line.length());
 				countInstruction=true;
 				return newLine;
 			}
@@ -699,11 +700,15 @@ public class FileParser {
 				booleanArrayString = getBooleanArrayString(currentBooleanCondition);
 				multiLineBooleanCondition = false;
 				currentBooleanCondition = "";
+				
+
 			}
 			else{
 				booleanArrayString = getBooleanArrayString(line);
+				
+
 			}
-			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerElseIf + line.substring(index+1, line.length());
+			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
 			countInstruction=true;
 			return newLine;
 		}
@@ -750,8 +755,13 @@ public class FileParser {
 			}
 			else{
 				booleanArrayString = getBooleanArrayString(line);
+				System.err.println("originale per if "+line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length()));
+				//addBooleanArrayToTracer(tracerIf); 
+				
 			}
-			newLine = line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length());
+			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerIf)+ 
+					 line.substring(index+1, line.length());
+			
 			countInstruction=true;
 			return newLine;
 		}
@@ -764,6 +774,11 @@ public class FileParser {
 		
 		return line;
 		
+	}
+
+	private String addBooleanArrayToTracer(String tracer) {
+		String newTracer=tracer.substring(0, tracer.length()-2)+ "," + currentBooleanArray +");";
+		return newTracer;
 	}
 	
 	private int findInstructions(String line){
@@ -881,6 +896,7 @@ public class FileParser {
 			return "forEach";
 		}else{
 		String booleanArrayString="boolean[] ilMioArrayDiBooleani"+arrayConditionsNumber+" ={"+conditions.substring(0, conditions.length()-1)+"};";
+		currentBooleanArray="ilMioArrayDiBooleani"+arrayConditionsNumber;
 		arrayConditionsNumber++;
 		return booleanArrayString;}
 	}
