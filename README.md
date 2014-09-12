@@ -170,6 +170,14 @@ protected void indexNodes(List<Node> nodes, RuleContext ctx) {
 Legge il metodo indexNodes() ma il visit() dentro non lo conta. E' un problema tralasciabile nel senso che non crea conflitto ma alla fine il programma non tiene conto della copertura di quei metodi.  
 Lo lascio come un punto da fare ma se ci avanza tempo
 
+-----
+Mi sa che forse inserire il numero di istruzioni nella struttura dati del MyTracer prima dell'inserimento della chiamata endRecordPath() non è possibile. Non vorrei dire una cazzata, vediamo se ho capito bene. 
+In pratica prima di inserire la chiamata al metodo endRecordPath(), nella classe FileParser, dovrei prendere dall'HashMap il numero di istruzioni di un blocco ed inserirle all'interno dell'HashMap della classe MyTracer.
+Il problema è che il metodo tracer viene eseguito dopo aver effettuato il preprocessing e quando esso viene eseguito, nella strttura dati che dovrebbe contenere i numeri di istruzioni inseriti precedente, non c'è più niente.
+L'ho spiegato male e probabilmente mi sto sbagliando.
+Delle volte, quando dovrei inserire il numero di struzioni nell'HashMap della classe MyTracer incontro delle nullPointer perché cerco il valore di una chiave(metodo-blocco) che non è presente nell'hashMap che contiene il numero di istruzioni appartenente alla classe fileParser.
+
+
 TODO LIST
 =========
 - [x] Risolvere problemi per il condition coverage
