@@ -177,6 +177,13 @@ Il problema è che il metodo tracer viene eseguito dopo aver effettuato il prepr
 L'ho spiegato male e probabilmente mi sto sbagliando.
 Delle volte, quando dovrei inserire il numero di struzioni nell'HashMap della classe MyTracer incontro delle nullPointer perché cerco il valore di una chiave(metodo-blocco) che non è presente nell'hashMap che contiene il numero di istruzioni appartenente alla classe fileParser.
 
+-----
+
+Sisi ho capito il problema.  
+Dobbiamo per forza passare tutto nel preprocessing e non aspettare che venga eseguito.  
+Il numero di istruzioni deve essere presente prima dell'esecuzione dei test.  A questo punto direi o di salvare il numero di istruzioni in qualche variabile e nella chiamata dell'endprocess() passare tutto al nel MyTracerClass (ma è abbastanza incasinato perchè verrebbe un metodo lunghissimo a seconda del numero di blocchi nel metodo)  
+Oppure ti conviene salvare il tutto su un file separato e poi quando è necessario uno va a prenderlo. Tipo il file MetodiTirocinio che fa ASTParser
+
 
 TODO LIST
 =========
