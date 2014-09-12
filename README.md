@@ -154,6 +154,22 @@ per sapere se inserirlo o no alla fine mi serve sapere qual'è l'ultima istruzio
 C'ero quasi riuscito solo che in un paio di casi su tutto il programma (mannaggia a loro) il throw era dentro un blocco catch alla fine del metodo e sono arrivato fino a questo punto. Devo sbrogliare questo problema e con i throw/return sono a posto. 
 Quando hai qualcosa ti conviene fare subito il commit perchè quando farò io (se mai riesco a risolvere) ci sono un patafracco di cambiamenti al fileParser e non vorrei che poi ti tocchi fare il merge di tutto sto bordello.
 
+Altro errore di cui mi sono accorto: ASTParser non tiene conto dei metodi dichiarati all'interno di un'istruzione...tipo
+
+```Java
+protected void indexNodes(List<Node> nodes, RuleContext ctx) {
+		PLSQLParserVisitor plsqlParserVistor = new PLSQLParserVisitorAdapter() {
+			@Override
+			public Object visit(PLSQLNode node, Object data) {
+				return super.visit(node, data);
+			}
+		};
+		LOGGER.exiting(CLASS_NAME, "indexNodes");
+}
+```
+Legge il metodo indexNodes() ma il visit() dentro non lo conta. E' un problema tralasciabile nel senso che non crea conflitto ma alla fine il programma non tiene conto della copertura di quei metodi.  
+Lo lascio come un punto da fare ma se ci avanza tempo
+
 TODO LIST
 =========
 - [x] Risolvere problemi per il condition coverage
@@ -166,6 +182,7 @@ TODO LIST
 - [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
 - [ ] Passare al myTracerClass il conteggio delle istruzioni
 - [ ] Gestire nel myTracerClass il conteggio istruzioni
+- [ ] Gestire ASTParser per fargli riconoscere i metodi dichiarati internamente a istruzioni
  
 
  
