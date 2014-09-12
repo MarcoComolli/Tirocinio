@@ -141,7 +141,7 @@ public class FileParser {
     				currentInstructionCount+=findInstructions(line);
     			}
     			if(line!=null && line.contains("}") && countInstruction){
-    				linesInBlock.put(currentMethod, currentBlockID);
+    				linesInBlock.put(currentMethod +" "+currentBlockID, currentInstructionCount);
     				System.err.println(currentMethod+" "+ currentBlockID +" " +currentInstructionCount);
     				currentInstructionCount=0;
     				countInstruction=false;
@@ -762,6 +762,7 @@ public class FileParser {
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerIf)+ 
 					 line.substring(index+1, line.length());
 			
+		
 			countInstruction=true;
 			return newLine;
 		}
