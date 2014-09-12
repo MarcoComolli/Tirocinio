@@ -135,7 +135,10 @@ Cavolo sono in panne. Riesco a mettere le istruzioni prima dei throw ma non ries
 		 MyTracerClass.endRecordPath("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ");throw new UnsupportedOperationException();
 	 MyTracerClass.endRecordPath("viewer/model/ASTModel valueForPathChanged,void,.TreePath Object ");} // <--- parte di codice irraggiungibile prchè dopo il throw
 ```
+----
 
+Il numero delle istruzioni interne ad un blocco dovrei inserirlo nell'HashMap countMap della classe MyTracer, giusto? In questo caso posso cambiare l'HashMap da <String,Integer> ad uno con chiave String e con valore una struttura dati che mi permetta di salvare due interi (uno per il numero di volte del blocco eseguito e uno per il numero di istruzioni all'interno del blocco)?
+Purtroppo per il problema dei throw, per ora non ti so aiutare.
 
 TODO LIST
 =========
