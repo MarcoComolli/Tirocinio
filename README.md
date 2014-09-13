@@ -154,11 +154,18 @@ Mi rimangono solo 2 errori in tutto il progetto di cui 1 si risolverà quando in
 Il secondo è un problema che deriva solo da un try-catch e devo pensare come risolverlo.  
 Una volta fatto questo le endRecordPath() dovrebbero essere tutte a posto e sarei pronto per il commit.
 
+-----
+Ok risolto anche l'ultimo problema...Posso fare il commit o devi committare qualcosa prima?
+p.s. ho visto la stampa su file. Secondo me ti conviene metterla in un formato facilmente parsabile tipo invece del 
+```blocco()  Numero di istruzioni:  10```
+si potrebbe mettere al posto di "numero di istruzioni:" un carattere speciale a scelta così quando facciamo il parsing ci basterà splittare con quel carattere
+```blocco()#10 ``` o roba simile.
+
 
 TODO LIST
 =========
 - [x] Risolvere problemi per il condition coverage
-- [ ] Risolvere gli errori dovuti al return per pmd (questo è per me)
+- [x] Risolvere gli errori dovuti al return per pmd (questo è per me)
 - [x] Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
 - [x] Bisogna passare nel tracer() l'array di booleani appena creato
 - [ ] Gestire nel MyTracerClass l'array di condizioni che viene passato
@@ -186,10 +193,10 @@ parsing logical boolean expressions java --> stringa di ricerca
 	- [x] inserire istruzioni prima dei blocchi if per sapere il valore della condizione
 	- [x] tenere traccia delle condizioni
 
-- [ ] copertura delle istruzioni interne ai blocchi (3)
+- [x] copertura delle istruzioni interne ai blocchi (3)
 	- [x] cercare un tool che tenga conto del numero istruzione
 	- [x] contare i punti e virgola in caso negativo
-	- [ ] sapere quante istruzioni per blocco e tenerne traccia
+	- [x] sapere quante istruzioni per blocco e tenerne traccia
 
 - [ ] interfaccia grafica (4)
 
