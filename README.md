@@ -175,6 +175,13 @@ Per ora non ho trovato niente, se il parsing non è fattibile e non c'è nessun 
 Io forse ho trovato qualcosa. Devo testare per vedere se funziona. E ti faccio sapere.  
 Se riesci a trovare un altro modo più facile per far andare i test di junit ben venga. Neanche a me piace tanto come funziona JunitCore
 
+------
+Mah no mi servirebbe una classe che non so dove trovare (il riferimento che stavo guardando è questo:  
+http://stackoverflow.com/questions/3845823/getting-list-of-fully-qualified-names-from-a-simple-name)  
+La classe sarebbe ClasspathPackageProvider che non ho capito dove pescarla. 
+Tuttavia ho letto che il fully qualified name della classe, cioè quello che ci serve, è comunque sempre deducibile dal path. Il vero problema rimane quindi come capire quali sono package e quali sono cartelle nel path della classe. Una volta capito quello il gioco è fatto e basterebbe parsare semplicemente il path con solo i package.  
+O in alternativa si potrebbe trovare qualcosa di alternativo a JunitCore ma non saprei dove sbattere la testa per questo.
+
 
 TODO LIST
 =========
