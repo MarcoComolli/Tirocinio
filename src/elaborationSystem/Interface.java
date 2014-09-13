@@ -38,6 +38,8 @@ import javax.swing.JTextPane;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
+import javax.swing.JSeparator;
+import java.awt.Rectangle;
 
 public class Interface extends JFrame{
 
@@ -60,6 +62,10 @@ public class Interface extends JFrame{
 	private JTextField textMidFiles;
 	private JLabel lblAdditionalFilesFolder;
 	private JButton btnOtherFiles;
+	private JSeparator separator;
+	private JLabel lblStep;
+	private JLabel lblStep1;
+	private JSeparator separator_1;
 
 	/**
 	 * Launch the application.
@@ -84,52 +90,60 @@ public class Interface extends JFrame{
 		
 		setTitle("Tirocinio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 271);
+		setBounds(100, 100, 450, 301);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setFont(new Font("Arial", Font.PLAIN, 11));
-		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][grow]"));
+		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][grow]"));
+		
+		lblStep1 = new JLabel("Step 1:");
+		lblStep1.setFont(new Font("Arial", Font.BOLD, 11));
+		lblStep1.setEnabled(false);
+		contentPane.add(lblStep1, "cell 0 0");
+		
+		separator_1 = new JSeparator();
+		contentPane.add(separator_1, "cell 0 1 2 1,growx");
 		
 		JLabel lblNewLabel = new JLabel("Source folder: ");
 		lblNewLabel.setToolTipText("Source where are located the source file of java project");
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblNewLabel, "cell 0 0,alignx left");
+		contentPane.add(lblNewLabel, "cell 0 2,alignx left");
 		
 		textSearch = new JTextField();
-		contentPane.add(textSearch, "flowx,cell 1 0,grow");
+		contentPane.add(textSearch, "flowx,cell 1 2,grow");
 		textSearch.setColumns(10);
 		
 		btnSearchSrc = new JButton("...");
 		btnSearchSrc.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnSearchSrc, "cell 1 0,alignx right,");
+		contentPane.add(btnSearchSrc, "cell 1 2,alignx right");
 		btnSearchSrc.addActionListener(new ButtonHandler());
 		
 		JLabel lblNewLabel_1 = new JLabel("Destination folder: ");
 		lblNewLabel_1.setToolTipText("Where processed files were saved");
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 11));
-		getContentPane().add(lblNewLabel_1, "cell 0 1,alignx left");
+		getContentPane().add(lblNewLabel_1, "cell 0 3,alignx left");
 		
 		textSave = new JTextField();
-		contentPane.add(textSave, "flowx,cell 1 1,grow");
+		contentPane.add(textSave, "flowx,cell 1 3,grow");
 		textSave.setColumns(10);
 		
 		btnSave = new JButton("...");
 		btnSave.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnSave, "cell 1 1,alignx right,");
+		contentPane.add(btnSave, "cell 1 3,alignx right");
 		btnSave.addActionListener(new ButtonHandler());
 		
 		lblAdditionalFilesFolder = new JLabel("Additional files folder:");
 		lblAdditionalFilesFolder.setToolTipText("Where will be saved mid-process files ");
 		lblAdditionalFilesFolder.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblAdditionalFilesFolder, "cell 0 2,alignx left");
+		contentPane.add(lblAdditionalFilesFolder, "cell 0 4,alignx left");
 		
 		textMidFiles = new JTextField();
-		contentPane.add(textMidFiles, "flowx,cell 1 2,grow");
+		contentPane.add(textMidFiles, "flowx,cell 1 4,grow");
 		textMidFiles.setColumns(10);
 		
 		btnCopy = new JButton("Copy");
 		btnCopy.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnCopy, "cell 0 3 2 1,alignx center");
+		contentPane.add(btnCopy, "cell 0 5 2 1,alignx center");
 		btnCopy.addActionListener(new ButtonHandler());
 		
 		progressBar = new JProgressBar();
@@ -140,25 +154,33 @@ public class Interface extends JFrame{
 		
 		lblStatus = new JLabel(" Processing requirements...");
 		lblStatus.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblStatus, "cell 0 4 2 1");
-		contentPane.add(progressBar, "cell 0 5 2 1,grow");
+		contentPane.add(lblStatus, "cell 0 6 2 1");
+		contentPane.add(progressBar, "cell 0 7 2 1,grow");
 		lblStatus.setVisible(false);
+		
+		lblStep = new JLabel("Step 2:");
+		lblStep.setEnabled(false);
+		lblStep.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(lblStep, "cell 0 8");
+		
+		separator = new JSeparator();
+		contentPane.add(separator, "cell 0 9 2 1,growx");
 		
 		lblTestFolder = new JLabel("Test folder:");
 		lblTestFolder.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblTestFolder, "cell 0 6,alignx left");
+		contentPane.add(lblTestFolder, "cell 0 10,alignx left");
 		
 		txtTest = new JTextField();
-		contentPane.add(txtTest, "flowx,cell 1 6,grow");
+		contentPane.add(txtTest, "flowx,cell 1 10,grow");
 		txtTest.setColumns(10);
 		
 		btnRunTest = new JButton("Run Tests");
 		btnRunTest.setFont(new Font("Arial", Font.BOLD, 11));
 		btnRunTest.addActionListener(new ButtonHandler());
-		contentPane.add(btnRunTest, "cell 0 7 2 1,alignx center");
+		contentPane.add(btnRunTest, "cell 0 11 2 1,alignx center");
 		
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 0 8 2 1,grow");
+		contentPane.add(scrollPane, "cell 0 12 2 1,grow");
 		
 		textPane = new JTextPane();
 		textPane.setContentType("text/html");
@@ -166,12 +188,12 @@ public class Interface extends JFrame{
 		
 		btnSearchTest = new JButton("...");
 		btnSearchTest.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnSearchTest, "cell 1 6");
+		contentPane.add(btnSearchTest, "cell 1 10");
 		
 		btnOtherFiles = new JButton("...");
 		btnOtherFiles.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnOtherFiles, "cell 1 2");
-		btnSearchTest.addActionListener(new ButtonHandler());
+		contentPane.add(btnOtherFiles, "cell 1 4");
+		btnOtherFiles.addActionListener(new ButtonHandler());
 	
 
 		
@@ -219,7 +241,6 @@ public class Interface extends JFrame{
 					textSearch.setText(s);
 					System.out.println(s);
 				}
-
 			}
 			else if(event.getSource() == btnSave){
 				JFileChooser jfc = new JFileChooser();
@@ -239,6 +260,7 @@ public class Interface extends JFrame{
 					String s = jfc.getSelectedFile().getAbsolutePath();
 					textMidFiles.setText(s);
 					System.out.println(s);
+				}
 			}
 			else if(event.getSource() == btnCopy){
 				btnCopy.setEnabled(false);
@@ -251,7 +273,6 @@ public class Interface extends JFrame{
 				copyTask = new CopyTask();
 				copyTask.addPropertyChangeListener(new ChangeListener());
 				copyTask.execute();
-				
 			}
 			else if(event.getSource() == btnSearchTest){
 				JFileChooser jfc = new JFileChooser();
@@ -264,13 +285,13 @@ public class Interface extends JFrame{
 					System.out.println(s);
 				}
 
+
 			}
 			else if(event.getSource() == btnRunTest){
 				JUnitCore junit = new JUnitCore();
 				ArrayList<File> directories = new ArrayList<File>();
 				runJunitTest(junit, directories, txtTest.getText());			
 			}
-
 
 		}
 
