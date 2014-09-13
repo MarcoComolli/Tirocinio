@@ -34,6 +34,11 @@ O in alternativa si potrebbe trovare qualcosa di alternativo a JunitCore ma non 
 
 Per chiarezza ho tolto tutta la parte iniziale del readMe ma siccome potrebbe essere comunque del materiale utile (magari possiamo attingere qualcosa o qualche fonte per la tesi) ho salvato tutto e l'ho messo in un file chiamato Annotazioni.txt all'interno del progetto. Se ti serve prendere/rivedere qualcosa è salvato tutto lì.
 
+Idea! E' un po' brutto ma mi sembra l'unica soluzione al momento:  
+ho guardato qua e là ma mi sembra che JunitCore sia l'unica classe in grado di far andare i test di Junit...comunque l'idea è di far specificare all'utente dove si trova il package generale dei source e poi della classe test.  
+Quindi si ha così la prima parte di ogni path che andrà rimossa. Nella restante parte si sostituiscono i / con i . e il gioco è fatto. Il problema è che l'utente deve fare un po' più di cose tutto qui.
+Sto cambiando l'interfaccia per permettere questo.
+
 
 TODO LIST
 =========
