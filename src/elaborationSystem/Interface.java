@@ -56,6 +56,10 @@ public class Interface extends JFrame{
 	private JLabel lblTestFolder;
 	private JButton btnSearchTest;
 	private JButton btnRunTest;
+	private JLabel lblStatus;
+	private JTextField textMidFiles;
+	private JLabel lblAdditionalFilesFolder;
+	private JButton btnOtherFiles;
 
 	/**
 	 * Launch the application.
@@ -84,7 +88,7 @@ public class Interface extends JFrame{
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setFont(new Font("Arial", Font.PLAIN, 11));
-		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][grow]"));
+		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][grow]"));
 		
 		JLabel lblNewLabel = new JLabel("Source folder: ");
 		lblNewLabel.setToolTipText("Source where are located the source file of java project");
@@ -101,8 +105,9 @@ public class Interface extends JFrame{
 		btnSearchSrc.addActionListener(new ButtonHandler());
 		
 		JLabel lblNewLabel_1 = new JLabel("Destination folder: ");
+		lblNewLabel_1.setToolTipText("Where processed files were saved");
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 11));
-		getContentPane().add(lblNewLabel_1, "cell 0 1,alignx trailing");
+		getContentPane().add(lblNewLabel_1, "cell 0 1,alignx left");
 		
 		textSave = new JTextField();
 		contentPane.add(textSave, "flowx,cell 1 1,grow");
@@ -113,9 +118,18 @@ public class Interface extends JFrame{
 		contentPane.add(btnSave, "cell 1 1,alignx right,");
 		btnSave.addActionListener(new ButtonHandler());
 		
+		lblAdditionalFilesFolder = new JLabel("Additional files folder:");
+		lblAdditionalFilesFolder.setToolTipText("Where will be saved mid-process files ");
+		lblAdditionalFilesFolder.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(lblAdditionalFilesFolder, "cell 0 2,alignx left");
+		
+		textMidFiles = new JTextField();
+		contentPane.add(textMidFiles, "flowx,cell 1 2,grow");
+		textMidFiles.setColumns(10);
+		
 		btnCopy = new JButton("Copy");
 		btnCopy.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnCopy, "cell 0 2 2 1,alignx center");
+		contentPane.add(btnCopy, "cell 0 3 2 1,alignx center");
 		btnCopy.addActionListener(new ButtonHandler());
 		
 		progressBar = new JProgressBar();
@@ -123,23 +137,28 @@ public class Interface extends JFrame{
 		progressBar.setToolTipText("Progress");
 		progressBar.setForeground(new Color(0, 128, 0));
 		progressBar.setVisible(false);
-		contentPane.add(progressBar, "cell 0 3 2 1,grow");
+		
+		lblStatus = new JLabel(" Processing requirements...");
+		lblStatus.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(lblStatus, "cell 0 4 2 1");
+		contentPane.add(progressBar, "cell 0 5 2 1,grow");
+		lblStatus.setVisible(false);
 		
 		lblTestFolder = new JLabel("Test folder:");
 		lblTestFolder.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblTestFolder, "cell 0 4,alignx left");
+		contentPane.add(lblTestFolder, "cell 0 6,alignx left");
 		
 		txtTest = new JTextField();
-		contentPane.add(txtTest, "flowx,cell 1 4,growx");
+		contentPane.add(txtTest, "flowx,cell 1 6,grow");
 		txtTest.setColumns(10);
 		
 		btnRunTest = new JButton("Run Tests");
 		btnRunTest.setFont(new Font("Arial", Font.BOLD, 11));
 		btnRunTest.addActionListener(new ButtonHandler());
-		contentPane.add(btnRunTest, "cell 0 5 2 1,alignx center");
+		contentPane.add(btnRunTest, "cell 0 7 2 1,alignx center");
 		
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 0 6 2 1,grow");
+		contentPane.add(scrollPane, "cell 0 8 2 1,grow");
 		
 		textPane = new JTextPane();
 		textPane.setContentType("text/html");
@@ -147,7 +166,11 @@ public class Interface extends JFrame{
 		
 		btnSearchTest = new JButton("...");
 		btnSearchTest.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnSearchTest, "cell 1 4");
+		contentPane.add(btnSearchTest, "cell 1 6");
+		
+		btnOtherFiles = new JButton("...");
+		btnOtherFiles.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(btnOtherFiles, "cell 1 2");
 		btnSearchTest.addActionListener(new ButtonHandler());
 	
 
@@ -156,10 +179,10 @@ public class Interface extends JFrame{
 	
 	
 	private void getFilesNumber(String dirPath) {
+		lblStatus.setText(" Processing requirements...");
+		lblStatus.setVisible(true);
 		File f = new File(dirPath);
 		File[] files = f.listFiles();
-		
-
 		if (files != null)
 			for (int i = 0; i < files.length; i++) {
 				filesCount++;
@@ -207,6 +230,15 @@ public class Interface extends JFrame{
 					textSave.setText(s);
 					System.out.println(s);
 				}
+			}
+			else if(event.getSource() == btnOtherFiles){
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int n = jfc.showSaveDialog(Interface.this);
+				if(n == 0){
+					String s = jfc.getSelectedFile().getAbsolutePath();
+					textMidFiles.setText(s);
+					System.out.println(s);
 			}
 			else if(event.getSource() == btnCopy){
 				btnCopy.setEnabled(false);
@@ -286,11 +318,13 @@ public class Interface extends JFrame{
             setProgress(0);
             progressBar.setValue(progress);
             getFilesNumber(source.toString());
+            lblStatus.setText(" Copying files...");
             try {
 				Files.walkFileTree(source, new CopyFileVisitor(target, this, filesCount));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+            lblStatus.setVisible(false);
             return null;
         }
 
