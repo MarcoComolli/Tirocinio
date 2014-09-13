@@ -161,6 +161,9 @@ p.s. ho visto la stampa su file. Secondo me ti conviene metterla in un formato f
 si potrebbe mettere al posto di "numero di istruzioni:" un carattere speciale a scelta così quando facciamo il parsing ci basterà splittare con quel carattere
 ```blocco()#10 ``` o roba simile.
 
+-----
+
+Quando vuoi, fai pure il commit.
 
 TODO LIST
 =========
