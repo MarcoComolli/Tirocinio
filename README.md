@@ -184,6 +184,10 @@ dovrei ottenere una stringa di questo tipo (l'ho presa dal metodo getClass())
 che corrisponde all'identificatore univoco della classe.
 Parsare il path e sostutire i punti non penso sia un'opzione perchè il percorso/path varia ogni volta in base ai package e a dove è messo.
 
+-----
+
+Per ora non ho trovato niente, se il parsing non è fattibile e non c'è nessun metodo che fa questa cosa non saprei come fare. Forse bisogna cercare qualche altro metodo per far partire le classi di test per Junit.
+
 
 TODO LIST
 =========
