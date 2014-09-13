@@ -90,12 +90,7 @@ Magari si potrebbe accedere al numero di istruzioni durante l'esecuzione del met
 
 ------
 
-Ok, ho testato su pmd il tuo codice è non mi dà errori.  
-Per quanto riguarda il salvataggio del conteggio delle istruzioni si potrebbero salvare in 2 modi secondo me:  
-O mettendo poco prima della chiamata endRecordPath() una chiamata ad un metodo in modo tale che aggiunga tutti i dati nuovi appena raccolti nella struttura dati del MyTracer  
-oppure come dici tu si può salvare alla fine del preprocessing l'hashmap su file, parsare il file e inserirlo nel my tracer.  
-Oppure magari si può fare qualcosa tipo che a fine esecuzione la mappa che abbiamo salvato va passata al mytracer direttamente nel parenthesysAdder ma non so se è fattibile questo.
-Ho notato un altro problemino (che palle lo so). Quando c'è una classe anonima interna i metodi di quella classe sono salvati nel myTracer con il nome della classe più esterna. Non so se questo potrebbe generare un conflitto o poca chiarezza nel "report" finale. Ora mi dedico ai throw
+Ho notato un altro problemino (che palle lo so). Quando c'è una classe anonima interna i metodi di quella classe sono salvati nel myTracer con il nome della classe più esterna. Non so se questo potrebbe generare un conflitto o poca chiarezza nel "report" finale.
 
 ------
 
@@ -109,12 +104,9 @@ oppure fai come hai detto tu.
 A dirti la verità non ho idea di quale delle due richieda più memoria, se 2 hashmap semplici oppure 1 hashmap più complessa. A questo punto direi di fare come preferisci per me è uguale.  
 p.s. cerca di non usare le parentesi angolari '<' e '>' qua perchè mi sa che è un simbolo per nascondere il contenuto.
 
-Per quanto riguarda il throw ci sto lavorando da qualche ora e ho scoperto casini che neanche ti immagini. Ho tra l'altro scoperto perchè non metteva alcuni tracer all'inizio e perchè alcuni erano sbagliati. E' tutto sbagliato l'ordine in cui legge la riga all'inizia e incrementa il contatore di linea...pure l'inserimento dei tracer si riferiscono a righe sbagliate senza i commenti rimossi e fanno macello.  
-Ora ho risolto in parte questo problema e quello dei throw. Ma cambiando lì mi ha ovviamente portato fuori altri errori.
-Per la risoluzione dei throw senti qua la follia che mi è venuta in mente:  
+
+Per la risoluzione dei throw:  
 per sapere se inserirlo o no alla fine mi serve sapere qual'è l'ultima istruzione appartenente al metodo. Allora ho tenuto in una stringa temporanea l'ultima riga di codice appartenente al metodo e a nessun blocco (l'ho calcolato in base al numero di parentesi { spaiate) Se arrivo in fondo al metodo guardo l'ultima riga salvata e calcolo l'ultima istruzione. Se è un throw o un return allora non inserisco l'endOfPath().  
-C'ero quasi riuscito solo che in un paio di casi su tutto il programma (mannaggia a loro) il throw era dentro un blocco catch alla fine del metodo e sono arrivato fino a questo punto. Devo sbrogliare questo problema e con i throw/return sono a posto. 
-Quando hai qualcosa ti conviene fare subito il commit perchè quando farò io (se mai riesco a risolvere) ci sono un patafracco di cambiamenti al fileParser e non vorrei che poi ti tocchi fare il merge di tutto sto bordello.
 
 Altro errore di cui mi sono accorto: ASTParser non tiene conto dei metodi dichiarati all'interno di un'istruzione...tipo
 
@@ -147,22 +139,13 @@ Difatti il numero di istruzioni deve essere presente prima dell'esecuzione dei t
 A questo punto direi o di salvare il numero di istruzioni in qualche variabile e nella chiamata dell'endprocess() passare tutto al nel MyTracerClass (ma è abbastanza incasinato perchè verrebbe un metodo lunghissimo a seconda del numero di blocchi nel metodo)  
 Oppure conviene salvare il tutto su un file separato e poi quando è necessario uno va a prenderlo. Tipo il file MetodiTirocinio che fa ASTParser
 
---------
-
-Quasi risolto tutto. 
-Mi rimangono solo 2 errori in tutto il progetto di cui 1 si risolverà quando iniziamo a pensare all'interfaccia grafica perchè servirà trovare un modo per identificare la classe (questo problema era un conflitto di 2 nomi uguali in 2 package diversi)  
-Il secondo è un problema che deriva solo da un try-catch e devo pensare come risolverlo.  
-Una volta fatto questo le endRecordPath() dovrebbero essere tutte a posto e sarei pronto per il commit.
-
 -----
 Ok risolto anche l'ultimo problema...Posso fare il commit o devi committare qualcosa prima?
-p.s. ho visto la stampa su file. Secondo me ti conviene metterla in un formato facilmente parsabile tipo invece del 
-```blocco()  Numero di istruzioni:  10```
-si potrebbe mettere al posto di "numero di istruzioni:" un carattere speciale a scelta così quando facciamo il parsing ci basterà splittare con quel carattere
-```blocco()#10 ``` o roba simile.
-
------
-Quando vuoi, fai pure il commit.
+p.s. ho visto la stampa su file. Secondo me ti conviene metterla in un formato facilmente parsabile tipo invece del  
+```blocco()  Numero di istruzioni:  10```  
+si potrebbe mettere al posto di "numero di istruzioni:" un carattere speciale a scelta così quando facciamo il parsing ci basterà splittare con quel carattere  
+```blocco()#10 ```  
+o roba simile.
 
 -------
 Ho dato un ordine di priorità alla todoList. Se trovi qualcosa di incongruente cambia/aggiungi pure.  
