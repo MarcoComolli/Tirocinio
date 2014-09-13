@@ -188,6 +188,10 @@ Parsare il path e sostutire i punti non penso sia un'opzione perchè il percorso
 
 Per ora non ho trovato niente, se il parsing non è fattibile e non c'è nessun metodo che fa questa cosa non saprei come fare. Forse bisogna cercare qualche altro metodo per far partire le classi di test per Junit.
 
+------
+Io forse ho trovato qualcosa. Devo testare per vedere se funziona. E ti faccio sapere.  
+Se riesci a trovare un altro modo più facile per far andare i test di junit ben venga. Neanche a me piace tanto come funziona JunitCore
+
 
 TODO LIST
 =========
