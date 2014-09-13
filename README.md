@@ -162,25 +162,48 @@ si potrebbe mettere al posto di "numero di istruzioni:" un carattere speciale a 
 ```blocco()#10 ``` o roba simile.
 
 -----
-
 Quando vuoi, fai pure il commit.
+
+-------
+Ho dato un ordine di priorità alla todoList. Se trovi qualcosa di incongruente cambia/aggiungi pure.  
+Ora mi stavo dedicando un po' all'interfaccia grafica faccio il commit di quel poco che ho fatto così evitiamo commit troppo grossi che sfalsano tutto.
+C'è una cosa che bisogna fare assolutamente (finito di mangiare provo a guardare su internet se c'è qualcosa di già fatto) se hai già idea di come fare o lo sai scrivi pure.
+In pratica bisogna riuscire dal path del file a ottenere la nomenclatura della classe (in pratica bisogna riuscire a tirare fuori il risultato del metodo getClass() di un oggetto avendo solo il path del file del file sorgente di quell'oggetto). Server assolutamente per far partire i test (e secondariamente per risolvere un problemino con la nomenclatura dei file per pmd).  
+In parole povere se ho ad esempio questo percorso: 
+
+```C:\Users\Marco\Desktop\pmd-src-5.1.1\src\main\java\net\sourceforge\pmd\lang\java\typeresolution\rules\imports\UnusedImports.java ```
+
+con questo path:
+
+```/pmd/src/main/java/net/sourceforge/pmd/lang/java/typeresolution/rules/imports/UnusedImports.java ```
+
+dovrei ottenere una stringa di questo tipo (l'ho presa dal metodo getClass()) 
+
+```net.sourceforge.pmd.lang.java.typeresolution.rules.imports.UnusedImports ```
+
+che corrisponde all'identificatore univoco della classe.
+Parsare il path e sostutire i punti non penso sia un'opzione perchè il percorso/path varia ogni volta in base ai package e a dove è messo.
+
 
 TODO LIST
 =========
-- [x] Risolvere problemi per il condition coverage
-- [x] Risolvere gli errori dovuti al return per pmd (questo è per me)
-- [x] Ho notato ora che in alcuni metodi non viene inserito il MyTracerClass.tracer(...) all'inizio e bisogna capire il perchè
-- [x] Bisogna passare nel tracer() l'array di booleani appena creato
-- [ ] Gestire nel MyTracerClass l'array di condizioni che viene passato
-- [x] Codice per contare le istruzioni nei blocchi
+
+####### Task principali (maggiore urgenza)
+
+- [ ] Trovare la giusta nomenclatura per i file sorgenti
+- [ ] Gestire nel MyTracerClass i dati raccolti
+
+-------
+
+####### Task secondari (non indispensabili
+
 - [ ] Testare codice per il conteggio delle istruzioni
 - [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
-- [ ] Passare al myTracerClass il conteggio delle istruzioni
-- [ ] Gestire nel myTracerClass il conteggio istruzioni
+- [ ] Codice per passare al myTracerClass il conteggio delle istruzioni
 - [ ] Gestire ASTParser per fargli riconoscere i metodi dichiarati internamente a istruzioni
-- [ ] Trovare la giusta nomenclatura per i file sorgenti
- 
 
+ 
+------
  
 Tirocinio
 =========
