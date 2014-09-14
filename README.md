@@ -44,6 +44,9 @@ Sto cambiando l'interfaccia per permettere questo.
 Ho inserito nella classe MyTracer la struttura dato che contiene il numero di istruzioni e ora ogni volta che viene eseguito il metodo tracer, viene anche stampato il numero di istruzioni nel blocco. Per ora se il metodo tracer viene eseguito con parametro metodo-idBlocco non presente nella struttura dati, il numero di istruzioni l'ho messo convenzionalmente a -1. Magari, se ci servirà, più avanti si potranno effettuare calcoli statistici sul numero di istruzioni anche sulla base del metodo (al posto del valore convenzionale -1).
 Io ho modificato solo La classe MyTracerClass, quando vuoi dimmi se posso effettuare il commit, altrimenti lo farò dopo il tuo aggiornamento.
 
+------
+
+Ok. Nono committa pure..Io non sto lavorando sul MyTracerClass quindi non dovrebbero neanche esserci conflitti di merge. 
 
 TODO LIST
 =========
