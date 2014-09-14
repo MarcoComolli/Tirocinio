@@ -48,6 +48,9 @@ Io ho modificato solo La classe MyTracerClass, quando vuoi dimmi se posso effett
 
 Ok. Nono committa pure..Io non sto lavorando sul MyTracerClass quindi non dovrebbero neanche esserci conflitti di merge. 
 
+Problemi con il classLoader. Ora i nomi riesco a prenderli giusti ma sembra che bisogna avere un classLoader che carichi le classi dei test o non li fa partire JUnitCore..ci sto lavorando (poi però bisognerà specificare anche nel parenthesysAdder un nuovo path perchè tutti i nomi non saranno più packageesterno/packageinterno/classe ma sarà tutto l'elenco dei package: pack1.pack2.pack3.classe).
+Vedo cosa si può fare per il ClassLoader
+
 TODO LIST
 =========
 
@@ -58,7 +61,7 @@ TODO LIST
 
 -------
 
-####### Task secondari (non indispensabili
+####### Task secondari (non indispensabili)
 
 - [ ] Testare codice per il conteggio delle istruzioni
 - [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
