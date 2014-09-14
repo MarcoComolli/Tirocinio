@@ -83,6 +83,10 @@ Dopo un po' di tempo ci sono riuscito in questo modo(ho usato le tue stesse impo
 - ho compilato la classe come hai fatto tu.
 - Poi sono andato nella directory java con il comando(cd \java) e qui ho eseguito il comando  ```java test.sec.Test ``` quindi mi ha stampato "class test.sec.Test".
 
+----------
+Ok credo proprio di avere qualche problema col pc perchè (l'avevo già fatto) ho comunque riprovato come hai detto tu e mi dice che non mi trova il file specificato.
+Quindi devo risolvere sto problema..proverò a reinstallare java (dio mi salvi) e rifare perchè ho un problema quasi uguale con i test di Junit...ho il nome, ho il ClassLoader nella cartella dei .class e mi dice che non me li trova quindi penso sia un problema del mio pc. Ora reinstallo java e ti faccio sapere.
+
 
 TODO LIST
 =========
