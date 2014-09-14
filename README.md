@@ -78,6 +78,11 @@ public class Test {
 ```
 E' un problema del mio pc o sono io che sono rimbambito?
 
+------
+Dopo un po' di tempo ci sono riuscito in questo modo(ho usato le tue stesse impostazioni di directory e il file che mi hai postato):
+ho compilato la classe come hai fatto tu. Poi sono andato nella directory java con il comando(cd java) e qui ho eseguito il comando  ```java test.sec.Test ``` quindi mi ha stampato "class test.sec.Test".
+
+
 TODO LIST
 =========
 
