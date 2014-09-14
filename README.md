@@ -48,16 +48,18 @@ Io ho modificato solo La classe MyTracerClass, quando vuoi dimmi se posso effett
 
 Ok. Nono committa pure..Io non sto lavorando sul MyTracerClass quindi non dovrebbero neanche esserci conflitti di merge. 
 
-Problemi con il classLoader. Ora i nomi riesco a prenderli giusti ma sembra che bisogna avere un classLoader che carichi le classi dei test o non li fa partire JUnitCore..ci sto lavorando (poi però bisognerà specificare anche nel parenthesysAdder un nuovo path perchè tutti i nomi non saranno più packageesterno/packageinterno/classe ma sarà tutto l'elenco dei package: pack1.pack2.pack3.classe).
+Problemi con il classLoader. Ora i nomi riesco a prenderli giusti ma sembra che bisogna avere un classLoader che carichi le classi dei test altrimenti JunitCore non li fa partire ..ci sto lavorando (poi però bisognerà specificare anche nel parenthesysAdder un nuovo path perchè tutti i nomi non saranno più packageesterno/packageinterno/classe ma sarà tutto l'elenco dei package: pack1.pack2.pack3.classe).
 Vedo cosa si può fare per il ClassLoader
+
+Ho trovato una classe che si chiama URLClassLoader in cui si può specificare un URL dove il nuovo loader andrà a pescare jar e directory però non funziona e non capisco perchè. Qualsiasi cosa gli passo nel costruttore lui con il metodo getResource() mi fa vedere che va sempre nella cartella bin di eclipse del progetto corrente (cioè quello del tirocinio) e ovviamente non trova le classi di test di PMD. Non so che fare. Non capisco se sbaglio io o se URLClassLoader è la classe sbagliata per lo scopo. Ora continuo a provare qualcosa. Se rimango senza idee faccio una domanda su StackOverflow perchè non so come andare avanti.
 
 TODO LIST
 =========
 
 ####### Task principali (maggiore urgenza)
 
-- [ ] Trovare la giusta nomenclatura per i file sorgenti
-- [ ] Gestire nel MyTracerClass i dati raccolti
+- [x] Trovare la giusta nomenclatura per i file sorgenti
+- [ ] Gestire nel MyTracerClass i dati raccolti (tipo mostrarli in un formato leggibile o farci gli esperimenti statistici)
 
 -------
 
