@@ -56,6 +56,28 @@ Ho trovato una classe che si chiama URLClassLoader in cui si può specificare un
 ------
 Sto testando tutto anche su Junit e sembra che funzioni, il numero di istruzioni mi sembra abbastanza impreciso, però almeno non dà probremi.
 
+------
+Credo di stare diventando matto.  
+Scusami ti faccio una domanda banalissima da novellino java perchè sembra che il mio problema sia qui.  
+Ho un file .java, una classe semplicissima che stampa il nome della classe. L'ho messa in questa directory:
+```C:/java/test/sec/ ``` e l'ho chiamata **Test.java**. Ora, tramite linea di comando vado in quella directory e faccio ```javac Test.java ``` e mi compila il file. Mi crea il **Test.class**. Poi quando lo dovevo eseguire ho fatto ```java Test ``` sempre da dentro la directory e mi dice che non trova il file.  
+Allora mi sposto su di una directory e provo ```java sec/Test ``` essendo in ```C:/java/test/ ``` e ancora niente e faccio così fino in ad arrivare in C ma niente. Come diavolo la eseguo da riga di comando?
+Questa è la classe:  
+
+``` Java
+package test.sec; 
+public class Test {
+
+	public Test() { 
+	} 
+ 
+	public static void main(String[] args){
+		System.out.println(new Test().getClass());
+	}
+}
+```
+E' un problema del mio pc o sono io che sono rimbambito?
+
 TODO LIST
 =========
 
