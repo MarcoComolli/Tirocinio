@@ -87,6 +87,11 @@ Dopo un po' di tempo ci sono riuscito in questo modo(ho usato le tue stesse impo
 Ok credo proprio di avere qualche problema col pc perchè (l'avevo già fatto) ho comunque riprovato come hai detto tu e mi dice che non mi trova il file specificato.
 Quindi devo risolvere sto problema..proverò a reinstallare java (dio mi salvi) e rifare perchè ho un problema quasi uguale con i test di Junit...ho il nome, ho il ClassLoader nella cartella dei .class e mi dice che non me li trova quindi penso sia un problema del mio pc. Ora reinstallo java e ti faccio sapere.
 
+-----
+
+Non riesco proprio a capire. Ho reinstallato java e ho riprovato ma nulla. Poi mi è venuto in mente del CLASSPATH. L'ho settato che puntava su quella cartella ed è andato tutto ok sono riuscito a stampare il class test.sec.Test.  
+Così ho messo fatto puntare il classpath alle classi di test di pmd e facendo partire tutto mi dava o delle CalssNotFoundException o NoClassDefFoundException. Non riesco a farlo partire. Domani mi sa che faccio domanda su stackOverflow. Se vuoi poi posso fare il commit se ci vuoi dare un'occhiata o se vuoi provare a farlo funzionare anche te.Dimmi tu (faccio tutto domani che ora vado a dormire)
+
 
 TODO LIST
 =========
