@@ -53,6 +53,9 @@ Vedo cosa si può fare per il ClassLoader
 
 Ho trovato una classe che si chiama URLClassLoader in cui si può specificare un URL dove il nuovo loader andrà a pescare jar e directory però non funziona e non capisco perchè. Qualsiasi cosa gli passo nel costruttore lui con il metodo getResource() mi fa vedere che va sempre nella cartella bin di eclipse del progetto corrente (cioè quello del tirocinio) e ovviamente non trova le classi di test di PMD. Non so che fare. Non capisco se sbaglio io o se URLClassLoader è la classe sbagliata per lo scopo. Ora continuo a provare qualcosa. Se rimango senza idee faccio una domanda su StackOverflow perchè non so come andare avanti.
 
+------
+Sto testando tutto anche su Junit e sembra che funzioni, il numero di istruzioni mi sembra abbastanza impreciso, però almeno non dà probremi.
+
 TODO LIST
 =========
 
