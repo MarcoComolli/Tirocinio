@@ -26,8 +26,14 @@ public class MyTracerClass {
 		instructionsCountMap= new HashMap<String, Integer>();
 	}
 
-	public static void tracer(String objectID, int blockCode, int blockID) throws IOException{
-		insertIstructionsNumber();
+	public static void tracer(String objectID, int blockCode, int blockID) {
+		try {
+			insertIstructionsNumber();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
 			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
@@ -72,8 +78,14 @@ public class MyTracerClass {
 		}
 	}
 
-	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani) throws IOException{
-		insertIstructionsNumber();
+	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
+		try {
+			insertIstructionsNumber();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
 			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
