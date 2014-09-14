@@ -139,8 +139,8 @@ public class FileParser {
     				currentInstructionCount+=findInstructions(line);
     			}
     			if(line!=null && line.contains("}") && countInstruction){
-    				linesInBlock.put(currentMethod +" "+currentBlockID, currentInstructionCount);
-    				System.err.println(currentMethod+" "+ currentBlockID +" " +currentInstructionCount);
+    				linesInBlock.put(currentMethod +"@"+currentBlockID, currentInstructionCount);
+    				System.err.println(currentMethod+"@"+ currentBlockID +" " +currentInstructionCount);
     				currentInstructionCount=0;
     				countInstruction=false;
     			}
@@ -187,7 +187,7 @@ public class FileParser {
 				
 				PrintWriter f0 = new PrintWriter(new FileWriter("C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt",true));
 				for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
-				    f0.println(entry.getKey() +" Numero di istruzioni: " +entry.getValue());
+				    f0.println(entry.getKey() +"#" +entry.getValue());
 				    f0.flush();
 				}
 				f0.close();
@@ -518,7 +518,7 @@ public class FileParser {
 		if(lastMethodInstrucion == null){
 			return line.substring(0,index) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(index);
 		}
-		if(!lastMethodInstrucion.contains("return;") && !lastMethodInstrucion.contains("throw ")){ //TODO occhio che può essere in una stringa
+		if(!lastMethodInstrucion.contains("return;") && !lastMethodInstrucion.contains("throw ")){ //TODO occhio che puï¿½ essere in una stringa
 			return line.substring(0,index) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(index);
 		}
 		return line;

@@ -1,5 +1,7 @@
 package tests;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import sources.BaseConstruct;
@@ -7,7 +9,7 @@ import sources.BaseConstruct;
 public class GlobalTest {
 
 	@Test
-	public void BaseConstructTest(){
+	public void BaseConstructTest() throws IOException{
 		BaseConstruct bc = new BaseConstruct();
 		
 		bc.methodIf();
