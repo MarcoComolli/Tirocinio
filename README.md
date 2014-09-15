@@ -7,10 +7,6 @@ Intanto qualcuno risponde così su stackoverflow:
 Seeems I'm having some problem: Which problem? –  JB Nizet 4 mins ago
 
 -----
-Mi fanno incazzare quelli di stackoverflow...gli ho scritto un papiro per spiegare qual'era il mio problema..e nei commenti mi scrivono "quale problema?".. cazzo leggi!  
-Ora provo il commit poi ti spiego tutti i cambiamenti.
-
-Fatto, non c'è stato bisogno neanche di fare il merge.
 Praticamente ora tutti i file vengono salvati con il loro FQN (Fully qualified name) ma per fare questo ho bisogno di fare come ti avevo detto: specificare il path originale del package più esterno così da poterlo sottrarre al path completo del file.  
 Quindi nel ParenthesysAdder va specificato nel main  
 ```String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java"; ```  
@@ -51,6 +47,21 @@ Se non riesci non importa, piuttosto che fare casini meglio averlo così.
 ----
 
 Cosa potrei fare io ora? Potrei iniziare a vedere come gestire i dati raccolti? Magari possiamo metterci d'accordo sui dati da raccogliere e sulla modalità di raggruppamento dei dati in modo tale da poter incominciare a farci qualcosa.
+
+---------
+
+Allora ti dico quello che al momento sto facendo io:  
+prima dovrei risolvere la faccenda dell'esecuzione dei test che si blocca. Devo arrivare a far funzionare tutti i test in modo corretto.  
+Fatto questo mi dedico al far partire il preprocessing da interfaccia grafica (che avevo già inziato) e al far fare all'interfaccia una cosuccia che se mi viene dà un bell'effetto. (praticamente siccome per i test è necessario specificare tutti i path delle classi o delle librerie esterne usate volevo far apparire dinamicamente a seconda della scelta dell'utente un numero arbitrario di caselle di testo in cui inserire i path specificati. Poi questi saranno gli argomenti dell'URLClassloader).  
+Al momento mi sto dedicando a questo.  
+Sì, ci sarebbe da "elaborare" i dati raccolti fino ad adesso. Fin'ora abbiamo: i path di esecuzione, i vari blocchi, il numero di volte che un metodo viene eseguito e il numero di istruzioni per blocco.  
+Al momento l'unica cosa che facciamo è farli stampare a video ma bisognerebbe farci qualcos'altro. Per esempio io pensavo di creare un file html in cui i risultati sono formattati in una tabella e suddivisi tipo per classe. (poi questo file si potrà far vedere anche da interfaccia grafica volendo).
+Oppure ci sono per l'appunto da fare un po' di calcoli che aveva richiesto il prof. Tipo la storia della casualità, del procedere e tutte le altre cose che ora non mi vengono in mente.
+Infine dobbiamo considerare che manca ancora l'ultimo punto (il 5) cioè dobbiamo ancora raccogliere quanta copertura ha una classe di test (questo però va fatto dentro al ciclo for dell'interfaccia. Cioè prima dell'istruzione ```Result result = junit.run(cl);```  andrebbe messo un metodo che dica di iniziare a registrare la copertura e dopo averlo eseguito uno che dica di finire di registrare) Però non mi sembra il caso di iniziare a verificare la copertura dei test se non riusciamo/riesco ancora a farli partire tutti in modo decente.  
+Dimmi tu cosa preferisci fare.
+
+Domani vuoi che scriviamo una mail al prof che gli diciamo come stanno andando le cose?  
+Altra domanda: tu giovedì vai a vedere le lauree?
 
 TODO LIST
 =========
