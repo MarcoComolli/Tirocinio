@@ -133,6 +133,9 @@ Compiled test folder dovrebbe essere giusta.
 O almeno, non capisco quest'ultima ho provato con diversi livelli (nel tuo caso sarebbe da provare tipo arrivare fino \junit-master\bin\junit\ e provare poi fare fino \junit-master\bin\ e provare o andare anche più avanti) di path ma non capisco se si trova lì l'errore.  
 Prova comunque a cambiare il test folder come ti ho detto. (se guardi il fullname dovrebbe essere corretto. Se non è corretto è sbagliata la "root" dei package: in questo caso quindi la *Test folder*).
 
+-----
+Mi hanno risposto su stackoverflow e credo di aver capito il problema. Ora riesco a far partire alcuni test!  
+Ci sto lavorando. Il problema è come diceva lui che non trova le classi usate dai test non quelle dei test in sè. Ho aggiornato il Classpath e aggiunto un secondo bin con le classi dei file e riesce a eseguire qualcosa ma da ancora qualche eccezione che ora vedo di risolvere.
 
 TODO LIST
 =========
