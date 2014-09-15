@@ -101,6 +101,10 @@ Se vuoi fai pure il commit così lo vedo anch'io.
 Intanto qualcuno risponde così su stackoverflow:
 Seeems I'm having some problem: Which problem? –  JB Nizet 4 mins ago
 
+-----
+Mi fanno incazzare quelli di stackoverflow...gli ho scritto un papiro per spiegare qual'era il mio problema..e nei commenti mi scrivono "quale problema?".. cazzo leggi!  
+Ora provo il commit poi ti spiego tutti i cambiamenti
+
 TODO LIST
 =========
 
