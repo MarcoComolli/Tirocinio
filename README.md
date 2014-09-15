@@ -96,6 +96,9 @@ Così ho messo fatto puntare il classpath alle classi di test di pmd e facendo p
 Ho fatto la domanda su stackoverflow. Se la vuoi vedere è qui 
 http://stackoverflow.com/questions/25845911/obtain-class-istances-in-a-directory-from-urlclassloader
 
+-----
+Se vuoi fai pure il commit così lo vedo anch'io.
+
 TODO LIST
 =========
 
