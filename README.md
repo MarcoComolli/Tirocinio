@@ -111,7 +111,9 @@ Quindi nel ParenthesysAdder va specificato nel main
 ```String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java"; ```  
 Questo è praticamente dove iniziano i miei package di pmd. Questo path verrò poi chiesto di essere specificato dall'utente nell'interfaccia (se non capisci qualcosa nell'interfaccia prova a vedere il tooltip sulle Label).
 Se hai qualche problema fammi sapere.
+
 -----
+
 Testando mi sembra di avere il tuo stesso problema ClassNotFoundException. Non so se ho capito tutti percorsi esatti da inserire nei campi dell'interfaccia (te li scrivo un attimo per vedere se ho capito).
 - Source folder: dove sono presenti i file sorgente es: C:\Users\Jacopo\Desktop\junit-master\src
 - Destination folder: la directory di destinazione della copia.
