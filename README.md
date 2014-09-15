@@ -103,7 +103,14 @@ Seeems I'm having some problem: Which problem? –  JB Nizet 4 mins ago
 
 -----
 Mi fanno incazzare quelli di stackoverflow...gli ho scritto un papiro per spiegare qual'era il mio problema..e nei commenti mi scrivono "quale problema?".. cazzo leggi!  
-Ora provo il commit poi ti spiego tutti i cambiamenti
+Ora provo il commit poi ti spiego tutti i cambiamenti.
+
+Fatto, non c'è stato bisogno neanche di fare il merge.
+Praticamente ora tutti i file vengono salvati con il loro FQN (Fully qualified name) ma per fare questo ho bisogno di fare come ti avevo detto: specificare il path originale del package più esterno così da poterlo sottrarre al path completo del file.  
+Quindi nel ParenthesysAdder va specificato nel main  
+```String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java"; ```  
+Questo è praticamente dove iniziano i miei package di pmd. Questo path verrò poi chiesto di essere specificato dall'utente nell'interfaccia (se non capisci qualcosa nell'interfaccia prova a vedere il tooltip sulle Label).
+Se hai qualche problema fammi sapere.
 
 TODO LIST
 =========
