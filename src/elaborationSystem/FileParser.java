@@ -25,7 +25,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class FileParser {
-	
+
 	public static final int CODE_IF = 0;
 	public static final int CODE_ELSE = 1;
 	public static final int CODE_WHILE = 2;
@@ -48,9 +48,9 @@ public class FileParser {
 	private boolean processNextMethodLine = false;
 	private boolean processSwitchCase = false;
 	private boolean whileAfterDo = false;
-	
-	
-	
+
+
+
 	private SortedSet<Map.Entry<String, Integer>> currentMethodMapSorted;
 	private Iterator<Entry<String, Integer>> iterator;
 	private int curlyOpened = 0;
@@ -58,7 +58,7 @@ public class FileParser {
 	private int currentCode = -1;
 	private int currentLine = 1;
 
-	
+
 	private String className;
 	private String currentMethod ;
 	private boolean currentMethodReturnVoid = false;
@@ -77,26 +77,27 @@ public class FileParser {
 	private String lastMethodInstrucion;
 	private boolean isInTryStatement = false;
 	private BufferedWriter out;
-	
+	private static boolean firstTime= true;
+
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI, String root) {
 		this.READ_URI = readURI;
 		System.out.println("READURI " + readURI);
 		className = extractClassFromPathString(readURI);
 		File f = new File(readURI);
-//		String packageName = extractPackageFromFile(f);
+		//		String packageName = extractPackageFromFile(f);
 		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, getFullyQualifiedName(readURI, root) + " ");
-//		System.out.println("|||||| MAPPA NON SORTED ||||||");
-//		for (Map.Entry entry : currentMethodMap.entrySet()) {
-//			System.out.println(entry.getKey() + " " + entry.getValue());
-//		}
+		//		System.out.println("|||||| MAPPA NON SORTED ||||||");
+		//		for (Map.Entry entry : currentMethodMap.entrySet()) {
+		//			System.out.println(entry.getKey() + " " + entry.getValue());
+		//		}
 		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
-//		System.out.println("|||||| MAPPA SORTED ||||||");
-//		for (Map.Entry entry : currentMethodMapSorted) {
-//			System.out.println(entry.getKey() + " " + entry.getValue());
-//		}
-	
-	
-		
+		//		System.out.println("|||||| MAPPA SORTED ||||||");
+		//		for (Map.Entry entry : currentMethodMapSorted) {
+		//			System.out.println(entry.getKey() + " " + entry.getValue());
+		//		}
+
+
+
 		iterator = currentMethodMapSorted.iterator();
 		if(iterator.hasNext()){
 			iteratorEntry = iterator.next();
@@ -108,14 +109,14 @@ public class FileParser {
 			else{
 				currentMethodReturnVoid = false;
 			}
-			
+
 			System.out.println("COSTRUTTORE - prossimo metodo " + currentMethod + " at line " + nextMethodLine);
 		}
-		
+
 		writeUri = writeURI;//"C:/Users/Marco/Desktop/FileParsato"+fileindex+".txt";
 
 	}
-	
+
 	public void a(){
 		FileReader fr = null;
 		FileWriter fw = null;
@@ -126,50 +127,50 @@ public class FileParser {
 			fw = new FileWriter(writeUri);
 			buffRead = new BufferedReader(fr);
 			buffWrite = new BufferedWriter(fw);
-			
+
 
 			String line = buffRead.readLine();
-			
-			
-            while(line != null){
-            	line = CommentsRemover.removeComments(line);
-            	String newLine = parseString(line);
-            	
-    			if(countInstruction){
-    				currentInstructionCount+=findInstructions(line);
-    			}
-    			if(line!=null && line.contains("}") && countInstruction){
-    				linesInBlock.put(currentMethod +"@"+currentBlockID, currentInstructionCount);
-    				System.err.println(currentMethod+"@"+ currentBlockID +" " +currentInstructionCount);
-    				currentInstructionCount=0;
-    				countInstruction=false;
-    			}
-    			if(currentLine == nextMethodLine && line != null){
-    				currentMethod = iteratorEntry.getKey();
-    				if(checkReturnType(currentMethod).equals("void")){
-    					currentMethodReturnVoid = true;
-    				}
-    				else{
-    					currentMethodReturnVoid = false;
-    				}
-    				newLine = insertMethodTracer(currentMethod, line);
-    				if(processNextMethodLine){
-    					nextMethodLine++;
-    					processNextMethodLine = false;
-    				}else{
-    					if(iterator.hasNext()){
-        					iteratorEntry = iterator.next();
-        					nextMethodLine = iteratorEntry.getValue();
-        					
-        				}
-    				}
-    			}
-    			buffWrite.write(newLine);
-    			buffWrite.newLine();
-    			buffWrite.flush();
-    			line = buffRead.readLine();
-    			currentLine++; 
-            }  
+
+
+			while(line != null){
+				line = CommentsRemover.removeComments(line);
+				String newLine = parseString(line);
+
+				if(countInstruction){
+					currentInstructionCount+=findInstructions(line);
+				}
+				if(line!=null && line.contains("}") && countInstruction){
+					linesInBlock.put(currentMethod +"@"+currentBlockID, currentInstructionCount);
+					System.err.println(currentMethod+"@"+ currentBlockID +" " +currentInstructionCount);
+					currentInstructionCount=0;
+					countInstruction=false;
+				}
+				if(currentLine == nextMethodLine && line != null){
+					currentMethod = iteratorEntry.getKey();
+					if(checkReturnType(currentMethod).equals("void")){
+						currentMethodReturnVoid = true;
+					}
+					else{
+						currentMethodReturnVoid = false;
+					}
+					newLine = insertMethodTracer(currentMethod, line);
+					if(processNextMethodLine){
+						nextMethodLine++;
+						processNextMethodLine = false;
+					}else{
+						if(iterator.hasNext()){
+							iteratorEntry = iterator.next();
+							nextMethodLine = iteratorEntry.getValue();
+
+						}
+					}
+				}
+				buffWrite.write(newLine);
+				buffWrite.newLine();
+				buffWrite.flush();
+				line = buffRead.readLine();
+				currentLine++; 
+			}  
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -178,19 +179,13 @@ public class FileParser {
 		}
 		finally{
 			try {
-				
+
 				buffRead.close();
 				fr.close();
 				buffWrite.close();
 				fw.close();
-				
-				
-				PrintWriter f0 = new PrintWriter(new FileWriter("C:/Users/Marco/Desktop/NumeroIstruzioni.txt",true));
-				for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
-				    f0.println(entry.getKey() +"#" +entry.getValue());
-				    f0.flush();
-				}
-				f0.close();
+
+				writeNumberOfInstructions();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -198,7 +193,26 @@ public class FileParser {
 
 	}
 
-	
+	private void writeNumberOfInstructions() throws IOException {
+		PrintWriter printWriter;
+		String numberOfInstructionsFilePath="C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt";
+		if(linesInBlock.size()>0){
+			if(firstTime){
+				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+				firstTime=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
+			}
+			for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
+				printWriter.println(entry.getKey() +"#" +entry.getValue());
+				printWriter.flush();
+
+			}
+			printWriter.close();				
+		}
+	}
+
+
 	private String insertMethodTracer(String currentMethod, String line) {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
@@ -231,11 +245,11 @@ public class FileParser {
 			Pattern pattern = Pattern.compile("\\{");
 			Matcher matcher = pattern.matcher(line); 
 			int count = 0;
-			
+
 			int ind;
 			while (matcher.find())
 				count++;
-						
+
 			if(count == 1){ //una sola parentesi {
 				if(!checkInString(line, "{", line.indexOf('{')) && !line.contains("'{'")){
 					return line.indexOf("{");
@@ -254,12 +268,12 @@ public class FileParser {
 					}
 				}
 			}
-			
+
 		}
-			return -1;
-		
+		return -1;
+
 	}
-	
+
 	private int searchCurlyOpen(String line){
 		ArrayList<Integer> indexList = new ArrayList<Integer>();
 		for (int i = 0; i < line.length(); i++) {
@@ -279,7 +293,7 @@ public class FileParser {
 				indexList.remove(i);
 			}
 		}
-		
+
 		if(indexList.isEmpty()) {
 			return -1;
 		}
@@ -287,7 +301,7 @@ public class FileParser {
 			return indexList.get(0);
 		}
 	}
-	
+
 	private String checkReturnType(String method){
 		String[] splitted = method.split(",");
 		if(splitted != null && splitted.length != 0){
@@ -317,7 +331,7 @@ public class FileParser {
 				code = CODE_WHILE;
 			}
 		}
-		
+
 		if(line.contains("do")){
 			if(checkKeyword("do", line) && !checkInString(line, "do", line.indexOf("do"))){
 				code = CODE_DO;
@@ -327,14 +341,14 @@ public class FileParser {
 			if(checkKeyword("for", line) && !checkInString(line, "for", line.indexOf("for"))){
 				code = CODE_FOR;
 			}
-			
+
 		}
 		if(line.contains("switch")){
 			if(checkKeyword("switch", line) && !checkInString(line, "switch", line.indexOf("switch"))){
 				code = CODE_SWITCH;
 			}
 		}
-		
+
 		if(line.contains("?")){
 			if(checkKeyword("?", line) && !checkInString(line, "?", line.indexOf("?"))){
 				code = CODE_CONDITIONAL;
@@ -362,10 +376,10 @@ public class FileParser {
 			}
 		}
 		return code;
-		
+
 	}
-	
-	
+
+
 	private boolean checkKeyword(String key, String line) {
 		int index = line.indexOf(key);
 		int keylength = key.length();
@@ -449,7 +463,7 @@ public class FileParser {
 				break;
 			}
 			return newLine;
-			
+
 		}
 		else{
 			if(curlyOpened != 0){
@@ -462,7 +476,7 @@ public class FileParser {
 
 	}
 
-	
+
 	//cerca se c'è un return e aggiunge la riga
 	private String checkReturnsAndThrow(String line) {
 		if(line.contains("return ") || line.contains("return;")){
@@ -504,16 +518,16 @@ public class FileParser {
 					if(!checkInString(line, "}", i)){ //se non e' in una stringa
 						curlyMethodCount--;
 						if(curlyMethodCount == 0){
-								return i;
+							return i;
 						}
 					}
 				}
 			}
-			
+
 		}
 		return -1;
 	}
-	
+
 	private String addEndOfMethod(String line, int index){
 		if(lastMethodInstrucion == null){
 			return line.substring(0,index) + " MyTracerClass.endRecordPath(\""+currentMethod+"\");" + line.substring(index);
@@ -548,10 +562,10 @@ public class FileParser {
 			}
 		}
 		return line;
-		
+
 	}
-	
-	
+
+
 
 	private String closeCurly(String line) {
 		String newLine = "----ERRORE----";
@@ -596,7 +610,7 @@ public class FileParser {
 		}
 		return line;
 	}
-	
+
 	private String processCatch(String line) {
 		currentBlockID++;
 		String newLine = null;
@@ -612,7 +626,7 @@ public class FileParser {
 		}
 		return line;
 	}
-	
+
 	private String processConditional(String line) {
 		currentBlockID++;
 		return line;
@@ -709,9 +723,9 @@ public class FileParser {
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
 				String booleanArrayString = getBooleanArrayString(line);
 				countInstruction=true;
-			return booleanArrayString+" "+newLine;
+				return booleanArrayString+" "+newLine;
 			}
-			
+
 		}
 		return line;
 	}
@@ -733,7 +747,7 @@ public class FileParser {
 		}
 		return line;
 	}
-	
+
 	private String processElseIf(String line) {
 		currentBlockID++;
 		String newLine = null;
@@ -746,12 +760,12 @@ public class FileParser {
 				booleanArrayString = getBooleanArrayString(currentBooleanCondition);
 				multiLineBooleanCondition = false;
 				currentBooleanCondition = "";
-				
+
 
 			}
 			else{
 				booleanArrayString = getBooleanArrayString(line);
-				
+
 
 			}
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
@@ -766,7 +780,7 @@ public class FileParser {
 		}
 		return line;
 	}
-	
+
 
 	private String processElse(String line) {
 		currentBlockID++;
@@ -802,12 +816,12 @@ public class FileParser {
 				booleanArrayString = getBooleanArrayString(line);
 				System.err.println("originale per if "+line.substring(0, index+1) +booleanArrayString+" "+ tracerIf + line.substring(index+1, line.length()));
 				//addBooleanArrayToTracer(tracerIf); 
-				
+
 			}
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerIf)+ 
-					 line.substring(index+1, line.length());
-			
-		
+					line.substring(index+1, line.length());
+
+
 			countInstruction=true;
 			return newLine;
 		}
@@ -817,16 +831,16 @@ public class FileParser {
 			currentCode = CODE_IF;
 			processNextLine = true;
 		}
-		
+
 		return line;
-		
+
 	}
 
 	private String addBooleanArrayToTracer(String tracer) {
 		String newTracer=tracer.substring(0, tracer.length()-2)+ "," + currentBooleanArray +");";
 		return newTracer;
 	}
-	
+
 	private int findInstructions(String line){
 		int count = 0;
 		if(line.contains(";")){
@@ -840,7 +854,7 @@ public class FileParser {
 		}
 		return count;
 	}
-	
+
 	private String findLastMethodInstruction(String line){
 		if(curlyMethodCount == 1 || isInTryStatement){ //se non sei in un blocco all'interno del metodo
 			int f = findInstructions(line);
@@ -868,7 +882,7 @@ public class FileParser {
 		}
 		return lastMethodInstrucion;
 	}
-	
+
 	//TODO
 	//metodo per test cancellare finito il tutto
 	private void printStack(){
@@ -879,30 +893,30 @@ public class FileParser {
 		}
 		System.out.println();
 	}
-	
+
 	public String extractClassFromPathString(String path){
 		int i = path.lastIndexOf('\\');
 		int j = path.lastIndexOf('.');
 		return path.substring(i+1,j);
 	}
-	
+
 	private SortedMap<String, Integer> getByPreffix(NavigableMap<String, Integer> myMap, String preffix ) {
-	    return myMap.subMap( preffix, preffix + Character.MAX_VALUE );
+		return myMap.subMap( preffix, preffix + Character.MAX_VALUE );
 	}
-	
+
 	private <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
-	    SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(new Comparator<Map.Entry<K,V>>() {
-	    	
-	            @Override 
-	            public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
-	                return e1.getValue().compareTo(e2.getValue());
-	            }
-	        }
-	    );
-	    sortedEntries.addAll(map.entrySet());
-	    return sortedEntries;
+		SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(new Comparator<Map.Entry<K,V>>() {
+
+			@Override 
+			public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+				return e1.getValue().compareTo(e2.getValue());
+			}
+		}
+				);
+		sortedEntries.addAll(map.entrySet());
+		return sortedEntries;
 	}
-	
+
 	public String extractPackageFromFile(File f){
 		String path = f.getParent();
 		String temp;
@@ -916,13 +930,13 @@ public class FileParser {
 			return null;
 		}
 	}
-	
+
 	private String extractFileFromPath(String path){
 		int index = path.lastIndexOf('\\');
 		path.substring(index);
 		return path.substring(index+1);
 	}
-	
+
 	/**
 	 * Check if a specified key with start at beginIndex is in a string or not
 	 * @param line
@@ -957,7 +971,7 @@ public class FileParser {
 		}
 		return false;
 	}
-	
+
 	private String getBooleanArrayString(String line) {
 		String[] operands=BooleanExpressionParser.extractOperands(line);
 		//boolean[] boolArr = new boolArr[array.length]{cond1,stack.isEmpty()};
@@ -969,13 +983,13 @@ public class FileParser {
 		if(conditions.substring(0, conditions.length()-1).equals("forEach")){
 			return "forEach";
 		}else{
-		String booleanArrayString="boolean[] ilMioArrayDiBooleani"+arrayConditionsNumber+" ={"+conditions.substring(0, conditions.length()-1)+"};";
-		currentBooleanArray="ilMioArrayDiBooleani"+arrayConditionsNumber;
-		arrayConditionsNumber++;
-		return booleanArrayString;}
+			String booleanArrayString="boolean[] ilMioArrayDiBooleani"+arrayConditionsNumber+" ={"+conditions.substring(0, conditions.length()-1)+"};";
+			currentBooleanArray="ilMioArrayDiBooleani"+arrayConditionsNumber;
+			arrayConditionsNumber++;
+			return booleanArrayString;}
 	}
-	
-	
+
+
 	public String getFullyQualifiedName(String currentPath, String root){
 		System.out.println("currentpath: " + currentPath);
 		System.out.println("currentroot: " + root);
