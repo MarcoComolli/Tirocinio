@@ -126,10 +126,12 @@ Testando mi sembra di avere il tuo stesso problema ClassNotFoundException. Non s
 -----
 
 Si esatto... i file addizionali sarebbero quelli tipo MetodiTirocinio.txt o NumeroIstruzioni.txt.  
-Packages folder è quella fino al primo package. si per junit è corretta quella perchè i packages iniziano tutti o con org.qualcosa.ecc oppure con junit.qualcosa.ecc
+*Packages folder* è quella fino al primo package. Si per junit è corretta quella perchè i packages iniziano tutti o con org.qualcosa.ecc oppure con junit.qualcosa.ecc
 per sapere se è corretto dovresti provare a far partire tutto (non da interfaccia che il preprocessing non lo fa ancora) ma normalmente dal parenthesysAdder. Se i file come metodiTirocinio o NumeroIstruzioni sono corretti (ossia non hanno null al posto del nome del metodo) allora dovrebbe essere corretto.  
-Test folder dovrebbe essere sbagliata. Nel mio Junit dovrebbe essere * C:\Users\Marco\Desktop\junit-master\junit-master\src\test\java* perchè tutti i packages iniziano con junit.blablabla o con org.blablabla quindi bisogna includere anche java
-Compiled test folder dovrebbe essere giusta. O almeno, non capisco quest'ultima ho provato con diversi livelli (nel tuo caso sarebbe da provare tipo arrivare fino \junit-master\bin\junit\ e provare poi fare fino \junit-master\bin\ e provare o andare anche più avanti) di path ma non capisco se si trova lì l'errore. Prova comunque a cambiare il test folder come ti ho detto. (se guardi il fullname dovrebbe essere corretto. Se non è corretto è sbagliata la "root" dei package: in questo caso quindi la *Test folder*
+Test folder dovrebbe essere sbagliata. Nel mio Junit dovrebbe essere *C:\Users\Marco\Desktop\junit-master\junit-master\src\test\java* perchè tutti i packages iniziano con junit.blablabla o con org.blablabla quindi bisogna includere anche *\java*.  
+Compiled test folder dovrebbe essere giusta.  
+O almeno, non capisco quest'ultima ho provato con diversi livelli (nel tuo caso sarebbe da provare tipo arrivare fino \junit-master\bin\junit\ e provare poi fare fino \junit-master\bin\ e provare o andare anche più avanti) di path ma non capisco se si trova lì l'errore.  
+Prova comunque a cambiare il test folder come ti ho detto. (se guardi il fullname dovrebbe essere corretto. Se non è corretto è sbagliata la "root" dei package: in questo caso quindi la *Test folder*).
 
 
 TODO LIST
