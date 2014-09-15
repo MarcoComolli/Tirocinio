@@ -39,16 +39,17 @@ public class MethodSignatureExtractor {
 	private String currentDir;
 	private TreeMap<String, Integer> methodMap;
 	private File currentFile;
+	private String rootPath;
 
 	
 	BufferedWriter out;
 	
 
-	public MethodSignatureExtractor(String pathWrite) {
-		
+	public MethodSignatureExtractor(String writePath, String rootPath) {
+		this.rootPath = rootPath;
 		methodMap = new TreeMap<String, Integer>();
 		try {
-			out = new BufferedWriter(new FileWriter(pathWrite));
+			out = new BufferedWriter(new FileWriter(writePath));
 		} catch (IOException e){
 			e.printStackTrace();
 		}
@@ -117,7 +118,7 @@ public class MethodSignatureExtractor {
 				
 				nodeName = node.getName().toString();
 				returned = node.getReturnType2(); //null se è un costruttore
-				temp = extractPackageFromFile(currentFile) +  "/" + currentFileName + " " + nodeName + ","+ returned + ",." ;
+				temp = getFullyQualifiedName(currentFile.getAbsolutePath(), rootPath) + " " + nodeName + ","+ returned + ",;" ;
 				
 				System.out.println("Method: '" + node + "'"
 						+ " return: " + node.getReturnType2() + "\nat line "
@@ -211,6 +212,16 @@ public class MethodSignatureExtractor {
 			return null;
 		}
 	}
+	
+	public String getFullyQualifiedName(String currentPath, String root){
+		if(root.contains("/")){
+			root = root.replace('/', '\\');
+		}
+		String name =  currentPath.replace(root, "");
+		name = name.replace(File.separatorChar, '.');
+		name = name.substring(1, name.lastIndexOf('.'));
+		return name;
+	}
 
 	// loop directory to get file list
 	public TreeMap<String, Integer> parseFilesInDir(String dirPath){
@@ -245,7 +256,6 @@ public class MethodSignatureExtractor {
 			filePath = f.getAbsolutePath();
 			System.out.println("Current: " + filePath);
 			if (f.isFile()) {
-
 				try {
 					parse(readFileToString(filePath));
 				} catch (IOException e) {

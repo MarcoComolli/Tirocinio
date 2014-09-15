@@ -66,6 +66,12 @@ public class Interface extends JFrame{
 	private JLabel lblStep;
 	private JLabel lblStep1;
 	private JSeparator separator_1;
+	private JTextField txtRootPathSrc;
+	private JButton btnRootPathSrc;
+	private JLabel lblRootPathSrc;
+	private JTextField txtClassTest;
+	private JButton btnClassTest;
+	private JLabel lblClassTestRoot;
 
 	/**
 	 * Launch the application.
@@ -90,11 +96,11 @@ public class Interface extends JFrame{
 		
 		setTitle("Tirocinio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 301);
+		setBounds(100, 100, 544, 366);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setFont(new Font("Arial", Font.PLAIN, 11));
-		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][grow]"));
+		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][][][][][][][][][][][grow]"));
 		
 		lblStep1 = new JLabel("Step 1:");
 		lblStep1.setFont(new Font("Arial", Font.BOLD, 11));
@@ -141,9 +147,18 @@ public class Interface extends JFrame{
 		contentPane.add(textMidFiles, "flowx,cell 1 4,grow");
 		textMidFiles.setColumns(10);
 		
+		lblRootPathSrc = new JLabel("Packages folder: ");
+		lblRootPathSrc.setToolTipText("Specify the first folder containing packages");
+		lblRootPathSrc.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(lblRootPathSrc, "cell 0 5,alignx left");
+		
+		txtRootPathSrc = new JTextField();
+		txtRootPathSrc.setColumns(10);
+		contentPane.add(txtRootPathSrc, "flowx,cell 1 5,grow");
+		
 		btnCopy = new JButton("Copy");
 		btnCopy.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnCopy, "cell 0 5 2 1,alignx center");
+		contentPane.add(btnCopy, "cell 0 6 2 1,alignx center");
 		btnCopy.addActionListener(new ButtonHandler());
 		
 		progressBar = new JProgressBar();
@@ -154,33 +169,42 @@ public class Interface extends JFrame{
 		
 		lblStatus = new JLabel(" Processing requirements...");
 		lblStatus.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblStatus, "cell 0 6 2 1");
-		contentPane.add(progressBar, "cell 0 7 2 1,grow");
+		contentPane.add(lblStatus, "cell 0 7 2 1");
+		contentPane.add(progressBar, "cell 0 8 2 1,grow");
 		lblStatus.setVisible(false);
 		
 		lblStep = new JLabel("Step 2:");
 		lblStep.setEnabled(false);
 		lblStep.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblStep, "cell 0 8");
+		contentPane.add(lblStep, "cell 0 9");
 		
 		separator = new JSeparator();
-		contentPane.add(separator, "cell 0 9 2 1,growx");
+		contentPane.add(separator, "cell 0 10 2 1,growx");
 		
 		lblTestFolder = new JLabel("Test folder:");
 		lblTestFolder.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(lblTestFolder, "cell 0 10,alignx left");
+		contentPane.add(lblTestFolder, "cell 0 11,alignx left");
 		
 		txtTest = new JTextField();
-		contentPane.add(txtTest, "flowx,cell 1 10,grow");
+		contentPane.add(txtTest, "flowx,cell 1 11,grow");
 		txtTest.setColumns(10);
 		
 		btnRunTest = new JButton("Run Tests");
 		btnRunTest.setFont(new Font("Arial", Font.BOLD, 11));
 		btnRunTest.addActionListener(new ButtonHandler());
-		contentPane.add(btnRunTest, "cell 0 11 2 1,alignx center");
+		
+		lblClassTestRoot = new JLabel("Compiled tests folder");
+		lblClassTestRoot.setToolTipText("Folder where are stored the .class test files");
+		lblClassTestRoot.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(lblClassTestRoot, "cell 0 12,alignx left");
+		
+		txtClassTest = new JTextField();
+		txtClassTest.setColumns(10);
+		contentPane.add(txtClassTest, "flowx,cell 1 12,grow");
+		contentPane.add(btnRunTest, "cell 0 13 2 1,alignx center");
 		
 		scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, "cell 0 12 2 1,grow");
+		contentPane.add(scrollPane, "cell 0 14 2 1,grow");
 		
 		textPane = new JTextPane();
 		textPane.setContentType("text/html");
@@ -188,12 +212,23 @@ public class Interface extends JFrame{
 		
 		btnSearchTest = new JButton("...");
 		btnSearchTest.setFont(new Font("Arial", Font.BOLD, 11));
-		contentPane.add(btnSearchTest, "cell 1 10");
+		contentPane.add(btnSearchTest, "cell 1 11");
+		btnSearchTest.addActionListener(new ButtonHandler());
 		
 		btnOtherFiles = new JButton("...");
 		btnOtherFiles.setFont(new Font("Arial", Font.BOLD, 11));
 		contentPane.add(btnOtherFiles, "cell 1 4");
 		btnOtherFiles.addActionListener(new ButtonHandler());
+		
+		btnRootPathSrc = new JButton("...");
+		btnRootPathSrc.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(btnRootPathSrc, "cell 1 5");
+		btnRootPathSrc.addActionListener(new ButtonHandler());
+		
+		btnClassTest = new JButton("...");
+		btnClassTest.setFont(new Font("Arial", Font.BOLD, 11));
+		contentPane.add(btnClassTest, "cell 1 12");
+		btnClassTest.addActionListener(new ButtonHandler());
 	
 
 		
@@ -278,14 +313,50 @@ public class Interface extends JFrame{
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				jfc.setCurrentDirectory(new java.io.File("."));
+				if(txtTest != null && !txtTest.equals("")){
+					jfc.setCurrentDirectory(new java.io.File(txtTest.getText()));
+				}
+				else{
+					jfc.setCurrentDirectory(new java.io.File("."));
+				}
 				int n = jfc.showOpenDialog(Interface.this);
 				if(n == 0){
 					String s = jfc.getSelectedFile().getAbsolutePath();
 					txtTest.setText(s);
 					System.out.println(s);
 				}
-
-
+			}
+			else if(event.getSource() == btnRootPathSrc){
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				if(txtRootPathSrc != null && !txtRootPathSrc.equals("")){
+					jfc.setCurrentDirectory(new java.io.File(txtRootPathSrc.getText()));
+				}
+				else{
+					jfc.setCurrentDirectory(new java.io.File("."));
+				}
+				int n = jfc.showOpenDialog(Interface.this);
+				if(n == 0){
+					String s = jfc.getSelectedFile().getAbsolutePath();
+					txtRootPathSrc.setText(s);
+					System.out.println(s);
+				}
+			}
+			else if(event.getSource() == btnClassTest){
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				if(txtClassTest != null && !txtClassTest.equals("")){
+					jfc.setCurrentDirectory(new java.io.File(txtClassTest.getText()));
+				}
+				else{
+					jfc.setCurrentDirectory(new java.io.File("."));
+				}
+				int n = jfc.showOpenDialog(Interface.this);
+				if(n == 0){
+					String s = jfc.getSelectedFile().getAbsolutePath();
+					txtClassTest.setText(s);
+					System.out.println(s);
+				}
 			}
 			else if(event.getSource() == btnRunTest){
 				JUnitCore junit = new JUnitCore();
@@ -295,17 +366,30 @@ public class Interface extends JFrame{
 
 		}
 
-		private void runJunitTest(JUnitCore junit, ArrayList<File> directories, String path ) {
+		private void runJunitTest(JUnitCore junit, ArrayList<File> directories, String path) {
 			File f = new File(path);
+			File bin = new File(txtClassTest.getText());
+			System.out.println("file path:" + path);
 			File[] files = f.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				if(files[i].isFile()){
+					System.out.println("file attuale: " + files[i]);
+					String fullname = getFullyQualifiedName(files[i].getAbsolutePath(), txtTest.getText());
+					System.out.println("fullname: " + fullname);
+						
 					try {
-						Class cl = Class.forName(getClassName(files[i]));
-						Result result = junit.run(cl);
-						//System.err.println("Failure " + result.getFailureCount());
+						System.out.println("url: " + bin.toURI().toURL());
+//						URL[] urlArray = new URL[]{bin.toURI().toURL()};
+//						URLClassLoader urlClassloader = new URLClassLoader(urlArray);
+						URLClassLoader urlClassloader = URLClassLoader.newInstance(new URL[] { bin.toURI().toURL() });
+						System.out.println("array: " + Arrays.toString(urlClassloader.getURLs()));
+						Class cl = Class.forName(fullname, false, urlClassloader);
+						System.out.println("CLASSEEEE: " + cl);
+//						Result result = junit.run(cl);
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
+					} catch (MalformedURLException e1) {
+						e1.printStackTrace();
 					}
 				}
 				else{
@@ -313,7 +397,9 @@ public class Interface extends JFrame{
 				}
 			}
 			if(!directories.isEmpty()){
-				runJunitTest(junit, directories, directories.get(0).getAbsolutePath());
+				String dir =  directories.get(0).getAbsolutePath();
+				directories.remove(0);
+				runJunitTest(junit, directories,dir);
 			}
 		}
 		
@@ -366,7 +452,19 @@ public class Interface extends JFrame{
         }
     }
 
-	
 
+	public String getFullyQualifiedName(String currentPath, String root){
+		if(root.contains("/")){
+			root = root.replace('/', '\\');
+		}
+		String name =  currentPath.replace(root, "");
+		name = name.replace(File.separatorChar, '.');
+		name = name.substring(1, name.lastIndexOf('.'));
+		System.out.println(name);
+		return name;
+	}
+	
+									
+		
 
 }

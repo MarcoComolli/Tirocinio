@@ -15,10 +15,12 @@ public class ParenthesisAdder {
 	
 	private LinkedList<File> dirList = new LinkedList<File>();
 	private TreeMap<String, Integer> methodMap;
+	private String rootPath;
 	
 	
-	public ParenthesisAdder(TreeMap<String, Integer> methodMap){
+	public ParenthesisAdder(TreeMap<String, Integer> methodMap, String rootPath){
 		this.methodMap = methodMap;
+		this.rootPath = rootPath;
 	}
 	public void parseFilesInDir(String dirPath){
 
@@ -35,7 +37,7 @@ public class ParenthesisAdder {
 		if(files == null){
 			if (root.isFile()) {
 				if(getExtension(root).equals("java")){
-					FileParser fp = new FileParser(root.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(root.getAbsolutePath()));
+					FileParser fp = new FileParser(root.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(root.getAbsolutePath()), rootPath);
 					fp.a();
 				}
 			}
@@ -54,7 +56,7 @@ public class ParenthesisAdder {
 			
 			if (f.isFile()) {
 				if(getExtension(f).equals("java")){
-					FileParser fp = new FileParser(f.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(filePath));
+					FileParser fp = new FileParser(f.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(filePath), rootPath);
 					fp.a();
 				}
 
@@ -92,13 +94,14 @@ public class ParenthesisAdder {
 //		}
 //		
 
-		
+
 		//C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java --> path per pmd
 		//F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/ --> path test base
-		MethodSignatureExtractor mse = new MethodSignatureExtractor("C:/Users/Marco/Desktop/MetodiTirocinio.txt");
-		m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
-		ParenthesisAdder p = new ParenthesisAdder(m);
-		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
+		String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java";
+		MethodSignatureExtractor mse = new MethodSignatureExtractor("C:/Users/Marco/Desktop/MetodiTirocinio.txt",rootPath);
+		m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd/AAA.java");
+		ParenthesisAdder p = new ParenthesisAdder(m, rootPath);
+		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd/AAA.java");
 		p.paintMap(m);
 
 		

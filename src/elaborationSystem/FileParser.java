@@ -78,13 +78,13 @@ public class FileParser {
 	private boolean isInTryStatement = false;
 	private BufferedWriter out;
 	
-	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI) {
+	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI, String root) {
 		this.READ_URI = readURI;
 		System.out.println("READURI " + readURI);
 		className = extractClassFromPathString(readURI);
 		File f = new File(readURI);
-		String packageName = extractPackageFromFile(f);
-		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, packageName+"/" + className + " ");
+//		String packageName = extractPackageFromFile(f);
+		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, getFullyQualifiedName(readURI, root) + " ");
 //		System.out.println("|||||| MAPPA NON SORTED ||||||");
 //		for (Map.Entry entry : currentMethodMap.entrySet()) {
 //			System.out.println(entry.getKey() + " " + entry.getValue());
@@ -185,7 +185,7 @@ public class FileParser {
 				fw.close();
 				
 				
-				PrintWriter f0 = new PrintWriter(new FileWriter("C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt",true));
+				PrintWriter f0 = new PrintWriter(new FileWriter("C:/Users/Marco/Desktop/NumeroIstruzioni.txt",true));
 				for (Entry<String, Integer> entry : linesInBlock.entrySet()) {
 				    f0.println(entry.getKey() +"#" +entry.getValue());
 				    f0.flush();
@@ -975,4 +975,19 @@ public class FileParser {
 		return booleanArrayString;}
 	}
 	
+	
+	public String getFullyQualifiedName(String currentPath, String root){
+		System.out.println("currentpath: " + currentPath);
+		System.out.println("currentroot: " + root);
+		if(root.contains("/")){
+			root = root.replace('/', '\\');
+		}
+		String name =  currentPath.replace(root, "");
+		System.out.println("Currentname: " + name);
+		name = name.replace(File.separatorChar, '.');
+		System.out.println(name);
+		name = name.substring(1, name.lastIndexOf('.'));
+		System.out.println(name);
+		return name;
+	}
 }
