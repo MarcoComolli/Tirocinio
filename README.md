@@ -93,6 +93,9 @@ Non riesco proprio a capire. Ho reinstallato java e ho riprovato ma nulla. Poi m
 Così ho messo fatto puntare il classpath alle classi di test di pmd e facendo partire tutto mi dava o delle CalssNotFoundException o NoClassDefFoundException. Non riesco a farlo partire. Domani mi sa che faccio domanda su stackOverflow. Se vuoi poi posso fare il commit se ci vuoi dare un'occhiata o se vuoi provare a farlo funzionare anche te.Dimmi tu (faccio tutto domani che ora vado a dormire)
 
 
+Ho fatto la domanda su stackoverflow. Se la vuoi vedere è qui 
+http://stackoverflow.com/questions/25845911/obtain-class-istances-in-a-directory-from-urlclassloader
+
 TODO LIST
 =========
 
