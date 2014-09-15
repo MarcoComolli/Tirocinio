@@ -98,6 +98,8 @@ http://stackoverflow.com/questions/25845911/obtain-class-istances-in-a-directory
 
 -----
 Se vuoi fai pure il commit così lo vedo anch'io.
+Intanto qualcuno risponde così su stackoverflow:
+Seeems I'm having some problem: Which problem? –  JB Nizet 4 mins ago
 
 TODO LIST
 =========
