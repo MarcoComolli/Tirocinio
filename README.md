@@ -42,15 +42,15 @@ Prova comunque a cambiare il test folder come ti ho detto. (se guardi il fullnam
 Mi hanno risposto su stackoverflow e credo di aver capito il problema. Ora riesco a far partire alcuni test!  
 Ci sto lavorando. Il problema è come diceva lui che non trova le classi usate dai test non quelle dei test in sè. Ho aggiornato il Classpath e aggiunto un secondo bin con le classi dei file e riesce a eseguire qualcosa ma da ancora qualche eccezione che ora vedo di risolvere.
 
------
-
-Almeno il rompipalle di stackoverflow ha detto qualcosa di utile alla fine.
-
 ----
 Boh sto provando...ho risolto un bel po' di problemi con sta cosa ma ora arriva ad un punto e si ferma. Non va avanti e non da eccezioni nè stackOverflowException niente di niente. Si impalla tutto e basta..sto provando a vedere cos'è ma si ferma sempre al solito punto...0 eccezioni mah.  
 Vedremo.  
 Ho da chiederti una cosa: puoi fare in modo che ogni volta che si fa ripartire tipo il parenthesysadder il file NumeroIstruzioni.txt venga ricreato da 0? Perchè continuandolo ad eseguire aggiunge sempre i dati a quello vecchio che lo fa diventare lunghissimo e con ripetizioni.  
 Se non riesci non importa, piuttosto che fare casini meglio averlo così.
+
+----
+
+Cosa potrei fare io ora? Potrei iniziare a vedere come gestire i dati raccolti? Magari possiamo metterci d'accordo sui dati da raccogliere e sulla modalità di raggruppamento dei dati in modo tale da poter incominciare a farci qualcosa.
 
 TODO LIST
 =========
