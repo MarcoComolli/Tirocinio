@@ -3,9 +3,12 @@ package elaborationSystem;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 
 public class MyTracerClass {
 
@@ -29,11 +32,7 @@ public class MyTracerClass {
 	public static void tracer(String objectID, int blockCode, int blockID) {
 		try {
 			insertIstructionsNumber();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 
 		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
 			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
@@ -48,6 +47,10 @@ public class MyTracerClass {
 		System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 				+" numero istruzioni nel blocco: " +instructionsNumber);
 		
+
+	    writeStatisticsData(objectID, blockCode, blockID, n);
+							
+		
 		instructionsNumber=-1;
 		
 		countMap.put(objectID+"@"+blockID, n);
@@ -56,6 +59,31 @@ public class MyTracerClass {
 		if(recordPath){ //se devo registrare il cammino
 			blockList.add(objectID + "@" + blockID);
 		}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void writeStatisticsData(String objectID, int blockCode,
+			int blockID, int n) throws IOException {
+		PrintWriter printWriter;
+		String numberOfInstructionsFilePath="C:/Users/Jacopo/Desktop/DatiStatistici.txt";
+		
+			if(firstTime){
+				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+				firstTime=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
+			}
+			
+				printWriter.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+						+" numero istruzioni nel blocco: " +instructionsNumber);
+				printWriter.flush();
+
+			
+			printWriter.close();
 	}
 
 	private static void insertIstructionsNumber() throws FileNotFoundException,
@@ -74,18 +102,14 @@ public class MyTracerClass {
 			} finally {
 				br.close();
 			}
-			firstTime=false;
+			//firstTime=false;
 		}
 	}
 
 	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
 		try {
 			insertIstructionsNumber();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 
 		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
 			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
@@ -100,6 +124,10 @@ public class MyTracerClass {
 		System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 				+" numero istruzioni nel blocco: " +instructionsNumber);
 		
+		
+		writeStatisticsData(objectID, blockCode, blockID, n);
+		
+		
 		instructionsNumber=-1;
 		
 		countMap.put(objectID+"@"+blockID, n);
@@ -107,6 +135,11 @@ public class MyTracerClass {
 
 		if(recordPath){ //se devo registrare il cammino
 			blockList.add(objectID + "@" + blockID);
+		}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

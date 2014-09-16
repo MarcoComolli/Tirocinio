@@ -19,6 +19,7 @@ public class GlobalTest {
 		bc.methodConditionalOperator();
 		bc.methodConditionalOperator(1);
 		bc.methodConditionalOperator(0, 0, 0);
+		//bc.methodIf();
 		
 	}
 }

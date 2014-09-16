@@ -10,7 +10,7 @@ public class BaseConstructDue {
 	int y = 0;
 	int x = 0;
 
-	private void methodIf()
+	public void methodIf()
 
 	{
 		if (true) {
