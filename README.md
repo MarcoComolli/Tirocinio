@@ -124,6 +124,10 @@ Per la mail per me va bene quando vuoi.
 -----
 Ok facciamo per le 15 su skype
 
+-----
+
+Va bene.
+
 
 TODO LIST
 =========
