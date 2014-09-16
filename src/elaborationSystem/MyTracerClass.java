@@ -49,10 +49,8 @@ public class MyTracerClass {
 		
 
 	    writeStatisticsData(objectID, blockCode, blockID, n);
-	    
-	    
-							
-		
+	    writePathsFile(objectID, blockID);
+	    		
 		instructionsNumber=-1;
 		
 		countMap.put(objectID+"@"+blockID, n);
@@ -75,7 +73,7 @@ public class MyTracerClass {
 		
 			if(firstTime){
 				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
-				firstTime=false;
+				//firstTime=false;
 			}else{
 				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
 			}
@@ -132,9 +130,7 @@ public class MyTracerClass {
 		writeStatisticsData(objectID, blockCode, blockID, n);
 		
 		writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
-			
-			
-		
+	
 		instructionsNumber=-1;
 		
 		countMap.put(objectID+"@"+blockID, n);
@@ -169,6 +165,28 @@ public class MyTracerClass {
 				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 				//		+" numero istruzioni nel blocco: " +instructionsNumber);
 			printWriter.println("percorso "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
+				printWriter.flush();
+
+			
+			printWriter.close();
+	}
+	
+	private static void writePathsFile(String objectID, int blockID) throws IOException {
+		
+		
+		PrintWriter printWriter;
+		String pathsFilePath="C:/Users/Jacopo/Desktop/FilePercorsi.txt";
+		
+			if(firstTime){
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+				firstTime=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+			}
+			
+				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+				//		+" numero istruzioni nel blocco: " +instructionsNumber);
+			printWriter.println("percorso "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
 				printWriter.flush();
 
 			
