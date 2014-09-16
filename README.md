@@ -66,11 +66,58 @@ Altra domanda: tu giovedì vai a vedere le lauree?
 ---------
 
 Per ora sul file viene scritto quello che veniva stampato a video.
-Stavo pensando a come ordinare i dati per classi, i dati vengono stampati a seconda di dove vengono eseguiti i test e per ordinare il file, si potrebbe fare un altro file che viene ordinato ogni volta al momento dell'esecuzione del metodo tracer oltre a quello attuale. Altrimenti bisognerebbe analizzare il file con i dati in un'altra esecuzione.
-Per i dati che si potrebbe raccogliere sono: quanti metodi e quali metodi vengono eseguiti di una classe, quante istruzioni di un metodo vengono eseguite durante un cammino, quali blocchi e quanti blocchi vengono eseguiti di un metodo
+Stavo pensando a come ordinare i dati per classi, i dati vengono stampati a seconda di dove vengono eseguiti i test e per ordinare il file, si potrebbe fare un altro file che viene ordinato ogni volta al momento dell'esecuzione del metodo tracer oltre a quello attuale.  
+Altrimenti bisognerebbe analizzare il file con i dati in un'altra esecuzione.
+Per i dati che si potrebbe raccogliere sono: 
+- quanti metodi e quali metodi vengono eseguiti di una classe, 
+- quante istruzioni di un metodo vengono eseguite durante un cammino, 
+- quali blocchi e quanti blocchi vengono eseguiti di un metodo  
+
 Poi bisogna ancora analizzare l'array di booleani.
 La mail si può scrivere, poi ci sentiamo per metterla giù.
 Giovedì penso di non esserci, mi mette un po' ansia vedere le lauree e poi mi fa anche un pochino arrabbiare per come è andata.
+
+------
+Ok. Per la mail magari ci sentiamo oggi pomeriggio?  
+Ah ok, no anche a me gira un po' per le lauree però era giusto per vedere come ci si comportava. Però non penso di esserci boh vedrò giovedì.  
+Sembra che abbia risolto la faccenda del test. In realtà non si impallava tutto ma quando andava ad eseguire una classe particolare dei test di pmd (e ora però mi fanno anche girare un po' i cosiddetti quelli di pmd) per come è scritta questa classe devia tutto l'output in una cartella del progetto che crea e che mi fa un file txt di più di 9 Megabyte. Una volta rimossa quella classe di test tutto funziona. Però non so come gestirla altrimenti. Se dovessi lasciarla questa fa delle robe con questo codice:
+```Java 
+public class CLITest {
+	private static final String TEST_OUPUT_DIRECTORY = "target/cli-tests/";
+
+	// Points toward a folder without any source files, to avoid actually PMD
+	// and slowing down tests
+	private static final String SOURCE_FOLDER = "src/main/resources";
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUp() throws Exception {
+		System.setProperty(PMDCommandLineInterface.NO_EXIT_AFTER_RUN, "true");
+		File testOuputDir = new File(TEST_OUPUT_DIRECTORY);
+		if (!testOuputDir.exists()) {
+			assertTrue("failed to create output directory for test:"
+					+ testOuputDir.getAbsolutePath(), testOuputDir.mkdirs());
+		}
+	}
+
+	private void createTestOutputFile(String filename) {
+		try {
+			PrintStream out = new PrintStream(new FileOutputStream(filename));
+			System.setOut(out);
+			System.setErr(out);
+		} catch (FileNotFoundException e) {
+			fail("Can't create file " + filename + " for test.");
+		}
+	}
+```
+
+Per il momento la tolgo. Ho quasi finito quella cosa che ti dicevo dell'interfaccia. Ora mi manca da far partire il preprocessing da interfaccia con tutti i dati specificati.
+Per quanto riguarda quello che hai detto secondo me far partire un'altra esecuzione che scandisca il file finale e lo "riordini" è molto meglio e si può fare facilmente (basta aggiungere uno step all'interfaccia con un pulsante ed è fatta) rispetto al riordinare ogni volta che viene chiamato il tracer che la cosa si farebbe piuttosto pesante penso.  
+Altra cosa che mi viene in mente da fare poi in seguito è gestire le situazioni in cui l'utente sbaglia a inserire qualcosa (tipo path scorretti o directory non esistenti) mostrando gli errori e catturando con eccezioni nel codice.  
+Però è secondario, prima cerchiamo di ottenere tutto con i dati giusti.
+
 
 TODO LIST
 =========
@@ -86,6 +133,7 @@ TODO LIST
 
 ####### Task secondari (non indispensabili)
 
+- [ ] Gestire situazioni di errore interfaccia e non
 - [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
 - [x] Codice per passare al myTracerClass il conteggio delle istruzioni
 - [ ] Gestire ASTParser per fargli riconoscere i metodi dichiarati internamente a istruzioni
