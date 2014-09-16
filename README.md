@@ -63,6 +63,15 @@ Dimmi tu cosa preferisci fare.
 Domani vuoi che scriviamo una mail al prof che gli diciamo come stanno andando le cose?  
 Altra domanda: tu giovedì vai a vedere le lauree?
 
+---------
+
+Per ora sul file viene scritto quello che veniva stampato a video.
+Stavo pensando a come ordinare i dati per classi, i dati vengono stampati a seconda di dove vengono eseguiti i test e per ordinare il file, si potrebbe fare un altro file che viene ordinato ogni volta al momento dell'esecuzione del metodo tracer oltre a quello attuale. Altrimenti bisognerebbe analizzare il file con i dati in un'altra esecuzione.
+Per i dati che si potrebbe raccogliere sono: quanti metodi e quali metodi vengono eseguiti di una classe, quante istruzioni di un metodo vengono eseguite durante un cammino, quali blocchi e quanti blocchi vengono eseguiti di un metodo
+Poi bisogna ancora analizzare l'array di booleani.
+La mail si può scrivere, poi ci sentiamo per metterla giù.
+Giovedì penso di non esserci, mi mette un po' ansia vedere le lauree e poi mi fa anche un pochino arrabbiare per come è andata.
+
 TODO LIST
 =========
 
