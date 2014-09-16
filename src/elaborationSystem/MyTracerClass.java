@@ -44,11 +44,13 @@ public class MyTracerClass {
 			n++;
 		}
 
-		System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+		System.out.println("Oggetto: " + objectID + " code: " + blockCode + "@" + blockID + " numero di volte: " + n
 				+" numero istruzioni nel blocco: " +instructionsNumber);
 		
 
 	    writeStatisticsData(objectID, blockCode, blockID, n);
+	    
+	    
 							
 		
 		instructionsNumber=-1;
@@ -78,8 +80,10 @@ public class MyTracerClass {
 				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
 			}
 			
-				printWriter.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-						+" numero istruzioni nel blocco: " +instructionsNumber);
+				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+				//		+" numero istruzioni nel blocco: " +instructionsNumber);
+			printWriter.println(objectID +" #c" + blockCode + " @" + blockID + " #v " + n
+			+" #i" +instructionsNumber);
 				printWriter.flush();
 
 			
@@ -127,6 +131,9 @@ public class MyTracerClass {
 		
 		writeStatisticsData(objectID, blockCode, blockID, n);
 		
+		writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
+			
+			
 		
 		instructionsNumber=-1;
 		
@@ -141,6 +148,31 @@ public class MyTracerClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void writePathsFile(String objectID, int blockID,
+			boolean[] ilMioArrayDiBooleani) throws IOException {
+		String booleanString="";
+		for (int i=0; i<ilMioArrayDiBooleani.length; i++){
+			booleanString+=ilMioArrayDiBooleani[i] +" ";
+		}
+		PrintWriter printWriter;
+		String pathsFilePath="C:/Users/Jacopo/Desktop/FilePercorsi.txt";
+		
+			if(firstTime){
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+				firstTime=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+			}
+			
+				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+				//		+" numero istruzioni nel blocco: " +instructionsNumber);
+			printWriter.println("percorso "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
+				printWriter.flush();
+
+			
+			printWriter.close();
 	}
 
 	//inizia a registrare un percorso
