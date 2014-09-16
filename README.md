@@ -121,6 +121,9 @@ Però è secondario, prima cerchiamo di ottenere tutto con i dati giusti.
 -----
 Per la mail per me va bene quando vuoi.
 
+-----
+Ok facciamo per le 15 su skype
+
 
 TODO LIST
 =========
