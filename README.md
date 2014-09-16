@@ -118,6 +118,9 @@ Per quanto riguarda quello che hai detto secondo me far partire un'altra esecuzi
 Altra cosa che mi viene in mente da fare poi in seguito è gestire le situazioni in cui l'utente sbaglia a inserire qualcosa (tipo path scorretti o directory non esistenti) mostrando gli errori e catturando con eccezioni nel codice.  
 Però è secondario, prima cerchiamo di ottenere tutto con i dati giusti.
 
+-----
+Per la mail per me va bene quando vuoi.
+
 
 TODO LIST
 =========
