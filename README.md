@@ -122,6 +122,10 @@ Però è secondario, prima cerchiamo di ottenere tutto con i dati giusti.
 
 Ci ho messo più del previsto (ovviamente problemi su problemi) però ora sembra che funzioni. Spero non incasini tutto ora faccio il commit.
 
+------
+
+Sono riuscito a far andare la copia e il preprocessing.
+
 
 TODO LIST
 =========
