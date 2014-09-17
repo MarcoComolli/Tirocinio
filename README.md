@@ -126,6 +126,21 @@ Ci ho messo più del previsto (ovviamente problemi su problemi) però ora sembra
 
 Sono riuscito a far andare la copia e il preprocessing.
 
+------
+Ok ora faccio un elenco dettagliato con cosa bisogna inserire nelle form:
+
+- Source folder: la cartella da copiare. Quella che contiene tutto il progetto/programma. es. *C:\Users\Marco\Desktop\pmd-src-5.1.3\*
+- Destination folder: cartella dove verrà ricopiato tutto il progetto/programma. es *C:\Users\Marco\Desktop\nn\*
+- Additional file folder: cartella dove verranno salvati i file intermedi come MetodiTirocinio.txt, NumeroIstruzioni.txt (e spero di riuscire a metterci anche tutte le analisi statistiche). es. *C:\Users\Marco\Desktop\files*
+- Original package folder: cartella "root" dove iniziano i package (nel progetto originario). es. *C:\Users\Marco\Desktop\files*
+- Destination packages folder: come quella sopra solo che del progetto che è stato copiato. es. *C:\Users\Marco\Desktop\nn\src\main\java*
+- Test folder: dove sono presenti i sorgenti dei test .java nel progetto copiato (sempre nella cartella più in alto possibile diciamo) es. *C:\Users\Marco\Desktop\nn\src\test\java*
+- Compiled test folder: dove sono presenti i .class dei test es *C:\Users\Marco\Desktop\nn\target\test-classes*
+- Compiled source code folder: dove sono presenti i .class dei sorgenti es. *C:\Users\Marco\Desktop\nn\target\classes*
+- Additional folder or jars: qui premendo sul [+] si aggiungono campi extra dove bisogna inserire eventuali dipendenze da librerie esterne es. *C:\Users\Marco\.m2\repository\org\apache\ant\ant-testutil\1.7.1\ant-testutil-1.7.1.jar*
+
+Ho una domanda: potresti spiegarmi in breve le dipendenze dei percorsi tra MyTracerClass e StatisticsDataOrder? Nel senso: siccome vorrei far mettere tutti i file nuovi che hai aggiunto tipo DatiStatistici.txt o FilePercorsi.txt in una cartella specificata volevo sapere dove dovevo cambiare i path e come interagivano tra loro (tipo: viene letto in questa classe due volte e viene invece scritto in questa con un buffered reader) così poi posso provare a metterli.
+
 
 TODO LIST
 =========
