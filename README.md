@@ -141,6 +141,14 @@ Ok ora faccio un elenco dettagliato con cosa bisogna inserire nelle form:
 
 Ho una domanda: potresti spiegarmi in breve le dipendenze dei percorsi tra MyTracerClass e StatisticsDataOrder? Nel senso: siccome vorrei far mettere tutti i file nuovi che hai aggiunto tipo DatiStatistici.txt o FilePercorsi.txt in una cartella specificata volevo sapere dove dovevo cambiare i path e come interagivano tra loro (tipo: viene letto in questa classe due volte e viene invece scritto in questa con un buffered reader) così poi posso provare a metterli.
 
+------
+- Il file DatiStatistici viene scritto nella classe MyTracerClass e viene letto nella classe StatisticsDataOrderer per scrivere i dati in ordine alfabetico nel file DatiStatisticiOrdinati.
+- Il file DatiStatisticiOrdinati viene scritto nella classe StatisticsDataOrderer.
+- Il file NumeroIstruzioni viene scritto nella classe MyTracerClass e mostra il numero di istruzioni totali in un metodo.
+- Il file NumeroIstruzioniTestatePerMetodo viene scritto nella classe StatisticsDataOrderer e contiene il numero di istruzioni eseguite in un metodo durante tutti i test.
+- Il file FilePercorsi viene scritto nella classe MyTracerClass e viene letto nella classe StatisticsDataOrderer per scrivere il file CondizioniNonCoperte che dovrebbe contenere metodo-blocco e condizioni non coperte.
+- Il file CondizioniNonCoperte viene scritto nella classe StatisticsDataOrderer.
+
 
 TODO LIST
 =========
