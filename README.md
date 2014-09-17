@@ -149,6 +149,10 @@ Ho una domanda: potresti spiegarmi in breve le dipendenze dei percorsi tra MyTra
 - Il file FilePercorsi viene scritto nella classe MyTracerClass e viene letto nella classe StatisticsDataOrderer per scrivere il file CondizioniNonCoperte che dovrebbe contenere metodo-blocco e condizioni non coperte.
 - Il file CondizioniNonCoperte viene scritto nella classe StatisticsDataOrderer.
 
+-----
+
+Ok perfetto grazie ora provo a vedere di fare qualcosa
+
 
 TODO LIST
 =========
