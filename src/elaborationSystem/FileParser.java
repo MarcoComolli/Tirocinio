@@ -78,23 +78,26 @@ public class FileParser {
 	private boolean isInTryStatement = false;
 	private BufferedWriter out;
 	private static boolean firstTime= true;
+	private String midFilesPath;
 
-	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI, String root) {
+	public FileParser(String readURI, TreeMap<String, Integer> methodMap, String writeURI, String root, String midFilesPath) {
 		this.READ_URI = readURI;
+		this.midFilesPath = midFilesPath;
 		System.out.println("READURI " + readURI);
+		System.out.println("WRITEURI " + writeURI);
 		className = extractClassFromPathString(readURI);
 		File f = new File(readURI);
 		//		String packageName = extractPackageFromFile(f);
 		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, getFullyQualifiedName(readURI, root) + " ");
-		//		System.out.println("|||||| MAPPA NON SORTED ||||||");
-		//		for (Map.Entry entry : currentMethodMap.entrySet()) {
-		//			System.out.println(entry.getKey() + " " + entry.getValue());
-		//		}
+//				System.out.println("|||||| MAPPA NON SORTED ||||||");
+//				for (Map.Entry entry : currentMethodMap.entrySet()) {
+//					System.out.println(entry.getKey() + " " + entry.getValue());
+//				}
 		currentMethodMapSorted = entriesSortedByValues(currentMethodMap);
-		//		System.out.println("|||||| MAPPA SORTED ||||||");
-		//		for (Map.Entry entry : currentMethodMapSorted) {
-		//			System.out.println(entry.getKey() + " " + entry.getValue());
-		//		}
+//				System.out.println("|||||| MAPPA SORTED ||||||");
+//				for (Map.Entry entry : currentMethodMapSorted) {
+//					System.out.println(entry.getKey() + " " + entry.getValue());
+//				}
 
 
 
@@ -195,7 +198,7 @@ public class FileParser {
 
 	private void writeNumberOfInstructions() throws IOException {
 		PrintWriter printWriter;
-		String numberOfInstructionsFilePath="C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt";
+		String numberOfInstructionsFilePath= midFilesPath + "/NumeroIstruzioni.txt";
 		if(linesInBlock.size()>0){
 			if(firstTime){
 				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));

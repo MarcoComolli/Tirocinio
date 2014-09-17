@@ -1,61 +1,58 @@
 package elaborationSystem;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.MethodRef;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Type;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 public class MethodSignatureExtractor {
-	
-	
+
 	private LinkedList<File> dirList = new LinkedList<File>();
-	private String currentFileName;
-	private String currentDir;
 	private TreeMap<String, Integer> methodMap;
 	private File currentFile;
 	private String rootPath;
 
-	
 	BufferedWriter out;
-	
 
 	public MethodSignatureExtractor(String writePath, String rootPath) {
 		this.rootPath = rootPath;
+		System.out.println("writepath " + writePath);
+		Path write = new File(writePath).toPath();
+		if (!Files.exists(write)) {
+			new File(writePath).mkdirs();
+		}
 		methodMap = new TreeMap<String, Integer>();
 		try {
-			out = new BufferedWriter(new FileWriter(writePath));
-		} catch (IOException e){
+			out = new BufferedWriter(new FileWriter(writePath
+					+ "\\MetodiTirocinio.txt"));
+			System.out.println("Filewriter: " + writePath
+					+ "\\MetodiTirocinio.txt");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	// use ASTParse to parse string
 	public void parse(String str) throws IOException {
@@ -72,21 +69,23 @@ public class MethodSignatureExtractor {
 		cu.accept(new ASTVisitor() {
 
 			Set names = new HashSet();
-			
-            @Override
-            public boolean visit(MethodInvocation node)
-            {
-            	SimpleName name = node.getName();
-                String methodName = name.toString();
-                
-//                ITypeBinding typeBinding = node.getExpression().resolveTypeBinding();
-//                IType type = (IType)typeBinding.getJavaElement();
-//
-//                System.out.printf("Type %s (method %s) calls %s\n", methodName, type.getFullyQualifiedName());
-//                System.out.println("Type %s (method %s) calls %s\n"+ methodName+" "+ type.getFullyQualifiedName());
-               
-                return true;
-            }
+
+			@Override
+			public boolean visit(MethodInvocation node) {
+				SimpleName name = node.getName();
+				String methodName = name.toString();
+
+				// ITypeBinding typeBinding =
+				// node.getExpression().resolveTypeBinding();
+				// IType type = (IType)typeBinding.getJavaElement();
+				//
+				// System.out.printf("Type %s (method %s) calls %s\n",
+				// methodName, type.getFullyQualifiedName());
+				// System.out.println("Type %s (method %s) calls %s\n"+
+				// methodName+" "+ type.getFullyQualifiedName());
+
+				return true;
+			}
 
 			@Override
 			public boolean visit(VariableDeclarationFragment node) {
@@ -102,12 +101,13 @@ public class MethodSignatureExtractor {
 				}
 				return true;
 			}
-			
-			public boolean visit(AnonymousClassDeclaration anonyomousClassDeclaration) {
-				System.out.println("Visito classe anonima: ");
-			    System.out.println(anonyomousClassDeclaration.toString());
 
-			    return true;
+			public boolean visit(
+					AnonymousClassDeclaration anonyomousClassDeclaration) {
+				System.out.println("Visito classe anonima: ");
+				System.out.println(anonyomousClassDeclaration.toString());
+
+				return true;
 			}
 
 			@Override
@@ -115,31 +115,31 @@ public class MethodSignatureExtractor {
 				String nodeName;
 				Type returned;
 				String temp;
-				
+
 				nodeName = node.getName().toString();
-				returned = node.getReturnType2(); //null se è un costruttore
-				temp = getFullyQualifiedName(currentFile.getAbsolutePath(), rootPath) + " " + nodeName + ","+ returned + ",;" ;
-				
-				System.out.println("Method: '" + node + "'"
-						+ " return: " + node.getReturnType2() + "\nat line "
+				returned = node.getReturnType2(); // null se è un costruttore
+				temp = getFullyQualifiedName(currentFile.getAbsolutePath(),
+						rootPath) + " " + nodeName + "," + returned + ",;";
+
+				System.out.println("Method: '" + node + "'" + " return: "
+						+ node.getReturnType2() + "\nat line "
 						+ +cu.getLineNumber(node.getStartPosition())
 						+ "\n\n altri fattori: \n" + "node name "
 						+ node.getName() + "\n" + "return type "
-						+ node.getReturnType2()
-						+ "\nparameters: ");
-				
+						+ node.getReturnType2() + "\nparameters: ");
+
 				List<SingleVariableDeclaration> list = node.parameters();
 				for (int i = 0; i < list.size(); i++) {
 					System.out.println(" - " + list.get(i).getType());
 					temp = temp.concat(list.get(i).getType().toString() + " ");
 				}
-				if(node.getReturnType2() != null){//!nodeName.equals(currentFileName)
-					methodMap.put(temp, cu.getLineNumber(node.getStartPosition()));
+				if (node.getReturnType2() != null) {// !nodeName.equals(currentFileName)
+					methodMap.put(temp,
+							cu.getLineNumber(node.getStartPosition()));
 				}
-				
-				
+
 				try {
-					if(returned != null){ //se non è un costruttore
+					if (returned != null) { // se non è un costruttore
 						System.out.println("SCRIVO! " + temp);
 						out.write(temp);
 						out.newLine();
@@ -160,11 +160,8 @@ public class MethodSignatureExtractor {
 		});
 	}
 
-
 	// read file content into a string
 	public String readFileToString(String filePath) throws IOException {
-		currentFileName = extractClassFromPathString(filePath);
-		currentDir = filePath;
 		StringBuilder fileData = new StringBuilder(1000);
 		BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
@@ -178,64 +175,61 @@ public class MethodSignatureExtractor {
 		reader.close();
 		return fileData.toString();
 	}
-	
-	public String extractFileFromPathString(String path){
+
+	public String extractFileFromPathString(String path) {
 		int i = path.lastIndexOf('\\');
-		return path.substring(i+1);
+		return path.substring(i + 1);
 	}
-	
-	public String extractClassFromPathString(String path){
-		System.out.println(path);
-		File f = new File(path);
-		String fileName = f.getName();
-		System.out.println(f.getName());
-		if(fileName.contains(".")){
-			int j = fileName.lastIndexOf('.');
-			return fileName.substring(0,j);
-		}
-		else{
-			return fileName;
-		}
-		
-	}
-	
-	public String extractPackageFromFile(File f){
+
+//	private String extractClassFromPathString(String path) {
+//		System.out.println(path);
+//		File f = new File(path);
+//		String fileName = f.getName();
+//		System.out.println(f.getName());
+//		if (fileName.contains(".")) {
+//			int j = fileName.lastIndexOf('.');
+//			return fileName.substring(0, j);
+//		} else {
+//			return fileName;
+//		}
+//
+//	}
+
+	public String extractPackageFromFile(File f) {
 		String path = f.getParent();
 		String temp;
-		if(path != null){
+		if (path != null) {
 			int i = path.lastIndexOf('\\');
-			temp = path.substring(0,i);
+			temp = path.substring(0, i);
 			i = temp.lastIndexOf('\\');
-			return path.substring(i+1).replace("\\", "/");
-		}
-		else{
+			return path.substring(i + 1).replace("\\", "/");
+		} else {
 			return null;
 		}
 	}
-	
-	public String getFullyQualifiedName(String currentPath, String root){
-		if(root.contains("/")){
+
+	public String getFullyQualifiedName(String currentPath, String root) {
+		if (root.contains("/")) {
 			root = root.replace('/', '\\');
 		}
-		String name =  currentPath.replace(root, "");
+		String name = currentPath.replace(root, "");
 		name = name.replace(File.separatorChar, '.');
 		name = name.substring(1, name.lastIndexOf('.'));
 		return name;
 	}
 
 	// loop directory to get file list
-	public TreeMap<String, Integer> parseFilesInDir(String dirPath){
-		
-		File dirs = new File(".");
+	public TreeMap<String, Integer> parseFilesInDir(String dirPath)
+			throws IOException {
 		// String dirPath = dirs.getCanonicalPath() +
 		// File.separator+"src"+File.separator;
-		//dirPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd";
+		// dirPath =
+		// "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd";
 
-		
 		File root = new File(dirPath);
 		System.out.println("rootpath: " + root.getAbsolutePath());
 		File[] files = root.listFiles();
-		if(files == null){
+		if (files == null) {
 			if (root.isFile()) {
 				currentFile = root;
 				try {
@@ -250,7 +244,7 @@ public class MethodSignatureExtractor {
 			System.out.println("file: " + files[i].getAbsolutePath());
 		}
 		String filePath = null;
-		
+
 		for (File f : files) {
 			currentFile = f;
 			filePath = f.getAbsolutePath();
@@ -259,20 +253,21 @@ public class MethodSignatureExtractor {
 				try {
 					parse(readFileToString(filePath));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-			}
-			else if(f.isDirectory()){ //Sennò aggiungilo alla lista e poi ci entrerai a vedere
+			} else if (f.isDirectory()) { // Sennò aggiungilo alla lista e poi
+											// ci entrerai a vedere
 				dirList.add(f);
 			}
 		}
-		
-		if(!dirList.isEmpty()){ //se la directory non è vuota
-			System.out.println("Cerco in:" + dirList.getFirst().getAbsolutePath());
+
+		if (!dirList.isEmpty()) { // se la directory non è vuota
+			System.out.println("Cerco in:"
+					+ dirList.getFirst().getAbsolutePath());
 			parseFilesInDir(dirList.poll().getAbsolutePath());
 		}
+		out.close();
 		return methodMap;
 	}
 

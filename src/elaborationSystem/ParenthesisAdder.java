@@ -1,6 +1,7 @@
 package elaborationSystem;
 
 import java.io.File;
+import java.io.IOException;
 
 
 
@@ -15,16 +16,17 @@ public class ParenthesisAdder {
 	
 	private LinkedList<File> dirList = new LinkedList<File>();
 	private TreeMap<String, Integer> methodMap;
-	private String rootPath;
+	private String rootPath, writePath, midFilesPath;
 	
 	
-	public ParenthesisAdder(TreeMap<String, Integer> methodMap, String rootPath){
+	public ParenthesisAdder(TreeMap<String, Integer> methodMap, String rootPath, String writePath, String midFilesPath){
 		this.methodMap = methodMap;
 		this.rootPath = rootPath;
+		this.writePath = writePath;
+		this.midFilesPath = midFilesPath;
 	}
 	public void parseFilesInDir(String dirPath){
 
-		File dirs = new File(".");
 		// String dirPath = dirs.getCanonicalPath() +
 		// File.separator+"src"+File.separator;
 		//dirPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd";
@@ -37,7 +39,7 @@ public class ParenthesisAdder {
 		if(files == null){
 			if (root.isFile()) {
 				if(getExtension(root).equals("java")){
-					FileParser fp = new FileParser(root.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(root.getAbsolutePath()), rootPath);
+					FileParser fp = new FileParser(root.getAbsolutePath(),methodMap, writePath  +"\\" +getRelativePath(root.getAbsolutePath(), rootPath), rootPath, midFilesPath);
 					fp.a();
 				}
 			}
@@ -56,7 +58,7 @@ public class ParenthesisAdder {
 			
 			if (f.isFile()) {
 				if(getExtension(f).equals("java")){
-					FileParser fp = new FileParser(f.getAbsolutePath(),methodMap, "C:/Users/Marco/Desktop/nn/" + getRelative(filePath), rootPath);
+					FileParser fp = new FileParser(f.getAbsolutePath(),methodMap, writePath +"\\" + getRelativePath(filePath, rootPath), rootPath, midFilesPath);
 					fp.a();
 				}
 
@@ -72,18 +74,13 @@ public class ParenthesisAdder {
 		}
 	}
 	
-	private String getRelative(String absolutePath) {
-		int index = absolutePath.indexOf("\\src\\");
-		if(index != -1){
-			System.err.println(absolutePath.substring(index));
-			return absolutePath.substring(index+1);
-		}
-		else{
-			return absolutePath;
-		}
+	private String getRelativePath(String absolutePath, String root) {
+		String s = absolutePath.replace(root, "");
+		System.out.println("THE RELATIVE IS: " + s);
+		return s;
 	}
-	public static void main(String[] args) {
-		TreeMap<String, Integer> m;
+	public static void main(String[] args) throws IOException {
+		
 //		Path source = new File("C:/Users/Marco/Desktop/pmd-src-5.1.1/").toPath();
 //		new File("C:/Users/Marco/Desktop/nn/").mkdirs();
 //		Path target = new File("C:/Users/Marco/Desktop/nn/").toPath();
@@ -98,10 +95,12 @@ public class ParenthesisAdder {
 		//C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java --> path per pmd
 		//F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/ --> path test base
 		String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java";
-		MethodSignatureExtractor mse = new MethodSignatureExtractor("C:/Users/Marco/Desktop/MetodiTirocinio.txt",rootPath);
-		m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd/AAA.java");
-		ParenthesisAdder p = new ParenthesisAdder(m, rootPath);
-		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd/AAA.java");
+		String writePath = "C:/Users/Marco/Desktop/nn/";
+		String txtFile = "C:/Users/Marco/Desktop/MetodiTirocinio.txt";
+		MethodSignatureExtractor mse = new MethodSignatureExtractor(txtFile,rootPath);
+		TreeMap<String, Integer> m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/");
+		ParenthesisAdder p = new ParenthesisAdder(m, rootPath, writePath, "C:/Users/Marco/Desktop");
+		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
 		p.paintMap(m);
 
 		

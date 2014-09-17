@@ -91,7 +91,7 @@ public class MyTracerClass {
 	private static void insertIstructionsNumber() throws FileNotFoundException,
 	IOException {
 		if(firstTime){
-			BufferedReader br = new BufferedReader(new FileReader("C:/Users/Jacopo/Desktop/NumeroIstruzioni.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("C:/Users/Marco/Desktop/NumeroIstruzioni.txt"));
 			try {
 				String line = br.readLine();
 				while (line != null) {
@@ -196,7 +196,6 @@ public class MyTracerClass {
 	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
 		if(recordPath == false){
-
 			recordPath = true;
 			//inizializza i campi
 			currentexecutionNumberPath = countMap.get(objectID+"@0"); //il codice è 0 perchè è l'inizio del metodo
