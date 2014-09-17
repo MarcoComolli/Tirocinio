@@ -17,16 +17,13 @@ public class StatisticsDataOrderer {
 	private static HashMap<String, Integer> totalInstructionsNumber = new HashMap<String, Integer>();
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
-
+	private static String filesPath = "C:\\Users\\Jacopo\\Desktop";
 
 	public static void main(String[] args) throws IOException {
 
 		TreeSet<String> treeSet = readAndOrderData();
-
 		writeOrderedData(treeSet);
 		writeNumberOfTestedLinesForMethod(treeSet);
-		
-		
 		writeNotCoveredConditions();
 		
 		
@@ -35,7 +32,7 @@ public class StatisticsDataOrderer {
 	private static void writeNotCoveredConditions()
 			throws FileNotFoundException, IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
-				"C:/Users/Jacopo/Desktop/FilePercorsi.txt"));
+				filesPath + "\\FilePercorsi.txt"));
 		String[] arrayLine;
 		String[] evaluatedConditionsInPath;
 		try {
@@ -100,7 +97,7 @@ public class StatisticsDataOrderer {
 			}
 			
 			PrintWriter printWriter;
-			String numberOfInstructionsFilePath = "C:/Users/Jacopo/Desktop/CondizioniNonCoperte.txt";
+			String numberOfInstructionsFilePath = filesPath + "\\CondizioniNonCoperte.txt";
 			printWriter = new PrintWriter(new FileWriter(
 					numberOfInstructionsFilePath));
 
@@ -177,7 +174,7 @@ public class StatisticsDataOrderer {
 			totalInstructionsNumber.put(arrayLine[0], numberInstructions);
 			numberInstructions = 0;
 			PrintWriter printWriter;
-			String numberOfInstructionsFilePath = "C:/Users/Jacopo/Desktop/NumeroIstruzioniTestatePerMetodo.txt";
+			String numberOfInstructionsFilePath = filesPath + "\\NumeroIstruzioniTestatePerMetodo.txt";
 			printWriter = new PrintWriter(new FileWriter(
 					numberOfInstructionsFilePath));
 
@@ -199,7 +196,7 @@ public class StatisticsDataOrderer {
 	 */
 	private static void writeOrderedData(TreeSet<String> treeSet) throws IOException {
 		PrintWriter printWriter;
-		String numberOfInstructionsFilePath = "C:/Users/Jacopo/Desktop/DatiStatisticiOrdinati.txt";
+		String numberOfInstructionsFilePath = filesPath + "\\DatiStatisticiOrdinati.txt";
 		printWriter = new PrintWriter(new FileWriter(
 				numberOfInstructionsFilePath));
 
@@ -221,7 +218,7 @@ public class StatisticsDataOrderer {
 	private static TreeSet<String> readAndOrderData() throws FileNotFoundException,
 			IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
-				"C:/Users/Jacopo/Desktop/DatiStatistici.txt"));
+				filesPath + "\\DatiStatistici.txt"));
 		TreeSet<String> treeSet = new TreeSet<String>();
 		try {
 			String line = br.readLine();
@@ -236,5 +233,8 @@ public class StatisticsDataOrderer {
 		}
 		return treeSet;
 	}
-
+	
+	public static void setFilesPath(String path){
+		filesPath = path;
+	}
 }
