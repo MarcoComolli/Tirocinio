@@ -153,6 +153,27 @@ Ho una domanda: potresti spiegarmi in breve le dipendenze dei percorsi tra MyTra
 
 Ok perfetto grazie ora provo a vedere di fare qualcosa
 
+-----
+
+Ti dico un attimo come sono compisto i file FilePercorsi e CondizioniNonCoperte perché secondo me devo sistemare qualcosa.
+Nel file FilePercorsi ogni riga è così composta:
+- numero percorso;
+- identificativo metodo-identificativo blocco
+- valori booleani presenti nell'array passato al metodo tracer.
+(Es.: percorso 1: org.junit.internal.requests.ClassRequest getRunner,Runner,; @1-true).
+
+Se il matodo tracer viene invocato senza un array come parametro, non c'è verrà scritta nessuna condizione dopo l'dentificativo del blocco.
+
+Nel file CondizioniNonCoperte ogni riga è così composta:
+-identificativo metodo-identificativo blocco
+-condizioni non valutate durante l'esecuzione dei test per il corrispettivo metodo-blocco.
+(Es.: junit.framework.Assert assertEquals,void,;String Object Object  @2 non valutate : false true;false false;true false;).
+
+Per ora in questo file per ogni metodo-blocco risulta comparire la condizione false o false false o false false false... come non valutata perché esso viene scritto leggendo dal file FilePercorsi quali condizioni erano presenti nell'array.
+Le condizioni false, false false.. (a seconda di quanti booleani prendono i controlli condizionali per entrare nel blocco) vorrebbero dire che il test non è entrato nel blocco e quindi non lo ha testato. Stavo pensando ad un modo per togliere questo tipo di condizioni dal file se i test non sono entrati nel blocco. 
+Forse bisognerebbe controllare per ogni percorso del file FilePercorsi se durante l'esecuzione dal blocco iniziale a quello finale non è presente la stringa avente identificativo metodo-blocco o forse abbiamo già qualcosa di pronto.
+
+Per far andare i test tramite interfaccia per pmd, dove hai rintracciato la posizione dei jars necessari mancanti?
 
 TODO LIST
 =========
