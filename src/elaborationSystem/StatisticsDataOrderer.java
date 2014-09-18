@@ -25,11 +25,83 @@ public class StatisticsDataOrderer {
 
 		writeOrderedData(treeSet);
 		writeNumberOfTestedLinesForMethod(treeSet);
-		
-		
-		writeNotCoveredConditions();
-		
-		
+
+
+		//writeNotCoveredConditions();
+		writeCoveredConditions();
+
+
+	}
+
+	private static void writeCoveredConditions() throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(
+				"C:/Users/Jacopo/Desktop/FilePercorsi.txt"));
+		String[] arrayLine;
+		String[] evaluatedConditionsInPath;
+		try {
+			String line = br.readLine();
+			while (line != null) {
+				//System.err.println(line);
+				Set<String> valuatedConditions = null;
+				String methodAndBlock="";
+				arrayLine = line.split(": ");
+				if(arrayLine[1].contains("-")){
+					arrayLine=arrayLine[1].split("-");	
+					methodAndBlock=arrayLine[0];
+				}else{
+					methodAndBlock=arrayLine[1];						
+				}
+				//arrayLine=arrayLine[1].split(" ");
+				evaluatedConditionsInPath = line.split("-");
+				if(evaluatedConditionsInPath.length>1){
+					//System.err.println(method);
+					if(evaluatedConditions.containsValue(methodAndBlock)){
+						valuatedConditions= evaluatedConditions.get(methodAndBlock);
+						System.err.println(methodAndBlock +" è presente");
+
+						valuatedConditions.add((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
+						evaluatedConditions.put(methodAndBlock, valuatedConditions);
+
+
+					}else{
+
+						valuatedConditions=new HashSet<String>();
+						valuatedConditions.add((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
+						System.err.println((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
+
+						System.out.println("inserisco "+ methodAndBlock);
+
+
+					}
+					evaluatedConditions.put(methodAndBlock, valuatedConditions);
+				}
+
+				line = br.readLine();
+			}
+
+			PrintWriter printWriter;
+			String numberOfInstructionsFilePath = "C:/Users/Jacopo/Desktop/CondizioniCoperte.txt";
+			printWriter = new PrintWriter(new FileWriter(
+					numberOfInstructionsFilePath));
+
+			for (Entry<String, Set<String>> entry : evaluatedConditions
+					.entrySet()) {
+				String valuated="";
+				for(String conditionCombination : entry.getValue()){
+					valuated+=conditionCombination +";";
+				}
+				printWriter.println(entry.getKey() + " valutate : "
+						+ valuated);
+				printWriter.flush();
+
+			}
+
+			printWriter.close();
+
+		} finally {
+			br.close();
+		}
+
 	}
 
 	private static void writeNotCoveredConditions()
@@ -54,51 +126,52 @@ public class StatisticsDataOrderer {
 				evaluatedConditionsInPath = line.split("-");
 				if(evaluatedConditionsInPath.length>1){
 					//System.err.println(method);
-				if(evaluatedConditions.containsValue(methodAndBlock)){
-					Set<String> notValuatedConditions= evaluatedConditions.get(methodAndBlock);
-					System.err.println(methodAndBlock +" è presente");
-					Iterator<String> i = notValuatedConditions.iterator();
-					while (i.hasNext()) {
-					   String conditionCombination = i.next(); 
-					   if((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1).equals(conditionCombination)){	
-					   i.remove();
-					   System.out.println("tolgo " +conditionCombination);
-					   }
-					}
-					evaluatedConditions.put(methodAndBlock, notValuatedConditions);
-										
-				}else{
-					if(evaluatedConditionsInPath[1].contains(" ")){
-					String[] conditions=evaluatedConditionsInPath[1].split(" ");
-					String prova="";
-					for(String s : conditions){
-						prova+=s;
-					}
-					System.err.println(prova);
-					Set<String> possibleCombinationsCondition=getCombinationsList(conditions.length);
-					
-					Iterator<String> i = possibleCombinationsCondition.iterator();
-					while (i.hasNext()) {
-					   String conditionCombination = i.next(); 
-					   if((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1).equals(conditionCombination)){	
-					   i.remove();
-					  
-					   }
-					}
-					evaluatedConditions.put(methodAndBlock, possibleCombinationsCondition);
-					System.out.println("inserisco "+ methodAndBlock);
+					if(evaluatedConditions.containsValue(methodAndBlock)){
+						Set<String> notValuatedConditions= evaluatedConditions.get(methodAndBlock);
+						System.err.println(methodAndBlock +" è presente");
+						Iterator<String> i = notValuatedConditions.iterator();
+						while (i.hasNext()) {
+							String conditionCombination = i.next(); 
+							if((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1).equals(conditionCombination)){	
+								i.remove();
+								System.out.println("tolgo " +conditionCombination);
+							}
+						}
+						evaluatedConditions.put(methodAndBlock, notValuatedConditions);
+
+
 					}else{
-						//sbagliato
-						Set<String> possibleCombinationsCondition=getCombinationsList(evaluatedConditionsInPath[1].length());
-						evaluatedConditions.put(methodAndBlock, possibleCombinationsCondition);
-					}					
-					
+						if(evaluatedConditionsInPath[1].contains(" ")){
+							String[] conditions=evaluatedConditionsInPath[1].split(" ");
+							String prova="";
+							for(String s : conditions){
+								prova+=s;
+							}
+							System.err.println(prova);
+							Set<String> possibleCombinationsCondition=getCombinationsList(conditions.length);
+
+							Iterator<String> i = possibleCombinationsCondition.iterator();
+							while (i.hasNext()) {
+								String conditionCombination = i.next(); 
+								if((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1).equals(conditionCombination)){	
+									i.remove();
+
+								}
+							}
+							evaluatedConditions.put(methodAndBlock, possibleCombinationsCondition);
+							System.out.println("inserisco "+ methodAndBlock);
+						}else{
+							//sbagliato
+							Set<String> possibleCombinationsCondition=getCombinationsList(evaluatedConditionsInPath[1].length());
+							evaluatedConditions.put(methodAndBlock, possibleCombinationsCondition);
+						}					
+
+					}
 				}
-				}
-				
+
 				line = br.readLine();
 			}
-			
+
 			PrintWriter printWriter;
 			String numberOfInstructionsFilePath = "C:/Users/Jacopo/Desktop/CondizioniNonCoperte.txt";
 			printWriter = new PrintWriter(new FileWriter(
@@ -113,7 +186,7 @@ public class StatisticsDataOrderer {
 				printWriter.println(entry.getKey() + " non valutate : "
 						+ notvaluated);
 				printWriter.flush();
-				
+
 			}
 
 			printWriter.close();
@@ -165,7 +238,7 @@ public class StatisticsDataOrderer {
 			numberInstructionsArray = line.split("#i");
 
 			//System.out.println(numberInstructionsArray[1]
-				//	+ " numero istruzioni");
+			//	+ " numero istruzioni");
 			if (totalInstructionsNumber.containsKey(arrayLine[0])) {
 				numberInstructions = totalInstructionsNumber.get(arrayLine[0]);
 				//System.out.println(numberInstructions + " " + arrayLine[0]);
@@ -219,7 +292,7 @@ public class StatisticsDataOrderer {
 	 * @throws IOException
 	 */
 	private static TreeSet<String> readAndOrderData() throws FileNotFoundException,
-			IOException {
+	IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
 				"C:/Users/Jacopo/Desktop/DatiStatistici.txt"));
 		TreeSet<String> treeSet = new TreeSet<String>();
