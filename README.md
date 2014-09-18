@@ -185,6 +185,10 @@ il blocco non viene eseguito nonostante sia appunto sia true-false la condizione
 
 Per quanto riguarda i jar li ho scoperti dalle eccezioni *NoClassDefFound*. Nel mio caso era solo una e sono andato nel build path di eclipse a vedere dove si trovava e ho messo quel percorso. 
 
+-----
+OK, ora il file CondizioniCoperte contiene metodi-blocchi con condizioni coperte, il file CondizioniNonCoperte non viene più scritto.
+Ora ripasso un attimo per domani che ho un po' di ansia, se ci dovesse essere qualche problema con qualsiasi file(se scrivono dati sbagliati o altro), dimmelo pure perché per ora non ho ho effettuato l'esecuzione completa con tutti i test, ma con solo poche classi.
+
 
 TODO LIST
 =========
