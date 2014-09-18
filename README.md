@@ -165,8 +165,8 @@ Nel file FilePercorsi ogni riga è così composta:
 Se il matodo tracer viene invocato senza un array come parametro, non c'è verrà scritta nessuna condizione dopo l'dentificativo del blocco.
 
 Nel file CondizioniNonCoperte ogni riga è così composta:
--identificativo metodo-identificativo blocco
--condizioni non valutate durante l'esecuzione dei test per il corrispettivo metodo-blocco.
+- identificativo metodo-identificativo blocco
+- condizioni non valutate durante l'esecuzione dei test per il corrispettivo metodo-blocco.
 (Es.: junit.framework.Assert assertEquals,void,;String Object Object  @2 non valutate : false true;false false;true false;).
 
 Per ora in questo file per ogni metodo-blocco risulta comparire la condizione false o false false o false false false... come non valutata perché esso viene scritto leggendo dal file FilePercorsi quali condizioni erano presenti nell'array.
