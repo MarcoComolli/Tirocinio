@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
 public class MyTracerClass {
 
@@ -21,6 +20,7 @@ public class MyTracerClass {
 	private static int currentexecutionNumberPath;
 	private static boolean firstTime=true;
 	private static int instructionsNumber;
+	private static String filesPath = "C:\\Users\\Jacopo\\Desktop\\";
 
 
 
@@ -32,33 +32,32 @@ public class MyTracerClass {
 	public static void tracer(String objectID, int blockCode, int blockID) {
 		try {
 			insertIstructionsNumber();
-		
 
-		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
-			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
-		}
+			if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
+				instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
+			}
 
-		int n = 1;
-		if(countMap.containsKey(objectID+"@"+blockID)){
-			n = countMap.get(objectID+"@"+blockID);
-			n++;
-		}
+			int n = 1;
+			if(countMap.containsKey(objectID+"@"+blockID)){
+				n = countMap.get(objectID+"@"+blockID);
+				n++;
+			}
 
-		System.out.println("Oggetto: " + objectID + " code: " + blockCode + "@" + blockID + " numero di volte: " + n
-				+" numero istruzioni nel blocco: " +instructionsNumber);
-		
+			System.out.println("Oggetto: " + objectID + " code: " + blockCode + "@" + blockID + " numero di volte: " + n
+					+" numero istruzioni nel blocco: " +instructionsNumber);
 
-	    writeStatisticsData(objectID, blockCode, blockID, n);
-	    writePathsFile(objectID, blockID);
-	    		
-		instructionsNumber=-1;
-		
-		countMap.put(objectID+"@"+blockID, n);
-		System.out.println(countMap.size());
 
-		if(recordPath){ //se devo registrare il cammino
-			blockList.add(objectID + "@" + blockID);
-		}
+			writeStatisticsData(objectID, blockCode, blockID, n);
+			writePathsFile(objectID, blockID);
+
+			instructionsNumber=-1;
+
+			countMap.put(objectID+"@"+blockID, n);
+			System.out.println(countMap.size());
+
+			if(recordPath){ //se devo registrare il cammino
+				blockList.add(objectID + "@" + blockID);
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -66,10 +65,47 @@ public class MyTracerClass {
 		}
 	}
 
-	private static void writeStatisticsData(String objectID, int blockCode,
-			int blockID, int n) throws IOException {
+	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
+		try {
+			insertIstructionsNumber();
+
+
+			if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
+				instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
+			}
+
+			int n = 1;
+			if(countMap.containsKey(objectID+"@"+blockID)){
+				n = countMap.get(objectID+"@"+blockID);
+				n++;
+			}
+
+			System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+					+" numero istruzioni nel blocco: " +instructionsNumber);
+
+
+			writeStatisticsData(objectID, blockCode, blockID, n);
+
+			writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
+
+			instructionsNumber=-1;
+
+			countMap.put(objectID+"@"+blockID, n);
+			System.out.println(countMap.size());
+
+			if(recordPath){ //se devo registrare il cammino
+				blockList.add(objectID + "@" + blockID);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void writeStatisticsData(String objectID, int blockCode, int blockID, int n) throws IOException {
 		PrintWriter printWriter;
-		String numberOfInstructionsFilePath="C:/Users/Jacopo/Desktop/DatiStatistici.txt";
+		String numberOfInstructionsFilePath= filesPath + "\\DatiStatistici.txt";
 		
 			if(firstTime){
 				printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
@@ -91,7 +127,7 @@ public class MyTracerClass {
 	private static void insertIstructionsNumber() throws FileNotFoundException,
 	IOException {
 		if(firstTime){
-			BufferedReader br = new BufferedReader(new FileReader("C:/Users/Marco/Desktop/NumeroIstruzioni.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\NumeroIstruzioni.txt"));
 			try {
 				String line = br.readLine();
 				while (line != null) {
@@ -108,43 +144,7 @@ public class MyTracerClass {
 		}
 	}
 
-	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
-		try {
-			insertIstructionsNumber();
-		
-
-		if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
-			instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
-		}
-
-		int n = 1;
-		if(countMap.containsKey(objectID+"@"+blockID)){
-			n = countMap.get(objectID+"@"+blockID);
-			n++;
-		}
-
-		System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-				+" numero istruzioni nel blocco: " +instructionsNumber);
-		
-		
-		writeStatisticsData(objectID, blockCode, blockID, n);
-		
-		writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
 	
-		instructionsNumber=-1;
-		
-		countMap.put(objectID+"@"+blockID, n);
-		System.out.println(countMap.size());
-
-		if(recordPath){ //se devo registrare il cammino
-			blockList.add(objectID + "@" + blockID);
-		}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private static void writePathsFile(String objectID, int blockID,
 			boolean[] ilMioArrayDiBooleani) throws IOException {
@@ -153,7 +153,7 @@ public class MyTracerClass {
 			booleanString+=ilMioArrayDiBooleani[i] +" ";
 		}
 		PrintWriter printWriter;
-		String pathsFilePath="C:/Users/Jacopo/Desktop/FilePercorsi.txt";
+		String pathsFilePath=filesPath + "\\FilePercorsi.txt";
 		
 			if(firstTime){
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
@@ -175,7 +175,7 @@ public class MyTracerClass {
 		
 		
 		PrintWriter printWriter;
-		String pathsFilePath="C:/Users/Jacopo/Desktop/FilePercorsi.txt";
+		String pathsFilePath= filesPath + "\\FilePercorsi.txt";
 		
 			if(firstTime){
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
@@ -219,6 +219,9 @@ public class MyTracerClass {
 
 	}
 
+	public static void setFilesPath(String path){
+		filesPath = path;
+	}
 
 
 }

@@ -126,6 +126,65 @@ Ci ho messo più del previsto (ovviamente problemi su problemi) però ora sembra
 
 Sono riuscito a far andare la copia e il preprocessing.
 
+------
+Ok ora faccio un elenco dettagliato con cosa bisogna inserire nelle form:
+
+- Source folder: la cartella da copiare. Quella che contiene tutto il progetto/programma. es. *C:\Users\Marco\Desktop\pmd-src-5.1.3\*
+- Destination folder: cartella dove verrà ricopiato tutto il progetto/programma. es *C:\Users\Marco\Desktop\nn\*
+- Additional file folder: cartella dove verranno salvati i file intermedi come MetodiTirocinio.txt, NumeroIstruzioni.txt (e spero di riuscire a metterci anche tutte le analisi statistiche). es. *C:\Users\Marco\Desktop\files*
+- Original package folder: cartella "root" dove iniziano i package (nel progetto originario). es. *C:\Users\Marco\Desktop\files*
+- Destination packages folder: come quella sopra solo che del progetto che è stato copiato. es. *C:\Users\Marco\Desktop\nn\src\main\java*
+- Test folder: dove sono presenti i sorgenti dei test .java nel progetto copiato (sempre nella cartella più in alto possibile diciamo) es. *C:\Users\Marco\Desktop\nn\src\test\java*
+- Compiled test folder: dove sono presenti i .class dei test es *C:\Users\Marco\Desktop\nn\target\test-classes*
+- Compiled source code folder: dove sono presenti i .class dei sorgenti es. *C:\Users\Marco\Desktop\nn\target\classes*
+- Additional folder or jars: qui premendo sul [+] si aggiungono campi extra dove bisogna inserire eventuali dipendenze da librerie esterne es. *C:\Users\Marco\.m2\repository\org\apache\ant\ant-testutil\1.7.1\ant-testutil-1.7.1.jar*
+
+Ho una domanda: potresti spiegarmi in breve le dipendenze dei percorsi tra MyTracerClass e StatisticsDataOrder? Nel senso: siccome vorrei far mettere tutti i file nuovi che hai aggiunto tipo DatiStatistici.txt o FilePercorsi.txt in una cartella specificata volevo sapere dove dovevo cambiare i path e come interagivano tra loro (tipo: viene letto in questa classe due volte e viene invece scritto in questa con un buffered reader) così poi posso provare a metterli.
+
+------
+- Il file DatiStatistici viene scritto nella classe MyTracerClass e viene letto nella classe StatisticsDataOrderer per scrivere i dati in ordine alfabetico nel file DatiStatisticiOrdinati.
+- Il file DatiStatisticiOrdinati viene scritto nella classe StatisticsDataOrderer.
+- Il file NumeroIstruzioni viene scritto nella classe MyTracerClass e mostra il numero di istruzioni totali in un metodo.
+- Il file NumeroIstruzioniTestatePerMetodo viene scritto nella classe StatisticsDataOrderer e contiene il numero di istruzioni eseguite in un metodo durante tutti i test.
+- Il file FilePercorsi viene scritto nella classe MyTracerClass e viene letto nella classe StatisticsDataOrderer per scrivere il file CondizioniNonCoperte che dovrebbe contenere metodo-blocco e condizioni non coperte.
+- Il file CondizioniNonCoperte viene scritto nella classe StatisticsDataOrderer.
+
+-----
+
+Ok perfetto grazie ora provo a vedere di fare qualcosa
+
+-----
+
+Ti dico un attimo come sono compisto i file FilePercorsi e CondizioniNonCoperte perché secondo me devo sistemare qualcosa.
+Nel file FilePercorsi ogni riga è così composta:
+- numero percorso;
+- identificativo metodo-identificativo blocco
+- valori booleani presenti nell'array passato al metodo tracer.
+(Es.: percorso 1: org.junit.internal.requests.ClassRequest getRunner,Runner,; @1-true).
+
+Se il matodo tracer viene invocato senza un array come parametro, non verrà scritta nessuna condizione dopo l'dentificativo del blocco.
+
+Nel file CondizioniNonCoperte ogni riga è così composta:
+- identificativo metodo-identificativo blocco
+- condizioni non valutate durante l'esecuzione dei test per il corrispettivo metodo-blocco.
+(Es.: junit.framework.Assert assertEquals,void,;String Object Object  @2 non valutate : false true;false false;true false;).
+
+Per ora in questo file per ogni metodo-blocco risulta comparire la condizione false o false false o false false false... come non valutata perché esso viene scritto leggendo dal file FilePercorsi quali condizioni erano presenti nell'array.
+Le condizioni false, false false.. (a seconda di quanti booleani prendono i controlli condizionali per entrare nel blocco) vorrebbero dire che il test non è entrato nel blocco e quindi non lo ha testato. Stavo pensando ad un modo per togliere questo tipo di condizioni dal file se i test non sono entrati nel blocco. 
+Forse bisognerebbe controllare per ogni percorso del file FilePercorsi se durante l'esecuzione dal blocco iniziale a quello finale non è presente la stringa avente identificativo metodo-blocco o forse abbiamo già qualcosa di pronto.
+
+Per far andare i test tramite interfaccia per pmd, dove hai rintracciato la posizione dei jars necessari mancanti?
+
+-----
+Hai ragione sarebbe un problema. Però teoricamente se in effetti le condizioni erano false-false per esempio e non è entrato nel blocco allora vuol dire che comunque lui le ha testate. Forse dovremmo fare in modo di mettere la cosa dei booleani prima dell'esecuzione del blocco.  
+Però pensandoci meglio mi sembra abbastanza infattibile perchè il file procede riga per riga e non torna mai indietro quindi nel caso di espressioni su più righe saremmo fregati.
+Però, se ci ragioniamo un attimo, è più o meno la stessa storia degli switch no? A noi serve sapere, quando entriamo nel blocco, le condizioni che sono verificate quando siamo al suo interno. Cioè con quali condizioni ci stiamo accedendo.  Quando non ci accediamo è ovvio che il predicato in sè è falso.  
+Quindi secondo te possiamo lasciare così e far vedere le condizioni solo quando siamo dentro al metodo? Perchè altrimenti pensavo che in un predicato del genere  
+```if(true && false){...}```  
+il blocco non viene eseguito nonostante sia appunto sia true-false la condizione e non false-false. Quindi mi sa che invece di condizioni non testate è meglio mettere solo le condizioni testate per quel blocco. Cosa ne pensi?
+
+Per quanto riguarda i jar li ho scoperti dalle eccezioni *NoClassDefFound*. Nel mio caso era solo una e sono andato nel build path di eclipse a vedere dove si trovava e ho messo quel percorso. 
+
 
 TODO LIST
 =========

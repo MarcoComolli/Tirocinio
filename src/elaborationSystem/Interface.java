@@ -503,6 +503,8 @@ public class Interface extends JFrame{
 					TreeMap<String, Integer> m = mse.parseFilesInDir(txtRootPathSrc.getText());
 					ParenthesisAdder p = new ParenthesisAdder(m, txtRootPathSrc.getText(), txtRootPathDest.getText(), textMidFiles.getText());
 					p.parseFilesInDir(txtRootPathSrc.getText());
+					MyTracerClass.setFilesPath(textMidFiles.getText());
+					StatisticsDataOrderer.setFilesPath(textMidFiles.getText());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -531,7 +533,7 @@ public class Interface extends JFrame{
 				urlArray = urlList.toArray(urlArray);
 
 				URLClassLoader urlClassloader = URLClassLoader.newInstance(urlArray);
-
+				System.out.println("url array: " + Arrays.toString(urlArray));
 				File[] files = f.listFiles();
 				for (int i = 0; i < files.length; i++) {
 					if(files[i].isFile()){
@@ -553,7 +555,6 @@ public class Interface extends JFrame{
 					}
 				}
 			} catch (MalformedURLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			System.out.println("FINITI I CASI DI TEST");
