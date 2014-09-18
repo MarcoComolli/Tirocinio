@@ -105,6 +105,11 @@ e questo primo metodo va avanti ancora per un bel po' in questo modo. Dai un'occ
 - Ultima cosa è che ho aspettato un paio di minuti ma l'esecuzione del *StatistcsDataOrderer* non termina e vedo che il file **NumeroIstruzioniTestatePermetodo.txt** continua ad andare da 0kb a 23kb...poi torna a 0..poi va a 36kb..poi 0 ancora e poi di nuovo a 27kb. Quando interrompo manualmente l'esecuzione il file ha dentro una ventina di kilobyte di dati. Questo mi sembra abbastanza anomalo invece.
 Fai pure con calma, dai un'occhiata più avanti e pensa all'esame di domani che questo non è urgente. Intanto provo a vedere qualcosa per il punto 5.
 
+-----
+
+I file DatiStatistici e DatiStatisticiOrdinati possono essere molto grossi perché sono i dati che venivano stampati a video originariamente durante l'esecuzione del metodo tracer. Le altre cose sono anomale e domani vedo di sistemarle, ma prima devo far funzionare i test via interfaccia per avere i file finali. Domani provo ad aggiustarli.
+
+
 TODO LIST
 =========
 
