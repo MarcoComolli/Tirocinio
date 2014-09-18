@@ -189,6 +189,9 @@ Per quanto riguarda i jar li ho scoperti dalle eccezioni *NoClassDefFound*. Nel 
 OK, ora il file CondizioniCoperte contiene metodi-blocchi con condizioni coperte, il file CondizioniNonCoperte non viene più scritto.
 Ora ripasso un attimo per domani che ho un po' di ansia, se ci dovesse essere qualche problema con qualsiasi file(se scrivono dati sbagliati o altro), dimmelo pure perché per ora non ho ho effettuato l'esecuzione completa con tutti i test, ma con solo poche classi.
 
+------
+Son tornato poco fa, sisi non ti preoccupare ripassa pure ora guardo un po' i casi di test e vedo di fare qualcosa.  
+Ho notato che c'è qualche problema con la storia dei path dei file che hai aggiunto da interfaccia. Se uno setta manualmente il percorso all'inizio del file va bene quindi per il momento bisogna farlo manualmente. Quando avremo finito tutto provvedo a sistemarlo.
 
 TODO LIST
 =========
