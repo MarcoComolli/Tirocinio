@@ -67,7 +67,7 @@ Ora ripasso un attimo per domani che ho un po' di ansia, se ci dovesse essere qu
 Son tornato poco fa, sisi non ti preoccupare ripassa pure ora guardo un po' i casi di test e vedo di fare qualcosa.  
 Ho notato che c'è qualche problema con la storia dei path dei file che hai aggiunto da interfaccia. Se uno setta manualmente il percorso all'inizio del file va bene quindi per il momento bisogna farlo manualmente. Quando avremo finito tutto provvedo a sistemarlo.
 
-Ho fatto partire tutto ma ci sono delle cose che non mi quadrano (magari è colpa di pmd per come è fatto):
+Ho fatto partire tutto (tutti i casi di test di PMD e poi dopo ho fatto partire il StatistcDataOrderer) ma ci sono delle cose che non mi quadrano (magari è colpa di pmd per come è fatto):
 - Nel NumeroIstruzioni.txt ci sono alcune righe che mi danno null come metodo (ho controllato in MetodiTirocinio e non ci sono quindi non penso derivi da lì l'errore) ti faccio un esempio di un pezzetto di file:  
 ```  
 net.sourceforge.pmd.dcd.UsageNodeVisitor visit,Object,;MethodNode Object @10#1
@@ -103,6 +103,7 @@ net.sourceforge.pmd.AbstractPropertySource checkValidPropertyDescriptor,void,;Pr
 e questo primo metodo va avanti ancora per un bel po' in questo modo. Dai un'occhio al parametro #v, è l'unico che cambia. Sono andato a vedere e #v dovrebbe essere il numero di volte che viene eseguito (quindi penso dovrebbe esserci una sola entry per quel metodo) invece qua mi sembra una specie di concatenazione di stringhe miste ad un incremento. E' giusto che faccia così?
 
 - Ultima cosa è che ho aspettato un paio di minuti ma l'esecuzione del *StatistcsDataOrderer* non termina e vedo che il file **NumeroIstruzioniTestatePermetodo.txt** continua ad andare da 0kb a 23kb...poi torna a 0..poi va a 36kb..poi 0 ancora e poi di nuovo a 27kb. Quando interrompo manualmente l'esecuzione il file ha dentro una ventina di kilobyte di dati. Questo mi sembra abbastanza anomalo invece.
+Fai pure con calma, dai un'occhiata più avanti e pensa all'esame di domani che questo non è urgente. Intanto provo a vedere qualcosa per il punto 5.
 
 TODO LIST
 =========
