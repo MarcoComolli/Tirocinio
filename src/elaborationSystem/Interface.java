@@ -499,12 +499,13 @@ public class Interface extends JFrame{
 			else if(event.getSource() == btnProcess){
 
 				try {
+					MyTracerClass.setFilesPath(textMidFiles.getText());
+					StatisticsDataOrderer.setFilesPath(textMidFiles.getText());
 					MethodSignatureExtractor mse = new MethodSignatureExtractor(textMidFiles.getText(), txtRootPathSrc.getText());
 					TreeMap<String, Integer> m = mse.parseFilesInDir(txtRootPathSrc.getText());
 					ParenthesisAdder p = new ParenthesisAdder(m, txtRootPathSrc.getText(), txtRootPathDest.getText(), textMidFiles.getText());
 					p.parseFilesInDir(txtRootPathSrc.getText());
-					MyTracerClass.setFilesPath(textMidFiles.getText());
-					StatisticsDataOrderer.setFilesPath(textMidFiles.getText());
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -557,12 +558,12 @@ public class Interface extends JFrame{
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			}
-			System.out.println("FINITI I CASI DI TEST");
 			if(!directories.isEmpty()){
 				String dir =  directories.get(0).getAbsolutePath();
 				directories.remove(0);
 				runJunitTest(junit, directories,dir);
 			}
+			System.out.println("FINITI I CASI DI TEST");
 		}
 		
 	}

@@ -17,7 +17,7 @@ public class StatisticsDataOrderer {
 	private static HashMap<String, Integer> totalInstructionsNumber = new HashMap<String, Integer>();
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
-	private static String filesPath = "C:\\Users\\Jacopo\\Desktop";
+	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 
 	public static void main(String[] args) throws IOException {
 
