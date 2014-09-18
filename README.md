@@ -175,6 +175,17 @@ Forse bisognerebbe controllare per ogni percorso del file FilePercorsi se durant
 
 Per far andare i test tramite interfaccia per pmd, dove hai rintracciato la posizione dei jars necessari mancanti?
 
+-----
+Hai ragione sarebbe un problema. Però teoricamente se in effetti le condizioni erano false-false per esempio e non è entrato nel blocco allora vuol dire che comunque lui le ha testate. Forse dovremmo fare in modo di mettere la cosa dei booleani prima dell'esecuzione del blocco.  
+Però pensandoci meglio mi sembra abbastanza infattibile perchè il file procede riga per riga e non torna mai indietro quindi nel caso di espressioni su più righe saremmo fregati.
+Però, se ci ragioniamo un attimo, è più o meno la stessa storia degli switch no? A noi serve sapere, quando entriamo nel blocco, le condizioni che sono verificate quando siamo al suo interno. Cioè con quali condizioni ci stiamo accedendo.  Quando non ci accediamo è ovvio che il predicato in sè è falso.  
+Quindi secondo te possiamo lasciare così e far vedere le condizioni solo quando siamo dentro al metodo? Perchè altrimenti pensavo che in un predicato del genere  
+```if(true && false){...}```  
+il blocco non viene eseguito nonostante sia appunto sia true-false la condizione e non false-false. Quindi mi sa che invece di condizioni non testate è meglio mettere solo le condizioni testate per quel blocco. Cosa ne pensi?
+
+Per quanto riguarda i jar li ho scoperti dalle eccezioni *NoClassDefFound*. Nel mio caso era solo una e sono andato nel build path di eclipse a vedere dove si trovava e ho messo quel percorso. 
+
+
 TODO LIST
 =========
 
