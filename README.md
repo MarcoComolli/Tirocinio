@@ -162,7 +162,7 @@ Nel file FilePercorsi ogni riga è così composta:
 - valori booleani presenti nell'array passato al metodo tracer.
 (Es.: percorso 1: org.junit.internal.requests.ClassRequest getRunner,Runner,; @1-true).
 
-Se il matodo tracer viene invocato senza un array come parametro, non c'è verrà scritta nessuna condizione dopo l'dentificativo del blocco.
+Se il matodo tracer viene invocato senza un array come parametro, non verrà scritta nessuna condizione dopo l'dentificativo del blocco.
 
 Nel file CondizioniNonCoperte ogni riga è così composta:
 - identificativo metodo-identificativo blocco
