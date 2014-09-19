@@ -80,6 +80,7 @@ public class Interface extends JFrame{
 	private JTextField txtClassRoot;
 	private JButton btnClassRoot;
 	private JLabel lblClassRoot;
+	private int ricursionCount = 0;
 	/**
 	 * Launch the application.
 	 */
@@ -549,6 +550,7 @@ public class Interface extends JFrame{
 							Result result = junit.run(cl);
 							MyTracerClass.endRecordTestCoverage(fullname);
 							System.out.println("Test finito");
+
 						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
 						}
@@ -563,9 +565,15 @@ public class Interface extends JFrame{
 			if(!directories.isEmpty()){
 				String dir =  directories.get(0).getAbsolutePath();
 				directories.remove(0);
+				ricursionCount++;
 				runJunitTest(junit, directories,dir);
+				ricursionCount--;
 			}
 			System.out.println("FINITI I CASI DI TEST");
+			if(ricursionCount == 0){
+				System.out.println("Finiti veramente");
+				MyTracerClass.endOfTests();
+			}
 		}
 		
 	}

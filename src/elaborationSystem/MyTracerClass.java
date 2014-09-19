@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 
 public class MyTracerClass {
 
@@ -18,18 +19,19 @@ public class MyTracerClass {
 	private static LinkedList<String> blockList = new LinkedList<String>();
 	private static String currentObjectIDPath;
 	private static int currentexecutionNumberPath = -1;
-	private static boolean firstTime=true;
+	private static boolean firstTime = true, firstTimeTest = true, firstTimeBlock = true;;
 	private static int instructionsNumber;
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
-	private static int coveredBlocksTest = 0;
+	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0;
 	private static boolean recordTest = false;
-	private static boolean firstTimeTest = true;
+	private static int blockCount;
 
 
 
 	public MyTracerClass(){
 		countMap = new HashMap<String, Integer>();
 		instructionsCountMap= new HashMap<String, Integer>();
+		blockCount = 0;
 	}
 
 	public static void tracer(String objectID, int blockCode, int blockID) {
@@ -245,7 +247,7 @@ public class MyTracerClass {
 		try{
 			PrintWriter printWriter;
 			String pathsFilePath= filesPath + "\\TestCoverage.txt";
-
+			totalCoveredBlocksTest += coveredBlocksTest;
 			if(firstTimeTest){
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
 				firstTimeTest=false;
@@ -254,6 +256,67 @@ public class MyTracerClass {
 			}
 
 			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest);
+			printWriter.flush();
+			printWriter.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void endOfTests(){
+		try{
+			int testedBlockCount = 0, uncoveredBlocks = 0;
+			for(Entry<String,Integer> entry : countMap.entrySet()){
+				if(entry.getValue() != 0){
+					testedBlockCount++;
+				}
+				else{
+					uncoveredBlocks++;
+				}
+			}
+				
+			
+			
+			PrintWriter printWriter;
+			String pathsFilePath= filesPath + "\\GlobalData.txt";
+			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+
+			printWriter.println("Total block code: " +  blockCount);
+			printWriter.println("Total block code tested (cumulative): " + totalCoveredBlocksTest);
+			printWriter.println("Total block code tested: " + testedBlockCount);
+			printWriter.println("Uncovered block: " + uncoveredBlocks);
+			printWriter.println("% test coverage: " + (double)testedBlockCount/(double)blockCount*100);
+			printWriter.println("% test uncovered: " + (double)uncoveredBlocks/(double)blockCount*100);
+			printWriter.flush();
+			printWriter.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//se è necessario un file con l'elenco dei blocchi basta scommentare il codice qua sotto
+	public static void addBlock(String blockName, int blockCode){
+
+		try{
+			PrintWriter printWriter;
+			String pathsFilePath= filesPath + "\\Blocks.txt";
+			
+			if(firstTimeBlock){
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+				firstTimeBlock=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+			}
+			blockCount++;
+			countMap.put(blockName+"@"+blockCode, 0);
+
+			printWriter.println(blockName+"@"+blockCode);
 			printWriter.flush();
 			printWriter.close();
 
