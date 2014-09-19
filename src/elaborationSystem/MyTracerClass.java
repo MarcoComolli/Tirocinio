@@ -17,10 +17,13 @@ public class MyTracerClass {
 	private static boolean recordPath = false;
 	private static LinkedList<String> blockList = new LinkedList<String>();
 	private static String currentObjectIDPath;
-	private static int currentexecutionNumberPath;
+	private static int currentexecutionNumberPath = -1;
 	private static boolean firstTime=true;
 	private static int instructionsNumber;
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
+	private static int coveredBlocksTest = 0;
+	private static boolean recordTest = false;
+	private static boolean firstTimeTest = true;
 
 
 
@@ -48,15 +51,21 @@ public class MyTracerClass {
 
 
 			writeStatisticsData(objectID, blockCode, blockID, n);
-			writePathsFile(objectID, blockID);
+			
+			if(recordPath){
+				writePathsFile(objectID, blockID);
+			}
 
-			instructionsNumber=-1;
+			instructionsNumber = -1;
 
 			countMap.put(objectID+"@"+blockID, n);
 			System.out.println(countMap.size());
 
 			if(recordPath){ //se devo registrare il cammino
 				blockList.add(objectID + "@" + blockID);
+			}
+			if(recordTest){
+				coveredBlocksTest++;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -85,9 +94,9 @@ public class MyTracerClass {
 
 
 			writeStatisticsData(objectID, blockCode, blockID, n);
-
-			writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
-
+			if(recordPath){
+				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
+			}
 			instructionsNumber=-1;
 
 			countMap.put(objectID+"@"+blockID, n);
@@ -95,6 +104,9 @@ public class MyTracerClass {
 
 			if(recordPath){ //se devo registrare il cammino
 				blockList.add(objectID + "@" + blockID);
+			}
+			if(recordTest){
+				coveredBlocksTest++;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -146,51 +158,50 @@ public class MyTracerClass {
 
 	
 
-	private static void writePathsFile(String objectID, int blockID,
-			boolean[] ilMioArrayDiBooleani) throws IOException {
+	private static void writePathsFile(String objectID, int blockID, boolean[] ilMioArrayDiBooleani) throws IOException {
 		String booleanString="";
 		for (int i=0; i<ilMioArrayDiBooleani.length; i++){
 			booleanString+=ilMioArrayDiBooleani[i] +" ";
 		}
 		PrintWriter printWriter;
 		String pathsFilePath=filesPath + "\\FilePercorsi.txt";
-		
-			if(firstTime){
-				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
-				firstTime=false;
-			}else{
-				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
-			}
-			
-				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-				//		+" numero istruzioni nel blocco: " +instructionsNumber);
-			printWriter.println("percorso "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
-				printWriter.flush();
 
-			
-			printWriter.close();
+		if(firstTime){
+			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+			firstTime=false;
+		}else{
+			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+		}
+
+		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+		//		+" numero istruzioni nel blocco: " +instructionsNumber);
+		printWriter.println("percorso "+ currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
+		printWriter.flush();
+
+
+		printWriter.close();
 	}
-	
+
 	private static void writePathsFile(String objectID, int blockID) throws IOException {
-		
-		
+
+
 		PrintWriter printWriter;
 		String pathsFilePath= filesPath + "\\FilePercorsi.txt";
-		
-			if(firstTime){
-				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
-				firstTime=false;
-			}else{
-				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
-			}
-			
-				//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-				//		+" numero istruzioni nel blocco: " +instructionsNumber);
-			printWriter.println("percorso "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
-				printWriter.flush();
 
-			
-			printWriter.close();
+		if(firstTime){
+			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+			firstTime=false;
+		}else{
+			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+		}
+
+		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+		//		+" numero istruzioni nel blocco: " +instructionsNumber);
+		printWriter.println("percorso "+ currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
+		printWriter.flush();
+
+
+		printWriter.close();
 	}
 
 	//inizia a registrare un percorso
@@ -221,6 +232,36 @@ public class MyTracerClass {
 
 	public static void setFilesPath(String path){
 		filesPath = path;
+	}
+
+	public static void startRecordTestCoverage() {
+		if(recordTest == false){
+			recordTest = true;
+		}
+		coveredBlocksTest = 0;
+	}
+	
+	public static void endRecordTestCoverage(String fullname){
+		try{
+			PrintWriter printWriter;
+			String pathsFilePath= filesPath + "\\TestCoverage.txt";
+
+			if(firstTimeTest){
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+				firstTimeTest=false;
+			}else{
+				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+			}
+
+			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest);
+			printWriter.flush();
+			printWriter.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

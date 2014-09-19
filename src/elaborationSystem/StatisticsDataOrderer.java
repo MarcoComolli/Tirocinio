@@ -104,8 +104,7 @@ public class StatisticsDataOrderer {
 
 	}
 
-	private static void writeNotCoveredConditions()
-			throws FileNotFoundException, IOException {
+	private static void writeNotCoveredConditions() throws FileNotFoundException, IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
 				filesPath + "\\FilePercorsi.txt"));
 		String[] arrayLine;

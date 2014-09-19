@@ -545,7 +545,9 @@ public class Interface extends JFrame{
 						try {
 							Class cl = Class.forName(fullname, false, urlClassloader);
 							System.out.println("CLASSEEEE: " + cl);
+							MyTracerClass.startRecordTestCoverage();
 							Result result = junit.run(cl);
+							MyTracerClass.endRecordTestCoverage(fullname);
 							System.out.println("Test finito");
 						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
