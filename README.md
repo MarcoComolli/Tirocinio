@@ -124,6 +124,14 @@ nel file percorsi è sbagliato come viene caratterizzato un percorso. Un percors
 Se due metodi A e B vengono chiamati essi fanno partire un percorso. Se supponiamo che il metodo A viene chiamato 3 volte alla terza volta la dicitura del percorso attuale sarà percorso 3: bla bla bla...ma se anche B viene chiamato 3 volte il percorso sarà percorso 3: ble ble ble. Quindi sarebbero percorsi chiamati uguali ma son diversi. Ho aggiunto in modo tale che sia percoso A3 o percorso B3. (ovviamente aggiungendo altre parti il file viene ancora decisamente più grande (tipo 20 MB a me).  
 Ora committo.
 
+Per il problema del timeout non so come aiutarti. A me con pmd funziona (più o meno) tutto e in un minutino me li fa tutti.  
+Sto cercando di collezionare dati sui test e stavo pensando: alla fine dei conti ci serve sapere (oltre alle altre millemila cose) il totale dei blocchi che abbiamo nel codice, il totale dei metodi e quali metodi/blocchi sono testati.  
+Allora ho pensato di usare il countMap.size() per sapere quanti blocchi ci sono nel codice ma poi se ci pensi nel countMap non ci sono tutti i metodi e i blocchi del codice. Infatti questa viene aggiornata solo quando viene chiamato il metodo tracer. E il metodo tracer viene chiamato dai test e solo quando questi vengono eseguiti o passano di là. Quindi in fin dei conti i file che abbiamo estrapolato non tengono conto di tutte le condizioni di tutti i blocchi ma solo quelli registrati dai test. Mi sbaglio? Allora ho pensato di inserire una lista con tutti i blocchi a partire dal preprocessing e non nella classe MyTracerClass. Per ora mi sto muovendo in questa direzione. Quindi bisogna stare attenti anche se gli altri file si riferiscono solo ai dati di test o ai dati globali del codice.  
+p.s. forse ho capito perchè mi dava *null* su alcuni metodi/blocchi. Suppongo dipenda da PMD (o ma va toh che novità..) visto che ogni tanto mi da questa eccezione: 
+```Java
+net.sourceforge.pmd.RuleSetNotFoundException: Can't find resource 'null' for rule 'java-basic'.  Make sure the resource is a valid file or URL and is on the CLASSPATH. Here's the current classpath: F:\Documenti - Marco\... eccetra eccetra
+```
+Non so magari dipende da questo.
                                                                           
 
 TODO LIST
