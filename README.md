@@ -132,6 +132,11 @@ p.s. forse ho capito perchè mi dava *null* su alcuni metodi/blocchi. Suppongo d
 net.sourceforge.pmd.RuleSetNotFoundException: Can't find resource 'null' for rule 'java-basic'.  Make sure the resource is a valid file or URL and is on the CLASSPATH. Here's the current classpath: F:\Documenti - Marco\... eccetra eccetra
 ```
 Non so magari dipende da questo.
+
+------
+
+L'esame è andato bene, grazie.
+I test ora sembrano andare tutti, ma nei file statistici non viene scritto niente, mi sembra di aver settato bene tutti i percorsi e non ho eccezioni, boh di sicuro mi sono perso qualcosa.
                                                                           
 
 TODO LIST
