@@ -116,6 +116,14 @@ Ho cancellato i file di questo tipo e l'esecuzione procede senza eccezioni. Il p
                                                                              // hour
 non vorrei che il test durasse un'ora, ma può essere. Mancano ancora 9 package, ma in questo modo non posso testare i file che stavo costruendo quindi forse per ora elimino la classe e provo a sistemare i file eseguendo gli altri 9 package di test.
 
+-----
+
+Ok com'è andato l'esame?
+ora faccio un commit. Ho aggiunto una copertura dei test, cioè il numero di blocchi testati da quella classe di test. L'ho messa nel file TestCoverage.txt. E cambiato una cosa:
+nel file percorsi è sbagliato come viene caratterizzato un percorso. Un percorso è caratterizzato sì dal numero di esecuzione ma anche dal particolare metodo da cui parte l'esecuzione (ti faccio un esempio)  
+Se due metodi A e B vengono chiamati essi fanno partire un percorso. Se supponiamo che il metodo A viene chiamato 3 volte alla terza volta la dicitura del percorso attuale sarà percorso 3: bla bla bla...ma se anche B viene chiamato 3 volte il percorso sarà percorso 3: ble ble ble. Quindi sarebbero percorsi chiamati uguali ma son diversi. Ho aggiunto in modo tale che sia percoso A3 o percorso B3. (ovviamente aggiungendo altre parti il file viene ancora decisamente più grande (tipo 20 MB a me).  
+Ora committo.
+
                                                                           
 
 TODO LIST
