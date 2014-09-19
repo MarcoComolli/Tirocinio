@@ -109,6 +109,14 @@ Fai pure con calma, dai un'occhiata più avanti e pensa all'esame di domani che 
 
 I file DatiStatistici e DatiStatisticiOrdinati possono essere molto grossi perché sono i dati che venivano stampati a video originariamente durante l'esecuzione del metodo tracer. Le altre cose sono anomale e domani vedo di sistemarle, ma prima devo far funzionare i test via interfaccia per avere i file finali. Domani provo ad aggiustarli.
 
+Sto eseguendo tutti i test da interfaccia, ma mi sa che il prolema non era dovuto a jars mancanti, ma forse a classi di test denominate in questo modo: package-info.java che contengono solo un commento e la dichiarazione del package (tipo package junit.samples;). 
+Ho cancellato i file di questo tipo e l'esecuzione procede senza eccezioni. Il problema è che sto eseguendo i test da 20 minuti ed ora l'esecuzione è ferma al 33esimo package di test che contiene una classe chiamata FailOnTimeoutTest che contiene questo campo:
+
+    private static final int DURATION_THAT_EXCEEDS_TIMEOUT = 60 * 60 * 1000; // 1
+                                                                             // hour
+non vorrei che il test durasse un'ora, ma può essere. Mancano ancora 9 package, ma in questo modo non posso testare i file che stavo costruendo quindi forse per ora elimino la classe e provo a sistemare i file eseguendo gli altri 9 package di test.
+
+                                                                          
 
 TODO LIST
 =========
