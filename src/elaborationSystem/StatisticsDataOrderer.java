@@ -231,6 +231,10 @@ public class StatisticsDataOrderer {
 			TreeSet<String> treeSet) throws IOException {
 		String[] arrayLine = null;
 		String[] numberInstructionsArray;
+		PrintWriter printWriter;
+		String numberOfInstructionsFilePath = filesPath + "\\NumeroIstruzioniTestatePerMetodo.txt";
+		printWriter = new PrintWriter(new FileWriter(
+				numberOfInstructionsFilePath));
 
 		for (String line : treeSet) {
 			arrayLine = line.split("#c");
@@ -248,10 +252,7 @@ public class StatisticsDataOrderer {
 			}
 			totalInstructionsNumber.put(arrayLine[0], numberInstructions);
 			numberInstructions = 0;
-			PrintWriter printWriter;
-			String numberOfInstructionsFilePath = filesPath + "\\NumeroIstruzioniTestatePerMetodo.txt";
-			printWriter = new PrintWriter(new FileWriter(
-					numberOfInstructionsFilePath));
+			
 
 			for (Entry<String, Integer> entry : totalInstructionsNumber
 					.entrySet()) {
@@ -260,8 +261,9 @@ public class StatisticsDataOrderer {
 				printWriter.flush();
 			}
 
-			printWriter.close();
+			
 		}
+		printWriter.close();
 	}
 
 	/**
