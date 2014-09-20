@@ -254,8 +254,7 @@ public class StatisticsDataOrderer {
 			numberInstructions = 0;
 			
 
-			for (Entry<String, Integer> entry : totalInstructionsNumber
-					.entrySet()) {
+			for (Entry<String, Integer> entry : totalInstructionsNumber.entrySet()) {
 				printWriter.println(entry.getKey() + " numero : "
 						+ entry.getValue());
 				printWriter.flush();
