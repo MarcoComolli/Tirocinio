@@ -137,6 +137,10 @@ Non so magari dipende da questo.
 
 OK, ora i test scrivono, ma ad un certo ppunto si bloccano e non scrivono più sui file (da interfaccia il bottone Run Tests rimane premuto quindi non dovrebbe aver terminato l'esecuzione).
 Stavo mettendo a posto il metodo per il file CondizioniCoperte che elaborando i dati del file FilePercorsi (4,4 MB) scrive un file di 5,78 KB (CondizioniCoperte.txt) non so quanto sia possibile, se vuoi faccio il commit così lo provi anche tu visto che i miei file di dati derivanti dai test dovrebbero essere incompleti.
+
+
+------
+Ok prova a fare il commit così vedo anche io
                                                                           
 
 TODO LIST
