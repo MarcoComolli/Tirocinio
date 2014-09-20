@@ -144,7 +144,7 @@ Stavo mettendo a posto il metodo per il file CondizioniCoperte che elaborando i 
 C'è qualcosa che non va. Allora fammi fare un riepilogo completo così ho un quadro chiaro dei file e cosa contengono (e quanto ci aspettiamo siano grandi):  
 
 - **MetodiTirocinio.txt** contiene l'elenco di tutti i metodi rilevati da ASTParser. E' scritto nella forma:  
- ```Nome metodo```
+ ```Nome metodo```  
 Ci si aspetta che contenga una entry per ogni metodo. PMD ha quasi 6000 metodi (da metrics). Quello che rilevo dopo il test sono quasi 5300 righe. Viene scritto da ASTParser ogni volta che incontra la dichiarazione di un metodo (non tiene conto delle dichiarazioni di metodi interni ad altri metodi). *Dimensione: 457Kb*
 - **Blocks.txt** contiene l'elenco di tutti i blocchi. E' scritto nella forma:  
  ```Nome metodo + @ + numero blocco```  
@@ -183,6 +183,7 @@ Ci si aspetta che contenga una entry per ogni blocco che è stato testato che co
 
 Come vedi ci sono un bel po' di incongruenze. L'errore che mi è saltato all'occhio è sul FileStatistici. E' sbagliato dove viene scritto perchè ogni volta che viene eseguito un tracer fa una riga ma se il tracer di quel metodo viene eseguito tipo 10 volte questo fa 10 righe con "esecuzione 1, esecuzione 2, esecuzione 3... ecc" . Quindi bisogna farlo scrivere alla fine di tutto quando il numero di esecuzioni è stato stabilito.  
 AstParser non legge tutti i metodi di Metrics però ce se ne può fare una ragione.  
+Guarda anche il NumeroIstruzioni. Fa un terzo delle righe che dovrebbe fare da me. (anche se ho visto che c'è una condizione che mette solo le righe con + di 0 istruzioni ci sono righe con 0 istruzioni contate quindi non so se è giusto così o no).  
 Un altro errore è sul NumeroIstruzioniTestatePerMetodo.txt non capisco perchè ma continua a fare quella stranezza che sembra impallarsi e ci mette una vita a scrivere (fa al solito 0kb...20kb...0kb...36kb ecc). L'ho lasciato andare un paio di minuti e poi ha finito con il file che ti ho detto. Non so ancora perchè.  
 Per quanto riguarda invece il CondizioniCoperte potrebbe anche essere giusto se vedi il numero delle righe. Dipende da come sono i blocchi ma bisognerebbe testare con qualcosa di semplice.  
 Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che vedi di sbagliato perchè sui file che hai messo tu non sono sicuro di aver capito se quello che devono fare è proprio quello che ho scritto. 
