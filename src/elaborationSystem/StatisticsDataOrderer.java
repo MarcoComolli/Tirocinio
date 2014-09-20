@@ -253,14 +253,10 @@ public class StatisticsDataOrderer {
 			totalInstructionsNumber.put(arrayLine[0], numberInstructions);
 			numberInstructions = 0;
 			
-
-			for (Entry<String, Integer> entry : totalInstructionsNumber.entrySet()) {
-				printWriter.println(entry.getKey() + " numero : "
-						+ entry.getValue());
-				printWriter.flush();
-			}
-
-			
+		}
+		for (Entry<String, Integer> entry : totalInstructionsNumber.entrySet()) {
+			printWriter.println(entry.getKey() + " numero : " + entry.getValue());
+			printWriter.flush();
 		}
 		printWriter.close();
 	}
