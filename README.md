@@ -140,8 +140,54 @@ Stavo mettendo a posto il metodo per il file CondizioniCoperte che elaborando i 
 
 
 ------
-Ok prova a fare il commit così vedo anche io
-                                                                          
+
+C'è qualcosa che non va. Allora fammi fare un riepilogo completo così ho un quadro chiaro dei file e cosa contengono (e quanto ci aspettiamo siano grandi):  
+
+- **MetodiTirocinio.txt** contiene l'elenco di tutti i metodi rilevati da ASTParser. E' scritto nella forma:  
+ ```Nome metodo```
+Ci si aspetta che contenga una entry per ogni metodo. PMD ha quasi 6000 metodi (da metrics). Quello che rilevo dopo il test sono quasi 5300 righe. Viene scritto da ASTParser ogni volta che incontra la dichiarazione di un metodo (non tiene conto delle dichiarazioni di metodi interni ad altri metodi). *Dimensione: 457Kb*
+- **Blocks.txt** contiene l'elenco di tutti i blocchi. E' scritto nella forma:  
+ ```Nome metodo + @ + numero blocco```  
+Ci si aspetta che contenga una entry per ogni blocco con il tracer dentro. PMD ha quasi 6000 metodi, contati 5300. Quello che rilevo dopo il test sono quasi 10000 righe. Con una media di 1,88 blocchi per ogni metodo potrebbe sarebbe fattibile. Viene scritto nel MyTracerClass ogni volta che viene inserito un tracer() nel codice. *Dimensione: 907Kb*
+- **NumeroIstruzioni.txt** contiene il numero di istruzioni che finiscono con il ; per ogni blocco di codice. E' scritto nella forma:  
+ ```Nome metodo + @ + numero blocco + # + numero di istruzioni```  
+Ci si aspetta che contenga una entry per ogni blocco con il tracer dentro. Secondo il file precedente sono almeno 10000 blocchi. Quello che rilevo dopo il test sono poco meno di 3300 righe. Dovrebbero essere almeno tanti quanti i blocchi nel file Blocks se conta anche i blocchi con 0 istruzioni. Viene scritto nel FileParser ogni volta che finisce il preprocessing di un file. *Dimensione: 313Kb*
+- **FilePercorsi.txt** contiene i blocchi percorsi per ogni cammino, dove un cammino è originato da ogni esecuzione di ogni metodo chiamato dai test. E' scritto nella forma:  
+ ```"percorso" + nome metodo  che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo + : + nome del metodo eseguito + @ + numero blocco + - + valore delle condizioni che hanno permesso l'entrata nel blocco (se presenti)```  
+Indefinito il numero di percorsi, soprattutto se un metodo viene eseguito in un ciclo dando origine più percorsi uguali. Quello che rilevo dopo il test sono poco meno di 130'000 righe.Non si sa quanto dovrebbero essere. Viene scritto in 2 metodi nel MyTracerClass. *Dimensione: quasi 20Mb*
+- **TestCoverage.txt** contiene il numero di blocchi di codice testati per ogni classe di test eseguita. E' scritto nella forma:  
+ ```Nome classe + #c + numero di blocchi attraversati```  
+Ci si aspetta che contenga una entry per ogni classe di test. Secondo metrics PMD ha 256 classi. Quello che rilevo dopo il test sono 229 righe. Viene scritto nel MyTracerClass ogni volta che finisce l'esecuzione di una classe di test da interfaccia. *Dimensione: 15kb*
+- **FileStatistici.txt** contiene per ogni blocco il cui tracer viene eseguito,il tipo di blocco, il numero di istruzioni e il numero di volte che viene eseguito. E' scritto nella forma:  
+ ```Nome metodo + #c + tipo di blocco + @ + numero blocco + #v + numetro di volte eseguito + #i+ numero di istruzioni```  
+Ci si aspetta che contenga una entry per ogni blocco con il tracer dentro. Secondo i file precedenti sono circa 10000 blocchi. Quello che rilevo dopo il test sono poco meno di 135'000 righe. Dovrebbero essere tanti quanti i blocchi nel file Blocks. Viene scritto nel MyTracerClass ogni volta che viene eseguito il metodo tracer() dai test. *Dimensione: quasi 12Mb*
+- **FileStatisticiOrdinati.txt** contiene ciò che è contenuto nel file precedente ma in ordine alfabetco. E' scritto nella forma:  
+ ```Nome metodo + #c + tipo di blocco + @ + numero blocco + #v + numetro di volte eseguito + #i+ numero di istruzioni```  
+Ci si aspetta che contenga una entry per ogni riga del file FileStatistici. Nel file precedente ho poco meno di 135'000 righe. Quello che rilevo dopo il test sono poco meno di 135'000 righe. Viene scritto nel StatisticDataOrderer. *Dimensione: quasi 12Mb*
+- **NumeroIstruzioniTestatePerMetodo.txt** contiene per ogni metodo il cui tracer viene eseguito dai test il numero di istruzioni dei blocchi eseguiti. E' scritto nella forma:  
+ ```Nome metodo + "numero: " + numero di istruzioni testate per quel metodo```  
+Ci si aspetta che contenga una entry per ogni metodo testato. Secondo i file precedenti sono circa 5300 metodi. Quello che rilevo dopo il test sono poco più di 3600 righe. Dovrebbero essere al massimo 5300 righe. Viene scritto nel StatisticDataOrderer. *Dimensione: 62kb*
+- **GlobalData.txt** contiene la percentuale e il numero dei blocchi testati e non rispetto al totale. E' scritto nella forma:  
+```
+Total block code: + numero blocchi totali
+Total block code tested (cumulative): + numero di blocchi testati in totale dai test
+Total block code tested: + numero di blocchi unici testati dai test
+Uncovered block: + numero di blocchi mai testati dai test
+% test coverage: + percentuale di copertura
+% test uncovered: + percentuale di non copertura
+```
+Ci si aspetta che i dati siano verosimili. Viene scritto nel MyTracerClass alla fine dell'esecuzione dei test *Dimensione: 1kb*
+- **CondizioniCoperte.txt** contiene l'elenco delle condizioni per entrare in alcuni blocchi, che sono state testate dai test. E' scritto nella forma:  
+ ```Nome metodo + @ + numero blocco + " valutate: " + elenco condizioni valutate```  
+Ci si aspetta che contenga una entry per ogni blocco che è stato testato che con il metodo tracer(...., booleanarray). Ci sono al massimo 10000 blocchi. Quello che rilevo dopo il test sono quasi 2300 righe. Dovrebbero essere al massimo tanti quanti i blocchi totali. Viene scritto nel StatisticDataOrderer elaborando il FilePercorsi. *Dimensione: 34Kb*.
+
+Come vedi ci sono un bel po' di incongruenze. L'errore che mi è saltato all'occhio è sul FileStatistici. E' sbagliato dove viene scritto perchè ogni volta che viene eseguito un tracer fa una riga ma se il tracer di quel metodo viene eseguito tipo 10 volte questo fa 10 righe con "esecuzione 1, esecuzione 2, esecuzione 3... ecc" . Quindi bisogna farlo scrivere alla fine di tutto quando il numero di esecuzioni è stato stabilito.  
+AstParser non legge tutti i metodi di Metrics però ce se ne può fare una ragione.  
+Un altro errore è sul NumeroIstruzioniTestatePerMetodo.txt non capisco perchè ma continua a fare quella stranezza che sembra impallarsi e ci mette una vita a scrivere (fa al solito 0kb...20kb...0kb...36kb ecc). L'ho lasciato andare un paio di minuti e poi ha finito con il file che ti ho detto. Non so ancora perchè.  
+Per quanto riguarda invece il CondizioniCoperte potrebbe anche essere giusto se vedi il numero delle righe. Dipende da come sono i blocchi ma bisognerebbe testare con qualcosa di semplice.  
+Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che vedi di sbagliato perchè sui file che hai messo tu non sono sicuro di aver capito se quello che devono fare è proprio quello che ho scritto. 
+
+
 
 TODO LIST
 =========
