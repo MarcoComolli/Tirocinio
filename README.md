@@ -209,6 +209,12 @@ Certo che 2 ore di esecuzione di test mi sembrano belle toste. Ci sarà qualcosa
 Mi sa che dovremo fare qualcosa per quei file..miseria son troppo grandi!
 Quel lavoro lo faccio domani alla fine che oggi non ho più avuto tempo.
 
+-----
+
+Sto facendo andare la classe StatisticDataOrderer da circa 4 ore, ma l'esecuzione non si è ancora arrestata, faccio andare tutta notte e poi vedo...
+
+----
+
 TODO LIST
 =========
 
@@ -255,7 +261,6 @@ parsing logical boolean expressions java --> stringa di ricerca
 - [ ] copertura dei casi di test (5)
 	- [ ] alla fine di ogni classe di test sapere quanto si è coperto del totale
 	- [ ] giocare con le statistiche
-
 
 
 
