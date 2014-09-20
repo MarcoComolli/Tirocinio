@@ -36,42 +36,44 @@ public class StatisticsDataOrderer {
 	private static void writeCoveredConditions() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
 				filesPath + "\\FilePercorsi.txt"));
+		PrintWriter printWriter;
+        String numberOfInstructionsFilePath = filesPath + "\\CondizioniCoperte.txt";
+        printWriter = new PrintWriter(new FileWriter(
+                numberOfInstructionsFilePath));
 		String[] arrayLine;
-		String[] evaluatedConditionsInPath;
+		
+		Set<String> valuatedConditions = null;
+		String[] methodBlockAndConditionLine;
+		String methodAndBlock="";
+		String evaluatedConditionsInPath = "";
+		
 		try {
 			String line = br.readLine();
 			while (line != null) {
-				//System.err.println(line);
-				Set<String> valuatedConditions = null;
-				String methodAndBlock="";
+							
 				arrayLine = line.split(": ");
-				if(arrayLine[1].contains("-")){
-					arrayLine=arrayLine[1].split("-");	
-					methodAndBlock=arrayLine[0];
+				if(!arrayLine[1].contains("-")){	
+					methodAndBlock=arrayLine[1];
+                    evaluatedConditionsInPath="";
+					
 				}else{
-					methodAndBlock=arrayLine[1];						
+				    methodBlockAndConditionLine=arrayLine[1].split("-");   
+                    methodAndBlock=methodBlockAndConditionLine[0];
+                    evaluatedConditionsInPath = methodBlockAndConditionLine[1];
 				}
-				//arrayLine=arrayLine[1].split(" ");
-				evaluatedConditionsInPath = line.split("-");
-				if(evaluatedConditionsInPath.length>1){
-					//System.err.println(method);
+				
+				System.out.println(methodAndBlock+".");
+						
+				if(evaluatedConditionsInPath!=""){
 					if(evaluatedConditions.containsValue(methodAndBlock)){
 						valuatedConditions= evaluatedConditions.get(methodAndBlock);
 						System.err.println(methodAndBlock +" è presente");
-
-						valuatedConditions.add((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
-						evaluatedConditions.put(methodAndBlock, valuatedConditions);
-
+						valuatedConditions.add(evaluatedConditionsInPath);
 
 					}else{
-
 						valuatedConditions=new HashSet<String>();
-						valuatedConditions.add((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
-						System.err.println((evaluatedConditionsInPath[1]).substring(0,evaluatedConditionsInPath[1].length()-1));
-
-						System.out.println("inserisco "+ methodAndBlock);
-
-
+						valuatedConditions.add(evaluatedConditionsInPath);
+						
 					}
 					evaluatedConditions.put(methodAndBlock, valuatedConditions);
 				}
@@ -79,27 +81,25 @@ public class StatisticsDataOrderer {
 				line = br.readLine();
 			}
 
-			PrintWriter printWriter;
-			String numberOfInstructionsFilePath = filesPath + "\\CondizioniCoperte.txt";
-			printWriter = new PrintWriter(new FileWriter(
-					numberOfInstructionsFilePath));
-
+			
 			for (Entry<String, Set<String>> entry : evaluatedConditions
 					.entrySet()) {
 				String valuated="";
 				for(String conditionCombination : entry.getValue()){
-					valuated+=conditionCombination +";";
+					valuated+=conditionCombination.substring(0,conditionCombination.length()-1) +";";
 				}
 				printWriter.println(entry.getKey() + " valutate : "
 						+ valuated);
+				
 				printWriter.flush();
 
 			}
 
-			printWriter.close();
+			
 
 		} finally {
 			br.close();
+			printWriter.close();
 		}
 
 	}
