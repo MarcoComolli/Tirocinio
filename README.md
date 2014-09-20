@@ -192,6 +192,8 @@ Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che
 
 Per parlare dei file se vuoi possiamo sentirci un attimo su skype.
 
+------
+Certo sono on
 
 
 TODO LIST
