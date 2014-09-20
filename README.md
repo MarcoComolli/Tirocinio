@@ -186,7 +186,11 @@ AstParser non legge tutti i metodi di Metrics però ce se ne può fare una ragio
 Guarda anche il NumeroIstruzioni. Fa un terzo delle righe che dovrebbe fare da me. (anche se ho visto che c'è una condizione che mette solo le righe con + di 0 istruzioni ci sono righe con 0 istruzioni contate quindi non so se è giusto così o no).  
 Un altro errore è sul NumeroIstruzioniTestatePerMetodo.txt non capisco perchè ma continua a fare quella stranezza che sembra impallarsi e ci mette una vita a scrivere (fa al solito 0kb...20kb...0kb...36kb ecc). L'ho lasciato andare un paio di minuti e poi ha finito con il file che ti ho detto. Non so ancora perchè.  
 Per quanto riguarda invece il CondizioniCoperte potrebbe anche essere giusto se vedi il numero delle righe. Dipende da come sono i blocchi ma bisognerebbe testare con qualcosa di semplice.  
-Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che vedi di sbagliato perchè sui file che hai messo tu non sono sicuro di aver capito se quello che devono fare è proprio quello che ho scritto. 
+Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che vedi di sbagliato perchè sui file che hai messo tu non sono sicuro di aver capito se quello che devono fare è proprio quello che ho scritto.
+
+-------
+
+Per parlare dei file se vuoi possiamo sentirci un attimo su skype.
 
 
 
