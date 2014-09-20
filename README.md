@@ -193,6 +193,15 @@ Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che
 Finalmente dopo 2 ore è finita l'esecuzione delle classi di test.
 Il FilePercorsi occupa 607 MB il file DatiStatistici occupa 396 MB.
 
+Ho dei dati sorprendenti:
+
+Total block code: 1636
+Total block code tested (cumulative): 3928427
+Total block code tested: 1402
+Uncovered block: 231
+% test coverage: 85.69682151589242
+% test uncovered: 14.119804400977994
+
 
 TODO LIST
 =========
