@@ -190,10 +190,8 @@ Se puoi leggi tutto quello che ho scritto sopra e correggi/edita pure quello che
 
 -------
 
-Per parlare dei file se vuoi possiamo sentirci un attimo su skype.
-
-------
-Certo sono on
+Finalmente dopo 2 ore è finita l'esecuzione delle classi di test.
+Il FilePercorsi occupa 607 MB il file DatiStatistici occupa 396 MB.
 
 
 TODO LIST
