@@ -200,8 +200,14 @@ Ho dei dati sorprendenti:
 - Total block code tested: 1402
 - Uncovered block: 231
 - % test coverage: 85.69682151589242
-- % test uncovered: 14.119804400977994```
+- % test uncovered: 14.119804400977994
 
+--------
+Ahah ma va? Allora può anche darsi che funziona il calcolo e che quelli di PMD abbiano fatto poco nulla di testing.  
+Mi sembra comunque ragionevole che quelli di Junit facciano un lavoro fatto meglio sui test. 85% se è veramente così è buona buona.  
+Certo che 2 ore di esecuzione di test mi sembrano belle toste. Ci sarà qualcosa veramente tipo sul timeout (magari prova a settarlo a 1 minuto invece che un'ora, giusto per curiosità XD).  
+Mi sa che dovremo fare qualcosa per quei file..miseria son troppo grandi!
+Quel lavoro lo faccio domani alla fine che oggi non ho più avuto tempo.
 
 TODO LIST
 =========
