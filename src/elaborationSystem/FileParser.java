@@ -72,6 +72,7 @@ public class FileParser {
 	private boolean multiLineBooleanCondition = false;
 	private HashMap<String,Integer> linesInBlock=new HashMap<String,Integer>();
 	private boolean countInstruction=false;
+	private int counter=0;
 	private String currentBooleanArray;
 	private String lastInstructionTemp = "";
 	private String lastMethodInstrucion;
@@ -146,7 +147,13 @@ public class FileParser {
 					linesInBlock.put(currentMethod +"@"+currentBlockID, currentInstructionCount);
 					System.err.println(currentMethod+"@"+ currentBlockID +" " +currentInstructionCount);
 					currentInstructionCount=0;
-					countInstruction=false;
+					if(counter==1){
+						countInstruction=false;
+						counter=0;
+					}else{
+						counter--;
+					}
+					
 				}
 				if(currentLine == nextMethodLine && line != null){
 					currentMethod = iteratorEntry.getKey();
@@ -606,6 +613,7 @@ public class FileParser {
 					MyTracerClass.addBlock(currentMethod, currentBlockID);
 					newLine = line.substring(0, i+1) + "{" +  tracerCatch + line.substring(i+1, line.length());
 					countInstruction=true;
+					counter++;
 				}
 			}
 			if(processFirstCase){
@@ -628,6 +636,7 @@ public class FileParser {
 				}
 			}
 			countInstruction=true;
+			counter++;
 			return newLine;
 		}
 		return line;
@@ -675,10 +684,12 @@ public class FileParser {
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
 				System.err.println("foreachhhhh "+ tracerFor);
 				countInstruction=true;
+				counter++;
 				return newLine;
 			}else{
 				newLine = line.substring(0, index+1) + booleanArrayString+" "+addBooleanArrayToTracer(tracerFor) + line.substring(index+1, line.length());
 				countInstruction=true;
+				counter++;
 				return newLine;
 			}
 		}
@@ -714,6 +725,7 @@ public class FileParser {
 				MyTracerClass.addBlock(currentMethod, currentBlockID);
 				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ addBooleanArrayToTracer(tracerWhile) + line.substring(index+1, line.length());
 				countInstruction=true;
+				counter++;
 				return newLine;
 			}
 			else{
@@ -733,6 +745,7 @@ public class FileParser {
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
 				String booleanArrayString = getBooleanArrayString(line);
 				countInstruction=true;
+				counter++;
 				return booleanArrayString+" "+newLine;
 			}
 
@@ -750,6 +763,7 @@ public class FileParser {
 			MyTracerClass.addBlock(currentMethod, currentBlockID);
 			newLine = line.substring(0, index+1) + tracerDo + line.substring(index+1, line.length());
 			countInstruction=true;
+			counter++;
 			return newLine;
 		}
 		else{
@@ -783,6 +797,7 @@ public class FileParser {
 			MyTracerClass.addBlock(currentMethod, currentBlockID);
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
 			countInstruction=true;
+			counter++;
 			return newLine;
 		}
 		else{
@@ -805,6 +820,7 @@ public class FileParser {
 			MyTracerClass.addBlock(currentMethod, currentBlockID);
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
 			countInstruction=true;
+			counter++;
 			return newLine;
 		}
 		else{
@@ -840,6 +856,7 @@ public class FileParser {
 
 
 			countInstruction=true;
+			counter++;
 			return newLine;
 		}
 		else{
