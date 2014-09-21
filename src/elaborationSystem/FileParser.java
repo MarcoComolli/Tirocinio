@@ -230,7 +230,7 @@ public class FileParser {
 				curlyMethodCount = 1;
 			}
 			currentBlockID = 0;
-			MyTracerClass.addBlock(currentMethod, 0);
+			MyTracerClass.addBlock(currentMethod, 0, -1);
 			return line.substring(0, index+1) + 
 					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
 					" MyTracerClass.recordPath(\""+currentMethod+"\");" +
@@ -610,7 +610,7 @@ public class FileParser {
 			}
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == ':'){
-					MyTracerClass.addBlock(currentMethod, currentBlockID);
+					MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 					newLine = line.substring(0, i+1) + "{" +  tracerCatch + line.substring(i+1, line.length());
 					countInstruction=true;
 					counter++;
@@ -631,7 +631,7 @@ public class FileParser {
 		if(line.contains("{")){
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){
-					MyTracerClass.addBlock(currentMethod, currentBlockID);
+					MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 					newLine = line.substring(0, i+1) + tracerCatch + line.substring(i+1, line.length());
 				}
 			}
@@ -679,7 +679,7 @@ public class FileParser {
 			else{
 				booleanArrayString = getBooleanArrayString(line);
 			}
-			MyTracerClass.addBlock(currentMethod, currentBlockID);
+			MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 			if(booleanArrayString.equals("forEach")){
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
 				System.err.println("foreachhhhh "+ tracerFor);
@@ -722,7 +722,7 @@ public class FileParser {
 				else{
 					booleanArrayString = getBooleanArrayString(line);
 				}
-				MyTracerClass.addBlock(currentMethod, currentBlockID);
+				MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ addBooleanArrayToTracer(tracerWhile) + line.substring(index+1, line.length());
 				countInstruction=true;
 				counter++;
@@ -741,7 +741,7 @@ public class FileParser {
 			System.err.println("line3: "+line);
 			whileAfterDo = false;
 			if(line.contains("while")){
-				MyTracerClass.addBlock(currentMethod, currentBlockID);
+				MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
 				String booleanArrayString = getBooleanArrayString(line);
 				countInstruction=true;
@@ -760,7 +760,7 @@ public class FileParser {
 		String tracerDo = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_DO+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			MyTracerClass.addBlock(currentMethod, currentBlockID);
+			MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 			newLine = line.substring(0, index+1) + tracerDo + line.substring(index+1, line.length());
 			countInstruction=true;
 			counter++;
@@ -794,7 +794,7 @@ public class FileParser {
 
 
 			}
-			MyTracerClass.addBlock(currentMethod, currentBlockID);
+			MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
 			countInstruction=true;
 			counter++;
@@ -817,7 +817,7 @@ public class FileParser {
 		String tracerElse = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_ELSE+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			MyTracerClass.addBlock(currentMethod, currentBlockID);
+			MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
 			countInstruction=true;
 			counter++;
@@ -837,7 +837,7 @@ public class FileParser {
 		String tracerIf = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_IF+","+currentBlockID+");";
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			MyTracerClass.addBlock(currentMethod, currentBlockID);
+			MyTracerClass.addBlock(currentMethod, currentBlockID, currentCode);
 			String booleanArrayString;
 			if(multiLineBooleanCondition){
 				currentBooleanCondition += line;

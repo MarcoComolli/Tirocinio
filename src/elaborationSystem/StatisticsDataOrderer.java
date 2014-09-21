@@ -23,7 +23,7 @@ public class StatisticsDataOrderer {
 
 		TreeSet<String> treeSet = readAndOrderData();
 		writeOrderedData(treeSet);
-		writeNumberOfTestedLinesForMethod(treeSet);
+		writeNumberOfLinesForMethod(treeSet);
 
 
 
@@ -227,12 +227,12 @@ public class StatisticsDataOrderer {
 	 * @param treeSet
 	 * @throws IOException
 	 */
-	private static void writeNumberOfTestedLinesForMethod(
+	private static void writeNumberOfLinesForMethod(
 			TreeSet<String> treeSet) throws IOException {
 		String[] arrayLine = null;
 		String[] numberInstructionsArray;
 		PrintWriter printWriter;
-		String numberOfInstructionsFilePath = filesPath + "\\NumeroIstruzioniTestatePerMetodo.txt";
+		String numberOfInstructionsFilePath = filesPath + "\\NumeroIstruzioniPerMetodo.txt";
 		printWriter = new PrintWriter(new FileWriter(
 				numberOfInstructionsFilePath));
 
