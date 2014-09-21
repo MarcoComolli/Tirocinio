@@ -217,6 +217,14 @@ In tutto, tra test ed elaborazione per altri file, credo siano passate un po' pi
 
 ----
 
+Decisamente troppo direi. Ci sarà qualche errore. Io ho sistemato quello che dovevo e fatto partire tutto: 
+- Datistatistici ora ha poco più di 10000 righe e 1MB di dimensione
+- FilePercorsi 23MB
+- NumeroIstruzioni ha sempre 3300 righe. Quindi mi sa che non era quello l'errore
+- GlobalData ora mi dice che c'è l'11% coperto e il 91% non coperto (mistero)
+- Devo sistemare un errore su numeroIstruzioniperMetodo che mi da tutto a 0
+- CondizioniCoperte 35kb e 336 righe
+
 TODO LIST
 =========
 
