@@ -225,6 +225,23 @@ Decisamente troppo direi. Ci sarà qualche errore. Io ho sistemato quello che do
 - Devo sistemare un errore su numeroIstruzioniperMetodo che mi da tutto a 0
 - CondizioniCoperte 35kb e 336 righe
 
+------
+
+Scrivo ancora 2 cose sui miei file perché visto il tempo che ci vuole per ottenerli, mi sa che li tengo buoni per un po' e me li salvo da qualche parte (I miei file sono stati ottenuti fino al mio ultimo commit e non comprendono le tue ultime modifiche).
+
+I file più grossi sono:
+
+- DatiStatistici 396 MB
+- DatiStatisticiOrdinati 279 MB
+- FilePercorsi 607 MB
+
+Si vede subito che i file DatiStatistici e DatiStatisticiOrdinati non hanno la stessa dimensione anche se quest'ultimo dovrebbe solo riordinare le stringhe.
+Dei rimanenti il più grande è Blocks con 124 KB.
+Il i dati del file GlobalData mi sembrano plausibili visto il tempo impiegato per effettuare i test e visto il numero cumulativo dei blocchi testati.
+La classe StatisticDataOrdere ci ha messo 4 ore e l'esecuzione più lunga è stata quella del metodo writeCoveredConditions() in cui bisognava esaminare riga per riga il file FilePercorsi ed inserire nell'HashMap i metodi non presenti ed effettuare alcuni calcoli. FilePercorsi nel mio caso è enorme e penso ci abbia messo un sacco per leggerlo e poi per effettuare il controllo nell'HashMap se fosse o no presente un metodo avente stesso nome. La scrittura del file CondizioniCoperte penso sia avvenuta molto velocemente.
+
+
+
 TODO LIST
 =========
 
