@@ -245,6 +245,8 @@ La classe StatisticDataOrdere ci ha messo 4 ore e l'esecuzione più lunga è sta
 Ok, si ti conviene tenerli. Con le mie modifiche il file dei DatiStatistici viene più o meno lungo quanto il file Blocks. PErò ti conviene aspettare che tutto sia sistemato prima di rieffettuare i test. Comunque sembra che non fosse quello il problema sul NumerIstruzioni. E' ancora corto. Devo pensare a qualcosa e sistemare anche gli altri (e capire perchè 91%+11% fa 102%. devo capire anche da dove esce quel 2% in più di blocchi.
 A me DatiStatistici e DatiStatistici ordinati sono grandi uguali.
 
+Posso pulire un po' l'output a video? Mi servirebbe reperire alcune informazioni durante l'esecuzione ma ci sono troppe println. Tu hai qualche println che ti interessa lasciare o posso rimuoverne la maggior parte?
+
 
 TODO LIST
 =========
