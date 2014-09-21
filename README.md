@@ -240,6 +240,10 @@ Dei rimanenti il più grande è Blocks con 124 KB.
 Il i dati del file GlobalData mi sembrano plausibili visto il tempo impiegato per effettuare i test e visto il numero cumulativo dei blocchi testati.
 La classe StatisticDataOrdere ci ha messo 4 ore e l'esecuzione più lunga è stata quella del metodo writeCoveredConditions() in cui bisognava esaminare riga per riga il file FilePercorsi ed inserire nell'HashMap i metodi non presenti ed effettuare alcuni calcoli. FilePercorsi nel mio caso è enorme e penso ci abbia messo un sacco per leggerlo e poi per effettuare il controllo nell'HashMap se fosse o no presente un metodo avente stesso nome. La scrittura del file CondizioniCoperte penso sia avvenuta molto velocemente.
 
+-------
+
+Ok, si ti conviene tenerli. Con le mie modifiche il file dei DatiStatistici viene più o meno lungo quanto il file Blocks. PErò ti conviene aspettare che tutto sia sistemato prima di rieffettuare i test. Comunque sembra che non fosse quello il problema sul NumerIstruzioni. E' ancora corto. Devo pensare a qualcosa e sistemare anche gli altri (e capire perchè 91%+11% fa 102%. devo capire anche da dove esce quel 2% in più di blocchi.
+A me DatiStatistici e DatiStatistici ordinati sono grandi uguali.
 
 
 TODO LIST
