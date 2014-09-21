@@ -247,6 +247,9 @@ A me DatiStatistici e DatiStatistici ordinati sono grandi uguali.
 
 Posso pulire un po' l'output a video? Mi servirebbe reperire alcune informazioni durante l'esecuzione ma ci sono troppe println. Tu hai qualche println che ti interessa lasciare o posso rimuoverne la maggior parte?
 
+--------
+
+Pulisci pure, al massimo poi le rimetto.
 
 TODO LIST
 =========
