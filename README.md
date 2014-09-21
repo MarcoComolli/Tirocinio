@@ -212,6 +212,8 @@ Quel lavoro lo faccio domani alla fine che oggi non ho più avuto tempo.
 -----
 
 Sto facendo andare la classe StatisticDataOrderer da circa 4 ore, ma l'esecuzione non si è ancora arrestata, faccio andare tutta notte e poi vedo...
+Alla fine il file CondizioniCoperte è di 32 KB. Credo ci abbia messo un po' più di 4 ore per terminare.
+In tutto, tra test ed elaborazione per altri file, credo siano passate un po' più di 6 ore.
 
 ----
 
