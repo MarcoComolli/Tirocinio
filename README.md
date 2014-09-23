@@ -264,6 +264,11 @@ Ti va se oggi parliamo un attimo delle cose da fare? Incluso anche eventuale com
 
 Sisi va bene...per le 15 va bene? p.s. se tutto va bene riesco a finire l'interfaccia con le progressbar
 
+-------
+
+OK
+
+
 TODO LIST
 =========
 
