@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,8 +22,6 @@ import java.util.SortedSet;
 import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import elaborationSystem.Interface.ProcessTask;
 
 public class FileParser {
 
@@ -40,6 +37,8 @@ public class FileParser {
 	public static final int CODE_PACKAGE = 9;
 	public static final int CODE_ELSEIF = 10;
 	public static final int CODE_TRY = 11;
+	public static final int CODE_FINALLY = 12;
+	public static final int CODE_SYNCHRONIZED = 13;
 
 
 	private final String READ_URI;
@@ -51,8 +50,6 @@ public class FileParser {
 	private boolean processSwitchCase = false;
 	private boolean whileAfterDo = false;
 
-
-
 	private SortedSet<Map.Entry<String, Integer>> currentMethodMapSorted;
 	private Iterator<Entry<String, Integer>> iterator;
 	private int curlyOpened = 0;
@@ -60,28 +57,27 @@ public class FileParser {
 	private int currentCode = -1;
 	private int currentLine = 1;
 
-
 	private String className;
 	private String currentMethod ;
 	private boolean currentMethodReturnVoid = false;
 	private int currentBlockID = 0;
 	private int nextMethodLine;
 	private Entry<String,Integer> iteratorEntry;
-	private int currentInstructionCount = 0;
 	private boolean processFirstCase;
 	private int arrayConditionsNumber=0;
 	private String currentBooleanCondition = "";
 	private boolean multiLineBooleanCondition = false;
 	private HashMap<String,Integer> linesInBlock=new HashMap<String,Integer>();
-	private boolean countInstruction=false;
-	private int counter=0;
 	private String currentBooleanArray;
 	private String lastInstructionTemp = "";
 	private String lastMethodInstrucion;
 	private boolean isInTryStatement = false;
-	private BufferedWriter out;
+	private boolean doubleCurly = false;
+	private boolean isInMethod = false;
+	
 	private static boolean firstTime= true;
 	private String midFilesPath;
+	private Stack<Integer> stackBlockID, stackInstruction;
 
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap,
 			String writeURI, String root, String midFilesPath) {
@@ -91,6 +87,8 @@ public class FileParser {
 		System.out.println("WRITEURI " + writeURI);
 		className = extractClassFromPathString(readURI);
 		File f = new File(readURI);
+		stackBlockID = new Stack<Integer>();
+		stackInstruction = new Stack<Integer>();
 		//		String packageName = extractPackageFromFile(f);
 		SortedMap<String, Integer> currentMethodMap = getByPreffix(methodMap, getFullyQualifiedName(readURI, root) + " ");
 //				System.out.println("|||||| MAPPA NON SORTED ||||||");
@@ -143,18 +141,19 @@ public class FileParser {
 				line = CommentsRemover.removeComments(line);
 				String newLine = parseString(line);
 
-				if(countInstruction){
-					currentInstructionCount+=findInstructions(line);
+				if(stackInstruction.isEmpty()){
+					isInMethod = false;
 				}
-				if(line!=null && line.contains("}") && countInstruction){
-					linesInBlock.put(currentMethod +"@"+currentBlockID, currentInstructionCount);
-					currentInstructionCount=0;
-					if(counter==1){
-						countInstruction=false;
-						counter=0;
-					}else{
-						counter--;
-					}
+				if(isInMethod){
+					int currentInstructionCount = stackInstruction.pop();
+					currentInstructionCount+=findInstructions(line);
+					stackInstruction.push(currentInstructionCount);
+					
+				}
+				if(line!=null && line.contains("}") && isInMethod){
+					int id = stackBlockID.pop();
+					int instructions = stackInstruction.pop();
+					linesInBlock.put(currentMethod +"@"+id, instructions);
 					
 				}
 				if(currentLine == nextMethodLine && line != null){
@@ -228,10 +227,12 @@ public class FileParser {
 	private String insertMethodTracer(String currentMethod, String line) {
 		int index = checkCurlyOpen(line);
 		if(index != -1){
-			if(currentMethodReturnVoid){
-				curlyMethodCount = 1;
-			}
+			isInMethod = true;
+			curlyMethodCount = 1;
+
 			currentBlockID = 0;
+			stackBlockID.push(0);
+			stackInstruction.push(0);
 			MyTracerClass.addBlock(currentMethod, 0, -1);
 			return line.substring(0, index+1) + 
 					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
@@ -471,7 +472,14 @@ public class FileParser {
 				break;
 			case CODE_TRY:
 				isInTryStatement  = true;
+				newLine = processTry(line);
 				break;
+			case CODE_FINALLY:
+				newLine = processFinally(line);
+				break;
+			case CODE_SYNCHRONIZED:
+				newLine = processSynchronized(line);
+				break;	
 			default:
 				break;
 			}
@@ -489,6 +497,60 @@ public class FileParser {
 
 	}
 
+
+	private String processSynchronized(String line) {
+		currentBlockID++;
+		String newLine = null;
+		String tracerSync = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_SYNCHRONIZED+","+currentBlockID+");";
+		if(line.contains("{")){
+			for (int i = 0; i < line.length(); i++) {
+				if(line.charAt(i) == '{'){
+					MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_SYNCHRONIZED);
+					newLine = line.substring(0, i+1) + tracerSync + line.substring(i+1, line.length());
+				}
+			}
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
+			return newLine;
+		}
+		return line;
+	}
+
+	private String processFinally(String line) {
+		currentBlockID++;
+		String newLine = null;
+		String tracerFinally = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_FINALLY+","+currentBlockID+");";
+		if(line.contains("{")){
+			for (int i = 0; i < line.length(); i++) {
+				if(line.charAt(i) == '{'){
+					MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_FINALLY);
+					newLine = line.substring(0, i+1) + tracerFinally + line.substring(i+1, line.length());
+				}
+			}
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
+			return newLine;
+		}
+		return line;
+	}
+
+	private String processTry(String line) {
+		currentBlockID++;
+		String newLine = null;
+		String tracerTry = " MyTracerClass.tracer(\""+currentMethod+"\","+CODE_TRY+","+currentBlockID+");";
+		if(line.contains("{")){
+			for (int i = 0; i < line.length(); i++) {
+				if(line.charAt(i) == '{'){
+					MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_TRY);
+					newLine = line.substring(0, i+1) + tracerTry + line.substring(i+1, line.length());
+				}
+			}
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
+			return newLine;
+		}
+		return line;
+	}
 
 	//cerca se c'è un return e aggiunge la riga
 	private String checkReturnsAndThrow(String line) {
@@ -518,17 +580,28 @@ public class FileParser {
 
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private int checkEndOfMethod(String line) {
+		boolean foundClosed = false;
+		boolean foundOpen = false;
+		doubleCurly = false;
 		if(curlyMethodCount != 0){ //fai il tutto quando il count non e' 0
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non e' in una stringa
 						curlyMethodCount++;
+						foundOpen = true;
+						if(foundClosed){
+							doubleCurly = true;
+						}
 					}
 
 				}
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non e' in una stringa
 						curlyMethodCount--;
+						foundClosed = true;
+						if(foundOpen){
+							doubleCurly = true;
+						}
 						if(curlyMethodCount == 0){
 							return i;
 						}
@@ -612,8 +685,8 @@ public class FileParser {
 				if(line.charAt(i) == ':'){
 					MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_CASE);
 					newLine = line.substring(0, i+1) + "{" +  tracerCatch + line.substring(i+1, line.length());
-					countInstruction=true;
-					counter++;
+					stackBlockID.push(currentBlockID);
+					stackInstruction.push(0);
 				}
 			}
 			if(processFirstCase){
@@ -635,15 +708,15 @@ public class FileParser {
 					newLine = line.substring(0, i+1) + tracerCatch + line.substring(i+1, line.length());
 				}
 			}
-			countInstruction=true;
-			counter++;
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
 			return newLine;
 		}
 		return line;
 	}
 
 	private String processConditional(String line) {
-		currentBlockID++;
+//		currentBlockID++;
 		return line;
 	}
 
@@ -682,15 +755,13 @@ public class FileParser {
 			MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_FOR);
 			if(booleanArrayString.equals("forEach")){
 				newLine = line.substring(0, index+1) + tracerFor + line.substring(index+1, line.length());	
-				countInstruction=true;
-				counter++;
-				return newLine;
+				
 			}else{
-				newLine = line.substring(0, index+1) + booleanArrayString+" "+addBooleanArrayToTracer(tracerFor) + line.substring(index+1, line.length());
-				countInstruction=true;
-				counter++;
-				return newLine;
+				newLine = line.substring(0, index+1) + booleanArrayString+" "+addBooleanArrayToTracer(tracerFor) + line.substring(index+1, line.length());	
 			}
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
+			return newLine;
 		}
 		else{
 			currentBlockID--;
@@ -722,8 +793,8 @@ public class FileParser {
 				}
 				MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_WHILE);
 				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ addBooleanArrayToTracer(tracerWhile) + line.substring(index+1, line.length());
-				countInstruction=true;
-				counter++;
+				stackBlockID.push(currentBlockID);
+				stackInstruction.push(0);
 				return newLine;
 			}
 			else{
@@ -740,8 +811,8 @@ public class FileParser {
 				MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_WHILE);
 				newLine = line.substring(0, index+1) + tracerWhile + line.substring(index+1, line.length());				
 				String booleanArrayString = getBooleanArrayString(line);
-				countInstruction=true;
-				counter++;
+				stackBlockID.push(currentBlockID);
+				stackInstruction.push(0);
 				return booleanArrayString+" "+newLine;
 			}
 
@@ -758,8 +829,8 @@ public class FileParser {
 		if(index != -1){
 			MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_DO);
 			newLine = line.substring(0, index+1) + tracerDo + line.substring(index+1, line.length());
-			countInstruction=true;
-			counter++;
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
 			return newLine;
 		}
 		else{
@@ -792,8 +863,8 @@ public class FileParser {
 			}
 			MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_ELSEIF);
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
-			countInstruction=true;
-			counter++;
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
 			return newLine;
 		}
 		else{
@@ -815,8 +886,8 @@ public class FileParser {
 		if(index != -1){
 			MyTracerClass.addBlock(currentMethod, currentBlockID, CODE_ELSE);
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
-			countInstruction=true;
-			counter++;
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
 			return newLine;
 		}
 		else{
@@ -850,8 +921,8 @@ public class FileParser {
 					line.substring(index+1, line.length());
 
 
-			countInstruction=true;
-			counter++;
+			stackBlockID.push(currentBlockID);
+			stackInstruction.push(0);
 			return newLine;
 		}
 		else{

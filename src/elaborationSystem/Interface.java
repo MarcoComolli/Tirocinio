@@ -376,8 +376,7 @@ public class Interface extends JFrame{
 		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
 		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
 		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
-		
-		
+			
 		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
 	}
 	
@@ -769,6 +768,9 @@ public class Interface extends JFrame{
 				
 				
 			} catch (IOException e) {
+				e.printStackTrace();
+			}
+            catch (Exception e) {
 				e.printStackTrace();
 			}
             

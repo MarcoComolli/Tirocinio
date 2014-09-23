@@ -27,8 +27,26 @@ public class StatisticsDataOrderer {
 
 		//writeNotCoveredConditions();
 		writeCoveredConditions();
-		
+	
 
+	}
+	
+	public void bla() { // 0 p1
+		int x = 0;
+		if (x == 0) { // 1 p2
+			try { // 2 p3
+				
+				
+				
+				
+				
+				
+			} catch (Exception e) { // 4 p3
+			} finally {
+
+			}
+			
+		}
 	}
 
 	public static void writeCoveredConditions() throws IOException {
