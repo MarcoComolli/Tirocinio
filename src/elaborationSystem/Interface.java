@@ -472,7 +472,10 @@ public class Interface extends JFrame{
 				    	System.out.println(filesCount);
 				    	testTask.setTheProgress(progress);					
 						Result result = junit.run(cl);
-						MyTracerClass.endRecordTestCoverage(fullname);
+						float timeSec = result.getRunTime()/1000f;
+						int testNumber = result.getRunCount();
+						int failCount =  result.getFailureCount();
+						MyTracerClass.endRecordTestCoverage(fullname,timeSec,testNumber, failCount);
 						System.out.println("Test finito");
 
 					} catch (ClassNotFoundException e) {

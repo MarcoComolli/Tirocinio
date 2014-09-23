@@ -20,7 +20,6 @@ public class MyTracerClass {
 	private static String currentObjectIDPath;
 	private static int currentexecutionNumberPath = -1;
 	private static boolean firstTime = true, firstTimeTest = true, firstTimeBlock = true, firstTimeStat = true;
-	private static int instructionsNumber;
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0;
 	private static boolean recordTest = false;
@@ -36,11 +35,7 @@ public class MyTracerClass {
 
 	public static void tracer(String objectID, int blockCode, int blockID) {
 		try {
-			insertIstructionsNumber();
-
-			if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
-				instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
-			}
+			
 
 			int n = 1;
 			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
@@ -57,7 +52,6 @@ public class MyTracerClass {
 				writePathsFile(objectID, blockID);
 			}
 
-			instructionsNumber = -1;
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
 
@@ -76,12 +70,7 @@ public class MyTracerClass {
 
 	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
 		try {
-			insertIstructionsNumber();
-
-
-			if(instructionsCountMap.containsKey(objectID+"@"+blockID)){
-				instructionsNumber=instructionsCountMap.get(objectID+"@"+blockID);
-			}
+			
 
 			int n = 1;
 			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
@@ -95,7 +84,6 @@ public class MyTracerClass {
 			if(recordPath){
 				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
 			}
-			instructionsNumber=-1;
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
 
@@ -124,30 +112,34 @@ public class MyTracerClass {
 			printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
 		}
 
-		printWriter.println(objectID +" #c" + blockCode + " @" + blockID + " #v " + n +" #i" +instructionsNumber);
+		
+		Integer instructions = instructionsCountMap.get(objectID+"@"+blockID);
+		if(instructions == null){
+			System.out.println("E' nullo " + objectID+"@"+blockID);
+			instructions = -1;
+		}
+		printWriter.println(objectID +" #c" + blockCode + " @" + blockID + " #v " + n +" #i" +instructions);
 		printWriter.flush();
 
 
 		printWriter.close();
 	}
 
-	private static void insertIstructionsNumber() throws FileNotFoundException,
-	IOException {
-		if(firstTime){
-			BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\NumeroIstruzioni.txt"));
-			try {
-				String line = br.readLine();
-				while (line != null) {
-					String []lineArray=line.split("#");
-					instructionsCountMap.put(lineArray[0],Integer.parseInt(lineArray[1]));
-					line = br.readLine();
-				}
+	private static void insertIstructionsNumber() throws FileNotFoundException, IOException {
 
-			} finally {
-				br.close();
+		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\NumeroIstruzioni.txt"));
+		try {
+			String line = br.readLine();
+			while (line != null) {
+				String []lineArray=line.split("#");
+				instructionsCountMap.put(lineArray[0],Integer.parseInt(lineArray[1]));
+				line = br.readLine();
 			}
-			//firstTime=false;
+
+		} finally {
+			br.close();
 		}
+
 	}
 
 	
@@ -229,7 +221,7 @@ public class MyTracerClass {
 		coveredBlocksTest = 0;
 	}
 	
-	public static void endRecordTestCoverage(String fullname){
+	public static void endRecordTestCoverage(String fullname, float timeSec, int testNumber, int failCount){
 		try{
 			PrintWriter printWriter;
 			String pathsFilePath= filesPath + "\\TestCoverage.txt";
@@ -241,7 +233,7 @@ public class MyTracerClass {
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
 			}
 
-			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest);
+			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec );
 			printWriter.flush();
 			printWriter.close();
 
@@ -263,6 +255,7 @@ public class MyTracerClass {
 				blockCode = key.substring(key.indexOf("#")+1);
 				blockID = key.substring(key.indexOf("@") +1, key.indexOf("#"));
 				
+				insertIstructionsNumber();
 				writeStatisticsData(objectID, Integer.parseInt(blockCode), Integer.parseInt(blockID), entry.getValue());
 				
 				if(entry.getValue() != 0){

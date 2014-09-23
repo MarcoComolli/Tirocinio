@@ -220,8 +220,7 @@ public class StatisticsDataOrderer {
 	 * @param treeSet
 	 * @throws IOException
 	 */
-	public static void writeNumberOfLinesForMethod(
-			TreeSet<String> treeSet) throws IOException {
+	public static void writeNumberOfLinesForMethod(TreeSet<String> treeSet) throws IOException {
 		String[] arrayLine = null;
 		String[] numberInstructionsArray;
 		PrintWriter printWriter;
@@ -280,10 +279,8 @@ public class StatisticsDataOrderer {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static TreeSet<String> readAndOrderData() throws FileNotFoundException,
-	IOException {
-		BufferedReader br = new BufferedReader(new FileReader(
-				filesPath + "\\DatiStatistici.txt"));
+	public static TreeSet<String> readAndOrderData() throws FileNotFoundException, IOException {
+		BufferedReader br = new BufferedReader(new FileReader( filesPath + "\\DatiStatistici.txt"));
 		TreeSet<String> treeSet = new TreeSet<String>();
 		try {
 			String line = br.readLine();
