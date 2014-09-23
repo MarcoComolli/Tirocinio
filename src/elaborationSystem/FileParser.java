@@ -72,7 +72,6 @@ public class FileParser {
 	private String lastInstructionTemp = "";
 	private String lastMethodInstrucion;
 	private boolean isInTryStatement = false;
-	private boolean doubleCurly = false;
 	private boolean isInMethod = false;
 	
 	private static boolean firstTime= true;
@@ -580,28 +579,17 @@ public class FileParser {
 
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private int checkEndOfMethod(String line) {
-		boolean foundClosed = false;
-		boolean foundOpen = false;
-		doubleCurly = false;
 		if(curlyMethodCount != 0){ //fai il tutto quando il count non e' 0
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non e' in una stringa
 						curlyMethodCount++;
-						foundOpen = true;
-						if(foundClosed){
-							doubleCurly = true;
-						}
 					}
 
 				}
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non e' in una stringa
 						curlyMethodCount--;
-						foundClosed = true;
-						if(foundOpen){
-							doubleCurly = true;
-						}
 						if(curlyMethodCount == 0){
 							return i;
 						}

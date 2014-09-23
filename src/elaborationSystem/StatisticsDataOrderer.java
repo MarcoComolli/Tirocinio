@@ -30,32 +30,12 @@ public class StatisticsDataOrderer {
 	
 
 	}
-	
-	public void bla() { // 0 p1
-		int x = 0;
-		if (x == 0) { // 1 p2
-			try { // 2 p3
-				
-				
-				
-				
-				
-				
-			} catch (Exception e) { // 4 p3
-			} finally {
-
-			}
-			
-		}
-	}
 
 	public static void writeCoveredConditions() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(
-				filesPath + "\\FilePercorsi.txt"));
+		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));
 		PrintWriter printWriter;
         String numberOfInstructionsFilePath = filesPath + "\\CondizioniCoperte.txt";
-        printWriter = new PrintWriter(new FileWriter(
-                numberOfInstructionsFilePath));
+        printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
 		String[] arrayLine;
 		
 		Set<String> valuatedConditions = null;
@@ -65,8 +45,7 @@ public class StatisticsDataOrderer {
 		
 		try {
 			String line = br.readLine();
-			while (line != null) {
-							
+			while (line != null) {		
 				arrayLine = line.split(": ");
 				if(!arrayLine[1].contains("-")){	
 					methodAndBlock=arrayLine[1];
@@ -80,9 +59,9 @@ public class StatisticsDataOrderer {
 				
 				System.out.println(methodAndBlock+".");
 						
-				if(evaluatedConditionsInPath!=""){
-					if(evaluatedConditions.containsValue(methodAndBlock)){
-						valuatedConditions= evaluatedConditions.get(methodAndBlock);
+				if(evaluatedConditionsInPath!=""){ 		//se ci sono le condizioni
+					if(evaluatedConditions.containsKey(methodAndBlock)){
+						valuatedConditions = evaluatedConditions.get(methodAndBlock);
 						System.err.println(methodAndBlock +" è presente");
 						valuatedConditions.add(evaluatedConditionsInPath);
 
@@ -98,14 +77,12 @@ public class StatisticsDataOrderer {
 			}
 
 			
-			for (Entry<String, Set<String>> entry : evaluatedConditions
-					.entrySet()) {
+			for (Entry<String, Set<String>> entry : evaluatedConditions.entrySet()) {
 				String valuated="";
 				for(String conditionCombination : entry.getValue()){
 					valuated+=conditionCombination.substring(0,conditionCombination.length()-1) +";";
 				}
-				printWriter.println(entry.getKey() + " valutate : "
-						+ valuated);
+				printWriter.println(entry.getKey() + " valutate : " + valuated);
 				
 				printWriter.flush();
 
