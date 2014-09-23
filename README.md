@@ -250,10 +250,15 @@ Posso pulire un po' l'output a video? Mi servirebbe reperire alcune informazioni
 --------
 
 Pulisci pure, al massimo poi le rimetto.
+
 ------
 
 Ho tolto un bel po' di sysout e ho scoperto che quei *null* che mi dava nei file al posto del nome del metodo è il responsabile dell'errore sulla % errata nel global test.  
 Il fatto che ci siano i null deriva dal fatto che ASTParser non legge le classi dichiarate come enumerativi (enum al posto di class) e tutti i metodi/blocchi al suo interno vengono contati null perchè non sono presenti nel file "metodiTirocinio" che fa ASTParser. Provo a vedere se riesco a fargli parsare gli enum.
+
+---------
+
+Ti va se oggi parliamo un attimo delle cose da fare? Incluso anche eventuale comunicazione al prof...
 
 TODO LIST
 =========
