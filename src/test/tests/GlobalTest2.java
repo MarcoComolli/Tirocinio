@@ -12,12 +12,12 @@ public class GlobalTest2 {
 	@Test
 	public void BaseConstructTest2() throws IOException{
 		BaseConstructDue bc2 = new BaseConstructDue();
-     	bc2.methodIf();
+     	bc2.methodIf2();
 		BaseConstruct bc = new BaseConstruct();
      	bc.methodLoop();
-     	
-		
-		//bc.methodIf();
+     	bc2.methodTry();
+     	bc2.methodSynchronized();
+     	bc.methodIf();
 		
 	}
 

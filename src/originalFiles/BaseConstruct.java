@@ -30,9 +30,9 @@ public class BaseConstruct {
 		;
 		return y;
 	}
-	
-	public void methodVoid(){
-		
+
+	public void methodVoid() {
+
 	}
 
 	/**
@@ -56,15 +56,15 @@ public class BaseConstruct {
 		return y;
 	}
 
-	public int methodSwitch() 
-	{
-		switch (x){
-		case 0:{
+	public int methodSwitch() {
+		switch (x) {
+		case 0: {
 			y++;
-			break;}
+			break;
+		}
 
 		case 1:
-			if(x == 0){
+			if (x == 0) {
 				y++;
 			}
 			y--;
@@ -95,13 +95,14 @@ public class BaseConstruct {
 		}
 		return x;
 	}
-	public int methodForEach(int x){ 
-	
-		LinkedList<String> s= new LinkedList();
-	for (String str:s) {
-		x++;
-	}
-	return x;
+
+	public int methodForEach(int x) {
+
+		LinkedList<String> s = new LinkedList();
+		for (String str : s) {
+			x++;
+		}
+		return x;
 	}
 
 }
