@@ -23,7 +23,6 @@ public class CopyFileVisitor extends SimpleFileVisitor<Path> {
 		this.targetPath = targetPath;
 		this.ct = ct;
 		this.filesNumber = filesNumber;
-		System.out.println(filesNumber);
 	}
 
 	@Override

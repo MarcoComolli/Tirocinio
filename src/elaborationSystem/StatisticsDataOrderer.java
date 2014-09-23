@@ -25,15 +25,13 @@ public class StatisticsDataOrderer {
 		writeOrderedData(treeSet);
 		writeNumberOfLinesForMethod(treeSet);
 
-
-
 		//writeNotCoveredConditions();
 		writeCoveredConditions();
 		
 
 	}
 
-	private static void writeCoveredConditions() throws IOException {
+	public static void writeCoveredConditions() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
 				filesPath + "\\FilePercorsi.txt"));
 		PrintWriter printWriter;
@@ -195,7 +193,7 @@ public class StatisticsDataOrderer {
 		}
 	}
 
-	private static Set<String> getCombinationsList(int length) {
+	public static Set<String> getCombinationsList(int length) {
 		Set<String> lista = new HashSet<String>();
 		String booleana="";
 		//final int n = 2;
@@ -227,7 +225,7 @@ public class StatisticsDataOrderer {
 	 * @param treeSet
 	 * @throws IOException
 	 */
-	private static void writeNumberOfLinesForMethod(
+	public static void writeNumberOfLinesForMethod(
 			TreeSet<String> treeSet) throws IOException {
 		String[] arrayLine = null;
 		String[] numberInstructionsArray;
@@ -266,7 +264,7 @@ public class StatisticsDataOrderer {
 	 * @param treeSet
 	 * @throws IOException
 	 */
-	private static void writeOrderedData(TreeSet<String> treeSet) throws IOException {
+	public static void writeOrderedData(TreeSet<String> treeSet) throws IOException {
 		PrintWriter printWriter;
 		String numberOfInstructionsFilePath = filesPath + "\\DatiStatisticiOrdinati.txt";
 		printWriter = new PrintWriter(new FileWriter(
@@ -287,7 +285,7 @@ public class StatisticsDataOrderer {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private static TreeSet<String> readAndOrderData() throws FileNotFoundException,
+	public static TreeSet<String> readAndOrderData() throws FileNotFoundException,
 	IOException {
 		BufferedReader br = new BufferedReader(new FileReader(
 				filesPath + "\\DatiStatistici.txt"));

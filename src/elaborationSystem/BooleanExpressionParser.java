@@ -21,17 +21,11 @@ public class BooleanExpressionParser {
 		a[8] = "if ((stack.isEmpty() || (isMethodCall(node) && isMethodBla(node) & (line.startWith(\"true || false\") | x == 0))))";
 		a[9] = "if((methodDeclaration.getMethodName().equals(\"setUp\") || methodDeclaration.getMethodName().equals(\"tearDown\")) && junitImported)";
 		
-
-		
-		for (int i = 0; i < a.length; i++) {
-			System.out.println(Arrays.toString(extractOperands(a[i])));
-		}
 	}
 
 	//estrae gli operatori nell'array result
 	public static String[] extractOperands(String string) {
 		String expression = extractBooleanExpression(string);
-		System.out.println("Espressione: " + expression);
 		if(expression.equals("forEach")){
 			return new String[]{"forEach"};
 		}

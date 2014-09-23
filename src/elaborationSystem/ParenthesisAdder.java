@@ -11,19 +11,28 @@ import java.util.NavigableMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import elaborationSystem.Interface.ProcessTask;
+
 
 public class ParenthesisAdder {
 	
 	private LinkedList<File> dirList = new LinkedList<File>();
 	private TreeMap<String, Integer> methodMap;
 	private String rootPath, writePath, midFilesPath;
+	private ProcessTask processTask;
+	private int filesCount;
+	private double increment = 50;
+	private int progress = 50;
 	
 	
-	public ParenthesisAdder(TreeMap<String, Integer> methodMap, String rootPath, String writePath, String midFilesPath){
+	public ParenthesisAdder(TreeMap<String, Integer> methodMap, String rootPath, String writePath, String midFilesPath, ProcessTask processTask, int filesCount){
 		this.methodMap = methodMap;
 		this.rootPath = rootPath;
 		this.writePath = writePath;
 		this.midFilesPath = midFilesPath;
+		this.processTask = processTask;
+		this.filesCount = filesCount;
+		processTask.setTheProgress(50);
 	}
 	public void parseFilesInDir(String dirPath){
 
@@ -46,19 +55,19 @@ public class ParenthesisAdder {
 			return;
 		}
 		
-		for (int i = 0; i < files.length; i++) {
-			System.out.println("file: " + files[i].getAbsolutePath());
-		}
 		String filePath = null;
 
 		for (File f : files) {
 			filePath = f.getAbsolutePath();
-			System.out.println(filePath);
 
 			
 			if (f.isFile()) {
 				if(getExtension(f).equals("java")){
 					FileParser fp = new FileParser(f.getAbsolutePath(),methodMap, writePath +"\\" + getRelativePath(filePath, rootPath), rootPath, midFilesPath);
+				 	increment += 100.0/filesCount/2.00;
+				 	System.out.println(increment + " " + filesCount);
+			    	progress = (int)increment;
+			    	processTask.setTheProgress(progress);
 					fp.a();
 				}
 
@@ -69,14 +78,12 @@ public class ParenthesisAdder {
 		}
 
 		if(!dirList.isEmpty()){ //se la directory non è vuota
-			System.out.println("Cerco in:" + dirList.getFirst().getAbsolutePath());
 			parseFilesInDir(dirList.poll().getAbsolutePath());
 		}
 	}
 	
 	private String getRelativePath(String absolutePath, String root) {
 		String s = absolutePath.replace(root, "");
-		System.out.println("THE RELATIVE IS: " + s);
 		return s;
 	}
 	public static void main(String[] args) throws IOException {
@@ -94,14 +101,14 @@ public class ParenthesisAdder {
 
 		//C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java --> path per pmd
 		//F:/Documenti - Marco/JavaPrg/Workspace/Tirocinio/src/originalFiles/ --> path test base
-		String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java";
-		String writePath = "C:/Users/Marco/Desktop/nn/";
-		String txtFile = "C:/Users/Marco/Desktop/MetodiTirocinio.txt";
-		MethodSignatureExtractor mse = new MethodSignatureExtractor(txtFile,rootPath);
-		TreeMap<String, Integer> m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/");
-		ParenthesisAdder p = new ParenthesisAdder(m, rootPath, writePath, "C:/Users/Marco/Desktop");
-		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
-		p.paintMap(m);
+//		String rootPath = "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java";
+//		String writePath = "C:/Users/Marco/Desktop/nn/";
+//		String txtFile = "C:/Users/Marco/Desktop/MetodiTirocinio.txt";
+//		MethodSignatureExtractor mse = new MethodSignatureExtractor(txtFile,rootPath);
+//		TreeMap<String, Integer> m = mse.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/");
+//		ParenthesisAdder p = new ParenthesisAdder(m, rootPath, writePath, "C:/Users/Marco/Desktop");
+//		p.parseFilesInDir("C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java");
+//		p.paintMap(m);
 
 		
 		

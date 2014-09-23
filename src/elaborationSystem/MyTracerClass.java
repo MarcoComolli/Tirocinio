@@ -43,13 +43,14 @@ public class MyTracerClass {
 			}
 
 			int n = 1;
-			if(countMap.containsKey(objectID+"@"+blockID)){
-				n = countMap.get(objectID+"@"+blockID);
+			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
+				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
 				n++;
 			}
+			else{
+				System.out.println(countMap.size() + " Questo blocco non è contenuto: " + objectID + " block: " + blockID + " esecuzione " + n);
+			}
 
-			System.out.println("Oggetto: " + objectID + " code: " + blockCode + "@" + blockID + " numero di volte: " + n
-					+" numero istruzioni nel blocco: " +instructionsNumber);
 
 			
 			if(recordPath){
@@ -59,7 +60,6 @@ public class MyTracerClass {
 			instructionsNumber = -1;
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
-			System.out.println(countMap.size());
 
 			if(recordPath){ //se devo registrare il cammino
 				blockList.add(objectID + "@" + blockID);
@@ -84,23 +84,20 @@ public class MyTracerClass {
 			}
 
 			int n = 1;
-			if(countMap.containsKey(objectID+"@"+blockID)){
-				n = countMap.get(objectID+"@"+blockID);
+			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
+				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
 				n++;
 			}
+			else{
+				System.out.println("-" + countMap.size() + " Questo blocco non è contenuto: " + objectID + " block: " + blockID + " esecuzione " + n);
+			}
 
-			System.out.println("Oggetto: " + objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-					+" numero istruzioni nel blocco: " +instructionsNumber);
-
-
-			
 			if(recordPath){
 				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
 			}
 			instructionsNumber=-1;
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
-			System.out.println(countMap.size());
 
 			if(recordPath){ //se devo registrare il cammino
 				blockList.add(objectID + "@" + blockID);
@@ -141,7 +138,6 @@ public class MyTracerClass {
 			try {
 				String line = br.readLine();
 				while (line != null) {
-					System.err.println(line);
 					String []lineArray=line.split("#");
 					instructionsCountMap.put(lineArray[0],Integer.parseInt(lineArray[1]));
 					line = br.readLine();
@@ -210,7 +206,6 @@ public class MyTracerClass {
 			currentexecutionNumberPath = countMap.get(objectID+"@0#-1"); //il codice è 0 perchè è l'inizio del metodo
 			currentObjectIDPath = objectID;
 			blockList.clear();
-			System.out.println("Inizio a registrare per " + objectID + "-" + currentexecutionNumberPath);
 		}
 	}
 
@@ -219,11 +214,6 @@ public class MyTracerClass {
 			recordPath = false;
 			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
 			pathMap.put(objectID+"-"+ currentexecutionNumberPath, blockList);
-			System.out.println("Finisco di registrare per " + objectID +"-"+ currentexecutionNumberPath);
-			for (String s : newList) {
-				System.out.print(s +  " >>> ");
-			}
-			System.out.println();
 		}
 
 	}
@@ -264,11 +254,10 @@ public class MyTracerClass {
 	
 	public static void endOfTests(){
 		try{
-
+			
 			int testedBlockCount = 0, uncoveredBlocks = 0;
 			String objectID, blockCode, blockID;
 			for(Entry<String,Integer> entry : countMap.entrySet()){
-				
 				String key = entry.getKey();
 				objectID = key.substring(0, key.indexOf("@"));
 				blockCode = key.substring(key.indexOf("#")+1);
@@ -320,7 +309,7 @@ public class MyTracerClass {
 			blockCount++;
 			countMap.put(blockName+"@"+blockID+"#"+blockCode, 0);
 
-			printWriter.println(blockName+"@"+blockID);
+			printWriter.println(blockName+"@"+blockID+"#"+blockCode);
 			printWriter.flush();
 			printWriter.close();
 

@@ -11,9 +11,11 @@ import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -27,16 +29,23 @@ import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
+import elaborationSystem.Interface.ProcessTask;
+
 public class MethodSignatureExtractor {
 
 	private LinkedList<File> dirList = new LinkedList<File>();
 	private TreeMap<String, Integer> methodMap;
 	private File currentFile;
 	private String rootPath;
+	private ProcessTask processTask;
+	private int filesNumber, progress = 0;
+	private double increment;
 
 	BufferedWriter out;
 
-	public MethodSignatureExtractor(String writePath, String rootPath) {
+	public MethodSignatureExtractor(String writePath, String rootPath, ProcessTask processTask, int filesNumber) {
+		this.filesNumber = filesNumber;
+		this.processTask =  processTask;
 		this.rootPath = rootPath;
 		System.out.println("writepath " + writePath);
 		Path write = new File(writePath).toPath();
@@ -45,10 +54,7 @@ public class MethodSignatureExtractor {
 		}
 		methodMap = new TreeMap<String, Integer>();
 		try {
-			out = new BufferedWriter(new FileWriter(writePath
-					+ "\\MetodiTirocinio.txt"));
-			System.out.println("Filewriter: " + writePath
-					+ "\\MetodiTirocinio.txt");
+			out = new BufferedWriter(new FileWriter(writePath + "\\MetodiTirocinio.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +69,10 @@ public class MethodSignatureExtractor {
 		parser.setSource(str.toCharArray());
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		parser.setResolveBindings(true);
+		
+		Map options = JavaCore.getOptions();
+		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_7); //or newer version
+		parser.setCompilerOptions(options);
 
 		final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
 
@@ -121,16 +131,16 @@ public class MethodSignatureExtractor {
 				temp = getFullyQualifiedName(currentFile.getAbsolutePath(),
 						rootPath) + " " + nodeName + "," + returned + ",;";
 
-				System.out.println("Method: '" + node + "'" + " return: "
-						+ node.getReturnType2() + "\nat line "
-						+ +cu.getLineNumber(node.getStartPosition())
-						+ "\n\n altri fattori: \n" + "node name "
-						+ node.getName() + "\n" + "return type "
-						+ node.getReturnType2() + "\nparameters: ");
+//				System.out.println("Method: '" + node + "'" + " return: "
+//						+ node.getReturnType2() + "\nat line "
+//						+ +cu.getLineNumber(node.getStartPosition())
+//						+ "\n\n altri fattori: \n" + "node name "
+//						+ node.getName() + "\n" + "return type "
+//						+ node.getReturnType2() + "\nparameters: ");
 
 				List<SingleVariableDeclaration> list = node.parameters();
 				for (int i = 0; i < list.size(); i++) {
-					System.out.println(" - " + list.get(i).getType());
+//					System.out.println(" - " + list.get(i).getType());
 					temp = temp.concat(list.get(i).getType().toString() + " ");
 				}
 				if (node.getReturnType2() != null) {// !nodeName.equals(currentFileName)
@@ -140,7 +150,6 @@ public class MethodSignatureExtractor {
 
 				try {
 					if (returned != null) { // se non è un costruttore
-						System.out.println("SCRIVO! " + temp);
 						out.write(temp);
 						out.newLine();
 						out.flush();
@@ -227,7 +236,6 @@ public class MethodSignatureExtractor {
 		// "C:/Users/Marco/Desktop/pmd-src-5.1.1/src/main/java/net/sourceforge/pmd";
 
 		File root = new File(dirPath);
-		System.out.println("rootpath: " + root.getAbsolutePath());
 		File[] files = root.listFiles();
 		if (files == null) {
 			if (root.isFile()) {
@@ -240,9 +248,6 @@ public class MethodSignatureExtractor {
 				return methodMap;
 			}
 		}
-		for (int i = 0; i < files.length; i++) {
-			System.out.println("file: " + files[i].getAbsolutePath());
-		}
 		String filePath = null;
 
 		for (File f : files) {
@@ -251,6 +256,9 @@ public class MethodSignatureExtractor {
 			System.out.println("Current: " + filePath);
 			if (f.isFile()) {
 				try {
+				 	increment += 100.0/filesNumber/2;
+			    	progress = (int)increment;
+			    	processTask.setTheProgress(progress);
 					parse(readFileToString(filePath));
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -263,8 +271,6 @@ public class MethodSignatureExtractor {
 		}
 
 		if (!dirList.isEmpty()) { // se la directory non è vuota
-			System.out.println("Cerco in:"
-					+ dirList.getFirst().getAbsolutePath());
 			parseFilesInDir(dirList.poll().getAbsolutePath());
 		}
 		out.close();
