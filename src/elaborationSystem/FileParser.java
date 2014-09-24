@@ -77,6 +77,7 @@ public class FileParser {
 	private static boolean firstTime= true;
 	private String midFilesPath;
 	private Stack<Integer> stackBlockID, stackInstruction;
+	private boolean doubleCurly;
 
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap,
 			String writeURI, String root, String midFilesPath) {
@@ -150,9 +151,18 @@ public class FileParser {
 					
 				}
 				if(line!=null && line.contains("}") && isInMethod){
+					int tempID = -1, tempInstruction = -1;
+					if(doubleCurly){
+						tempID = stackBlockID.pop();
+						tempInstruction = stackInstruction.pop();
+					}
 					int id = stackBlockID.pop();
 					int instructions = stackInstruction.pop();
 					linesInBlock.put(currentMethod +"@"+id, instructions);
+					if(doubleCurly){
+						stackBlockID.push(tempID);
+						stackInstruction.push(tempInstruction);
+					}
 					
 				}
 				if(currentLine == nextMethodLine && line != null){
@@ -325,6 +335,7 @@ public class FileParser {
 
 	public int checkConstruct(String line) {
 		int code = -1;
+		String lineWithNoSpaces = line.replace(" ", "");
 		if(line.contains("if")){
 			if(checkKeyword("if", line) && !checkInString(line, "if", line.indexOf("if"))){
 				code = CODE_IF;
@@ -383,13 +394,22 @@ public class FileParser {
 				code = CODE_PACKAGE;
 			}
 		}
-		if(line.contains("try ")){
-			if(checkKeyword("try ", line) && !checkInString(line, "try ", line.indexOf("try "))){
+		if(line.contains("try")){
+			if(checkKeyword("try", line) && !checkInString(line, "try", line.indexOf("try"))){
 				code = CODE_TRY;
 			}
 		}
+		if(line.contains("finally")){
+			if(checkKeyword("finally ", line) && !checkInString(line, "finally", line.indexOf("finally"))){
+				code = CODE_FINALLY;
+			}
+		}
+		if(lineWithNoSpaces.contains("synchronized(")){
+			if(!checkInString(lineWithNoSpaces, "synchronized(", lineWithNoSpaces.indexOf("synchronized("))){
+				code = CODE_SYNCHRONIZED;
+			}
+		}
 		return code;
-
 	}
 
 
@@ -579,16 +599,26 @@ public class FileParser {
 
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private int checkEndOfMethod(String line) {
+		doubleCurly=false;
+		boolean open = false, closed = false; 
 		if(curlyMethodCount != 0){ //fai il tutto quando il count non e' 0
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non e' in una stringa
+						open = true;
+						if(closed){
+							doubleCurly = true;
+						}
 						curlyMethodCount++;
 					}
 
 				}
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non e' in una stringa
+						closed = true;
+						if(open){
+							doubleCurly = true;
+						}
 						curlyMethodCount--;
 						if(curlyMethodCount == 0){
 							return i;

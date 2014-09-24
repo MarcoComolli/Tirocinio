@@ -112,8 +112,8 @@ public class MethodSignatureExtractor {
 				return true;
 			}
 
-			public boolean visit(
-					AnonymousClassDeclaration anonyomousClassDeclaration) {
+			@Override
+			public boolean visit( AnonymousClassDeclaration anonyomousClassDeclaration) {
 				System.out.println("Visito classe anonima: ");
 				System.out.println(anonyomousClassDeclaration.toString());
 

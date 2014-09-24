@@ -237,9 +237,8 @@ public class StatisticsDataOrderer {
 			if (totalInstructionsNumber.containsKey(arrayLine[0])) {
 				numberInstructions = totalInstructionsNumber.get(arrayLine[0]);
 				//System.out.println(numberInstructions + " " + arrayLine[0]);
-				if (Integer.parseInt(numberInstructionsArray[1]) > 0) {
-					numberInstructions += Integer
-							.parseInt(numberInstructionsArray[1]);
+				if (Integer.parseInt(numberInstructionsArray[1].trim()) > 0) {
+					numberInstructions += Integer.parseInt(numberInstructionsArray[1].trim());
 				}
 			}
 			totalInstructionsNumber.put(arrayLine[0], numberInstructions);

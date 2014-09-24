@@ -368,16 +368,29 @@ public class Interface extends JFrame{
 		
 		//TODO
 		//rimuovere  qui di seguito. Solo per test
+//		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
+//		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
+//		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
+//
+//		
+//		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
+//		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
+//		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
+			
+		//additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
+		
+		textSearch.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\");
+		textSave.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\");
+		
+
 		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
-		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
-		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
+		txtRootPathSrc.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\src\\classi");
+		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classi");
 
 		
-		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
-		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
-		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
-			
-		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
+		txtTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classiditest");
+		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin");
+		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin\\files");
 	}
 	
 	
@@ -457,6 +470,7 @@ public class Interface extends JFrame{
 			urlArray = urlList.toArray(urlArray);
 
 			URLClassLoader urlClassloader = URLClassLoader.newInstance(urlArray);
+			System.out.println(Arrays.toString(urlArray));
 			File[] files = f.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				if(files[i].isFile()){

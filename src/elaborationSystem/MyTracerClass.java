@@ -24,6 +24,7 @@ public class MyTracerClass {
 	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0;
 	private static boolean recordTest = false;
 	private static int blockCount;
+	static int c = 0;
 
 
 
@@ -42,12 +43,8 @@ public class MyTracerClass {
 				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
 				n++;
 			}
-			else{
-				System.out.println(countMap.size() + " Questo blocco non è contenuto: " + objectID + " block: " + blockID + " esecuzione " + n);
-			}
 
 
-			
 			if(recordPath){
 				writePathsFile(objectID, blockID);
 			}
@@ -77,10 +74,8 @@ public class MyTracerClass {
 				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
 				n++;
 			}
-			else{
-				System.out.println("-" + countMap.size() + " Questo blocco non è contenuto: " + objectID + " block: " + blockID + " esecuzione " + n);
-			}
-
+			
+			
 			if(recordPath){
 				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
 			}
@@ -115,10 +110,11 @@ public class MyTracerClass {
 		
 		Integer instructions = instructionsCountMap.get(objectID+"@"+blockID);
 		if(instructions == null){
-			System.out.println("E' nullo " + objectID+"@"+blockID);
+			c++;
+			System.out.println(c + " E' nullo " + objectID+"@"+blockID);
 			instructions = -1;
 		}
-		printWriter.println(objectID +" #c" + blockCode + " @" + blockID + " #v " + n +" #i" +instructions);
+		printWriter.println(objectID +" #c" + blockCode + " @" + blockID + " #v " + n +" #i " +instructions);
 		printWriter.flush();
 
 
