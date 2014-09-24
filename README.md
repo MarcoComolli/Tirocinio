@@ -127,6 +127,8 @@ Può essere qualche eccezione? Anche se non penso perché i package-info li ho e
 Non lo so. Ho ricontrollato e non mi sembra ci siano errori. Però ho visto che ci siamo dimenticati di far riconoscere i block finally e i syncronized. Non penso sia per quello però dovrebbe trovare qualche blocco in più (p.s. i blocchi synchronized sono difficili da prendere perchè possono essere anche synchronized i metodi quindi li prende solo quando i blocchi hanno una parentesi tonda subito dopo il "synchronized".)
 Ma ti si resetta una sola volta o tante? Con che frenquenza più o meno? Può essere che fosse qualcosa tipo quell'altro file che mi faceva la stessa cosa a me?
 
+Son riuscito a far partire quella classe di test base che non riusciva a partire. I file son tutti i giusti tranne il FileIstruzioni che mi conta 2 istruzioni in un solo blocco quando in realtà è una in 1 blocco e l'altra in un'altro. A parte questo c'è un problema. Il FilePercorsi ogni tanto non viene creato, forse è relativo al tuo problema. Ora provo a vedere cosa lo causa.
+
 TODO LIST
 =========
 
