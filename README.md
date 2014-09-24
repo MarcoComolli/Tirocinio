@@ -123,6 +123,10 @@ Cavolo ora controllo. Sul mio ho provato e non lo fa non so cosa possa essere
 
 Può essere qualche eccezione? Anche se non penso perché i package-info li ho eliminati
 
+------ 
+Non lo so. Ho ricontrollato e non mi sembra ci siano errori. Però ho visto che ci siamo dimenticati di far riconoscere i block finally e i syncronized. Non penso sia per quello però dovrebbe trovare qualche blocco in più (p.s. i blocchi synchronized sono difficili da prendere perchè possono essere anche synchronized i metodi quindi li prende solo quando i blocchi hanno una parentesi tonda subito dopo il "synchronized".)
+Ma ti si resetta una sola volta o tante? Con che frenquenza più o meno? Può essere che fosse qualcosa tipo quell'altro file che mi faceva la stessa cosa a me?
+
 TODO LIST
 =========
 
