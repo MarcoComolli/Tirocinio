@@ -134,6 +134,8 @@ Son riuscito a far partire quella classe di test base che non riusciva a partire
 Mi si resetta tante volte, forse per ogni test, quindi abbastanza frequentemente. I test stanno andando da 4 ore (sono ritornato da poco) e non sono terminati ancora. Adesso vedo qual è il problema anche se dal nome del test mi pare che non possa risolvere.
 I test base io li avevo fatti partire da eclipse direttamente perché da interfaccia non capivo bene come farli partire.
 
+Boh, non capisco vermente dove sia il problema e perché ce l'ho solo io, non c'è nessuna eccezione e il file si azzera casualmente. In più, prima rimaneva fisso al 49% ora l'ho fatto ripartire ed è al 59%....
+
 TODO LIST
 =========
 
