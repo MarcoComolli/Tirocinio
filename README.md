@@ -129,6 +129,11 @@ Ma ti si resetta una sola volta o tante? Con che frenquenza più o meno? Può es
 
 Son riuscito a far partire quella classe di test base che non riusciva a partire. I file son tutti i giusti tranne il FileIstruzioni che mi conta 2 istruzioni in un solo blocco quando in realtà è una in 1 blocco e l'altra in un'altro. A parte questo c'è un problema. Il FilePercorsi ogni tanto non viene creato, forse è relativo al tuo problema. Ora provo a vedere cosa lo causa.
 
+-------
+
+Mi si resetta tante volte, forse per ogni test, quindi abbastanza frequentemente. I test stanno andando da 4 ore (sono ritornato da poco) e non sono terminati ancora. Adesso vedo qual è il problema anche se dal nome del test mi pare che non possa risolvere.
+I test base io li avevo fatti partire da eclipse direttamente perché da interfaccia non capivo bene come farli partire.
+
 TODO LIST
 =========
 
