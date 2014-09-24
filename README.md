@@ -119,6 +119,10 @@ Sto provando a far andare i test, ma il FilePercorsi ogni tanto mi si azzera. Pr
 
 Cavolo ora controllo. Sul mio ho provato e non lo fa non so cosa possa essere
 
+-----
+
+Può essere qualche eccezione? Anche se non penso perché i package-info li ho eliminati
+
 TODO LIST
 =========
 
