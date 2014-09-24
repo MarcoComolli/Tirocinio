@@ -136,6 +136,10 @@ I test base io li avevo fatti partire da eclipse direttamente perché da interfa
 
 Boh, non capisco vermente dove sia il problema e perché ce l'ho solo io, non c'è nessuna eccezione e il file si azzera casualmente. In più, prima rimaneva fisso al 49% ora l'ho fatto ripartire ed è al 59%....
 
+------
+Purtroppo non saprei. Che sia un problema sullo stream o sulla condizione firstTime nel myTracerclass?  
+Per la barra non so, dovrebbe essere giusta quindi penso si fermi in 2 punti diversi dei test. Proverò a mettere nella label il test in esecuzione. p.s. stasera non posso che non ci sono
+
 TODO LIST
 =========
 
@@ -151,7 +155,7 @@ TODO LIST
 ####### Task secondari (non indispensabili)
 
 - [ ] Gestire situazioni di errore interfaccia e non
-- [ ] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
+- [x] Codice per contare le istruzioni all'interno dei metodi ma fuori dai blocchi
 - [x] Codice per passare al myTracerClass il conteggio delle istruzioni
 - [ ] Gestire ASTParser per fargli riconoscere i metodi dichiarati internamente a istruzioni
 
@@ -177,10 +181,10 @@ parsing logical boolean expressions java --> stringa di ricerca
 	- [x] contare i punti e virgola in caso negativo
 	- [x] sapere quante istruzioni per blocco e tenerne traccia
 
-- [ ] interfaccia grafica (4)
+- [x] interfaccia grafica (4)
 
 - [ ] copertura dei casi di test (5)
-	- [ ] alla fine di ogni classe di test sapere quanto si è coperto del totale
+	- [x] alla fine di ogni classe di test sapere quanto si è coperto del totale
 	- [ ] giocare con le statistiche
 
 
