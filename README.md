@@ -140,6 +140,13 @@ Boh, non capisco vermente dove sia il problema e perché ce l'ho solo io, non c'
 Purtroppo non saprei. Che sia un problema sullo stream o sulla condizione firstTime nel myTracerclass?  
 Per la barra non so, dovrebbe essere giusta quindi penso si fermi in 2 punti diversi dei test. Proverò a mettere nella label il test in esecuzione. p.s. stasera non posso che non ci sono
 
+-------
+
+Non credo che sia un problema della barra, penso sia un problema legato alla casualità dei test (secondo me rendono casuale l'esecuzione quelli di junit).
+Io sto facendo ancora andare il tutto e ho tolto anche il timeout. L'unica cosa è vedere se il problema è solo mio a questo punto, magari quando non devi fare più altro e se hai voglia, prova a far andare il programma su Junit
+
+
+
 TODO LIST
 =========
 
