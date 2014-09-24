@@ -258,16 +258,7 @@ Il fatto che ci siano i null deriva dal fatto che ASTParser non legge le classi 
 
 ---------
 
-Ti va se oggi parliamo un attimo delle cose da fare? Incluso anche eventuale comunicazione al prof...
-
---------
-
-Sisi va bene...per le 15 va bene? p.s. se tutto va bene riesco a finire l'interfaccia con le progressbar
-
--------
-
-OK
-
+Sto provando a far andare i test, ma il FilePercorsi ogni tanto mi si azzera. Prima mi sa che non lo faceva. 
 
 TODO LIST
 =========
