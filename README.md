@@ -166,6 +166,13 @@ Guardando la mail del prof ci chiedeva anche di calcolare la similarità di vari
 
 Per la mail va bene, entro domenica scriviamo.
 
+--------
+
+I miei problemi sono quello dell'azzeramento del FilePercorsi, che non capisco perchè a me si azzera delle volte e con PMD no e poi che non mi finsce l'esecuzione dei test. Il primo pensavo fosse il booleano che dice se è la prima volta che viene scritto il file, però se a te non lo dà non lo so cosa potrebbe essere..
+Per il secondo problema non c'è niente da fare, ho provato ieri pomeriggio a farlo andare per più di 4 ore e anche stamattina, ma niente. A sto punto spero che sia qualche problema mio
+
+Ora effettivamente non so come aiutarti per andare avanti, se mi dici qualcosa da fare provo a farla
+
 
 TODO LIST
 =========
