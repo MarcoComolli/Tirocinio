@@ -24,12 +24,13 @@ public class StatisticsDataOrderer {
 		TreeSet<String> treeSet = readAndOrderData();
 		writeOrderedData(treeSet);
 		writeNumberOfLinesForMethod(treeSet);
-
 		//writeNotCoveredConditions();
 		writeCoveredConditions();
 	
 
 	}
+
+
 
 	public static void writeCoveredConditions() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));

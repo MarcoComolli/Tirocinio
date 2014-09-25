@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -25,11 +28,15 @@ public class MyTracerClass {
 	private static boolean firstTime = true, firstTimeTest = true, firstTimeBlock = true, firstTimeStat = true;
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0, newUniqueCoveredBloksTest = 0;
+	private static int totalTest = 0, totalTestClasses = 0, totalUniqueBlocksCovered = 0;
 	private static boolean recordTest = false;
 	private static int blockCount = 0;
 	private static TreeSet<String> testedBlockSet = new TreeSet<String>();;
 	static int c = 0;
 	private static int pathNumber = 0, totalPathSize = 0;
+	private static float totalTimeSec;
+	private static DecimalFormat form = new DecimalFormat("#.####");
+
 
 
 
@@ -231,6 +238,10 @@ public class MyTracerClass {
 		try{
 			PrintWriter printWriter;
 			String pathsFilePath= filesPath + "\\TestCoverage.txt";
+			totalTest += testNumber;
+			totalTimeSec += timeSec;
+			totalTestClasses++;
+			totalUniqueBlocksCovered += testedBlockSet.size();
 			totalCoveredBlocksTest += coveredBlocksTest;
 			if(firstTimeTest){
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath));
@@ -239,9 +250,13 @@ public class MyTracerClass {
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
 			}
 
+			double blockPercentage = (double)testedBlockSet.size()/blockCount*100;
+			double uniqueBlockPercentage = (double)newUniqueCoveredBloksTest/blockCount*100;
 			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec +
-					" #ub " + newUniqueCoveredBloksTest + " #ubp " + (double)newUniqueCoveredBloksTest/blockCount*100 +
-					" #b " + testedBlockSet.size() + " bp " +  (double)testedBlockSet.size()/blockCount*100);
+					" #ub " + newUniqueCoveredBloksTest + " #ubp " + form.format(uniqueBlockPercentage) +
+					" #b " + testedBlockSet.size() + " #bp " +  form.format(blockPercentage) +
+					" #tnc " + (int)Math.ceil(50 / blockPercentage) + "-" + (int)Math.ceil(75 / blockPercentage) + "-" + (int)Math.ceil(85 / blockPercentage) +
+					" #tnt " + (int)Math.ceil(50/(blockPercentage /testNumber)) + "-" + (int)Math.ceil(75 /(blockPercentage / testNumber)) + "-" + (int)Math.ceil(85 / (blockPercentage / testNumber)));
 			printWriter.flush();
 			printWriter.close();
 
@@ -277,6 +292,11 @@ public class MyTracerClass {
 				}
 			}
 			
+			DecimalFormat form2 = new DecimalFormat("#.##");
+			double avgBlockPerClass = (double)totalUniqueBlocksCovered/totalTestClasses;
+			double percentageTestedBlock = (double)testedBlockCount/(double)blockCount*100;
+			double percentageAverageBlockCoveredClass = avgBlockPerClass/blockCount *100;
+			double percentageAverageBlockCoveredTest = (avgBlockPerClass/blockCount *100)/((double)totalTest/totalTestClasses);
 			PrintWriter printWriter;
 			String pathsFilePath= filesPath + "\\GlobalData.txt";
 			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
@@ -285,11 +305,31 @@ public class MyTracerClass {
 			printWriter.println("Total block code tested (cumulative): " + totalCoveredBlocksTest);
 			printWriter.println("Total block code tested: " + testedBlockCount);
 			printWriter.println("Uncovered block: " + uncoveredBlocks);
-			printWriter.println("% test coverage: " + (double)testedBlockCount/(double)blockCount*100);
-			printWriter.println("% test uncovered: " + (double)uncoveredBlocks/(double)blockCount*100);
+			printWriter.println("Percentage test coverage: " + form.format(percentageTestedBlock) +"%");
+			printWriter.println("Percentage test uncovered: " + form.format((double)uncoveredBlocks/(double)blockCount*100) +"%");
+			printWriter.println("-----------------");
 			printWriter.println("Total number of path: " + pathNumber);
 			printWriter.println("Total number of path-block covered: " + totalPathSize);
-			printWriter.println("Average path size: " + (double)totalPathSize/pathNumber);
+			printWriter.println("Average path size: " + form.format((double)totalPathSize/pathNumber));
+			printWriter.println("-----------------");
+			printWriter.println("Total time for testing " + totalTimeSec + " sec.");
+			printWriter.println("Total number of test classes: " + totalTestClasses);
+			printWriter.println("Total number of tests: " + totalTest);
+			printWriter.println("Average tests for test class: " + form.format((double)totalTest/totalTestClasses));
+			printWriter.println("Average block covered by test class: " + form.format(avgBlockPerClass) + " (" + 
+						form.format(avgBlockPerClass/testedBlockCount*100) +"% of tested blocks and " +
+						form.format(percentageAverageBlockCoveredClass) +"% of total blocks)");
+			printWriter.println("-----------------");
+			printWriter.println("Number of additional class to reach 50% coverage: " + form2.format((50- percentageTestedBlock)/percentageAverageBlockCoveredClass));
+			printWriter.println("Number of additional class to reach 75% coverage: " + form2.format((75- percentageTestedBlock)/percentageAverageBlockCoveredClass));
+			printWriter.println("Number of additional class to reach 85% coverage: " + form2.format((85- percentageTestedBlock)/percentageAverageBlockCoveredClass));
+			printWriter.println("Number of additional tests to reach 100% coverage: " + form2.format((100- percentageTestedBlock)/percentageAverageBlockCoveredClass));
+			printWriter.println();
+			printWriter.println("Number of additional tests to reach 50% coverage: " + form2.format((50- percentageTestedBlock)/percentageAverageBlockCoveredTest));
+			printWriter.println("Number of additional tests to reach 75% coverage: " + form2.format((75- percentageTestedBlock)/percentageAverageBlockCoveredTest));
+			printWriter.println("Number of additional tests to reach 85% coverage: " + form2.format((85- percentageTestedBlock)/percentageAverageBlockCoveredTest));
+			printWriter.println("Number of additional tests to reach 100% coverage: " + form2.format((100- percentageTestedBlock)/percentageAverageBlockCoveredTest));
+			
 			printWriter.flush();
 			printWriter.close();
 
