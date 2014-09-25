@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MyTracerClass {
 
@@ -21,18 +24,15 @@ public class MyTracerClass {
 	private static int currentexecutionNumberPath = -1;
 	private static boolean firstTime = true, firstTimeTest = true, firstTimeBlock = true, firstTimeStat = true;
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
-	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0;
+	private static int coveredBlocksTest = 0, totalCoveredBlocksTest = 0, newUniqueCoveredBloksTest = 0;
 	private static boolean recordTest = false;
-	private static int blockCount;
+	private static int blockCount = 0;
+	private static TreeSet<String> testedBlockSet = new TreeSet<String>();;
 	static int c = 0;
+	private static int pathNumber = 0, totalPathSize = 0;
 
 
 
-	public MyTracerClass(){
-		countMap = new HashMap<String, Integer>();
-		instructionsCountMap= new HashMap<String, Integer>();
-		blockCount = 0;
-	}
 
 	public static void tracer(String objectID, int blockCode, int blockID) {
 		try {
@@ -47,16 +47,20 @@ public class MyTracerClass {
 
 			if(recordPath){
 				writePathsFile(objectID, blockID);
+				totalPathSize++;
+				blockList.add(objectID + "@" + blockID);
 			}
 
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
 
-			if(recordPath){ //se devo registrare il cammino
-				blockList.add(objectID + "@" + blockID);
-			}
+
 			if(recordTest){
 				coveredBlocksTest++;
+				if(n == 1){
+					newUniqueCoveredBloksTest++;
+				}
+			testedBlockSet.add(objectID+"@"+blockID);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -78,15 +82,18 @@ public class MyTracerClass {
 			
 			if(recordPath){
 				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
+				totalPathSize++;
+				blockList.add(objectID + "@" + blockID);
 			}
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
 
-			if(recordPath){ //se devo registrare il cammino
-				blockList.add(objectID + "@" + blockID);
-			}
 			if(recordTest){
 				coveredBlocksTest++;
+				if(n == 1){
+					newUniqueCoveredBloksTest++;
+				}
+			testedBlockSet.add(objectID+"@"+blockID);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -157,7 +164,7 @@ public class MyTracerClass {
 
 		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 		//		+" numero istruzioni nel blocco: " +instructionsNumber);
-		printWriter.println("percorso "+ currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
+		printWriter.println(currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
 		printWriter.flush();
 
 
@@ -179,7 +186,7 @@ public class MyTracerClass {
 
 		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 		//		+" numero istruzioni nel blocco: " +instructionsNumber);
-		printWriter.println("percorso "+ currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
+		printWriter.println(currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
 		printWriter.flush();
 
 
@@ -194,6 +201,7 @@ public class MyTracerClass {
 			currentexecutionNumberPath = countMap.get(objectID+"@0#-1"); //il codice è 0 perchè è l'inizio del metodo
 			currentObjectIDPath = objectID;
 			blockList.clear();
+			pathNumber ++;
 		}
 	}
 
@@ -201,7 +209,7 @@ public class MyTracerClass {
 		if(objectID == currentObjectIDPath){ //se l'ordine di fermarsi arriva dalla fine del metodo giusto
 			recordPath = false;
 			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
-			pathMap.put(objectID+"-"+ currentexecutionNumberPath, blockList);
+			pathMap.put(objectID+"*"+ currentexecutionNumberPath, newList);
 		}
 
 	}
@@ -215,6 +223,8 @@ public class MyTracerClass {
 			recordTest = true;
 		}
 		coveredBlocksTest = 0;
+		newUniqueCoveredBloksTest = 0;
+		testedBlockSet.clear();
 	}
 	
 	public static void endRecordTestCoverage(String fullname, float timeSec, int testNumber, int failCount){
@@ -229,13 +239,18 @@ public class MyTracerClass {
 				printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
 			}
 
-			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec );
+			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec +
+					" #ub " + newUniqueCoveredBloksTest + " #ubp " + (double)newUniqueCoveredBloksTest/blockCount*100 +
+					" #b " + testedBlockSet.size() + " bp " +  (double)testedBlockSet.size()/blockCount*100);
 			printWriter.flush();
 			printWriter.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -272,6 +287,9 @@ public class MyTracerClass {
 			printWriter.println("Uncovered block: " + uncoveredBlocks);
 			printWriter.println("% test coverage: " + (double)testedBlockCount/(double)blockCount*100);
 			printWriter.println("% test uncovered: " + (double)uncoveredBlocks/(double)blockCount*100);
+			printWriter.println("Total number of path: " + pathNumber);
+			printWriter.println("Total number of path-block covered: " + totalPathSize);
+			printWriter.println("Average path size: " + (double)totalPathSize/pathNumber);
 			printWriter.flush();
 			printWriter.close();
 
@@ -280,6 +298,14 @@ public class MyTracerClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+//		for (Map.Entry<String, LinkedList<String>> entry : pathMap.entrySet()) {
+//			System.out.print(entry.getKey() + " ");
+//			for (String s : entry.getValue()) {
+//				System.out.print(s + " ");
+//			}
+//			System.out.println();
+//		}
 	}
 	
 	//se è necessario un file con l'elenco dei blocchi basta scommentare il codice qua sotto
