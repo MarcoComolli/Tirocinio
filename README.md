@@ -151,7 +151,7 @@ Entro fine settimana mandiamo una mail al prof?
 
 Va bene appena abbiamo terminato le cose principali proverò anche io con Junit.  
 Ho guardato la mail del prof e ho cercato di aggiungere qualche dato in più che ci chiedeva. Ora ti spiego:  
-- Nel GlobalData ora sono presenti quanti cammini ci sono, quant'è la lunghezza media per ogni cammino, e il numero totale di blocchi nei cammini (ovvero se il cammino A è così composto percorso A = C -> D -> F -> M allora la lunghezza di A è 4. Se c'è un altro cammino uguale ad A allora il totale è 8. Invece i blocchi testati saranno 10 (ossia i 4 blocchi del cammino più i due metodi A). Questo è per spiegare perchè il *Total block code tested (cumulative)* è più grande del *Total number of path-block covered*.
+- Nel GlobalData ora sono presenti quanti cammini ci sono, quant'è la lunghezza media per ogni cammino e il numero totale di blocchi nei cammini (ovvero se il cammino A è così composto percorso A = C -> D -> F -> M allora la lunghezza di A è 4. Se c'è un altro cammino uguale ad A allora il totale è 8. Invece i blocchi testati saranno 10 (ossia i 4 blocchi del cammino più i due metodi A). Questo è per spiegare perchè il *Total block code tested (cumulative)* è più grande del *Total number of path-block covered*.
 - Nel test coverage invece sono presenti 4 dati in più: 
 	- **#ub** sta per unique block e rappresenta il numero di blocchi testati in più. Cioè il numero di blocchi che prima non erano testati e che aggiunge rispetto a prima.
 	- **#ubp** è la percentuale di blocchi unici rispetto al totale dei blocchi
@@ -160,7 +160,9 @@ Ho guardato la mail del prof e ho cercato di aggiungere qualche dato in più che
 
 Altro accorgimento. Ho rimosso la parola *percorso* quando viene scritto il FilePercorsi così dovrebbe diminuire di un pochino la dimensione non dovendo riscrivere per tot-mila volte quella parola.  
 Mi sono accorto che comunque c'è un errore per il riconoscimento dei percorsi:  
-Quando c'è un metodo ricorsivo il metodo richiama sè stesso quindi il nome del metodo chiamato coincide con il metodo che ha originato il percorso causando la fine di questo e iniziandone un altro per ogni chiamata ricorsiva subita. Bisogna decidere se fixarlo o no. Al momento non ho idea di come poter fare.
+quando c'è un metodo ricorsivo il metodo richiama sè stesso quindi il nome del metodo chiamato coincide con il metodo che ha originato il percorso causando la fine di questo e iniziandone un altro per ogni chiamata ricorsiva subita. Bisogna decidere se fixarlo o no. Al momento non ho idea di come poter fare.
+
+Guardando la mail del prof ci chiedeva anche di calcolare la similarità di vari percorsi. Ho un'idea di come si potrebbe fare però questo richiederebbe il processing un po' elaborato del FilePercorsi. Essendo questo molto grande (soprattutto nel tuo caso) sarebbe abbastanza lunga la procedura (penso). Dopo provo a farla (la aggiungo nel post processing nel *StatisticsDataOrderer*, poi eventualmente decidi tu se commentare l'esecuzione di quel metodo per evitare di allungare ulteriormente l'esecuzione.
 
 Per la mail va bene, entro domenica scriviamo.
 
