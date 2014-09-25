@@ -145,6 +145,7 @@ Per la barra non so, dovrebbe essere giusta quindi penso si fermi in 2 punti div
 Non credo che sia un problema della barra, penso sia un problema legato alla casualità dei test (secondo me rendono casuale l'esecuzione quelli di junit).
 Io sto facendo ancora andare il tutto e ho tolto anche il timeout. L'unica cosa è vedere se il problema è solo mio a questo punto, magari quando non devi fare più altro e se hai voglia, prova a far andare il programma su Junit
 
+Entro fine settimana mandiamo una mail al prof?
 
 
 TODO LIST
