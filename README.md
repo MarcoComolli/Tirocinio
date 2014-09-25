@@ -177,11 +177,13 @@ Ora effettivamente non so come aiutarti per andare avanti, se mi dici qualcosa d
 Guarda, attualmente non sto testando nulla su pmd. Sto facendo tutti i test sui file di prova.  
 Guardando la mail ci mancherebbe da fare questo:
 - Analisi delle frequenze delle diramazioni
-- Analisi delle frequenze di porzioni di cammino (sto provando a farla ora)
+- Analisi delle frequenze di porzioni di cammino 
 - Analisi del procedere della copertura (un pezzetto l'ho già fatto prima, cioè nel mettere quanta copertura per classe di test) bisognerebbe analizzare quello che chiede il prof
 - chiamate effettuate a metodi della stessa classe e chiamate effettuate a metodi di altre classi (qua ci aveva dato il link però non so quanto sia fattibile)
 
 Dimmi tu cosa preferisci fare.
+
+Dimentica la storia delle frequenze delle diramazioni che si differenziano...verrebbe una struttura dati per ogni entry del percorso (decisamente infattibile). L'idea era sbagliata. Non saprei, se hai idee fai pure. Provo con l'analisi del procede della copertura
 
 
 TODO LIST
