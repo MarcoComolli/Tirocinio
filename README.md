@@ -183,7 +183,13 @@ Guardando la mail ci mancherebbe da fare questo:
 
 Dimmi tu cosa preferisci fare.
 
-Dimentica la storia delle frequenze delle diramazioni che si differenziano...verrebbe una struttura dati per ogni entry del percorso (decisamente infattibile). L'idea era sbagliata. Non saprei, se hai idee fai pure. Provo con l'analisi del procede della copertura
+Dimentica la storia delle frequenze delle diramazioni che si differenziano...verrebbe una struttura dati per ogni entry del percorso (decisamente infattibile). L'idea era sbagliata. Non saprei, se hai idee fai pure. Provo con l'analisi del procedere della copertura
+
+Ho aggiunto statistiche al GlobalData e al TestCoverage.  
+Per quanto riguarda il TestCoverage ti spiego cosa vogliono dire:  
+**#tnc** vuol dire quanti classi di test come questa sono necessarie per raggiungere il 50%-75%-85% di copertura dei blocchi  
+**#tnt** vuol dire in media quanti test case come quelli di questa classe sono necessari per raggiungere il 50%-75%-85% di copertura dei blocchi  
+Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non capisci scrivi che ti spiego cosa vogliono dire (p.s. negli ultimi dati un numero negativo indica quanti bisognerebbe toglierne per raggiungere quell'obiettivo di copertura, nel caso in cui l'obiettivo sia già stato raggiunto e superato)
 
 
 TODO LIST
