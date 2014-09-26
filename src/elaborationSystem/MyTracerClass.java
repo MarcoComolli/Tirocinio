@@ -190,6 +190,7 @@ public class MyTracerClass {
 		}else{
 			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
 		}
+		System.out.println("Scrivo");
 
 		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 		//		+" numero istruzioni nel blocco: " +instructionsNumber);
@@ -252,11 +253,18 @@ public class MyTracerClass {
 
 			double blockPercentage = (double)testedBlockSet.size()/blockCount*100;
 			double uniqueBlockPercentage = (double)newUniqueCoveredBloksTest/blockCount*100;
-			printWriter.println("Test " + fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec +
-					" #ub " + newUniqueCoveredBloksTest + " #ubp " + form.format(uniqueBlockPercentage) +
-					" #b " + testedBlockSet.size() + " #bp " +  form.format(blockPercentage) +
-					" #tnc " + (int)Math.ceil(50 / blockPercentage) + "-" + (int)Math.ceil(75 / blockPercentage) + "-" + (int)Math.ceil(85 / blockPercentage) +
-					" #tnt " + (int)Math.ceil(50/(blockPercentage /testNumber)) + "-" + (int)Math.ceil(75 /(blockPercentage / testNumber)) + "-" + (int)Math.ceil(85 / (blockPercentage / testNumber)));
+//			printWriter.println(fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec +
+//					" #ub " + newUniqueCoveredBloksTest + " #ubp " + form.format(uniqueBlockPercentage) +
+//					" #b " + testedBlockSet.size() + " #bp " +  form.format(blockPercentage) +
+//					" #tnc " + (int)Math.ceil(50 / blockPercentage) + "-" + (int)Math.ceil(75 / blockPercentage) + "-" + (int)Math.ceil(85 / blockPercentage) +
+//					" #tnt " + (int)Math.ceil(50/(blockPercentage /testNumber)) + "-" + (int)Math.ceil(75 /(blockPercentage / testNumber)) + "-" + (int)Math.ceil(85 / (blockPercentage / testNumber)));
+			printWriter.println(fullname + " #" + coveredBlocksTest + "#" + testNumber + "#" + failCount + "#" + timeSec +
+					"#" + newUniqueCoveredBloksTest + "#" + form.format(uniqueBlockPercentage) +
+					"#" + testedBlockSet.size() + "#" +  form.format(blockPercentage) +
+					"#" + (int)Math.ceil(50 / blockPercentage) + "-" + (int)Math.ceil(75 / blockPercentage) + "-" + (int)Math.ceil(85 / blockPercentage) +
+					"#" + (int)Math.ceil(50/(blockPercentage /testNumber)) + "-" + (int)Math.ceil(75 /(blockPercentage / testNumber)) + "-" + (int)Math.ceil(85 / (blockPercentage / testNumber)));
+			
+			
 			printWriter.flush();
 			printWriter.close();
 

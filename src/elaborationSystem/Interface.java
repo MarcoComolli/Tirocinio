@@ -668,6 +668,7 @@ public class Interface extends JFrame{
 					StatisticsDataOrderer.writeOrderedData(treeSet);
 					StatisticsDataOrderer.writeNumberOfLinesForMethod(treeSet);
 					StatisticsDataOrderer.writeCoveredConditions();
+					StatisticsDataOrderer.writePathsLength();
 					
 				} catch (IOException e) {
 

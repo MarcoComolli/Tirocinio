@@ -20,7 +20,7 @@ public class StatisticsDataOrderer {
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
 	private static  TreeMap<Integer, LinkedList<String>> pathNumberMap = new TreeMap<Integer, LinkedList<String>>();
-	private static String filesPath = "C:\\Users\\Jacopo\\Desktop\\files - Copia";
+	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 
 	public static void main(String[] args) throws IOException {
 
@@ -33,7 +33,7 @@ public class StatisticsDataOrderer {
 
 
 
-	private static void writePathsLength() throws IOException {
+	public static void writePathsLength() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));
 		PrintWriter printWriter;
         String numberOfInstructionsFilePath = filesPath + "\\LunghezzaCammini.txt";
