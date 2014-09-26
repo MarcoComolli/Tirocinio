@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -19,8 +18,8 @@ public class StatisticsDataOrderer {
 	private static HashMap<String, Integer> totalInstructionsNumber = new HashMap<String, Integer>();
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
-	private static  TreeMap<Integer, LinkedList<String>> pathNumberMap = new TreeMap<Integer, LinkedList<String>>();
-	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
+	private static  TreeMap<String, LinkedList<String>> pathNumberMap = new TreeMap<String, LinkedList<String>>();
+	private static String filesPath = "C:\\Users\\Jacopo\\Desktop\\files - Copia";
 
 	public static void main(String[] args) throws IOException {
 
@@ -41,18 +40,21 @@ public class StatisticsDataOrderer {
 		String[] arrayLine;
 		
 		LinkedList<String> path = null;
-		int pathNumber;
+		String pathMethodNumber;
 		try {
 			String line = br.readLine();
 			while (line != null) {		
-				arrayLine = line.split("\\* ");
-				String[] pathNumberLine=arrayLine[1].split(":");	
-					 pathNumber=Integer.parseInt(pathNumberLine[0]);
-					String pathLine=pathNumberLine[1];
+				//arrayLine = line.split("\\* ");
+				arrayLine=line.split(":");	
+				pathMethodNumber=arrayLine[0];
+				String pathLine = arrayLine[1];
+			
+				System.out.println(pathMethodNumber);
+				System.out.println(pathLine);
 										
 			
-					if(pathNumberMap.containsKey(pathNumber)){
-						path = pathNumberMap.get(pathNumber);
+					if(pathNumberMap.containsKey(pathMethodNumber)){
+						path = pathNumberMap.get(pathMethodNumber);
 						path.add(pathLine);
 						
 
@@ -61,7 +63,7 @@ public class StatisticsDataOrderer {
 						path.add(pathLine);
 						
 					}
-					pathNumberMap.put(pathNumber, path);
+					pathNumberMap.put(pathMethodNumber, path);
 					line = br.readLine();
 				}
 
@@ -69,27 +71,27 @@ public class StatisticsDataOrderer {
 			double totalNumberOfPaths=0;
 			totalNumberOfPaths=pathNumberMap.size();
 			int maxPathLength=0;
-			int maxPathKey = 0;
+			String maxPathKey = null;
 			double maxCoveragePath = 0;
 			int minPathLength=0;
-			int minPathKey = 0;
+			String minPathKey = null ;
 			double minCoveragePath = 0;
 			double coverage;
 
-			TreeSet<Integer> minLengthPathsSet= new TreeSet<Integer>();
-			TreeSet<Integer> maxLengthPathsSet= new TreeSet<Integer>();
+			TreeSet<String> minLengthPathsSet= new TreeSet<String>();
+			TreeSet<String> maxLengthPathsSet= new TreeSet<String>();
 
 			
-			for (Entry<Integer, LinkedList<String>> entry : pathNumberMap.entrySet()) {
+			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
 				
 				totalLength+=entry.getValue().size();
 			}
 			if(!pathNumberMap.isEmpty()){
-			maxPathLength=minPathLength=pathNumberMap.get(1).size();
-			maxPathKey=minPathKey=1;
-			maxCoveragePath=minCoveragePath=(pathNumberMap.get(1).size()*100)/totalLength;
+			maxPathLength=minPathLength=pathNumberMap.get(pathNumberMap.firstKey()).size();
+			maxPathKey=minPathKey=pathNumberMap.firstKey();
+			maxCoveragePath=minCoveragePath=(pathNumberMap.get(pathNumberMap.firstKey()).size()*100)/totalLength;
 			}
-			for (Entry<Integer, LinkedList<String>> entry : pathNumberMap.entrySet()) {
+			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
 				coverage=(entry.getValue().size()*100)/totalLength;
 				printWriter.println(entry.getKey() + " size : " + entry.getValue().size() + " covers "+
 				coverage+"% of total paths");
@@ -117,11 +119,11 @@ public class StatisticsDataOrderer {
 			String shortestPathsKeys="";
 			String longestPathsKeys="";
 			
-			for(Integer i:minLengthPathsSet){
+			for(String i:minLengthPathsSet){
 				shortestPathsKeys+=i+",";
 			}
 			
-			for(Integer i:maxLengthPathsSet){
+			for(String i:maxLengthPathsSet){
 				longestPathsKeys+=i+",";
 			}
 			System.out.println(shortestPathsKeys +" length: "+minPathLength +" covers " + minCoveragePath);
@@ -129,10 +131,10 @@ public class StatisticsDataOrderer {
 			printWriter.println("Total number of paths: " + totalNumberOfPaths);
 			printWriter.println("Total Paths length: " +totalLength);
 			printWriter.println("Average Paths length: " +totalLength/totalNumberOfPaths);
-			printWriter.println("Longest Path: " +maxPathKey +" length: "+maxPathLength +" covers " + maxCoveragePath);
-			printWriter.println("Shortest Path: " +minPathKey +" length: "+minPathLength +" covers " + minCoveragePath);
-			printWriter.println("Longest Paths: " +longestPathsKeys.substring(0, longestPathsKeys.length()-1) +" length: "+maxPathLength +" covers " + maxCoveragePath);
-			printWriter.println("Shortest Paths: "+ shortestPathsKeys.substring(0, shortestPathsKeys.length()-1) +" length: "+minPathLength +" covers " + minCoveragePath);
+			printWriter.println("Longest Path: " +maxPathKey +" length: "+maxPathLength +" covers " + maxCoveragePath +"%");
+			printWriter.println("Shortest Path: " +minPathKey +" length: "+minPathLength +" covers " + minCoveragePath +"%");
+			printWriter.println("Longest Paths: " +longestPathsKeys.substring(0, longestPathsKeys.length()-1) +" length: "+maxPathLength +" covers " + maxCoveragePath +"%");
+			printWriter.println("Shortest Paths: "+ shortestPathsKeys.substring(0, shortestPathsKeys.length()-1) +" length: "+minPathLength +" covers " + minCoveragePath +"%");
 
 		} finally {
 			printWriter.flush();
