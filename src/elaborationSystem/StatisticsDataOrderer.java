@@ -75,6 +75,10 @@ public class StatisticsDataOrderer {
 			int minPathKey = 0;
 			double minCoveragePath = 0;
 			double coverage;
+
+			TreeSet<Integer> minLengthPathsSet= new TreeSet<Integer>();
+			TreeSet<Integer> maxLengthPathsSet= new TreeSet<Integer>();
+
 			
 			for (Entry<Integer, LinkedList<String>> entry : pathNumberMap.entrySet()) {
 				
@@ -84,31 +88,51 @@ public class StatisticsDataOrderer {
 			maxPathLength=minPathLength=pathNumberMap.get(1).size();
 			maxPathKey=minPathKey=1;
 			maxCoveragePath=minCoveragePath=(pathNumberMap.get(1).size()*100)/totalLength;
-			
 			}
 			for (Entry<Integer, LinkedList<String>> entry : pathNumberMap.entrySet()) {
 				coverage=(entry.getValue().size()*100)/totalLength;
 				printWriter.println(entry.getKey() + " size : " + entry.getValue().size() + " covers "+
 				coverage+"% of total paths");
-				if(entry.getValue().size()>=maxPathLength){
+				if(entry.getValue().size()==maxPathLength){
+					maxLengthPathsSet.add(entry.getKey());
+				}else if(entry.getValue().size()>maxPathLength){
+					maxLengthPathsSet.clear();
 					maxPathLength=entry.getValue().size();
 					maxPathKey=entry.getKey();
 					maxCoveragePath=coverage;
+					maxLengthPathsSet.add(entry.getKey());
+
 				}
-				
-				if(entry.getValue().size()<=minPathLength){
+				if(entry.getValue().size()==minPathLength){
+					minLengthPathsSet.add(entry.getKey());
+					
+				}else if(entry.getValue().size()<minPathLength){
+					minLengthPathsSet.clear();
 					minPathLength=entry.getValue().size();
 					minPathKey=entry.getKey();
 					minCoveragePath=coverage;
+					minLengthPathsSet.add(entry.getKey());
 				}
 			}
+			String shortestPathsKeys="";
+			String longestPathsKeys="";
+			
+			for(Integer i:minLengthPathsSet){
+				shortestPathsKeys+=i+",";
+			}
+			
+			for(Integer i:maxLengthPathsSet){
+				longestPathsKeys+=i+",";
+			}
+			System.out.println(shortestPathsKeys +" length: "+minPathLength +" covers " + minCoveragePath);
 			
 			printWriter.println("Total number of paths: " + totalNumberOfPaths);
 			printWriter.println("Total Paths length: " +totalLength);
 			printWriter.println("Average Paths length: " +totalLength/totalNumberOfPaths);
 			printWriter.println("Longest Path: " +maxPathKey +" length: "+maxPathLength +" covers " + maxCoveragePath);
 			printWriter.println("Shortest Path: " +minPathKey +" length: "+minPathLength +" covers " + minCoveragePath);
-
+			printWriter.println("Longest Paths: " +longestPathsKeys.substring(0, longestPathsKeys.length()-1) +" length: "+maxPathLength +" covers " + maxCoveragePath);
+			printWriter.println("Shortest Paths: "+ shortestPathsKeys.substring(0, shortestPathsKeys.length()-1) +" length: "+minPathLength +" covers " + minCoveragePath);
 
 		} finally {
 			printWriter.flush();
