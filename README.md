@@ -191,6 +191,9 @@ Per quanto riguarda il TestCoverage ti spiego cosa vogliono dire:
 **#tnt** vuol dire in media quanti test case come quelli di questa classe sono necessari per raggiungere il 50%-75%-85% di copertura dei blocchi  
 Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non capisci scrivi che ti spiego cosa vogliono dire (p.s. negli ultimi dati un numero negativo indica quanti bisognerebbe toglierne per raggiungere quell'obiettivo di copertura, nel caso in cui l'obiettivo sia già stato raggiunto e superato)
 
+----------
+
+Non trovo più il mio commento, lo scrivo qui. Non so esattamente come identificare un cammino per effetuare le statistiche.
 
 TODO LIST
 =========
