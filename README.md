@@ -200,6 +200,10 @@ Quando vuoi ci sentiamo un attimo per vedere le ultime cose da fare o per la mai
 
 Sisi per le 16 va bene?
 
+-------
+
+Perfetto
+
 
 TODO LIST
 =========
