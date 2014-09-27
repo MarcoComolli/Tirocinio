@@ -191,18 +191,6 @@ Per quanto riguarda il TestCoverage ti spiego cosa vogliono dire:
 **#tnt** vuol dire in media quanti test case come quelli di questa classe sono necessari per raggiungere il 50%-75%-85% di copertura dei blocchi  
 Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non capisci scrivi che ti spiego cosa vogliono dire (p.s. negli ultimi dati un numero negativo indica quanti bisognerebbe toglierne per raggiungere quell'obiettivo di copertura, nel caso in cui l'obiettivo sia già stato raggiunto e superato)
 
------------
-
-Quando vuoi ci sentiamo un attimo per vedere le ultime cose da fare o per la mail?
-
-
-------
-
-Sisi per le 16 va bene?
-
--------
-
-Perfetto
 
 
 TODO LIST
@@ -213,7 +201,7 @@ TODO LIST
 - [x] Trovare la giusta nomenclatura per i file sorgenti
 - [x] Far fare all'interfaccia grafica il preprocessing
 - [x] Risolvere errori per l'esecuzione test di JUnit
-- [ ] Gestire nel MyTracerClass i dati raccolti (tipo mostrarli in un formato leggibile o farci gli esperimenti statistici)
+- [x] Gestire nel MyTracerClass i dati raccolti (tipo mostrarli in un formato leggibile o farci gli esperimenti statistici)
 
 -------
 
@@ -248,9 +236,9 @@ parsing logical boolean expressions java --> stringa di ricerca
 
 - [x] interfaccia grafica (4)
 
-- [ ] copertura dei casi di test (5)
+- [x] copertura dei casi di test (5)
 	- [x] alla fine di ogni classe di test sapere quanto si è coperto del totale
-	- [ ] giocare con le statistiche
+	- [x] giocare con le statistiche
 
 
 
