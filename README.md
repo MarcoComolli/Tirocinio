@@ -196,6 +196,11 @@ Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non cap
 Quando vuoi ci sentiamo un attimo per vedere le ultime cose da fare o per la mail?
 
 
+------
+
+Sisi per le 16 va bene?
+
+
 TODO LIST
 =========
 
