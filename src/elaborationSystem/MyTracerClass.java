@@ -209,7 +209,7 @@ public class MyTracerClass {
 			currentexecutionNumberPath = countMap.get(objectID+"@0#-1"); //il codice è 0 perchè è l'inizio del metodo
 			currentObjectIDPath = objectID;
 			blockList.clear();
-			pathNumber ++;
+			pathNumber++;
 		}
 	}
 

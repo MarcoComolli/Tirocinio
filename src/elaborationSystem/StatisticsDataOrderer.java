@@ -19,7 +19,7 @@ public class StatisticsDataOrderer {
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
 	private static  TreeMap<String, LinkedList<String>> pathNumberMap = new TreeMap<String, LinkedList<String>>();
-	private static String filesPath = "C:\\Users\\Jacopo\\Desktop\\files - Copia";
+	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 
 	public static void main(String[] args) throws IOException {
 

@@ -244,8 +244,8 @@ public class FileParser {
 			stackInstruction.push(0);
 			MyTracerClass.addBlock(currentMethod, 0, -1);
 			return line.substring(0, index+1) + 
-					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
 					" MyTracerClass.recordPath(\""+currentMethod+"\");" +
+					" MyTracerClass.tracer(\""+currentMethod+"\",-1,"+currentBlockID+");" + 
 					line.substring(index+1, line.length());
 		}
 		else if(line.contains(";")){
