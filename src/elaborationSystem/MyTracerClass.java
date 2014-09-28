@@ -7,13 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.TreeSet;
 
 public class MyTracerClass {
@@ -110,6 +106,7 @@ public class MyTracerClass {
 	}
 
 	private static void writeStatisticsData(String objectID, int blockCode, int blockID, int n) throws IOException {
+
 		PrintWriter printWriter;
 		String numberOfInstructionsFilePath= filesPath + "\\DatiStatistici.txt";
 
@@ -121,7 +118,6 @@ public class MyTracerClass {
 			printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath,true));
 		}
 
-		
 		Integer instructions = instructionsCountMap.get(objectID+"@"+blockID);
 		if(instructions == null){
 			c++;
@@ -190,7 +186,6 @@ public class MyTracerClass {
 		}else{
 			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
 		}
-		System.out.println("Scrivo");
 
 		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 		//		+" numero istruzioni nel blocco: " +instructionsNumber);
@@ -253,6 +248,13 @@ public class MyTracerClass {
 
 			double blockPercentage = (double)testedBlockSet.size()/blockCount*100;
 			double uniqueBlockPercentage = (double)newUniqueCoveredBloksTest/blockCount*100;
+			int tnc50 = (coveredBlocksTest != 0) ? (int)Math.ceil(50 / blockPercentage) : 0;
+			int tnc75 = (coveredBlocksTest != 0) ? (int)Math.ceil(75 / blockPercentage) : 0;
+			int tnc85 = (coveredBlocksTest != 0) ? (int)Math.ceil(85 / blockPercentage) : 0;
+			int tnt50 = (coveredBlocksTest != 0) ? (int)Math.ceil(50/(blockPercentage /testNumber)) : 0;
+			int tnt75 = (coveredBlocksTest != 0) ? (int)Math.ceil(75/(blockPercentage /testNumber)) : 0;
+			int tnt85 = (coveredBlocksTest != 0) ? (int)Math.ceil(85/(blockPercentage /testNumber)) : 0;
+
 //			printWriter.println(fullname + " #c " + coveredBlocksTest + " #n " + testNumber + " #f " + failCount + " #t " + timeSec +
 //					" #ub " + newUniqueCoveredBloksTest + " #ubp " + form.format(uniqueBlockPercentage) +
 //					" #b " + testedBlockSet.size() + " #bp " +  form.format(blockPercentage) +
@@ -261,8 +263,7 @@ public class MyTracerClass {
 			printWriter.println(fullname + " #" + coveredBlocksTest + "#" + testNumber + "#" + failCount + "#" + timeSec +
 					"#" + newUniqueCoveredBloksTest + "#" + form.format(uniqueBlockPercentage) +
 					"#" + testedBlockSet.size() + "#" +  form.format(blockPercentage) +
-					"#" + (int)Math.ceil(50 / blockPercentage) + "-" + (int)Math.ceil(75 / blockPercentage) + "-" + (int)Math.ceil(85 / blockPercentage) +
-					"#" + (int)Math.ceil(50/(blockPercentage /testNumber)) + "-" + (int)Math.ceil(75 /(blockPercentage / testNumber)) + "-" + (int)Math.ceil(85 / (blockPercentage / testNumber)));
+					"#" + tnc50 + "-" + tnc75 + "-" + tnc85 + "#" + tnt50 + "-" + tnt75 + "-" + tnt85);
 			
 			
 			printWriter.flush();
@@ -281,17 +282,19 @@ public class MyTracerClass {
 	public static void endOfTests(){
 		try{
 			
+
 			int testedBlockCount = 0, uncoveredBlocks = 0;
 			String objectID, blockCode, blockID;
+			insertIstructionsNumber();
+			
 			for(Entry<String,Integer> entry : countMap.entrySet()){
 				String key = entry.getKey();
 				objectID = key.substring(0, key.indexOf("@"));
 				blockCode = key.substring(key.indexOf("#")+1);
 				blockID = key.substring(key.indexOf("@") +1, key.indexOf("#"));
 				
-				insertIstructionsNumber();
+
 				writeStatisticsData(objectID, Integer.parseInt(blockCode), Integer.parseInt(blockID), entry.getValue());
-				
 				if(entry.getValue() != 0){
 					testedBlockCount++;
 				}
@@ -299,6 +302,7 @@ public class MyTracerClass {
 					uncoveredBlocks++;
 				}
 			}
+
 			
 			DecimalFormat form2 = new DecimalFormat("#.##");
 			double avgBlockPerClass = (double)totalUniqueBlocksCovered/totalTestClasses;
@@ -347,13 +351,6 @@ public class MyTracerClass {
 			e.printStackTrace();
 		}
 		
-//		for (Map.Entry<String, LinkedList<String>> entry : pathMap.entrySet()) {
-//			System.out.print(entry.getKey() + " ");
-//			for (String s : entry.getValue()) {
-//				System.out.print(s + " ");
-//			}
-//			System.out.println();
-//		}
 	}
 	
 	//se è necessario un file con l'elenco dei blocchi basta scommentare il codice qua sotto

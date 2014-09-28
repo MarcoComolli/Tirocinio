@@ -78,6 +78,7 @@ public class FileParser {
 	private String midFilesPath;
 	private Stack<Integer> stackBlockID, stackInstruction;
 	private boolean doubleCurly;
+	private boolean isThereKeyword = false;
 
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap,
 			String writeURI, String root, String midFilesPath) {
@@ -122,7 +123,7 @@ public class FileParser {
 
 	}
 
-	public void a(){
+	public void processFile(){
 		FileReader fr = null;
 		FileWriter fw = null;
 		BufferedReader buffRead = null;
@@ -148,11 +149,10 @@ public class FileParser {
 					int currentInstructionCount = stackInstruction.pop();
 					currentInstructionCount+=findInstructions(line);
 					stackInstruction.push(currentInstructionCount);
-					
 				}
-				if(line!=null && line.contains("}") && isInMethod){
+				if(line!=null && line.contains("}") && !checkInString(line, "}", line.indexOf("}")) && isInMethod){
 					int tempID = -1, tempInstruction = -1;
-					if(doubleCurly){
+					if(doubleCurly && isThereKeyword){
 						tempID = stackBlockID.pop();
 						tempInstruction = stackInstruction.pop();
 					}
@@ -429,6 +429,10 @@ public class FileParser {
 	}
 
 	public String parseString(String line) {
+		isThereKeyword = false;
+		if(checkConstruct(line) != -1){
+			isThereKeyword = true;
+		}
 		int constructCode;
 		String newLine = line;
 		int endIndex = checkEndOfMethod(line);

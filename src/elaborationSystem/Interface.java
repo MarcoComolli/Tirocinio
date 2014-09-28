@@ -50,25 +50,19 @@ public class Interface extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane, step1Panel, step2Panel, step3Panel, step4Panel;
 	private JTabbedPane tabbedPane;
-	private JTextField textSearch;
-	private JTextField textSave;
+	private JTextField textSearch,textSave, textMidFiles, txtClassTest, txtClassRoot;
 	private JButton btnCopy, btnSearchSrc, btnSave, btnSearchTest, btnRunTest, btnOtherFiles, btnProcess, btnAddDir;
+	private JButton btnRootPathSrc, btnGetStatistics, btnClassTest, btnRootPathDest, btnClassRoot;
 	private CopyTask copyTask;
 	private ProcessTask processTask;
 	private TestTask testTask;
-	private JProgressBar progressBarStep1;
+	private JProgressBar progressBarStep1,progressBarStep2,progressBarStep3;
 	private Path source, target;
 	private int filesCount = 0;
-	private JTextField txtTest;
+	private JTextField txtTest, txtRootPathSrc, txtRootPathDest;
 	private JLabel lblTestFolder,lblStatus,lblStep2,lblStep1,lblRootPathSrc,lblStep3,lblAdditionalFolders,lblClassTestRoot;
-	private JTextField textMidFiles;
-	private JLabel lblAdditionalFilesFolder;
-	private JSeparator separator;
-	private JSeparator separator_1;
-	private JTextField txtRootPathSrc;
-	private JButton btnRootPathSrc;
-	private JTextField txtClassTest;
-	private JButton btnClassTest;
+	private JLabel lblAdditionalFilesFolder, lblDestinationPackagesFolder, lblClassRoot, lblStatusStep2, lblStep, lblStatusStep3;
+	private JSeparator separator,separator_1,separator_2,separator_3;
 	private JScrollPane scrollPane_1;
 	private JPanel additionalFormsPanel;
 	private ArrayList<JButton> additionalButtons;
@@ -77,26 +71,13 @@ public class Interface extends JFrame{
 	private String panelLayoutCol = "[][grow]";
 	private String panelLayoutRow = "[]";
 	private MigLayout panelLayout;
-	private JTextField txtRootPathDest;
-	private JButton btnRootPathDest;
-	private JLabel lblDestinationPackagesFolder;
-	private JTextField txtClassRoot;
-	private JButton btnClassRoot;
-	private JLabel lblClassRoot;
-	private JLabel lblStatusStep2;
-	private JProgressBar progressBarStep2;
-	private JLabel lblStatusStep3;
-	private JProgressBar progressBarStep3;
+
 	private int ricursionCount = 0;
 	private Color barColor;
 	private double increment;
 	private int progress;
-	//per test
-	private int testEseguiti = 0;
-	private JLabel lblStep;
-	private JSeparator separator_2;
-	private JButton btnGetStatistics;
-	private JSeparator separator_3;
+
+
 	
 	/**
 	 * Launch the application.
@@ -368,29 +349,32 @@ public class Interface extends JFrame{
 		
 		//TODO
 		//rimuovere  qui di seguito. Solo per test
+		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
+		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
+		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
+
+		
+		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
+		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
+		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
+			
+		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\jaxen\\jaxen\\1.1.1\\jaxen-1.1.1.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\resources"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\"));
+
+//		textSearch.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\");
+//		textSave.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\");
+//		
+//
 //		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
-//		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
-//		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
+//		txtRootPathSrc.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\src\\classi");
+//		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classi");
 //
 //		
-//		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
-//		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
-//		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
-			
-		//additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
-		
-		textSearch.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\");
-		textSave.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\");
-		
-
-		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
-		txtRootPathSrc.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\src\\classi");
-		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classi");
-
-		
-		txtTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classiditest");
-		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin");
-		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin\\files");
+//		txtTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classiditest");
+//		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin");
+//		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin\\files");
 	}
 	
 	
@@ -479,7 +463,6 @@ public class Interface extends JFrame{
 					try {
 						Class cl = Class.forName(fullname, false, urlClassloader);
 						System.out.println("CLASSE: " + cl);
-						testEseguiti++;
 						MyTracerClass.startRecordTestCoverage();
 						increment += 100.0/filesCount;
 				    	progress = (int)increment;
@@ -512,7 +495,6 @@ public class Interface extends JFrame{
 		}
 		if(ricursionCount == 0){
 			System.out.println("Finiti i casi di test");
-			System.out.println("Eseguiti " + testEseguiti + " classi di test");
 			MyTracerClass.endOfTests();
 		}
 	}
@@ -781,7 +763,7 @@ public class Interface extends JFrame{
 				StatisticsDataOrderer.setFilesPath(textMidFiles.getText());
 				MethodSignatureExtractor mse = new MethodSignatureExtractor(textMidFiles.getText(), txtRootPathSrc.getText(),this,filesCount);
 				TreeMap<String, Integer> m = mse.parseFilesInDir(txtRootPathSrc.getText());
-				ParenthesisAdder p = new ParenthesisAdder(m, txtRootPathSrc.getText(), txtRootPathDest.getText(), textMidFiles.getText(), this, filesCount);
+				DirectoriesScanner p = new DirectoriesScanner(m, txtRootPathSrc.getText(), txtRootPathDest.getText(), textMidFiles.getText(), this, filesCount);
 				p.parseFilesInDir(txtRootPathSrc.getText());
 				
 				

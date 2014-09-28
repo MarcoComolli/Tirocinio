@@ -1,27 +1,11 @@
 package elaborationSystem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BooleanExpressionParser {
 
-	public static void main(String[] args) {
-
-		String[] a = new String[10];
-		a[0] = "if(x == 3 && tested ){";
-		a[1] = "else if( (y -3) != 4 || y == 2 && alfa != 9)";
-		a[2] = "for(int i = 0; i< 10; i++){";
-		a[3] = "if(stack.isempty() | list.size() == 0)";
-		a[4] = "if(stack.isempty())";
-		a[5] = "for(int i = 0; i< 10 & list.size() == 0; i++){";
-		a[6] = "for(String str:lista) {";
-		a[7] = "if (isAttributeAccess(node) || (isMethodCall(node) && isForeignGetterSetterCall(node)))";
-		a[8] = "if ((stack.isEmpty() || (isMethodCall(node) && isMethodBla(node) & (line.startWith(\"true || false\") | x == 0))))";
-		a[9] = "if((methodDeclaration.getMethodName().equals(\"setUp\") || methodDeclaration.getMethodName().equals(\"tearDown\")) && junitImported)";
-		
-	}
 
 	//estrae gli operatori nell'array result
 	public static String[] extractOperands(String string) {

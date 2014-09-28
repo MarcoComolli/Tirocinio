@@ -74,7 +74,6 @@ public class CommentsRemover {
 		if(beginIndex >= line.length()){
 			return false;
 		}
-		String substring = line.substring(beginIndex);
 		boolean firstApex = false;
 		for (int i = 0; i < line.length(); i++) {
 			if(line.charAt(i) == '"'){
