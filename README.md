@@ -83,6 +83,10 @@ Ma io non ho la cartella target...tu l'hai per caso compilato con maven o fatto 
 
 Possibile che lo abbia fatto all'inizio, ma non mi ricordo precisamente.
 
+---------
+
+Ok ho fatto compilare a maven. Ho anche io le classi target ecc. ma quando lo faccio partire i risultati sono gli stessi di prima: file piccoli e a quanto pare incompleti. Non so che farci
+
 
 TODO LIST
 =========
