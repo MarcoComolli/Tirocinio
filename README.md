@@ -217,6 +217,10 @@ No, credo che crei una hashmap/treemap/treeset o qualche struttura troppo grande
 
 Ha detto che iniziamo durante la pausa e poi finiamo subito dopo la sua lezione.
 
+------
+
+Ok grazie. Al momento ho un errore in preprocessing per Junit. (emptystackexception) sto cercando di risolvere.
+
 
 
 TODO LIST
