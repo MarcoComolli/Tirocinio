@@ -79,6 +79,11 @@ Ok perfetto ora riprovo
 
 Ma io non ho la cartella target...tu l'hai per caso compilato con maven o fatto qualcosa con maven? perchè i target sono generalmente di maven..o forse anche di ant.
 
+-------
+
+Possibile che lo abbia fatto all'inizio, ma non mi ricordo precisamente.
+
+
 TODO LIST
 =========
 
