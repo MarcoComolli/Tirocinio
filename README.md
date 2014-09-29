@@ -213,6 +213,10 @@ Sei riuscito a risolvere l'eccezione?
 --------
 No, credo che crei una hashmap/treemap/treeset o qualche struttura troppo grande in memoria visto il file di così grandi dimensioni. Poi guardo dopo aver provato anche con Junit. Il prof ha detto qualcos'altro sul vederci domani?
 
+--------
+
+Ha detto che iniziamo durante la pausa e poi finiamo subito dopo la sua lezione.
+
 
 
 TODO LIST
