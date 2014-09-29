@@ -87,6 +87,11 @@ Possibile che lo abbia fatto all'inizio, ma non mi ricordo precisamente.
 
 Ok ho fatto compilare a maven. Ho anche io le classi target ecc. ma quando lo faccio partire i risultati sono gli stessi di prima: file piccoli e a quanto pare incompleti. Non so che farci
 
+---------
+
+Ho provato anch'io e mi dà la stessa cosa. Prima delle modifiche di questa settimana non terminava e ora termina subito, boh...
+Non so cosa fare potrei cambiare programma, ma non so se il tutto funzionerebbe, inoltre anche su PMD ci sono problemi, quindi non so
+
 
 TODO LIST
 =========
