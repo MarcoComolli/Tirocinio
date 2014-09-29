@@ -60,22 +60,24 @@ Non ho mai avuto eccezioni durante il preprocessing (a parte alcune cose in alcu
 I percorsi sono questi qui in ordine:
 
 
-C:\Users\Jacopo\Desktop\junit-master
-C:\Users\Jacopo\Desktop\nn
+C:\Users\Jacopo\Desktop\junit-master  
+C:\Users\Jacopo\Desktop\nn  
 
 
-C:\Users\Jacopo\Desktop\files
-C:\Users\Jacopo\Desktop\junit-master\src\main\java
-C:\Users\Jacopo\Desktop\nn\src\main\java
+C:\Users\Jacopo\Desktop\files  
+C:\Users\Jacopo\Desktop\junit-master\src\main\java  
+C:\Users\Jacopo\Desktop\nn\src\main\java  
 
 
-C:\Users\Jacopo\Desktop\nn\src\test\java
-C:\Users\Jacopo\Desktop\nn\target\test-classes
-C:\Users\Jacopo\Desktop\nn\target\classes
+C:\Users\Jacopo\Desktop\nn\src\test\java  
+C:\Users\Jacopo\Desktop\nn\target\test-classes  
+C:\Users\Jacopo\Desktop\nn\target\classes  
 
 ------
 
 Ok perfetto ora riprovo
+
+Ma io non ho la cartella target...tu l'hai per caso compilato con maven o fatto qualcosa con maven? perchè i target sono generalmente di maven..o forse anche di ant.
 
 TODO LIST
 =========
