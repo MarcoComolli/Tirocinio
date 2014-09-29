@@ -102,6 +102,10 @@ Ora sto guardando 2 cose: la prima è vedere se riesco a sistemare il metodo wri
 La seconda cosa è il filePercorsi. Teoricamente so come renderlo grande diciamo la metà o comunque ridurne di molto le dimensione ma devo cambiare due cosine. Se per te va bene ci proverei.  
 Per il prof va bene. Io credo di essere là una mezz'oretta prima della lezione perchè mia sorella inizia prima. Se vuoi ci possiamo sentire prima/durante la lezione oppure dimmi te.
 
+--------
+
+OK, allora vengo anch'io mezzoretta prima così ci mettimao d'accordo. Ci troviamo lì nella sede di Montegeneroso?
+
 TODO LIST
 =========
 
