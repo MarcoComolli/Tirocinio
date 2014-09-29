@@ -221,7 +221,27 @@ Ha detto che iniziamo durante la pausa e poi finiamo subito dopo la sua lezione.
 
 Ok grazie. Al momento ho un errore in preprocessing per Junit. (emptystackexception) sto cercando di risolvere.
 
+Ho risolto l'errore sul preprocessing (a te non succedeva?) con qualche variabile booleana.  
+Ho fatto partire le classi di test e ovviamente c'è qualche errore da qualche parte perchè finiscono in 8 secondi senza darmi alcuna eccezione e i risultati sono a dir poco scarsi (4% di copertura e 9 percorsi).  
+Penso di sbagliare qualcosa nel mettere i path. Mi scriveresti quelli che usi tu così li confronto?
+Questo è il globaldata che ottengo
 
+> Total block code: 1831  
+Total block code tested (cumulative): 714  
+Total block code tested: 77  
+Uncovered block: 1753  
+Percentage test coverage: 4,2054%  
+Percentage test uncovered: 95,74%  
+>
+Total number of path: 9  
+Total number of path-block covered: 690  
+Average path size: 76,6667  
+>
+Total time for testing 8.739999953657389 sec.  
+Total number of test classes: 190  
+Total number of tests: 2295  
+Average tests for test class: 12,0789  
+Average block covered by test class: 0,7947 (1,0321% of tested blocks and 0,0434% of total blocks)  
 
 TODO LIST
 =========
