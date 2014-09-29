@@ -52,6 +52,26 @@ Total number of tests: 2295
 Average tests for test class: 12,0789  
 Average block covered by test class: 0,7947 (1,0321% of tested blocks and 0,0434% of total blocks)  
 
+
+------
+
+Non ho mai avuto eccezioni durante il preprocessing (a parte alcune cose in alcune classi che dovevo sistemare dopo aver fatto il preprocessing), magari l'ultima modifica che abbiamo fatto può averle generate.
+
+I percorsi sono questi qui in ordine:
+
+- C:\Users\Jacopo\Desktop\junit-master
+- C:\Users\Jacopo\Desktop\nn
+
+- C:\Users\Jacopo\Desktop\files
+- C:\Users\Jacopo\Desktop\junit-master\src\main\java
+- C:\Users\Jacopo\Desktop\nn\src\main\java
+
+- C:\Users\Jacopo\Desktop\nn\src\test\java
+- C:\Users\Jacopo\Desktop\nn\target\test-classes
+- C:\Users\Jacopo\Desktop\nn\target\classes
+
+
+
 TODO LIST
 =========
 
