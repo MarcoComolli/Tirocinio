@@ -191,6 +191,21 @@ Per quanto riguarda il TestCoverage ti spiego cosa vogliono dire:
 **#tnt** vuol dire in media quanti test case come quelli di questa classe sono necessari per raggiungere il 50%-75%-85% di copertura dei blocchi  
 Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non capisci scrivi che ti spiego cosa vogliono dire (p.s. negli ultimi dati un numero negativo indica quanti bisognerebbe toglierne per raggiungere quell'obiettivo di copertura, nel caso in cui l'obiettivo sia già stato raggiunto e superato)
 
+---------------------
+Ho "risolto" i problemi di classpath di pmd. Il riusltato è stata un'esecuzione dei casi di test durata 27 minuti con il filepercorsi di 1,21 GB. Gli altri files sono ok come dimensioni.
+Ho poi fatto partire il statistics data orderer e calcolato il tempo necessario per ogni task con questi risultati:
+> readAndOrderData 0.07
+writeOrderedData 0.111
+writeNumberOfLinesForMethod 0.222
+writeCoveredConditions 22.38
+
+i tempi sono misurati in secondi.  
+Manca il task finale **writePathsLength** perchè non finisce. Fa saltare questa eccezione  
+```Exception in thread "AWT-EventQueue-0" java.lang.OutOfMemoryError: GC overhead limit exceeded```  
+che fondamentalmente dice che ha problemi con il GarbageCollector perchè lo spazio in memoria allocato è troppo grande.
+
+Ora salvo i dati e provo a far partire Junit e ti posto i risultati (se mai termina l'esecuzione)
+
 
 
 TODO LIST
