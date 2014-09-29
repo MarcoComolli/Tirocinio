@@ -206,6 +206,10 @@ che fondamentalmente dice che ha problemi con il GarbageCollector perchè lo spa
 
 Ora salvo i dati e provo a far partire Junit e ti posto i risultati (se mai termina l'esecuzione)
 
+--------
+
+Sei riuscito a risolvere l'eccezione?
+
 
 
 TODO LIST
