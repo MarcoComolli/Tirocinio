@@ -94,6 +94,13 @@ Non so cosa fare potrei cambiare programma, ma non so se il tutto funzionerebbe,
 
 Nella versione precedente andava tutto su PMD? Se così fosse potremmo ritornare indietro (non so come si fa di preciso) e non far presente al prof il casino. Ci mettimao d'accordo prima di incontrarlo? 
 
+------
+
+Il problema è che io PMD so come farlo andare come prima. Prima non leggeva tutto perchè mi dimenticavo di inserire una libreria di "jaxen" o qualcosa del genere. Quando ho iniziato a inserire le varie librerie (poi ci sono stati errori a catena quindi le ho inserite una ad una) ha iniziato a leggermi tutti i file di test e a fare i percorsi. Quindi anche con il rollback del lavoro se lascio le librerie dovrebbe fare lo stesso un bel bordello.
+
+Ora sto guardando 2 cose: la prima è vedere se riesco a sistemare il metodo writepathlenght. Se riesco a capire dove crea la struttura dati enorme o se è veramente quello il problema allora si può vedere di fixare.  
+La seconda cosa è il filePercorsi. Teoricamente so come renderlo grande diciamo la metà o comunque ridurne di molto le dimensione ma devo cambiare due cosine. Se per te va bene ci proverei.  
+Per il prof va bene. Io credo di essere là una mezz'oretta prima della lezione perchè mia sorella inizia prima. Se vuoi ci possiamo sentire prima/durante la lezione oppure dimmi te.
 
 TODO LIST
 =========
