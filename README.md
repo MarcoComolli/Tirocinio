@@ -194,10 +194,10 @@ Per quanto riguarda i nuovi dati sul GlobalData si dovrebbero capire, se non cap
 ---------------------
 Ho "risolto" i problemi di classpath di pmd. Il riusltato è stata un'esecuzione dei casi di test durata 27 minuti con il filepercorsi di 1,21 GB. Gli altri files sono ok come dimensioni.
 Ho poi fatto partire il statistics data orderer e calcolato il tempo necessario per ogni task con questi risultati:
-> readAndOrderData 0.07
-writeOrderedData 0.111
-writeNumberOfLinesForMethod 0.222
-writeCoveredConditions 22.38
+> readAndOrderData 0.07  
+> writeOrderedData 0.111  
+> writeNumberOfLinesForMethod 0.222  
+> writeCoveredConditions 22.38  
 
 i tempi sono misurati in secondi.  
 Manca il task finale **writePathsLength** perchè non finisce. Fa saltare questa eccezione  
