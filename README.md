@@ -106,6 +106,12 @@ Per il prof va bene. Io credo di essere là una mezz'oretta prima della lezione 
 
 OK, allora vengo anch'io mezzoretta prima così ci mettimao d'accordo. Ci troviamo lì nella sede di Montegeneroso?
 
+------
+Io credo di essere lì mezz'ora prima ma non ne sono sicuro.  
+Al massimo domani mattina ti mando un messaggio prima delle 8 e ti dico.  
+Comunque le lezioni sono al morselli non è meglio se ci troviamo già lì?  
+p.s. credo di aver trovato il modo per sistemare un po' la faccenda. Posso procedere o preferisci tenere così per evitrare magari altri problemi?
+
 TODO LIST
 =========
 
