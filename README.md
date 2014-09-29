@@ -92,6 +92,8 @@ Ok ho fatto compilare a maven. Ho anche io le classi target ecc. ma quando lo fa
 Ho provato anch'io e mi dà la stessa cosa. Prima delle modifiche di questa settimana non terminava e ora termina subito, boh...
 Non so cosa fare potrei cambiare programma, ma non so se il tutto funzionerebbe, inoltre anche su PMD ci sono problemi, quindi non so
 
+Nella versione precedente andava tutto su PMD? Se così fosse potremmo ritornare indietro (non so come si fa di preciso) e non far presente al prof il casino. Ci mettimao d'accordo prima di incontrarlo? 
+
 
 TODO LIST
 =========
