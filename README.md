@@ -117,6 +117,10 @@ p.s. credo di aver trovato il modo per sistemare un po' la faccenda. Posso proce
 Ah, ok scusa non avevo guardato, va bene al Morselli.
 Non so, se vuoi vai pure avanti, al massimo si può tornare indietro.
 
+-------
+
+Ho quasi fatto però finisco domani pomeriggio e vedo come va, per il momento non diciamo niente al prof sull'errore dell Garbage collector. Ci sentiamo domani
+
 
 TODO LIST
 =========
