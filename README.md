@@ -112,6 +112,12 @@ Al massimo domani mattina ti mando un messaggio prima delle 8 e ti dico.
 Comunque le lezioni sono al morselli non è meglio se ci troviamo già lì?  
 p.s. credo di aver trovato il modo per sistemare un po' la faccenda. Posso procedere o preferisci tenere così per evitrare magari altri problemi?
 
+--------
+
+Ah, ok scusa non avevo guardato, va bene al Morselli.
+Non so, se vuoi vai pure avanti, al massimo si può tornare indietro.
+
+
 TODO LIST
 =========
 
