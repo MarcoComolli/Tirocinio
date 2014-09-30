@@ -121,6 +121,10 @@ Non so, se vuoi vai pure avanti, al massimo si può tornare indietro.
 
 Ho quasi fatto però finisco domani pomeriggio e vedo come va, per il momento non diciamo niente al prof sull'errore dell Garbage collector. Ci sentiamo domani
 
+Stavo scrivendo in segreteria ma non ricordo più se il modulo che abbiamo compilato era questo o no (per dargli un riferimento corretto)
+http://ws1-va.ateneo.uninsubria.it/uninsubria/allegati/pagine/14035/Richiesta_stage_interno_itinerante.pdf
+ricordi quando l'abbiamo consegnato?
+
 
 TODO LIST
 =========
