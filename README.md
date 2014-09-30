@@ -147,6 +147,11 @@ Ora sto provando a commentare i test che impallano l'esecuzione ma sono tanti e 
 --------
 
 Lo so, ma ora abbiamo detto al prof che funziona e che iniziavamo a scrivere la tesi, quindi o gli diciamo tutto o incominciamo al più presto a scrivere se no non ci prende neanche più sul serio.
+
+---------
+
+Se gli diciamo dei problemi che abbiamo è facile che non ci fa neanche laureare quest'anno. Il problema è che funziona se il programma testato fosse un normale programma come ad esempio i nostri. Ma se tipo pmd fa in modo che tutti i casi di test provino su file xml e i file xml non li legge allora è normale che non testi quasi nulla.  
+Comunque io sto scrivendo la tesi (ho iniziato con la prima pagina di intestazione) e intanto sto provando questo. Se riesco a risolvere tanto di guadagnato. Sennò usiamo i dati fittizi.
  
 
 TODO LIST
