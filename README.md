@@ -139,6 +139,11 @@ Non so più che fare oramai mi sono proprio rotto...problemi ovunque...mai una c
 Ora secondo me bisogna incominciare a scrivere e tener buoni dei dati, se pensi che si debba tornare indietro con le versioni, facciamolo. Altrimenti non riusciamo più ad andare avanti.
 Non si può più continuare con il codice, al massimo gli si può dire al prof che su alcune cose non siamo sicuri che tutto vada per il verso giusto, per il resto credo non si possa più continuare con le modifiche.
 
+------------
+
+Eh ma se i dati sono totalmente sbagliati cosa scriviamo nella tesi? Che pmd è stato testato all'11% quando in realtà magari è oltre il 50%? Poi ora il test dà problemi di sè...cioè i test danno un'eccezione non più il codice che abbiamo fatto noi. Più aggiungo classi e jar che mi richiede nel classpath e più fa casini.  
+Ora sto provando a commentare i test che impallano l'esecuzione ma sono tanti e tutti uguali. Praticamente non hanno test dentro ma un solo metodo setUp() che è composto da tanti addRule(.. , ..) in sequenza. Se riesco a far andare il metodo addRule dovrei in teoria risolvere qualcosa però ogni addRule richiede come paramentro un file .xml che non trova nel classpath e va all'infinito. Ora ho terminato io l'esecuzione perchè il filepercorsi arrivava oltre i due giga e mezzo. Sto provando ad aggiungere un po' di tutto al classpath vedere se risolve.
+ 
 
 TODO LIST
 =========
