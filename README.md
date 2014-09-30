@@ -143,6 +143,10 @@ Non si può più continuare con il codice, al massimo gli si può dire al prof c
 
 Eh ma se i dati sono totalmente sbagliati cosa scriviamo nella tesi? Che pmd è stato testato all'11% quando in realtà magari è oltre il 50%? Poi ora il test dà problemi di sè...cioè i test danno un'eccezione non più il codice che abbiamo fatto noi. Più aggiungo classi e jar che mi richiede nel classpath e più fa casini.  
 Ora sto provando a commentare i test che impallano l'esecuzione ma sono tanti e tutti uguali. Praticamente non hanno test dentro ma un solo metodo setUp() che è composto da tanti addRule(.. , ..) in sequenza. Se riesco a far andare il metodo addRule dovrei in teoria risolvere qualcosa però ogni addRule richiede come paramentro un file .xml che non trova nel classpath e va all'infinito. Ora ho terminato io l'esecuzione perchè il filepercorsi arrivava oltre i due giga e mezzo. Sto provando ad aggiungere un po' di tutto al classpath vedere se risolve.
+
+--------
+
+Lo so, ma ora abbiamo detto al prof che funziona e che iniziavamo a scrivere la tesi, quindi o gli diciamo tutto o incominciamo al più presto a scrivere se no non ci prende neanche più sul serio.
  
 
 TODO LIST
