@@ -125,6 +125,10 @@ Stavo scrivendo in segreteria ma non ricordo più se il modulo che abbiamo compi
 http://ws1-va.ateneo.uninsubria.it/uninsubria/allegati/pagine/14035/Richiesta_stage_interno_itinerante.pdf
 ricordi quando l'abbiamo consegnato?
 
+--------
+
+Sì, il modulo era quello.
+
 
 TODO LIST
 =========
