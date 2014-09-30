@@ -129,6 +129,11 @@ ricordi quando l'abbiamo consegnato?
 
 Sì, il modulo era quello.
 
+-------
+
+Ho riscritto il tutto...con i file di prova funziona..ma indovina un po'...pmd si interrompe con un'eccezione..sui test però neanche nel statistic data orderer...e credo di aver capito perchè ha così poco test pmd. In realtà hanno messo un po' di file esterni (tipo txt o formati che sanno solo loro) da provare che ovviamente non vengono letti dai test. Quindi non leggendeli i test non fanno niente e non testano niente.  
+Non so più che fare oramai mi sono proprio rotto...problemi ovunque...mai una cosa che va per il verso giusto..
+
 
 TODO LIST
 =========
