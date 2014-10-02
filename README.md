@@ -152,6 +152,19 @@ Lo so, ma ora abbiamo detto al prof che funziona e che iniziavamo a scrivere la 
 
 Se gli diciamo dei problemi che abbiamo è facile che non ci fa neanche laureare quest'anno. Il problema è che funziona se il programma testato fosse un normale programma come ad esempio i nostri. Ma se tipo pmd fa in modo che tutti i casi di test provino su file xml e i file xml non li legge allora è normale che non testi quasi nulla.  
 Comunque io sto scrivendo la tesi (ho iniziato con la prima pagina di intestazione) e intanto sto provando questo. Se riesco a risolvere tanto di guadagnato. Sennò usiamo i dati fittizi.
+
+####NOVITA'!
+Credo di aver capito perchè pmd non finisce/testa poco. Ti spiego tutti i passaggi che ho fatto così magari si capisce meglio:  
+- Ho preso in considerazione 1 classe di test di quelle che davano problemi (quelle che prendevano gli xml e testavano) e ho provato a farla andare con Junit da eclipse dal progetto originale non modificato e andava tutto liscio. Eseguiva 70 casi di test senza nessun fail.
+- L'ho fatta partire sul progetto modificato sempre con lo stesso metodo e invece si impiantava
+- Allora ho fatto in modo di fargli stampare prima dell'esecuzione il classpath che usava nel progetto originario e ho copiato tutte le classi nel classpath nuovo. Ho fatto ripartire ma l'errore era lo stesso. Non è quindi un problema di classpath.
+- Dopo un po' di esperimenti ho provato a commentare tutti i metodi della classe MyTracerClass in modo tale che quella classe non facesse nulla. Ho fatto partire e tutto ha funzionato (ovviamente senza dati)
+- Allora ho scommentato uno alla volta i metodi del MyTracerClass fino ad arrivare al succo del problema.
+- I metodi che fanno casino alla fine di tutto sono i metodi writePathsFile() sia quello normale che quello col booleano. Lasciandoli commentati, e con solo 1 classe di test i dati che mi venivano fuori erano abbastanza sorprendenti: 70 casi di test eseguiti, 10,9% blocchi testati del totale, i blocchi coperti sono 1'850'000 circa su quasi 2400 percorsi. Il tutto testato in poco più di 2 secondi.
+- Ho provato a lasciar andare l'esecuzione con i metodi che scrivono sul file percorsi. L'esecuzione è terminata dopo 4 minuti con un file con 1'850'000 righe (giustamente) e di dimensione 158 Mb. Tutto questo per una sola classe di test.  
+Il problema quindi è che la scrittura su stream oltre a diventare una cosa enorme (io fermavo a 2,5GB ma probabilmente se lasciavo andare (non so quanto) avrebbe terminato con un file di molto più grande) è lentissima rispetto all'esecuzione. Quindi anche i tempi si allungano eccessivamente. Il problema ora diventa quindi come evitare il filePercorsi perchè comunque tutti gli altri dati riesco a ottenerli anche senza questo (da questo file dipenderebbero le condizioni coperte e il file lunghezza cammini).  
+
+Altra cosa, sto cercando dei progetti alternativi a Junit ma tutti quelli che guardo o non c'è il codice o quando c'è mancano i test) sei riuscito a trovare qualcosa tu?
  
 
 TODO LIST
