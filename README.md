@@ -247,7 +247,9 @@ E ha bloccato la scrittura del file (è arrivato ad 1,1 MB poi si è troncato pe
 
 Ora provo a vedere Junit se riesco a fare qualcosa. Mal che vada provo quelli che mi hai scritto.
 
+-------
 
+Bene i risultati sembrano buoni, speriamo che con JUnit funzioni.
 
 
 TODO LIST
