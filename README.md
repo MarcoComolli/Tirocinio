@@ -161,8 +161,13 @@ Credo di aver capito perchè pmd non finisce/testa poco. Ti spiego tutti i passa
 - Dopo un po' di esperimenti ho provato a commentare tutti i metodi della classe MyTracerClass in modo tale che quella classe non facesse nulla. Ho fatto partire e tutto ha funzionato (ovviamente senza dati)
 - Allora ho scommentato uno alla volta i metodi del MyTracerClass fino ad arrivare al succo del problema.
 - I metodi che fanno casino alla fine di tutto sono i metodi writePathsFile() sia quello normale che quello col booleano. Lasciandoli commentati, e con solo 1 classe di test i dati che mi venivano fuori erano abbastanza sorprendenti: 70 casi di test eseguiti, 10,9% blocchi testati del totale, i blocchi coperti sono 1'850'000 circa su quasi 2400 percorsi. Il tutto testato in poco più di 2 secondi.
-- Ho provato a lasciar andare l'esecuzione con i metodi che scrivono sul file percorsi. L'esecuzione è terminata dopo 4 minuti con un file con 1'850'000 righe (giustamente) e di dimensione 158 Mb. Tutto questo per una sola classe di test.  
+- Ho provato a lasciar andare l'esecuzione con i metodi che scrivono sul file percorsi. L'esecuzione è terminata dopo 4 minuti con un file con 1'850'000 righe (giustamente) e di dimensione 158 Mb. Tutto questo per una sola classe di test.
+
 Il problema quindi è che la scrittura su stream oltre a diventare una cosa enorme (io fermavo a 2,5GB ma probabilmente se lasciavo andare (non so quanto) avrebbe terminato con un file di molto più grande) è lentissima rispetto all'esecuzione. Quindi anche i tempi si allungano eccessivamente. Il problema ora diventa quindi come evitare il filePercorsi perchè comunque tutti gli altri dati riesco a ottenerli anche senza questo (da questo file dipenderebbero le condizioni coperte e il file lunghezza cammini).  
+
+***possibile soluzione:***
+Ogni volta che venivano chiamati i metodi inizializzava un printwriter e poi lo chiudeva. Gliel'ho fatto fare una sola volta (inizializzandolo in un blocco *static*) e chiudendolo alla fine dei test. Il tempo di esecuzione è passato da 4 minuti a 10 secondi...la grandezza è ovviamente rimasta invariata.  
+Per la grandezza si potrebbe assegnare ad ogni blocco un codice numerico. Essendo i blocchi al max 10000 i caratteri scritti sarebbero al massimo 5 per ogni metodo invece che 50-80 riducendo di più di 10 volte la dimensione. I nomi dei blocchi verrebbero poi mappati in una mappa. Che ne pensi? Così tipo possiamo raccogliere le info e poi eliminare il filePercorsi che invece di 4 giga sarebbe 400 mega tipo...mi sembra un buon improovement
 
 Altra cosa, sto cercando dei progetti alternativi a Junit ma tutti quelli che guardo o non c'è il codice o quando c'è mancano i test) sei riuscito a trovare qualcosa tu?
  
