@@ -175,7 +175,7 @@ Altra cosa, sto cercando dei progetti alternativi a Junit ma tutti quelli che gu
 
 Io ho trovato programmi con codice e test, ma tutti hanno problemi di compilazione quando vengono importati con eclipse. In pratica faccio il build con ant o maven e vengono scaricate tutte le librerie, ma quando li importo su eclipse i problemi con le librerie rimangono.
 
-Questi tre programmi avevano test e sorgenti: dependometer-java-1.2.5, Jalopy2, jfreechart-1.0.19, ma hanno un bel po' di problemi. Del primo eseguo il build con maven e tutto è a posto, ma importandolo su eclipse ci sono problemi cpn dipendenze,  inoltre ha source folders sparse di test. Il secondo stessa cosa del primo anche se le cartelle dei test sempbrerebbero più gestibili. L'ultimo eseguo il build di ant, ma con eclipse non me l'ho fa importare e non ha un pom di maven. Quindi ho provato ha copiarlo nel wrkspace e a creare un progetto con lo stesso nome, ma le source folders me le rieva come normali cartelle.
+Questi tre programmi avevano test e sorgenti: dependometer-java-1.2.5, Jalopy2, jfreechart-1.0.19, ma hanno un bel po' di problemi. Del primo eseguo il build con maven e tutto è a posto, ma importandolo su eclipse ci sono problemi cpn dipendenze,  inoltre ha source folders sparse di test. Il secondo stessa cosa del primo anche se le cartelle dei test sembrerebbero più gestibili. L'ultimo eseguo il build di ant, ma con eclipse non me l'ho fa importare e non ha un pom di maven. Quindi ho provato a copiarlo nel wrkspace e a creare un progetto con lo stesso nome, ma le source folders me le rieva come normali cartelle.
 
 TODO LIST
 =========
