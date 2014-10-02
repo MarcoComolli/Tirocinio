@@ -187,6 +187,13 @@ Ahah adesso ti faccio ridere...esecuzione ferma al 91% e 26GB di filePercorsi, i
 Per quanto riguarda i programmi, per jfreechart basta inserire le cartelle nel buildpath e prenderle come source code. Per quello coi test sparsi direi di lasciar perdere che è troppo difficile arrivare a mettere dentro tutti i path giusti.  
 Provo poi a scaricare e guardare il secondo e il terzo vedere se ache a me da gli stessi errori.
 
+---------
+
+Oddio 26 GB! La percentuale almeno è aumentata.
+
+Per jfreechart-1.0.19 ho provato a fare il build con maven ma fallisce, poi lo importo con eclipse e ha giustamente problemi di dipendenze. Ho provato anche ad aggiungere le cartelle al path, ma l'opzione dal menu non era disponibile.
+
+
 TODO LIST
 =========
 
