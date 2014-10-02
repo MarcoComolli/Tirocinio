@@ -193,6 +193,11 @@ Oddio 26 GB! La percentuale almeno è aumentata.
 
 Per jfreechart-1.0.19 ho provato a fare il build con maven ma fallisce, poi lo importo con eclipse e ha giustamente problemi di dipendenze. Ho provato anche ad aggiungere le cartelle al path, ma l'opzione dal menu non era disponibile.
 
+Ti metto i link se vuoi provare:
+
+http://sourceforge.net/projects/jfreechart/files/
+
+
 
 TODO LIST
 =========
