@@ -170,6 +170,10 @@ Ogni volta che venivano chiamati i metodi inizializzava un printwriter e poi lo 
 Per la grandezza si potrebbe assegnare ad ogni blocco un codice numerico. Essendo i blocchi al max 10000 i caratteri scritti sarebbero al massimo 5 per ogni metodo invece che 50-80 riducendo di più di 10 volte la dimensione. I nomi dei blocchi verrebbero poi mappati in una mappa. Che ne pensi? Così tipo possiamo raccogliere le info e poi eliminare il filePercorsi che invece di 4 giga sarebbe 400 mega tipo...mi sembra un buon improovement
 
 Altra cosa, sto cercando dei progetti alternativi a Junit ma tutti quelli che guardo o non c'è il codice o quando c'è mancano i test) sei riuscito a trovare qualcosa tu?
+
+---------
+
+Io ho trovato programmi con codice e test, ma tutti hanno problemi di compilazione quando vengono importati con eclipse. In pratica faccio il build con ant o maven e vengono scaricate tutte le librerie, ma quando li importo su eclipse i problemi con le librerie rimangono.
  
 
 TODO LIST
