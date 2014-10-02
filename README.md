@@ -262,6 +262,9 @@ Errori nel preprocessing...questi mettono le condizioni tipo
 e il parser mette come operatori booleani [int, int] che sono interi. (perchè la & in questo caso indica operazione binaria tra interi).
 E come se non bastasse mettono anche gli assegnamenti nelle condizioni per complicare un po' il tutto. Vedo cosa riesco a fare. Una volta fixati questi non dovrebbe dare altri errori e posso procedere con il test
 
+--------
+
+Come va? Niente di buono? In effetti avevo notato che i programmi erano abbastanza grandi, quindi avranno anche loro i loro problemi..
 
 TODO LIST
 =========
