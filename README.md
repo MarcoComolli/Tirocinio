@@ -273,6 +273,8 @@ Ho tolto i 32 errori che dava sulle operazioni tra interi.
 Per quanto riguarda gli altri due errori sugli assegnamenti avrei dovuto scrivere un altro pezzo di codice per toglierli però ho visto che bastava solo togliere il *final* davanti alla variabile (infatti dava problemi nell'assegnamento solo perchè veniva assegnato due volte una variabile final) visto che non abbiamo tutto sto tempo se me lo concedi preferisco toglierlo dal codice.  
 Ora sono alle prese con i test per farli andare che mi si blocca al 22% ma devo settare ancora bene il classpath.
 
+Non riesco a farlo andare. Si blocca al 23% su una classe di test. Se la levo non funziona più niente. Se invece la tengo si impianta sui test che esegue in modo casuale... non so perchè..provo a vedere gli altri programmi..
+
 TODO LIST
 =========
 
