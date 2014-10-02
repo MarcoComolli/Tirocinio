@@ -197,6 +197,10 @@ Ti metto i link se vuoi provare:
 
 http://sourceforge.net/projects/jfreechart/files/
 
+https://github.com/notzippy/JALOPY2-MAIN
+
+http://source.valtech.com/display/dpm/Downloads
+
 
 
 TODO LIST
