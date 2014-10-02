@@ -257,6 +257,11 @@ Per Junit non riesco proprio a capire il problema...mi da sempre testato 4%.
 Però in compenso a me Jchart con qualche accorgimento funziona (l'import su eclipse e i test fatti da eclipse). 2256 casi di test 1 failure. Secondo Metrics sono 1000 classi e quasi 11000 metodi. Non mi sembra piccolo come programma. Forse basta questo da sostituire a junit.  
 Ora bisogna vedere se il nostro programma funziona per questo. Provo a far partire il tutto.
 
+Errori nel preprocessing...questi mettono le condizioni tipo   
+```if((int & int) == int){} ```  
+e il parser mette come operatori booleani [int, int] che sono interi. (perchè la & in questo caso indica operazione binaria tra interi).
+E come se non bastasse mettono anche gli assegnamenti nelle condizioni per complicare un po' il tutto. Vedo cosa riesco a fare. Una volta fixati questi non dovrebbe dare altri errori e posso procedere con il test
+
 
 TODO LIST
 =========
