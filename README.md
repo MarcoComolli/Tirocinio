@@ -181,6 +181,12 @@ Magari il problema dei metodi writePathsFile() era anche di JUnit, forse si potr
 
 Per diminuire la grandezza dei file fai pure come vuoi tu.
 
+---- 
+Ahah adesso ti faccio ridere...esecuzione ferma al 91% e 26GB di filePercorsi, in aumento. Ho terminato e vedo se riesco a fare qualcosa tipo commentare qualche classe particolarmente ostica. Comunque con i dati presi fin'ora ho fatto un calcolo approssimativo e la % di test copre più del 30/40%. Ti informo per altri risultati.
+
+Per quanto riguarda i programmi, per jfreechart basta inserire le cartelle nel buildpath e prenderle come source code. Per quello coi test sparsi direi di lasciar perdere che è troppo difficile arrivare a mettere dentro tutti i path giusti.  
+Provo poi a scaricare e guardare il secondo e il terzo vedere se ache a me da gli stessi errori.
+
 TODO LIST
 =========
 
