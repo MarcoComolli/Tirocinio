@@ -251,6 +251,12 @@ Ora provo a vedere Junit se riesco a fare qualcosa. Mal che vada provo quelli ch
 
 Bene i risultati sembrano buoni, speriamo che con JUnit funzioni.
 
+-----
+
+Per Junit non riesco proprio a capire il problema...mi da sempre testato 4%.
+Però in compenso a me Jchart con qualche accorgimento funziona (l'import su eclipse e i test fatti da eclipse). 2256 casi di test 1 failure. Secondo Metrics sono 1000 classi e quasi 11000 metodi. Non mi sembra piccolo come programma. Forse basta questo da sostituire a junit.  
+Ora bisogna vedere se il nostro programma funziona per questo. Provo a far partire il tutto.
+
 
 TODO LIST
 =========
