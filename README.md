@@ -204,7 +204,49 @@ http://source.valtech.com/display/dpm/Downloads
 
 ------
 
-Ok grazie, dopo li provo
+Ok grazie, dopo li provo.
+
+Eureka! Ha finito l'esecuzione! Ho ritoccato un po' dei test ed ecco qua i risultati:
+- Filepercorsi: 9GB
+- Gli altri files hanno dimensioni umane (non sopra il megabyte)
+questo è il global test:
+
+> Total block code: 10041  
+Total block code tested (cumulative): 109666872  
+Total block code tested: 5508  
+Uncovered block: 4518  
+Percentage test coverage: 54,8551%  
+Percentage test uncovered: 44,9955%  
+>
+Total number of path: 10012  
+Total number of path-block covered: 109663689  
+Average path size: 10953,225  
+>
+Total time for testing 580.1909878458828 sec.  
+Total number of test classes: 230  
+Total number of tests: 3184  
+Average tests for test class: 13,8435  
+Average block covered by test class: 220,9435 (4,0113% of tested blocks and 2,2004% of total blocks)  
+>
+Number of additional class to reach 50% coverage: -2,21  
+Number of additional class to reach 75% coverage: 9,16  
+Number of additional class to reach 85% coverage: 13,7  
+Number of additional tests to reach 100% coverage: 20,52  
+>
+Number of additional tests to reach 50% coverage: -30,54  
+Number of additional tests to reach 75% coverage: 126,74  
+Number of additional tests to reach 85% coverage: 189,65  
+Number of additional tests to reach 100% coverage: 284,02  
+
+Qua dice che ci ha messo circa 10 minuti ma a me sembra ci abbia messo di più..però boh. L'unica pecca è che mi ha fatto partire tutto tranne il file Lunghezza cammini che dopo qualche minuto se ne è uscito con una bella  
+```java
+Exception in thread "D3D Screen Updater" java.lang.OutOfMemoryError: Java heap space
+Exception in thread "AWT-EventQueue-0" java.lang.OutOfMemoryError: Java heap space
+```
+E ha bloccato la scrittura del file (è arrivato ad 1,1 MB poi si è troncato per l'eccezione).
+
+Ora provo a vedere Junit se riesco a fare qualcosa. Mal che vada provo quelli che mi hai scritto.
+
 
 
 
