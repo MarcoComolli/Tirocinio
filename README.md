@@ -266,6 +266,13 @@ E come se non bastasse mettono anche gli assegnamenti nelle condizioni per compl
 
 Come va? Niente di buono? In effetti avevo notato che i programmi erano abbastanza grandi, quindi avranno anche loro i loro problemi..
 
+-----
+
+Ci ho messo un po' ma alla fine ho fatto qualcosa (è un po' fuffo ma funziona).  
+Ho tolto i 32 errori che dava sulle operazioni tra interi.  
+Per quanto riguarda gli altri due errori sugli assegnamenti avrei dovuto scrivere un altro pezzo di codice per toglierli però ho visto che bastava solo togliere il *final* davanti alla variabile (infatti dava problemi nell'assegnamento solo perchè veniva assegnato due volte una variabile final) visto che non abbiamo tutto sto tempo se me lo concedi preferisco toglierlo dal codice.  
+Ora sono alle prese con i test per farli andare che mi si blocca al 22% ma devo settare ancora bene il classpath.
+
 TODO LIST
 =========
 
