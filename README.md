@@ -283,6 +283,12 @@ L'altro invece utilizza file xml come test e già facendolo partire dal junit di
 Stavo cercando altri programmi ma non trovo niente con i test.
 Ma che cazzo fa con i test sta gente? Perchè non li fanno andare in un modo decente?
 
+------
+
+Bah non ne ho idea.
+Ho provato a far partire i test da Junit di eclipse per freechart. Partono 2256 test di cui 0 errori e 1 fallimento. Quindi se partono lì dovrebbero andare anche dopo. Ho provato a far partire i test del progetto originario da interfaccia grafica ed effettivamente partono e terminano tutti in pochi secondi. Quindi non è un problema di interfaccia grafica. E penso neanche di classpath visto che son partiti tutti.  
+Così ho provato a far partire i test da Junit di quello processato (con dentro i mytracer) e ne fa partire 2225 con 4 errori e 16 fallimenti. Praticamente perde 31 test e da errori. Eppure non dovrebbe cambiare nulla. Domani riprovo la procedura e guardo cosa si è modificato. Teoricamente se lo riporto identico a quell'altro dovrebbe andare tutto quanto...secondo me se sbatto la testa dalla parte giusta freechart si può tenere..vediamo domani. Ci vediamo
+
 TODO LIST
 =========
 
