@@ -177,6 +177,10 @@ Io ho trovato programmi con codice e test, ma tutti hanno problemi di compilazio
 
 Questi tre programmi avevano test e sorgenti: dependometer-java-1.2.5, Jalopy2, jfreechart-1.0.19, ma hanno un bel po' di problemi. Del primo eseguo il build con maven e tutto è a posto, ma importandolo su eclipse ci sono problemi cpn dipendenze,  inoltre ha source folders sparse di test. Il secondo stessa cosa del primo anche se le cartelle dei test sembrerebbero più gestibili. L'ultimo eseguo il build di ant, ma con eclipse non me l'ho fa importare e non ha un pom di maven. Quindi ho provato a copiarlo nel wrkspace e a creare un progetto con lo stesso nome, ma le source folders me le rieva come normali cartelle.
 
+Magari il problema dei metodi writePathsFile() era anche di JUnit, forse si potrebbe provare ad eseguire ancora i test in questo modo.
+
+Per diminuire la grandezza dei file fai pure come vuoi tu.
+
 TODO LIST
 =========
 
