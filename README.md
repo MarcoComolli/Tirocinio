@@ -278,6 +278,11 @@ Non riesco a farlo andare. Si blocca al 23% su una classe di test. Se la levo no
 Jalopy2 ha solo una classe di test. Direi che è meglio di no.
 L'altro invece utilizza file xml come test e già facendolo partire dal junit di eclipse non trova i file..figuriamoci se lo annetto al nostro. Secondo me Junit potevano farlo meglio o almeno fornire API migliori che non sia JunitCore che fa schifo...sono abbastanza disperato...riprovo a tornare su Jfreechart
 
+-------
+
+Stavo cercando altri programmi ma non trovo niente con i test.
+Ma che cazzo fa con i test sta gente? Perchè non li fanno andare in un modo decente?
+
 TODO LIST
 =========
 
