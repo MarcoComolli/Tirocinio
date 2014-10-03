@@ -585,6 +585,10 @@ Sì, in pratica nel mio metodo salvavo i blocchi nelle liste, ma non usavo mai i
 
 Aaah ok...allora ricordavo male io. Perfetto se tutto va bene allora devo solo cambiare due cose negli split iniziali e mettere i contatori. Poi guardo se funziona e ti dico.
 
+-----
+
+Spero che i TreeSet dei minimi e massimi a parimerito non diano problemi, al massimo si mettono solo dei contatori e si tiene il nome di uno dei minimi e massimi a parimerito.
+
 
 TODO LIST
 =========
