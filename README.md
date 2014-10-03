@@ -434,7 +434,9 @@ L'idea era di ottenere i dati mano a mano che scandivo il file però per ottener
 L'altro problema è che per tenere il percorso più lungo usavo una lista temporanea. Ogni percorso lo salvavo in questa lista e alla fine del percorso guardavo: se era la più grande fino ad ora la salvavo (e rimpiazzavo quella vecchia) sennò si svuotava e ricominciava con il vecchio percorso.
 Qui credo che il problema sia che la lista del percorso più grande sia troppo grande per essere tenuta in memoria. Quindi devo inventarmi qualcos'altro.
 
+-------
 
+Al posto delle liste non si potrebbe mettere un intero che viene incrementato ogni volta che si trova una riga che ha nome metodo  che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo come chiave già presente nel TreeMap? In pratica al posto della lista si avrebbe solo il contatore e si potrebbe riusare il vecchio metodo. 
 
 TODO LIST
 =========
