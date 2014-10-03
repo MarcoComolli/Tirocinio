@@ -343,6 +343,35 @@ Sto cercando la causa del problema per il momento
 Risolta...sono un idiota io...mettevo le cose nella lista per il classpath ma mi dimenticavo di aggiungere la lista al classpath...se riesce a terminare dovrebbero esserci dati migliori...è ancora in running ti faccio sapere
 
 
+Eheheheh
+
+> Total block code: 18261  
+Total block code tested (cumulative): 64782755  
+Total block code tested: 8711  
+Uncovered block: 9545  
+Percentage test coverage: 47,7028%  
+Percentage test uncovered: 52,2699%  
+> 
+Total number of path: 7600  
+Total number of path-block covered: 64782553  
+Average path size: 8524,0201  
+> 
+Total time for testing 385.68800514016766 sec.  
+Total number of test classes: 365  
+Total number of tests: 2263  
+Average tests for test class: 6,2  
+Average block covered by test class: 145,8247 (1,674% of tested blocks and 0,7986% of total blocks)  
+> 
+Number of additional class to reach 50% coverage: 2,88  
+Number of additional class to reach 75% coverage: 34,18  
+Number of additional class to reach 85% coverage: 46,71  
+Number of additional tests to reach 100% coverage: 65,49  
+>
+Number of additional tests to reach 50% coverage: 17,84  
+Number of additional tests to reach 75% coverage: 211,94  
+Number of additional tests to reach 85% coverage: 289,58  
+Number of additional tests to reach 100% coverage: 406,04  
+
 TODO LIST
 =========
 
