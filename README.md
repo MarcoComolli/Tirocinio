@@ -437,6 +437,122 @@ Qui credo che il problema sia che la lista del percorso più grande sia troppo g
 -------
 
 Al posto delle liste non si potrebbe mettere un intero che viene incrementato ogni volta che si trova una riga che ha nome metodo  che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo come chiave già presente nel TreeMap? In pratica al posto della lista si avrebbe solo il contatore e si potrebbe riusare il vecchio metodo. 
+```java
+public static void writePathsLength() throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));
+		PrintWriter printWriter;
+        String numberOfInstructionsFilePath = filesPath + "\\LunghezzaCammini.txt";
+        printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+		String[] arrayLine;
+		
+		LinkedList<String> path = null;
+		String pathMethodNumber;
+		try {
+			String line = br.readLine();
+			while (line != null) {		
+				//arrayLine = line.split("\\* ");
+				arrayLine=line.split(":");	
+				pathMethodNumber=arrayLine[0];
+				String pathLine = arrayLine[1];
+			
+				System.out.println(pathMethodNumber);
+				System.out.println(pathLine);
+										
+			
+					if(pathNumberMap.containsKey(pathMethodNumber)){
+						path = pathNumberMap.get(pathMethodNumber);
+						path.add(pathLine);
+						
+
+					}else{
+						path=new LinkedList<String>();
+						path.add(pathLine);
+						
+					}
+					pathNumberMap.put(pathMethodNumber, path);
+					line = br.readLine();
+				}
+
+			double totalLength=0;
+			double totalNumberOfPaths=0;
+			totalNumberOfPaths=pathNumberMap.size();
+			int maxPathLength=0;
+			String maxPathKey = null;
+			double maxCoveragePath = 0;
+			int minPathLength=0;
+			String minPathKey = null ;
+			double minCoveragePath = 0;
+			double coverage;
+
+			TreeSet<String> minLengthPathsSet= new TreeSet<String>();
+			TreeSet<String> maxLengthPathsSet= new TreeSet<String>();
+
+			
+			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
+				
+				totalLength+=entry.getValue().size();
+			}
+			if(!pathNumberMap.isEmpty()){
+			maxPathLength=minPathLength=pathNumberMap.get(pathNumberMap.firstKey()).size();
+			maxPathKey=minPathKey=pathNumberMap.firstKey();
+			maxCoveragePath=minCoveragePath=(pathNumberMap.get(pathNumberMap.firstKey()).size()*100)/totalLength;
+			}
+			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
+				coverage=(entry.getValue().size()*100)/totalLength;
+				printWriter.println(entry.getKey() + " size : " + entry.getValue().size() + " covers "+
+				coverage+"% of total paths");
+				if(entry.getValue().size()==maxPathLength){
+					maxLengthPathsSet.add(entry.getKey());
+				}else if(entry.getValue().size()>maxPathLength){
+					maxLengthPathsSet.clear();
+					maxPathLength=entry.getValue().size();
+					maxPathKey=entry.getKey();
+					maxCoveragePath=coverage;
+					maxLengthPathsSet.add(entry.getKey());
+
+				}
+				if(entry.getValue().size()==minPathLength){
+					minLengthPathsSet.add(entry.getKey());
+					
+				}else if(entry.getValue().size()<minPathLength){
+					minLengthPathsSet.clear();
+					minPathLength=entry.getValue().size();
+					minPathKey=entry.getKey();
+					minCoveragePath=coverage;
+					minLengthPathsSet.add(entry.getKey());
+				}
+			}
+			String shortestPathsKeys="";
+			String longestPathsKeys="";
+			
+			for(String i:minLengthPathsSet){
+				shortestPathsKeys+=i+",";
+			}
+			
+			for(String i:maxLengthPathsSet){
+				longestPathsKeys+=i+",";
+			}
+			System.out.println(shortestPathsKeys +" length: "+minPathLength +" covers " + minCoveragePath);
+			
+			printWriter.println("Total number of paths: " + totalNumberOfPaths);
+			printWriter.println("Total Paths length: " +totalLength);
+			printWriter.println("Average Paths length: " +totalLength/totalNumberOfPaths);
+			printWriter.println("Longest Path: " +maxPathKey +" length: "+maxPathLength +" covers " + maxCoveragePath +"%");
+			printWriter.println("Shortest Path: " +minPathKey +" length: "+minPathLength +" covers " + minCoveragePath +"%");
+			printWriter.println("Longest Paths: " +longestPathsKeys.substring(0, longestPathsKeys.length()-1) +" length: "+maxPathLength +" covers " + maxCoveragePath +"%");
+			printWriter.println("Shortest Paths: "+ shortestPathsKeys.substring(0, shortestPathsKeys.length()-1) +" length: "+minPathLength +" covers " + minCoveragePath +"%");
+
+		} finally {
+			printWriter.flush();
+			br.close();
+			printWriter.close();
+		}
+
+		
+	}
+```
+	
+
 
 TODO LIST
 =========
