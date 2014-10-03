@@ -596,6 +596,12 @@ Se non ti dispiace facciamo domani la mail che ora son stanco morto e preferirei
 
 Faccio il commit? (c'e tanta roba commentata, lasciala perdere quella serve per far andare pmd, junit e freechart)
 
+---------
+
+Certo, per la mail facciamo domani.
+
+Se vuoi fai pure il commit.
+
 
 TODO LIST
 =========
