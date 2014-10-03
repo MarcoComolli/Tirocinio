@@ -372,6 +372,11 @@ Number of additional tests to reach 75% coverage: 211,94
 Number of additional tests to reach 85% coverage: 289,58  
 Number of additional tests to reach 100% coverage: 406,04  
 
+--------
+
+Cazzo sembra buona!
+
+
 TODO LIST
 =========
 
