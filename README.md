@@ -300,6 +300,36 @@ Però sono riuscito a farlo terminare! (dovendo modificare un parametro della JV
 Ma c'è un problema. Non esce dalla ricorsione dei casi di test. E non finendo la ricorsione non esegue il globalData alla fine. Cioè, non so il perchè, però il metodo runJunitTest scandisce le varie cartelle e quando trova dei file li esegue, se invece trova una cartella riesegue il metodo per tutte le sottocartelle. Arrivo ad un livello di ricorsione pari a 21 che però non decrementa mai, cioè, quando il test finisce dovrebbe tornare al metodo che l'ha chiamato che dovrebbe terminare e così via...invece non lo fa. Così ora stavo provando a cercare un modo per eliminare la ricorsione e provare a farlo partire.  
 Tra l'altro, ho scoperto che in questo modo eseguiamo i test come la visita in ampiezza (tanto per intenderci) mentre Junit da eclipse li esegue come la visita in profondità. Quindi i test partono in ordine diverso, però non so se c'entra qualcosa.
 
+---- 
+Non era un problema di ricorsione...il problema è in una classe di test che...non so perchè, non riesco proprio a capirlo, impediva di finire tutti i test ma allo stesso tempo faceva terminare l'esecuzione...così ho provato a rimuoverla e ha funzionato tutto...però quella classe (Che non ha nemmeno una, dico UNA, cavolo di annotazione del tipo @test) sembra aver tolto tipo 700 test...i risultati non sono dei migliori in effetti te li posto:
+
+> Total block code: 18261  
+Total block code tested (cumulative): 63741202  
+Total block code tested: 913  
+Uncovered block: 17343  
+Percentage test coverage: 4,9997%  
+Percentage test uncovered: 94,9729%  
+> 
+Total number of path: 52  
+Total number of path-block covered: 63741202  
+Average path size: 1225792,3462  
+> 
+Total time for testing 327.09800705499947 sec.  
+Total number of test classes: 365  
+Total number of tests: 1558  
+Average tests for test class: 4,2685  
+Average block covered by test class: 4,3644 (0,478% of tested blocks and 0,0239% of total blocks)  
+> 
+Number of additional class to reach 50% coverage: 1882,85  
+Number of additional class to reach 75% coverage: 2928,88  
+Number of additional class to reach 85% coverage: 3347,29  
+Number of additional tests to reach 100% coverage: 3974,9  
+> 
+Number of additional tests to reach 50% coverage: 8036,95  
+Number of additional tests to reach 75% coverage: 12501,9  
+Number of additional tests to reach 85% coverage: 14287,88  
+Number of additional tests to reach 100% coverage: 16966,84  
+
 TODO LIST
 =========
 
