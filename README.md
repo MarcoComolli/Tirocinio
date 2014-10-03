@@ -581,6 +581,10 @@ Se per te va bene possiamo anche evitare di scriverli e li teniamo così. Cioè:
 
 Sì, in pratica nel mio metodo salvavo i blocchi nelle liste, ma non usavo mai i loro nomi nel file. I cammini più lunghi e quelli più corti erano identificati "solo da nome metodo che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo" in pratica le chiavi che avevano le liste di lunghezza minima e massima come valore.
 
+----
+
+Aaah ok...allora ricordavo male io. Perfetto se tutto va bene allora devo solo cambiare due cose negli split iniziali e mettere i contatori. Poi guardo se funziona e ti dico.
+
 
 TODO LIST
 =========
