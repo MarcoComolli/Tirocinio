@@ -336,6 +336,10 @@ L'output è sbagliato. Si vede dai test...già il primo se lo faccio partire da 
 
 Quindi cosa si fa? Si lavora con dati fittizzi?
 
+-------
+
+Sto cercando la causa del problema per il momento
+
 
 TODO LIST
 =========
