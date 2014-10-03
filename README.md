@@ -600,7 +600,7 @@ Faccio il commit? (c'e tanta roba commentata, lasciala perdere quella serve per 
 
 Certo, per la mail facciamo domani.
 
-Se vuoi fai pure il commit.
+OK, grazie.
 
 
 TODO LIST
