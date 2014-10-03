@@ -376,6 +376,12 @@ Number of additional tests to reach 100% coverage: 406,04
 
 Cazzo sembra buona!
 
+-----
+Eh sì! Comunque il filepercorsi di freechart è uasi 4 GB.  
+Ora mi manca solo da sistemare gli errori su lunghezzacammini.  
+Sembra si diverta ad alternare heap exception con Garbage collector exception.  
+Se riesco a sistemare abbiamo tutto! E possiamo chiedere al prof di sostituire Junit con freechart oltre a mandargli lo scheletro della tesi.
+
 
 TODO LIST
 =========
