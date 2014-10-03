@@ -382,6 +382,10 @@ Ora mi manca solo da sistemare gli errori su lunghezzacammini.
 Sembra si diverta ad alternare heap exception con Garbage collector exception.  
 Se riesco a sistemare abbiamo tutto! E possiamo chiedere al prof di sostituire Junit con freechart oltre a mandargli lo scheletro della tesi.
 
+------
+
+Sì, credo che non farà storie se gli diciamo che è delle stesse dimensioni di JUnit.
+
 
 TODO LIST
 =========
