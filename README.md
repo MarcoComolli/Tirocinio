@@ -409,6 +409,16 @@ Togliere le liste intendi da questo metodo? Se è così sto cercando di farlo ma
 Per come l'avevo scritto io non lo percorrevo due volte per avere la percentuale totale, dici che mi sbagliavo?
 Se vuoi ti posso dire cosa faceva il mio metodo.
 
+All'inizio il metodo leggeva il FilePercorsi e ogni riga del file veniva splittata con parametro ":" in modo tale da avere in posizione 0 e 1 rispettivaente dell'array:
+- nome metodo  che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo 
+- nome del metodo eseguito + @ + numero blocco + - + valore delle condizioni che hanno permesso l'entrata nel blocco
+
+Nel TreeMap veniva controllato se era presente una chiave contenente nome metodo che ha originato il percorso più numero esecuzione e se era presente veniva aggiunta alla lista (valore della chiave) il nome del metodo + blocco + condizioni. Altrimenti veniva inserita una nuova chiave(nome metodo che ha originato il percorso più numero esecuzione) e creata una nuova lista associata alla chiave. In questa lista veniva aggiunto nome del metodo eseguito + numero blocco condizioni.
+
+In pratica le liste nel TreeMap potrebbero essere tolte e potrebbero essere sostituite da un intero (contatore dei metodi-blocchi ).
+
+
+
 
 TODO LIST
 =========
