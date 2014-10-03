@@ -340,6 +340,8 @@ Quindi cosa si fa? Si lavora con dati fittizzi?
 
 Sto cercando la causa del problema per il momento
 
+Risolta...sono un idiota io...mettevo le cose nella lista per il classpath ma mi dimenticavo di aggiungere la lista al classpath...se riesce a terminare dovrebbero esserci dati migliori...è ancora in running ti faccio sapere
+
 
 TODO LIST
 =========
