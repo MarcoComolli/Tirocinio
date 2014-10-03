@@ -552,6 +552,7 @@ public static void writePathsLength() throws IOException {
 	}
 ```
 	
+Al posto della lista "path" ci sarebbe un intero incrementato ad ogni occorrenza della chiave e questo verrebbe usato anche per i calcoli successivi al posto del dato ottenuto con il metodo size()
 
 
 TODO LIST
