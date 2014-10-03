@@ -389,6 +389,7 @@ Lì mi sa che bisogna eliminare le liste se si può.
 
 -----------
 Ok credo che debba riscrivere un po' il metodo writePathsLength() però siccome l'avevo già cambiato un po' tutto non ricordo più cosa deve scrivere. Alla fine che dati deve avere? Che io mi ricordi aveva dentro questi:
+
 - Lunghezza percorso massimo
 - Lunghezza percorso minimo
 - Lunghezza totale percorsi
@@ -399,7 +400,7 @@ Ok credo che debba riscrivere un po' il metodo writePathsLength() però siccome 
 - elenco del cammino più lungo.
 
 C'era altro?
-p.s. per ottenere la % di copertura del totale è necessario percorrere il file almeno 2 volte.
+p.s. per ottenere la % di copertura del totale (di ogni percorso) è necessario leggere tutto il filepercorsi almeno 2 volte.
 
 Togliere le liste intendi da questo metodo? Se è così sto cercando di farlo ma è abbastanza complicato
 
