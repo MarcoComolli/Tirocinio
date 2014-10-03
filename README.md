@@ -385,6 +385,7 @@ Se riesco a sistemare abbiamo tutto! E possiamo chiedere al prof di sostituire J
 ------
 
 Sì, credo che non farà storie se gli diciamo che è delle stesse dimensioni di JUnit.
+Lì mi sa che bisogna eliminare le liste se si può. 
 
 
 TODO LIST
