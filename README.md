@@ -293,6 +293,13 @@ Così ho provato a far partire i test da Junit di quello processato (con dentro 
 
 Come va? 
 
+-----
+
+Sclero.  
+Però sono riuscito a farlo terminare! (dovendo modificare un parametro della JVM)
+Ma c'è un problema. Non esce dalla ricorsione dei casi di test. E non finendo la ricorsione non esegue il globalData alla fine. Cioè, non so il perchè, però il metodo runJunitTest scandisce le varie cartelle e quando trova dei file li esegue, se invece trova una cartella riesegue il metodo per tutte le sottocartelle. Arrivo ad un livello di ricorsione pari a 21 che però non decrementa mai, cioè, quando il test finisce dovrebbe tornare al metodo che l'ha chiamato che dovrebbe terminare e così via...invece non lo fa. Così ora stavo provando a cercare un modo per eliminare la ricorsione e provare a farlo partire.  
+Tra l'altro, ho scoperto che in questo modo eseguiamo i test come la visita in ampiezza (tanto per intenderci) mentre Junit da eclipse li esegue come la visita in profondità. Quindi i test partono in ordine diverso, però non so se c'entra qualcosa.
+
 TODO LIST
 =========
 
