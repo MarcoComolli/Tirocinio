@@ -589,6 +589,11 @@ Aaah ok...allora ricordavo male io. Perfetto se tutto va bene allora devo solo c
 
 Spero che i TreeSet dei minimi e massimi a parimerito non diano problemi, al massimo si mettono solo dei contatori e si tiene il nome di uno dei minimi e massimi a parimerito.
 
+---------
+Finito! Funziona tutto (si spera). Già che c'ero ho fatto anche il metodo che scrive un nuovo file con le frequenze dei blocchi.  
+Se tutto va bene col codice dovremmo aver finito.  
+Se non ti dispiace facciamo domani la mail che ora son stanco morto e preferirei andare a letto.
+
 
 TODO LIST
 =========
