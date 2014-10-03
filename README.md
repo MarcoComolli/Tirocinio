@@ -404,6 +404,11 @@ p.s. per ottenere la % di copertura del totale (di ogni percorso) è necessario 
 
 Togliere le liste intendi da questo metodo? Se è così sto cercando di farlo ma è abbastanza complicato
 
+-------
+
+Per come l'avevo scritto io non lo percorrevo due volte per avere la percentuale totale, dici che mi sbagliavo?
+Se vuoi ti posso dire cosa faceva il mio metodo.
+
 
 TODO LIST
 =========
