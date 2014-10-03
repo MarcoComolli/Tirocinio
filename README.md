@@ -330,6 +330,8 @@ Number of additional tests to reach 75% coverage: 12501,9
 Number of additional tests to reach 85% coverage: 14287,88  
 Number of additional tests to reach 100% coverage: 16966,84  
 
+L'output è sbagliato. Si vede dai test...già il primo se lo faccio partire da Eclipse mi da 4 test che eseguono con successo...se vedo nei dati il primo mi segna 1 test con 1 failure e 0 blocchi testati...
+
 TODO LIST
 =========
 
