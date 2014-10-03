@@ -577,6 +577,10 @@ Il problema però è che avendo i contatori possiamo ottenere tutto tranne i per
 Cioè, non avendo più le liste non teniamo traccia dei blocchi del percorso più lungo/più corto ma solo il numero di blocchi.  
 Se per te va bene possiamo anche evitare di scriverli e li teniamo così. Cioè: mettiamo tutti i dati coi numeri senza avere tutto l'elenco del percorso più lungo e quello del percorso più corto. (poi al massimo uno se li va a leggere nel file percorsi...sempre che riesca ad aprirlo ahaha)
 
+------
+
+Sì, in pratica nel mio metodo salvavo i blocchi nelle liste, ma non usavo mai i loro nomi nel file. I cammini più lunghi e quelli più corti erano identificati "solo da nome metodo che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo" in pratica le chiavi che avevano le liste di lunghezza minima e massima come valore.
+
 
 TODO LIST
 =========
