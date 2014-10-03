@@ -424,6 +424,15 @@ Due TreeSet servivano per contenere i cammini più lunghi e più corti a parimer
 
 Se vuoi copio il vecchio metodo.
 
+-------
+
+Mi sa che ho cancellato quello che hai scritto tu, lo ricopio:
+
+Sisi sto chiedendo quello.
+Lo so, tu costruivi una treemap coi percorsi e poi chiamavi il metodo size() per averne il numero però non ci stava tutta quanta in memoria così mi dava errore e ho dovuto riscriverlo.
+L'idea era di ottenere i dati mano a mano che scandivo il file però per ottenere la % dei percorsi totali ho bisogno dei percorsi totali e non posso avercela fino a quando la scansione non è finita.
+L'altro problema è che per tenere il percorso più lungo usavo una lista temporanea. Ogni percorso lo salvavo in questa lista e alla fine del percorso guardavo: se era la più grande fino ad ora la salvavo (e rimpiazzavo quella vecchia) sennò si svuotava e ricominciava con il vecchio percorso.
+Qui credo che il problema sia che la lista del percorso più grande sia troppo grande per essere tenuta in memoria. Quindi devo inventarmi qualcos'altro.
 
 
 
