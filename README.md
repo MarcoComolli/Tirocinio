@@ -409,6 +409,16 @@ Togliere le liste intendi da questo metodo? Se è così sto cercando di farlo ma
 Per come l'avevo scritto io non lo percorrevo due volte per avere la percentuale totale, dici che mi sbagliavo?
 Se vuoi ti posso dire cosa faceva il mio metodo.
 
+------
+
+Sisi sto chiedendo quello.
+Lo so, tu costruivi una treemap coi percorsi e poi chiamavi il metodo size() per averne il numero però non ci stava tutta quanta in memoria così mi dava errore e ho dovuto riscriverlo.
+L'idea era di ottenere i dati mano a mano che scandivo il file però per ottenere la % dei percorsi totali ho bisogno dei percorsi totali e non posso avercela fino a quando la scansione non è finita.
+L'altro problema è che per tenere il percorso più lungo usavo una lista temporanea. Ogni percorso lo salvavo in questa lista e alla fine del percorso guardavo: se era la più grande fino ad ora la salvavo (e rimpiazzavo quella vecchia) sennò si svuotava e ricominciava con il vecchio percorso.
+Qui credo che il problema sia che la lista del percorso più grande sia troppo grande per essere tenuta in memoria. Quindi devo inventarmi qualcos'altro.
+
+--------
+
 All'inizio il metodo leggeva il FilePercorsi e ogni riga del file veniva splittata con parametro ":" in modo tale da avere in posizione 0 e 1 rispettivaente dell'array:
 - nome metodo  che ha originato il percorso + * + n-esima volta che viene eseguito quel metodo 
 - nome del metodo eseguito + @ + numero blocco + - + valore delle condizioni che hanno permesso l'entrata nel blocco
@@ -424,15 +434,7 @@ Due TreeSet servivano per contenere i cammini più lunghi e più corti a parimer
 
 Se vuoi copio il vecchio metodo.
 
--------
-
-Mi sa che ho cancellato quello che hai scritto tu, lo ricopio:
-
-Sisi sto chiedendo quello.
-Lo so, tu costruivi una treemap coi percorsi e poi chiamavi il metodo size() per averne il numero però non ci stava tutta quanta in memoria così mi dava errore e ho dovuto riscriverlo.
-L'idea era di ottenere i dati mano a mano che scandivo il file però per ottenere la % dei percorsi totali ho bisogno dei percorsi totali e non posso avercela fino a quando la scansione non è finita.
-L'altro problema è che per tenere il percorso più lungo usavo una lista temporanea. Ogni percorso lo salvavo in questa lista e alla fine del percorso guardavo: se era la più grande fino ad ora la salvavo (e rimpiazzavo quella vecchia) sennò si svuotava e ricominciava con il vecchio percorso.
-Qui credo che il problema sia che la lista del percorso più grande sia troppo grande per essere tenuta in memoria. Quindi devo inventarmi qualcos'altro.
+Mi sa che ho cancellato quello che hai scritto tu, lo ricopio
 
 -------
 
@@ -555,7 +557,25 @@ public static void writePathsLength() throws IOException {
 Al posto della lista "path" ci sarebbe un intero incrementato ad ogni occorrenza della chiave e questo verrebbe usato anche per i calcoli successivi al posto del dato ottenuto con il metodo size()
 
 ----
-Si ho capito, aspetta un secondo a committare che non riesco a scrivere la risposta sennò ti cancello quello che scrivi
+Ho rimesso in ordine temporale le risposte
+Comunque no tra, ho capito.  
+Bisogna tenere conto però che ora il filepercorsi per come ce l'ho io (la versione che pesava la metà) ora ha questa forma:
+> §nomepercorso*esecuzione  
+blocco  
+blocco  
+blocco  
+blocco  
+§nomepercorso*esecuzione  
+blocco  
+blocco  
+§nomepercorso*esecuzione  
+...  
+
+e così via.  
+Però come dici tu è giusto perchè stando ai dati il Treemap verrebbe grande al massimo tanto quanti sono i number of path (7600 nell'ultimo caso) e mi sembra accettabile.  
+Il problema però è che avendo i contatori possiamo ottenere tutto tranne i percorsi.  
+Cioè, non avendo più le liste non teniamo traccia dei blocchi del percorso più lungo/più corto ma solo il numero di blocchi.  
+Se per te va bene possiamo anche evitare di scriverli e li teniamo così. Cioè: mettiamo tutti i dati coi numeri senza avere tutto l'elenco del percorso più lungo e quello del percorso più corto. (poi al massimo uno se li va a leggere nel file percorsi...sempre che riesca ad aprirlo ahaha)
 
 
 TODO LIST
