@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import net.miginfocom.swing.MigLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -29,21 +27,15 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-
-import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import javax.swing.JSeparator;
-import java.awt.Rectangle;
 
 public class Interface extends JFrame{
 
@@ -76,6 +68,7 @@ public class Interface extends JFrame{
 	private Color barColor;
 	private double increment;
 	private int progress;
+	private ArrayList<URL> projectFolder = new ArrayList<URL>();
 
 
 	
@@ -349,20 +342,33 @@ public class Interface extends JFrame{
 		
 		//TODO
 		//rimuovere  qui di seguito. Solo per test
-		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
-		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
-		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
-
-		
-		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
-		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
-		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
-			
-		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
+		//pmd
+//		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
+//		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\pmd-src-5.1.3\\src\\main\\java");
+//		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\java");
+//
+//		
+//		txtTest.setText("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\java");
+//		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes");
+//		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nn\\target\\classes");
+//			
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar"));
 //		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\jaxen\\jaxen\\1.1.1\\jaxen-1.1.1.jar"));
-//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\resources"));
-//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\"));
-
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\target"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\src"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\src\\test\\resources\\net\\sourceforge\\pmd\\lang\\java\\rule\\codesize\\xml"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\src\\main\\resources\\rulesets"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes\\net\\sourceforge\\pmd\\cpd\\files"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\commons-io\\commons-io\\2.2\\commons-io-2.2.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\ow2\\asm\\asm\\5.0.2\\asm-5.0.2.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\org\\mozilla\\rhino\\1.7R3\\rhino-1.7R3.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\net\\sourceforge\\saxon\\saxon\\9.1.0.8\\saxon-9.1.0.8.jar"));
+//		additionalTextField.add(new JTextField("C:\\Users\\Marco\\.m2\\repository\\net\\sourceforge\\saxon\\saxon\\9.1.0.8\\saxon-9.1.0.8-dom.jar"));
+	
+		
+		//files di prova
 //		textSearch.setText("F:\\Documenti - Marco\\JavaPrg\\Workspace\\ProvaTests\\");
 //		textSave.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\");
 //		
@@ -375,6 +381,37 @@ public class Interface extends JFrame{
 //		txtTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\src\\classiditest");
 //		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin");
 //		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\AAA copiati\\bin\\files");
+		
+		
+		//junit
+//		
+//		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
+//		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\junit-master\\junit-master\\src\\main\\java");
+//		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\nnjunit\\junit-master\\src\\main\\java");
+//
+//		
+//		txtTest.setText("C:\\Users\\Marco\\Desktop\\nnjunit\\junit-master\\src\\test\\java");
+//		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\nnjunit\\junit-master\\target\\classes");
+//		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\nnjunit\\junit-master\\target\\test-classes");
+		
+		//jfreechart
+		textMidFiles.setText("C:\\Users\\Marco\\Desktop\\files");
+		txtRootPathSrc.setText("C:\\Users\\Marco\\Desktop\\jfreechart-1.0.19\\jfreechart-1.0.19\\source");
+		txtRootPathDest.setText("C:\\Users\\Marco\\Desktop\\aajfreechart\\jfreechart-1.0.19\\source");
+
+		
+		txtTest.setText("C:\\Users\\Marco\\Desktop\\aajfreechart\\jfreechart-1.0.19\\tests");
+		txtClassTest.setText("C:\\Users\\Marco\\Desktop\\aajfreechart\\jfreechart-1.0.19\\target\\test-classes");
+		txtClassRoot.setText("C:\\Users\\Marco\\Desktop\\aajfreechart\\jfreechart-1.0.19\\target\\classes");
+		
+		additionalTextField.add(new JTextField("/C:/Users/Marco/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar"));
+		additionalTextField.add(new JTextField("/C:/Users/Marco/.m2/repository/org/jfree/jcommon/1.0.23/jcommon-1.0.23.jar"));
+		additionalTextField.add(new JTextField("/C:/Users/Marco/.m2/repository/junit/junit/4.11/junit-4.11.jar"));
+		additionalTextField.add(new JTextField("/C:/Users/Marco/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"));
+		additionalTextField.add(new JTextField("/D:/Programmi/Eclipse/eclipse/configuration/org.eclipse.osgi/bundles/351/1/.cp/"));
+		additionalTextField.add(new JTextField("/D:/Programmi/Eclipse/eclipse/configuration/org.eclipse.osgi/bundles/350/1/.cp/"));
+
+		
 	}
 	
 	
@@ -387,7 +424,12 @@ public class Interface extends JFrame{
 		if (files != null)
 			for (int i = 0; i < files.length; i++) {
 				if(files[i].isFile()){
-					filesCount++;
+					String filename = files[i].getName();
+					String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+					System.out.println(extension);
+					if (extension.equals("java")) {
+						filesCount++;
+					}
 				}
 				File file = files[i];
 				if (file.isDirectory()) {
@@ -437,6 +479,7 @@ public class Interface extends JFrame{
 	}
 	
 	private void runJunitTest(JUnitCore junit, ArrayList<File> directories, String path) {
+		System.out.println("Ricorsione: " + ricursionCount);
 		File f = new File(path);
 		ArrayList<URL> urlList = new ArrayList<URL>();
 	
@@ -445,38 +488,104 @@ public class Interface extends JFrame{
 		try {
 			urlList.add(bin.toURI().toURL());
 			urlList.add(bin2.toURI().toURL());
-			
+			//TODO
+			//prova
+//			retrieveAllSubFolders("C:\\Users\\Marco\\Desktop\\nn");
 			for (JTextField  txtf : additionalTextField) {
 				urlList.add(new File(txtf.getText()).toURI().toURL());
 			}
+			//fine prova
+//			for (URL url : projectFolder) {
+//				urlList.add(url);
+//			}
 			
-			URL[] urlArray = new URL[2];
+//			urlList.add(new File("C:\\Users\\Marco\\Desktop\\nn\\target\\test-classes").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\Desktop\\nn\\target\\classes").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant\\1.8.1\\ant-1.8.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-launcher\\1.8.1\\ant-launcher-1.8.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\ant\\ant-testutil\\1.7.1\\ant-testutil-1.7.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\jaxen\\jaxen\\1.1.1\\jaxen-1.1.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\dom4j\\dom4j\\1.6.1\\dom4j-1.6.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\jdom\\jdom\\1.0\\jdom-1.0.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\xml-apis\\xml-apis\\1.3.02\\xml-apis-1.3.02.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\xom\\xom\\1.0\\xom-1.0.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\xerces\\xmlParserAPIs\\2.6.2\\xmlParserAPIs-2.6.2.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\com\\beust\\jcommander\\1.27\\jcommander-1.27.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\ow2\\asm\\asm\\5.0.2\\asm-5.0.2.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\net\\sourceforge\\saxon\\saxon\\9.1.0.8\\saxon-9.1.0.8.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\net\\sourceforge\\saxon\\saxon\\9.1.0.8\\saxon-9.1.0.8-dom.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\mozilla\\rhino\\1.7R3\\rhino-1.7R3.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\junit\\junit\\4.11\\junit-4.11.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\hamcrest\\hamcrest-core\\1.3\\hamcrest-core-1.3.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\xerces\\xercesImpl\\2.9.1\\xercesImpl-2.9.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\net\\java\\dev\\javacc\\javacc\\5.0\\javacc-5.0.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\commons-io\\commons-io\\2.2\\commons-io-2.2.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\mockito\\mockito-all\\1.9.5\\mockito-all-1.9.5.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.7\\slf4j-api1.7.7.jar").toURI().toURL());
+//			urlList.add(new File("/D:/Programmi/Eclipse/eclipse/configuration/org.eclipse.osgi/bundles/351/1/.cp/").toURI().toURL());
+//			urlList.add(new File("/D:/Programmi/Eclipse/eclipse/configuration/org.eclipse.osgi/bundles/350/1/.cp/").toURI().toURL());
+//			urlList.add(new File("C:\\Users\\Marco\\.m2\\repository\\org\\hamcrest\\hamcrest-core\\1.3\\hamcrest-core1.3.jar").toURI().toURL());
+			
+
+			
+			
+			URL[] urlArray = new URL[3];
 			urlArray = urlList.toArray(urlArray);
 
-			URLClassLoader urlClassloader = URLClassLoader.newInstance(urlArray);
 			System.out.println(Arrays.toString(urlArray));
+			URLClassLoader urlClassloader = URLClassLoader.newInstance(urlArray);
+			
+			//TEST
+			
+//			try {
+//				Class cl = Class.forName("org.junit.tests.internal.runners.statements.FailOnTimeoutTest", false, urlClassloader);
+//
+//				MyTracerClass.startRecordTestCoverage();
+//				increment += 100.0/filesCount;
+//				progress = (int)increment;
+//				System.out.println(filesCount);
+//				testTask.setTheProgress(progress);					
+//				Result result = junit.run(cl);
+//				float timeSec = result.getRunTime()/1000f;
+//				int testNumber = result.getRunCount();
+//				int failCount =  result.getFailureCount();
+//				System.out.println("Test finito inizio endtest");
+//				MyTracerClass.endRecordTestCoverage("net.sourceforge.pmd.lang.java.rule.codesize.CodesizeRulesTest",timeSec,testNumber, failCount);
+//				System.out.println("Test finito " + testNumber + "/" + failCount);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+			
+			//TEST
+			
 			File[] files = f.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				if(files[i].isFile()){
-					String fullname = getFullyQualifiedName(files[i].getAbsolutePath(), txtTest.getText());
-					System.out.println("fullname: " + fullname);
-					try {
-						Class cl = Class.forName(fullname, false, urlClassloader);
-						System.out.println("CLASSE: " + cl);
-						MyTracerClass.startRecordTestCoverage();
-						increment += 100.0/filesCount;
-				    	progress = (int)increment;
-				    	System.out.println(filesCount);
-				    	testTask.setTheProgress(progress);					
-						Result result = junit.run(cl);
-						float timeSec = result.getRunTime()/1000f;
-						int testNumber = result.getRunCount();
-						int failCount =  result.getFailureCount();
-						MyTracerClass.endRecordTestCoverage(fullname,timeSec,testNumber, failCount);
-						System.out.println("Test finito");
+					String filename = files[i].getName();
+					String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+					System.out.println(extension);
+					if (extension.equals("java")) {
+						String fullname = getFullyQualifiedName(files[i].getAbsolutePath(), txtTest.getText());
+						System.out.println("fullname: " + fullname);
+						try {
+							Class cl = Class.forName(fullname, false, urlClassloader);
+							System.out.println("CLASSE: " + cl);
+							MyTracerClass.startRecordTestCoverage();
+							increment += 100.0/filesCount;
+							progress = (int)increment;
+							System.out.println(filesCount + " progress " + progress);
+							testTask.setTheProgress(progress);					
+							Result result = junit.run(cl);
+							float timeSec = result.getRunTime()/1000f;
+							int testNumber = result.getRunCount();
+							int failCount =  result.getFailureCount();
+							MyTracerClass.endRecordTestCoverage(fullname,timeSec,testNumber, failCount);
+							System.out.println("Test finito");
 
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				else{
@@ -490,7 +599,9 @@ public class Interface extends JFrame{
 			String dir =  directories.get(0).getAbsolutePath();
 			directories.remove(0);
 			ricursionCount++;
+			System.out.println("Aggiungo 1 a ricorsione " + ricursionCount + " directory: " + directories.size() + "   " + dir );
 			runJunitTest(junit, directories,dir);
+			System.out.println("Ho finito la ricorsione " + ricursionCount + " -> " +  (ricursionCount-1));
 			ricursionCount--;
 		}
 		if(ricursionCount == 0){
@@ -498,7 +609,7 @@ public class Interface extends JFrame{
 			MyTracerClass.endOfTests();
 		}
 	}
-	
+
 	
 	
 	class ButtonHandler implements ActionListener{
@@ -628,7 +739,9 @@ public class Interface extends JFrame{
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));		
 				testTask = new TestTask();
 				testTask.addPropertyChangeListener(new ChangeListener(progressBarStep3));
+				long a = System.currentTimeMillis();
 				testTask.execute();		
+				System.out.println("Test eseguiti in " + (System.currentTimeMillis() - a));
 			}
 			else if(event.getSource() == btnProcess){
 
@@ -644,15 +757,26 @@ public class Interface extends JFrame{
 					addForm();
 			}
 			else if(event.getSource() == btnGetStatistics){
+				long a;
 				try {
-					
+					a = System.currentTimeMillis();
 					TreeSet<String> treeSet = StatisticsDataOrderer.readAndOrderData();
+					System.out.println("readAndOrderData " + ((System.currentTimeMillis() - a)/1000.0));
+					StatisticsDataOrderer.writeBlockFrequency();
+					a = System.currentTimeMillis();
 					StatisticsDataOrderer.writeOrderedData(treeSet);
+					System.out.println("writeOrderedData " + ((System.currentTimeMillis() - a)/1000.0));
+					a = System.currentTimeMillis();
 					StatisticsDataOrderer.writeNumberOfLinesForMethod(treeSet);
+					System.out.println("writeNumberOfLinesForMethod " + ((System.currentTimeMillis() - a)/1000.0));
+					a = System.currentTimeMillis();
 					StatisticsDataOrderer.writeCoveredConditions();
+					System.out.println("writeCoveredConditions " + ((System.currentTimeMillis() - a)/1000.0));
+					a = System.currentTimeMillis();
 					StatisticsDataOrderer.writePathsLength();
+					System.out.println("writePathsLength " + ((System.currentTimeMillis() - a)/1000.0));
 					
-				} catch (IOException e) {
+				} catch (Exception e) {
 
 					e.printStackTrace();
 				}
@@ -835,7 +959,40 @@ public class Interface extends JFrame{
         	this.setProgress(a);
         }
     }
-									
-		
+
+	public void retrieveAllSubFolders(String path){
+		ArrayList<File> pathlist = new ArrayList<File>();
+		File f = new File(path);
+		try {
+			File[] files = f.listFiles();
+			if (files != null)
+				for (int i = 0; i < files.length; i++) {
+					File file = files[i];
+					if (file.isDirectory()) {
+						projectFolder.add(file.toURI().toURL());
+						pathlist.add(file);
+					}
+				}
+
+			while(!pathlist.isEmpty()){
+				f = pathlist.remove(0);
+				files = f.listFiles();
+				if (files != null)
+					for (int i = 0; i < files.length; i++) {
+						File file = files[i];
+						if (file.isDirectory()) {
+							projectFolder.add(file.toURI().toURL());
+							pathlist.add(file);
+						}
+					}
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("End");
+
+	}
 
 }

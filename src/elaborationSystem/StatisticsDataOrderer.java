@@ -18,7 +18,7 @@ public class StatisticsDataOrderer {
 	private static HashMap<String, Integer> totalInstructionsNumber = new HashMap<String, Integer>();
 	private static Integer numberInstructions = 0;
 	private static HashMap<String, Set<String>> evaluatedConditions = new HashMap<String, Set<String>>();
-	private static  TreeMap<String, LinkedList<String>> pathNumberMap = new TreeMap<String, LinkedList<String>>();
+	private static  TreeMap<String, Integer> pathNumberMap = new TreeMap<String, Integer>();
 	private static String filesPath = "C:\\Users\\Marco\\Desktop\\files";
 
 	public static void main(String[] args) throws IOException {
@@ -32,40 +32,113 @@ public class StatisticsDataOrderer {
 
 
 
+	public static void writeBlockFrequency() throws Exception{
+		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\Blocks.txt"));
+		PrintWriter printWriter;
+		String numberOfInstructionsFilePath = filesPath + "\\BlocksFrequency.txt";
+		int a = 0;
+		printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+		
+		int[] numberOfBlocks = new int[13];
+		for (int i = 0; i < numberOfBlocks.length; i++) {
+			numberOfBlocks[i] = 0;
+		}
+		String line = br.readLine();
+		while (line != null) {  
+			String code = line.split("#")[1];
+			switch (Integer.parseInt(code)) {
+			case -1:
+				numberOfBlocks[0]++;
+				break;
+			case 0:
+				numberOfBlocks[1]++;
+				break;
+			case 1:
+				numberOfBlocks[2]++;
+				break;
+			case 2:
+				numberOfBlocks[3]++;
+				break;
+			case 3:
+				numberOfBlocks[4]++;
+				break;
+			case 4:
+				numberOfBlocks[5]++;
+				break;
+			case 5:
+				numberOfBlocks[6]++;
+				break;
+			case 7:
+				numberOfBlocks[7]++;
+				break;
+			case 8:
+				numberOfBlocks[8]++;
+				break;
+			case 10:
+				numberOfBlocks[9]++;
+				break;
+			case 11:
+				numberOfBlocks[10]++;
+				break;
+			case 12:
+				numberOfBlocks[11]++;
+				break;
+			case 13:
+				numberOfBlocks[12]++;
+				break;
+			}
+			
+			line = br.readLine();
+		}
+		
+		
+		printWriter.println("Number of METHOD block: " + numberOfBlocks[0]);
+		printWriter.println("Number of IF block: " + numberOfBlocks[1]);
+		printWriter.println("Number of ELSE block: " + numberOfBlocks[2]);
+		printWriter.println("Number of WHILE block: " + numberOfBlocks[3]);
+		printWriter.println("Number of DO-WHILE block: " + numberOfBlocks[4]);
+		printWriter.println("Number of FOR block: " + numberOfBlocks[5]);
+		printWriter.println("Number of SWITCH block: " + numberOfBlocks[6]);
+		printWriter.println("Number of CATCH block: " + numberOfBlocks[7]);
+		printWriter.println("Number of CASE block: " + numberOfBlocks[8]);
+		printWriter.println("Number of ELSE IF block: " + numberOfBlocks[9]);
+		printWriter.println("Number of TRY block: " + numberOfBlocks[10]);
+		printWriter.println("Number of FINALLY block: " + numberOfBlocks[11]);
+		printWriter.println("Number of SYNCHRONIZED block: " + numberOfBlocks[12]);
+		
+		printWriter.flush();
+		
+
+		br.close();
+		printWriter.close();
+
+	}
+	
 	public static void writePathsLength() throws IOException {
+
 		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));
 		PrintWriter printWriter;
-        String numberOfInstructionsFilePath = filesPath + "\\LunghezzaCammini.txt";
-        printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
-		String[] arrayLine;
-		
-		LinkedList<String> path = null;
-		String pathMethodNumber;
+		String numberOfInstructionsFilePath = filesPath + "\\LunghezzaCammini.txt";
+		printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+
+		int pathSize = 0;
+		String pathName = "";
 		try {
 			String line = br.readLine();
-			while (line != null) {		
-				//arrayLine = line.split("\\* ");
-				arrayLine=line.split(":");	
-				pathMethodNumber=arrayLine[0];
-				String pathLine = arrayLine[1];
-			
-				System.out.println(pathMethodNumber);
-				System.out.println(pathLine);
-										
-			
-					if(pathNumberMap.containsKey(pathMethodNumber)){
-						path = pathNumberMap.get(pathMethodNumber);
-						path.add(pathLine);
-						
-
-					}else{
-						path=new LinkedList<String>();
-						path.add(pathLine);
-						
-					}
-					pathNumberMap.put(pathMethodNumber, path);
-					line = br.readLine();
+			while (line != null) {      
+				if(line.startsWith("§")){
+					pathName = line.substring(1);
 				}
+				if(pathNumberMap.containsKey(pathName)){
+					pathSize = pathNumberMap.get(pathName);
+					pathSize++;
+				}
+				else{
+					pathSize = 0;
+				}
+				pathNumberMap.put(pathName, pathSize);
+				line = br.readLine();
+			}
 
 			double totalLength=0;
 			double totalNumberOfPaths=0;
@@ -81,36 +154,38 @@ public class StatisticsDataOrderer {
 			TreeSet<String> minLengthPathsSet= new TreeSet<String>();
 			TreeSet<String> maxLengthPathsSet= new TreeSet<String>();
 
+
+			for (Entry<String, Integer> entry : pathNumberMap.entrySet()) {
+
+				totalLength+=entry.getValue();
+			}
 			
-			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
-				
-				totalLength+=entry.getValue().size();
-			}
 			if(!pathNumberMap.isEmpty()){
-			maxPathLength=minPathLength=pathNumberMap.get(pathNumberMap.firstKey()).size();
-			maxPathKey=minPathKey=pathNumberMap.firstKey();
-			maxCoveragePath=minCoveragePath=(pathNumberMap.get(pathNumberMap.firstKey()).size()*100)/totalLength;
+				maxPathLength=minPathLength=pathNumberMap.get(pathNumberMap.firstKey());
+				maxPathKey=minPathKey=pathNumberMap.firstKey();
+				maxCoveragePath=minCoveragePath=(pathNumberMap.get(pathNumberMap.firstKey())*100)/totalLength;
 			}
-			for (Entry<String, LinkedList<String>> entry : pathNumberMap.entrySet()) {
-				coverage=(entry.getValue().size()*100)/totalLength;
-				printWriter.println(entry.getKey() + " size : " + entry.getValue().size() + " covers "+
-				coverage+"% of total paths");
-				if(entry.getValue().size()==maxPathLength){
+			
+			for (Entry<String, Integer> entry : pathNumberMap.entrySet()) {
+				coverage=(entry.getValue()*100)/totalLength;
+				printWriter.println(entry.getKey() + " size : " + entry.getValue() + " covers "+
+						coverage+"% of total paths");
+				if(entry.getValue() == maxPathLength){
 					maxLengthPathsSet.add(entry.getKey());
-				}else if(entry.getValue().size()>maxPathLength){
+				}else if(entry.getValue()>maxPathLength){
 					maxLengthPathsSet.clear();
-					maxPathLength=entry.getValue().size();
+					maxPathLength=entry.getValue();
 					maxPathKey=entry.getKey();
 					maxCoveragePath=coverage;
 					maxLengthPathsSet.add(entry.getKey());
 
 				}
-				if(entry.getValue().size()==minPathLength){
+				if(entry.getValue()==minPathLength){
 					minLengthPathsSet.add(entry.getKey());
-					
-				}else if(entry.getValue().size()<minPathLength){
+
+				}else if(entry.getValue()<minPathLength){
 					minLengthPathsSet.clear();
-					minPathLength=entry.getValue().size();
+					minPathLength=entry.getValue();
 					minPathKey=entry.getKey();
 					minCoveragePath=coverage;
 					minLengthPathsSet.add(entry.getKey());
@@ -118,16 +193,16 @@ public class StatisticsDataOrderer {
 			}
 			String shortestPathsKeys="";
 			String longestPathsKeys="";
-			
+
 			for(String i:minLengthPathsSet){
 				shortestPathsKeys+=i+",";
 			}
-			
+
 			for(String i:maxLengthPathsSet){
 				longestPathsKeys+=i+",";
 			}
 			System.out.println(shortestPathsKeys +" length: "+minPathLength +" covers " + minCoveragePath);
-			
+
 			printWriter.println("Total number of paths: " + totalNumberOfPaths);
 			printWriter.println("Total Paths length: " +totalLength);
 			printWriter.println("Average Paths length: " +totalLength/totalNumberOfPaths);
@@ -141,8 +216,6 @@ public class StatisticsDataOrderer {
 			br.close();
 			printWriter.close();
 		}
-
-		
 	}
 
 
@@ -150,61 +223,60 @@ public class StatisticsDataOrderer {
 	public static void writeCoveredConditions() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\FilePercorsi.txt"));
 		PrintWriter printWriter;
-        String numberOfInstructionsFilePath = filesPath + "\\CondizioniCoperte.txt";
-        printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
+		String numberOfInstructionsFilePath = filesPath + "\\CondizioniCoperte.txt";
+		printWriter = new PrintWriter(new FileWriter(numberOfInstructionsFilePath));
 		String[] arrayLine;
-		
+
 		Set<String> valuatedConditions = null;
 		String[] methodBlockAndConditionLine;
 		String methodAndBlock="";
 		String evaluatedConditionsInPath = "";
-		
+
 		try {
 			String line = br.readLine();
 			while (line != null) {		
-				arrayLine = line.split(": ");
-				if(!arrayLine[1].contains("-")){	
-					methodAndBlock=arrayLine[1];
-                    evaluatedConditionsInPath="";
-					
-				}else{
-				    methodBlockAndConditionLine=arrayLine[1].split("-");   
-                    methodAndBlock=methodBlockAndConditionLine[0];
-                    evaluatedConditionsInPath = methodBlockAndConditionLine[1];
-				}
-				
-				System.out.println(methodAndBlock+".");
-						
-				if(evaluatedConditionsInPath!=""){ 		//se ci sono le condizioni
-					if(evaluatedConditions.containsKey(methodAndBlock)){
-						valuatedConditions = evaluatedConditions.get(methodAndBlock);
-						System.err.println(methodAndBlock +" è presente");
-						valuatedConditions.add(evaluatedConditionsInPath);
+				if(!line.startsWith("§")){
+					if(!line.contains("-")){	
+						methodAndBlock=line;
+						evaluatedConditionsInPath="";
 
 					}else{
-						valuatedConditions=new HashSet<String>();
-						valuatedConditions.add(evaluatedConditionsInPath);
-						
+						methodBlockAndConditionLine=line.split("-");   
+						methodAndBlock=methodBlockAndConditionLine[0];
+						evaluatedConditionsInPath = methodBlockAndConditionLine[1];
 					}
-					evaluatedConditions.put(methodAndBlock, valuatedConditions);
+
+
+					if(evaluatedConditionsInPath!=""){ 		//se ci sono le condizioni
+						if(evaluatedConditions.containsKey(methodAndBlock)){
+							valuatedConditions = evaluatedConditions.get(methodAndBlock);
+							valuatedConditions.add(evaluatedConditionsInPath);
+
+						}else{
+							valuatedConditions=new HashSet<String>();
+							valuatedConditions.add(evaluatedConditionsInPath);
+
+						}
+						evaluatedConditions.put(methodAndBlock, valuatedConditions);
+					}
 				}
 
 				line = br.readLine();
 			}
 
-			
+
 			for (Entry<String, Set<String>> entry : evaluatedConditions.entrySet()) {
 				String valuated="";
 				for(String conditionCombination : entry.getValue()){
 					valuated+=conditionCombination.substring(0,conditionCombination.length()-1) +";";
 				}
 				printWriter.println(entry.getKey() + " valutate : " + valuated);
-				
+
 				printWriter.flush();
 
 			}
 
-			
+
 
 		} finally {
 			br.close();
@@ -268,7 +340,7 @@ public class StatisticsDataOrderer {
 			}
 			totalInstructionsNumber.put(arrayLine[0], numberInstructions);
 			numberInstructions = 0;
-			
+
 		}
 		for (Entry<String, Integer> entry : totalInstructionsNumber.entrySet()) {
 			printWriter.println(entry.getKey() + " numero : " + entry.getValue());
@@ -319,7 +391,7 @@ public class StatisticsDataOrderer {
 		}
 		return treeSet;
 	}
-	
+
 	public static void setFilesPath(String path){
 		filesPath = path;
 	}

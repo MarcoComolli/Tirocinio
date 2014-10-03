@@ -13,12 +13,12 @@ import java.util.Map.Entry;
 import java.util.TreeSet;
 
 public class MyTracerClass {
-
+//
 	private static HashMap<String, Integer> countMap = new HashMap<String, Integer>();
 	private static HashMap<String, Integer> instructionsCountMap = new HashMap<String, Integer>();
-	private static HashMap<String, LinkedList<String>> pathMap = new HashMap<String, LinkedList<String>>();
+//	private static HashMap<String, LinkedList<String>> pathMap = new HashMap<String, LinkedList<String>>();
 	private static boolean recordPath = false;
-	private static LinkedList<String> blockList = new LinkedList<String>();
+//	private static LinkedList<String> blockList = new LinkedList<String>();
 	private static String currentObjectIDPath;
 	private static int currentexecutionNumberPath = -1;
 	private static boolean firstTime = true, firstTimeTest = true, firstTimeBlock = true, firstTimeStat = true;
@@ -30,28 +30,40 @@ public class MyTracerClass {
 	private static TreeSet<String> testedBlockSet = new TreeSet<String>();;
 	static int c = 0;
 	private static int pathNumber = 0, totalPathSize = 0;
-	private static float totalTimeSec;
+	private static double totalTimeSec;
 	private static DecimalFormat form = new DecimalFormat("#.####");
-
-
-
-
-
+	private static boolean startOfPath = false;
+	private static PrintWriter printWriter;
+	
+	static{
+		try {
+			printWriter = new PrintWriter(new FileWriter(filesPath + "\\FilePercorsi.txt"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+//
+//
+//
+//
+//
 	public static void tracer(String objectID, int blockCode, int blockID) {
 		try {
 			
 
-			int n = 1;
-			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
-				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
-				n++;
+			Integer n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
+			if(n != null){
+				n++;			
+			}
+			else{
+				n = 1;
 			}
 
 
 			if(recordPath){
 				writePathsFile(objectID, blockID);
 				totalPathSize++;
-				blockList.add(objectID + "@" + blockID);
+//				blockList.add(objectID + "@" + blockID);
 			}
 
 
@@ -71,22 +83,24 @@ public class MyTracerClass {
 			e.printStackTrace();
 		}
 	}
-
+//
 	public static void tracer(String objectID, int blockCode, int blockID, boolean[] ilMioArrayDiBooleani){
 		try {
 			
 
-			int n = 1;
-			if(countMap.containsKey(objectID+"@"+blockID+"#"+blockCode)){
-				n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
-				n++;
+			Integer n = countMap.get(objectID+"@"+blockID+"#"+blockCode);
+			if(n != null){
+				n++;			
+			}
+			else{
+				n = 1;
 			}
 			
 			
 			if(recordPath){
 				writePathsFile(objectID, blockID, ilMioArrayDiBooleani);
 				totalPathSize++;
-				blockList.add(objectID + "@" + blockID);
+//				blockList.add(objectID + "@" + blockID);
 			}
 
 			countMap.put(objectID+"@"+blockID+"#"+blockCode, n);
@@ -104,7 +118,7 @@ public class MyTracerClass {
 			e.printStackTrace();
 		}
 	}
-
+//
 	private static void writeStatisticsData(String objectID, int blockCode, int blockID, int n) throws IOException {
 
 		PrintWriter printWriter;
@@ -130,7 +144,7 @@ public class MyTracerClass {
 
 		printWriter.close();
 	}
-
+//
 	private static void insertIstructionsNumber() throws FileNotFoundException, IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader(filesPath + "\\NumeroIstruzioni.txt"));
@@ -147,80 +161,87 @@ public class MyTracerClass {
 		}
 
 	}
-
-	
-
+//
+//	
+//
 	private static void writePathsFile(String objectID, int blockID, boolean[] ilMioArrayDiBooleani) throws IOException {
 		String booleanString="";
 		for (int i=0; i<ilMioArrayDiBooleani.length; i++){
 			booleanString+=ilMioArrayDiBooleani[i] +" ";
 		}
-		PrintWriter printWriter;
-		String pathsFilePath=filesPath + "\\FilePercorsi.txt";
+		
+		// String pathsFilePath=filesPath + "\\FilePercorsi.txt";
 
-		if(firstTime){
-			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
-			firstTime=false;
-		}else{
-			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
-		}
+//		if(firstTime){
+//			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+//			firstTime=false;
+//		}else{
+//			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+//		}
 
 		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
 		//		+" numero istruzioni nel blocco: " +instructionsNumber);
-		printWriter.println(currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID + "-"+booleanString);
+		if(startOfPath){
+			startOfPath = false;
+			printWriter.println("§"+currentObjectIDPath+"*"+currentexecutionNumberPath);
+		}
+		printWriter.println(objectID +"@" + blockID + "-"+booleanString);
 		printWriter.flush();
 
 
-		printWriter.close();
+	//	printWriter.close();
 	}
-
+//
 	private static void writePathsFile(String objectID, int blockID) throws IOException {
-
-
-		PrintWriter printWriter;
-		String pathsFilePath= filesPath + "\\FilePercorsi.txt";
-
-		if(firstTime){
-			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
-			firstTime=false;
-		}else{
-			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+//		PrintWriter printWriter;
+//		String pathsFilePath= filesPath + "\\FilePercorsi.txt";
+//
+//		if(firstTime){
+//			printWriter = new PrintWriter(new FileWriter(pathsFilePath));
+//			firstTime=false;
+//		}else{
+//			printWriter = new PrintWriter(new FileWriter(pathsFilePath,true));
+//		}
+//
+//		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
+//		//		+" numero istruzioni nel blocco: " +instructionsNumber);
+		if(startOfPath){
+			startOfPath = false;
+			printWriter.println("§"+currentObjectIDPath+"*"+currentexecutionNumberPath);
 		}
-
-		//printWriter.println(objectID + " code: " + blockCode + " IDblocco: " + blockID + " numero di volte: " + n
-		//		+" numero istruzioni nel blocco: " +instructionsNumber);
-		printWriter.println(currentObjectIDPath+" * "+currentexecutionNumberPath+": " + objectID +" @" + blockID );
+		printWriter.println(objectID +"@" + blockID );
 		printWriter.flush();
-
-
-		printWriter.close();
+//
+//
+//		printWriter.close();
 	}
-
-	//inizia a registrare un percorso
+//
+//	//inizia a registrare un percorso
 	public static void recordPath(String objectID){
 		if(recordPath == false){
 			recordPath = true;
+			startOfPath  = true;
 			//inizializza i campi
 			currentexecutionNumberPath = countMap.get(objectID+"@0#-1"); //il codice è 0 perchè è l'inizio del metodo
 			currentObjectIDPath = objectID;
-			blockList.clear();
+//			blockList.clear();
 			pathNumber++;
 		}
 	}
-
+//
 	public static void endRecordPath(String objectID){
 		if(objectID == currentObjectIDPath){ //se l'ordine di fermarsi arriva dalla fine del metodo giusto
 			recordPath = false;
-			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
-			pathMap.put(objectID+"*"+ currentexecutionNumberPath, newList);
+//			LinkedList<String> newList = (LinkedList<String>) blockList.clone();
+//			pathMap.put(objectID+"*"+ currentexecutionNumberPath, newList);
 		}
 
 	}
-
+//
 	public static void setFilesPath(String path){
-		filesPath = path;
+//		filesPath = path;
 	}
-
+//
 	public static void startRecordTestCoverage() {
 		if(recordTest == false){
 			recordTest = true;
@@ -229,9 +250,10 @@ public class MyTracerClass {
 		newUniqueCoveredBloksTest = 0;
 		testedBlockSet.clear();
 	}
-	
+//	
 	public static void endRecordTestCoverage(String fullname, float timeSec, int testNumber, int failCount){
 		try{
+			
 			PrintWriter printWriter;
 			String pathsFilePath= filesPath + "\\TestCoverage.txt";
 			totalTest += testNumber;
@@ -265,7 +287,6 @@ public class MyTracerClass {
 					"#" + testedBlockSet.size() + "#" +  form.format(blockPercentage) +
 					"#" + tnc50 + "-" + tnc75 + "-" + tnc85 + "#" + tnt50 + "-" + tnt75 + "-" + tnt85);
 			
-			
 			printWriter.flush();
 			printWriter.close();
 
@@ -278,10 +299,10 @@ public class MyTracerClass {
 			e.printStackTrace();
 		}
 	}
-	
+//	
 	public static void endOfTests(){
 		try{
-			
+			printWriter.close();
 
 			int testedBlockCount = 0, uncoveredBlocks = 0;
 			String objectID, blockCode, blockID;
@@ -352,8 +373,8 @@ public class MyTracerClass {
 		}
 		
 	}
-	
-	//se è necessario un file con l'elenco dei blocchi basta scommentare il codice qua sotto
+//	
+//	//se è necessario un file con l'elenco dei blocchi basta scommentare il codice qua sotto
 	public static void addBlock(String blockName, int blockID, int blockCode){
 
 		try{
@@ -378,6 +399,10 @@ public class MyTracerClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+//	
+	public static int getTotalPathsSize(){
+		return totalPathSize;
 	}
 
 

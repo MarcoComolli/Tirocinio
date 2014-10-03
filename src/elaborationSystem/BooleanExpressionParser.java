@@ -1,12 +1,23 @@
 package elaborationSystem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BooleanExpressionParser {
 
 
+	public static void main(String[] args) {
+		String a = "while ((f1 | f2) == 0 && (f4 & f3) > 3) {";
+		String b = "while ((true | carlo != gianni) == true) {";
+		String c = "while ((true | carlo & gianni)) {";
+		System.out.println(Arrays.toString(BooleanExpressionParser.extractOperands(a)));
+		
+	}
+	
+	
 	//estrae gli operatori nell'array result
 	public static String[] extractOperands(String string) {
 		String expression = extractBooleanExpression(string);
@@ -32,8 +43,10 @@ public class BooleanExpressionParser {
 			int ind = matcher.toMatchResult().start();
 			String key = matcher.group();
 			if(!checkInString(expression, key, ind)){ //se non è una stringa
-				startIndexList.add(ind);
-				endIndexList.add(matcher.toMatchResult().end());
+				if(checkBitwiseOp(expression, key, ind)){ //se non è un'operazione binaria tra interi
+					startIndexList.add(ind);
+					endIndexList.add(matcher.toMatchResult().end());
+				}
 			}
 		}
 		
@@ -108,6 +121,33 @@ public class BooleanExpressionParser {
 		}
 		return condizioni;
 	}
+
+	private static boolean checkBitwiseOp(String expression, String key, int ind) {
+		if(key.equals("|") || key.equals("&")){
+			Pattern pattern = Pattern.compile(">|>=|<|<=|!=|==");
+			Matcher matcher = pattern.matcher(expression); 
+			ArrayList<Integer> indlist = new ArrayList<Integer>();
+			while (matcher.find()) {
+				int index = matcher.toMatchResult().start();
+				if(index > ind){
+					indlist.add(index);
+				}
+			}
+			if(indlist.isEmpty()){ //se non è stato trovato alcun != == > ecc
+				return true;
+			}
+			else{
+				int min = Collections.min(indlist);
+				for (int i = ind; i < min; i++) {
+					if(expression.charAt(i) == ')'){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
 
 	//estrae l'espressione booleana dalla riga di codice parsata
 	private static String extractBooleanExpression(String string) {

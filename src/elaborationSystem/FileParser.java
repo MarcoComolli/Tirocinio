@@ -73,12 +73,14 @@ public class FileParser {
 	private String lastMethodInstrucion;
 	private boolean isInTryStatement = false;
 	private boolean isInMethod = false;
+	private boolean addedInStack = false;
 	
 	private static boolean firstTime= true;
 	private String midFilesPath;
 	private Stack<Integer> stackBlockID, stackInstruction;
 	private boolean doubleCurly;
 	private boolean isThereKeyword = false;
+	private boolean openCurlyFound = false;
 
 	public FileParser(String readURI, TreeMap<String, Integer> methodMap,
 			String writeURI, String root, String midFilesPath) {
@@ -429,6 +431,7 @@ public class FileParser {
 	}
 
 	public String parseString(String line) {
+		addedInStack = false;
 		isThereKeyword = false;
 		if(checkConstruct(line) != -1){
 			isThereKeyword = true;
@@ -506,17 +509,22 @@ public class FileParser {
 			default:
 				break;
 			}
-			return newLine;
-
 		}
 		else{
 			if(curlyOpened != 0){
+				if(openCurlyFound && !addedInStack){
+					stackBlockID.push(-2);
+					stackInstruction.push(-2);
+				}
 				return closeCurly(line);
 			}
-			return newLine;
+
 		}
-
-
+		if(openCurlyFound && !addedInStack){
+			stackBlockID.push(-2);
+			stackInstruction.push(-2);
+		}
+		return newLine;
 
 	}
 
@@ -534,6 +542,7 @@ public class FileParser {
 			}
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		return line;
@@ -552,6 +561,7 @@ public class FileParser {
 			}
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		return line;
@@ -570,6 +580,7 @@ public class FileParser {
 			}
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		return line;
@@ -604,12 +615,13 @@ public class FileParser {
 	//esegue il conteggio delle parentesi graffe e se è arrivato alla fine aggiunge la fine metodo
 	private int checkEndOfMethod(String line) {
 		doubleCurly=false;
-		boolean open = false, closed = false; 
+		openCurlyFound  = false;
+		boolean closed = false; 
 		if(curlyMethodCount != 0){ //fai il tutto quando il count non e' 0
 			for (int i = 0; i < line.length(); i++) {
 				if(line.charAt(i) == '{'){ //se ho trovato una {
 					if(!checkInString(line, "{", i)){ //se non e' in una stringa
-						open = true;
+						openCurlyFound = true;
 						if(closed){
 							doubleCurly = true;
 						}
@@ -620,7 +632,7 @@ public class FileParser {
 				else if(line.charAt(i) == '}'){ //se ho trovato una }
 					if(!checkInString(line, "}", i)){ //se non e' in una stringa
 						closed = true;
-						if(open){
+						if(openCurlyFound){
 							doubleCurly = true;
 						}
 						curlyMethodCount--;
@@ -709,6 +721,7 @@ public class FileParser {
 					newLine = line.substring(0, i+1) + "{" +  tracerCatch + line.substring(i+1, line.length());
 					stackBlockID.push(currentBlockID);
 					stackInstruction.push(0);
+					addedInStack = true;
 				}
 			}
 			if(processFirstCase){
@@ -732,6 +745,7 @@ public class FileParser {
 			}
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		return line;
@@ -783,6 +797,7 @@ public class FileParser {
 			}
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		else{
@@ -817,6 +832,7 @@ public class FileParser {
 				newLine = line.substring(0, index+1) + " " +booleanArrayString+" "+ addBooleanArrayToTracer(tracerWhile) + line.substring(index+1, line.length());
 				stackBlockID.push(currentBlockID);
 				stackInstruction.push(0);
+				addedInStack = true;
 				return newLine;
 			}
 			else{
@@ -835,6 +851,7 @@ public class FileParser {
 				String booleanArrayString = getBooleanArrayString(line);
 				stackBlockID.push(currentBlockID);
 				stackInstruction.push(0);
+				addedInStack = true;
 				return booleanArrayString+" "+newLine;
 			}
 
@@ -853,6 +870,7 @@ public class FileParser {
 			newLine = line.substring(0, index+1) + tracerDo + line.substring(index+1, line.length());
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		else{
@@ -887,6 +905,7 @@ public class FileParser {
 			newLine = line.substring(0, index+1) +booleanArrayString+" "+ addBooleanArrayToTracer(tracerElseIf) + line.substring(index+1, line.length());
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		else{
@@ -910,6 +929,7 @@ public class FileParser {
 			newLine = line.substring(0, index+1) + tracerElse + line.substring(index+1, line.length());
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		else{
@@ -945,6 +965,7 @@ public class FileParser {
 
 			stackBlockID.push(currentBlockID);
 			stackInstruction.push(0);
+			addedInStack = true;
 			return newLine;
 		}
 		else{
