@@ -594,6 +594,8 @@ Finito! Funziona tutto (si spera). Già che c'ero ho fatto anche il metodo che s
 Se tutto va bene col codice dovremmo aver finito.  
 Se non ti dispiace facciamo domani la mail che ora son stanco morto e preferirei andare a letto.
 
+Faccio il commit? (c'e tanta roba commentata, lasciala perdere quella serve per far andare pmd, junit e freechart)
+
 
 TODO LIST
 =========
